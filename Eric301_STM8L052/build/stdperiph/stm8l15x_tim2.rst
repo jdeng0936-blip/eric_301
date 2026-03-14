@@ -1,0 +1,2887 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8l15x_tim2
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _TIM2_DeInit
+                                     11 	.globl _TIM2_TimeBaseInit
+                                     12 	.globl _TIM2_PrescalerConfig
+                                     13 	.globl _TIM2_CounterModeConfig
+                                     14 	.globl _TIM2_SetCounter
+                                     15 	.globl _TIM2_SetAutoreload
+                                     16 	.globl _TIM2_GetCounter
+                                     17 	.globl _TIM2_GetPrescaler
+                                     18 	.globl _TIM2_UpdateDisableConfig
+                                     19 	.globl _TIM2_UpdateRequestConfig
+                                     20 	.globl _TIM2_ARRPreloadConfig
+                                     21 	.globl _TIM2_SelectOnePulseMode
+                                     22 	.globl _TIM2_Cmd
+                                     23 	.globl _TIM2_OC1Init
+                                     24 	.globl _TIM2_OC2Init
+                                     25 	.globl _TIM2_BKRConfig
+                                     26 	.globl _TIM2_CtrlPWMOutputs
+                                     27 	.globl _TIM2_SelectOCxM
+                                     28 	.globl _TIM2_SetCompare1
+                                     29 	.globl _TIM2_SetCompare2
+                                     30 	.globl _TIM2_ForcedOC1Config
+                                     31 	.globl _TIM2_ForcedOC2Config
+                                     32 	.globl _TIM2_OC1PreloadConfig
+                                     33 	.globl _TIM2_OC2PreloadConfig
+                                     34 	.globl _TIM2_OC1FastConfig
+                                     35 	.globl _TIM2_OC2FastConfig
+                                     36 	.globl _TIM2_OC1PolarityConfig
+                                     37 	.globl _TIM2_OC2PolarityConfig
+                                     38 	.globl _TIM2_CCxCmd
+                                     39 	.globl _TIM2_ICInit
+                                     40 	.globl _TIM2_PWMIConfig
+                                     41 	.globl _TIM2_GetCapture1
+                                     42 	.globl _TIM2_GetCapture2
+                                     43 	.globl _TIM2_SetIC1Prescaler
+                                     44 	.globl _TIM2_SetIC2Prescaler
+                                     45 	.globl _TIM2_ITConfig
+                                     46 	.globl _TIM2_GenerateEvent
+                                     47 	.globl _TIM2_GetFlagStatus
+                                     48 	.globl _TIM2_ClearFlag
+                                     49 	.globl _TIM2_GetITStatus
+                                     50 	.globl _TIM2_ClearITPendingBit
+                                     51 	.globl _TIM2_DMACmd
+                                     52 	.globl _TIM2_SelectCCDMA
+                                     53 	.globl _TIM2_InternalClockConfig
+                                     54 	.globl _TIM2_TIxExternalClockConfig
+                                     55 	.globl _TIM2_ETRClockMode1Config
+                                     56 	.globl _TIM2_ETRClockMode2Config
+                                     57 	.globl _TIM2_SelectInputTrigger
+                                     58 	.globl _TIM2_SelectOutputTrigger
+                                     59 	.globl _TIM2_SelectSlaveMode
+                                     60 	.globl _TIM2_SelectMasterSlaveMode
+                                     61 	.globl _TIM2_ETRConfig
+                                     62 	.globl _TIM2_EncoderInterfaceConfig
+                                     63 	.globl _TIM2_SelectHallSensor
+                                     64 ;--------------------------------------------------------
+                                     65 ; ram data
+                                     66 ;--------------------------------------------------------
+                                     67 	.area DATA
+                                     68 ;--------------------------------------------------------
+                                     69 ; ram data
+                                     70 ;--------------------------------------------------------
+                                     71 	.area INITIALIZED
+                                     72 ;--------------------------------------------------------
+                                     73 ; absolute external ram data
+                                     74 ;--------------------------------------------------------
+                                     75 	.area DABS (ABS)
+                                     76 
+                                     77 ; default segment ordering for linker
+                                     78 	.area HOME
+                                     79 	.area GSINIT
+                                     80 	.area GSFINAL
+                                     81 	.area CONST
+                                     82 	.area INITIALIZER
+                                     83 	.area CODE
+                                     84 
+                                     85 ;--------------------------------------------------------
+                                     86 ; global & static initialisations
+                                     87 ;--------------------------------------------------------
+                                     88 	.area HOME
+                                     89 	.area GSINIT
+                                     90 	.area GSFINAL
+                                     91 	.area GSINIT
+                                     92 ;--------------------------------------------------------
+                                     93 ; Home
+                                     94 ;--------------------------------------------------------
+                                     95 	.area HOME
+                                     96 	.area HOME
+                                     97 ;--------------------------------------------------------
+                                     98 ; code
+                                     99 ;--------------------------------------------------------
+                                    100 	.area CODE
+                                    101 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 168: void TIM2_DeInit(void)
+                                    102 ; genLabel
+                                    103 ;	-----------------------------------------
+                                    104 ;	 function TIM2_DeInit
+                                    105 ;	-----------------------------------------
+                                    106 ;	Register assignment is optimal.
+                                    107 ;	Stack space usage: 0 bytes.
+      00E0EE                        108 _TIM2_DeInit:
+                                    109 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 170: TIM2->CR1 = TIM_CR1_RESET_VALUE;
+                                    110 ; genPointerSet
+      00E0EE 35 00 52 50      [ 1]  111 	mov	0x5250+0, #0x00
+                                    112 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 171: TIM2->CR2 = TIM_CR2_RESET_VALUE;
+                                    113 ; genPointerSet
+      00E0F2 35 00 52 51      [ 1]  114 	mov	0x5251+0, #0x00
+                                    115 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 172: TIM2->SMCR = TIM_SMCR_RESET_VALUE;
+                                    116 ; genPointerSet
+      00E0F6 35 00 52 52      [ 1]  117 	mov	0x5252+0, #0x00
+                                    118 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 173: TIM2->ETR = TIM_ETR_RESET_VALUE;
+                                    119 ; genPointerSet
+      00E0FA 35 00 52 53      [ 1]  120 	mov	0x5253+0, #0x00
+                                    121 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 174: TIM2->IER = TIM_IER_RESET_VALUE;
+                                    122 ; genPointerSet
+      00E0FE 35 00 52 55      [ 1]  123 	mov	0x5255+0, #0x00
+                                    124 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 175: TIM2->SR2 = TIM_SR2_RESET_VALUE;
+                                    125 ; genPointerSet
+      00E102 35 00 52 57      [ 1]  126 	mov	0x5257+0, #0x00
+                                    127 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 178: TIM2->CCER1 = TIM_CCER1_RESET_VALUE;
+                                    128 ; genPointerSet
+      00E106 35 00 52 5B      [ 1]  129 	mov	0x525b+0, #0x00
+                                    130 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 180: TIM2->CCMR1 = 0x01;/*TIM2_ICxSource_TIxFPx */
+                                    131 ; genPointerSet
+      00E10A 35 01 52 59      [ 1]  132 	mov	0x5259+0, #0x01
+                                    133 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 181: TIM2->CCMR2 = 0x01;/*TIM2_ICxSource_TIxFPx */
+                                    134 ; genPointerSet
+      00E10E 35 01 52 5A      [ 1]  135 	mov	0x525a+0, #0x01
+                                    136 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 184: TIM2->CCER1 = TIM_CCER1_RESET_VALUE;
+                                    137 ; genPointerSet
+      00E112 35 00 52 5B      [ 1]  138 	mov	0x525b+0, #0x00
+                                    139 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 185: TIM2->CCMR1 = TIM_CCMR1_RESET_VALUE;
+                                    140 ; genPointerSet
+      00E116 35 00 52 59      [ 1]  141 	mov	0x5259+0, #0x00
+                                    142 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 186: TIM2->CCMR2 = TIM_CCMR2_RESET_VALUE;
+                                    143 ; genPointerSet
+      00E11A 35 00 52 5A      [ 1]  144 	mov	0x525a+0, #0x00
+                                    145 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 188: TIM2->CNTRH = TIM_CNTRH_RESET_VALUE;
+                                    146 ; genPointerSet
+      00E11E 35 00 52 5C      [ 1]  147 	mov	0x525c+0, #0x00
+                                    148 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 189: TIM2->CNTRL = TIM_CNTRL_RESET_VALUE;
+                                    149 ; genPointerSet
+      00E122 35 00 52 5D      [ 1]  150 	mov	0x525d+0, #0x00
+                                    151 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 191: TIM2->PSCR = TIM_PSCR_RESET_VALUE;
+                                    152 ; genPointerSet
+      00E126 35 00 52 5E      [ 1]  153 	mov	0x525e+0, #0x00
+                                    154 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 193: TIM2->ARRH = TIM_ARRH_RESET_VALUE;
+                                    155 ; genPointerSet
+      00E12A 35 FF 52 5F      [ 1]  156 	mov	0x525f+0, #0xff
+                                    157 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 194: TIM2->ARRL = TIM_ARRL_RESET_VALUE;
+                                    158 ; genPointerSet
+      00E12E 35 FF 52 60      [ 1]  159 	mov	0x5260+0, #0xff
+                                    160 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 196: TIM2->CCR1H = TIM_CCR1H_RESET_VALUE;
+                                    161 ; genPointerSet
+      00E132 35 00 52 61      [ 1]  162 	mov	0x5261+0, #0x00
+                                    163 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 197: TIM2->CCR1L = TIM_CCR1L_RESET_VALUE;
+                                    164 ; genPointerSet
+      00E136 35 00 52 62      [ 1]  165 	mov	0x5262+0, #0x00
+                                    166 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 198: TIM2->CCR2H = TIM_CCR2H_RESET_VALUE;
+                                    167 ; genPointerSet
+      00E13A 35 00 52 63      [ 1]  168 	mov	0x5263+0, #0x00
+                                    169 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 199: TIM2->CCR2L = TIM_CCR2L_RESET_VALUE;
+                                    170 ; genPointerSet
+      00E13E 35 00 52 64      [ 1]  171 	mov	0x5264+0, #0x00
+                                    172 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 202: TIM2->OISR = TIM_OISR_RESET_VALUE;
+                                    173 ; genPointerSet
+      00E142 35 00 52 66      [ 1]  174 	mov	0x5266+0, #0x00
+                                    175 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 203: TIM2->EGR = 0x01;/* TIM_EGR_UG */
+                                    176 ; genPointerSet
+      00E146 35 01 52 58      [ 1]  177 	mov	0x5258+0, #0x01
+                                    178 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 204: TIM2->BKR = TIM_BKR_RESET_VALUE;
+                                    179 ; genPointerSet
+      00E14A 35 00 52 65      [ 1]  180 	mov	0x5265+0, #0x00
+                                    181 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 205: TIM2->SR1 = TIM_SR1_RESET_VALUE;
+                                    182 ; genPointerSet
+      00E14E 35 00 52 56      [ 1]  183 	mov	0x5256+0, #0x00
+                                    184 ; genLabel
+                                    185 ; peephole j30 removed unused label 00101$.
+                                    186 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 206: }
+                                    187 ; genEndFunction
+      00E152 81               [ 4]  188 	ret
+                                    189 ;	Total TIM2_DeInit function size at codegen: 1 bytes.
+                                    190 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 231: void TIM2_TimeBaseInit(TIM2_Prescaler_TypeDef TIM2_Prescaler,
+                                    191 ; genLabel
+                                    192 ;	-----------------------------------------
+                                    193 ;	 function TIM2_TimeBaseInit
+                                    194 ;	-----------------------------------------
+                                    195 ;	Register assignment is optimal.
+                                    196 ;	Stack space usage: 1 bytes.
+      00E153                        197 _TIM2_TimeBaseInit:
+      00E153 88               [ 1]  198 	push	a
+                                    199 ; genReceive
+      00E154 6B 01            [ 1]  200 	ld	(0x01, sp), a
+                                    201 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 242: TIM2->ARRH = (uint8_t)(TIM2_Period >> 8) ;
+                                    202 ; genGetByte
+      00E156 7B 05            [ 1]  203 	ld	a, (0x05, sp)
+                                    204 ; genPointerSet
+      00E158 C7 52 5F         [ 1]  205 	ld	0x525f, a
+                                    206 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 243: TIM2->ARRL = (uint8_t)(TIM2_Period);
+                                    207 ; genCast
+                                    208 ; genAssign
+      00E15B 7B 06            [ 1]  209 	ld	a, (0x06, sp)
+                                    210 ; genPointerSet
+      00E15D C7 52 60         [ 1]  211 	ld	0x5260, a
+                                    212 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 246: TIM2->PSCR = (uint8_t)(TIM2_Prescaler);
+                                    213 ; genPointerSet
+      00E160 AE 52 5E         [ 2]  214 	ldw	x, #0x525e
+      00E163 7B 01            [ 1]  215 	ld	a, (0x01, sp)
+      00E165 F7               [ 1]  216 	ld	(x), a
+                                    217 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 249: TIM2->CR1 &= (uint8_t)((uint8_t)(~TIM_CR1_CMS)) & ((uint8_t)(~TIM_CR1_DIR));
+                                    218 ; genPointerGet
+      00E166 C6 52 50         [ 1]  219 	ld	a, 0x5250
+                                    220 ; genAnd
+      00E169 A4 8F            [ 1]  221 	and	a, #0x8f
+                                    222 ; genPointerSet
+      00E16B C7 52 50         [ 1]  223 	ld	0x5250, a
+                                    224 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 250: TIM2->CR1 |= (uint8_t)(TIM2_CounterMode);
+                                    225 ; genPointerGet
+      00E16E C6 52 50         [ 1]  226 	ld	a, 0x5250
+                                    227 ; genOr
+      00E171 1A 04            [ 1]  228 	or	a, (0x04, sp)
+                                    229 ; genPointerSet
+      00E173 C7 52 50         [ 1]  230 	ld	0x5250, a
+                                    231 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 253: TIM2->EGR = TIM2_EventSource_Update;
+                                    232 ; genPointerSet
+      00E176 35 01 52 58      [ 1]  233 	mov	0x5258+0, #0x01
+                                    234 ; genLabel
+                                    235 ; peephole j30 removed unused label 00101$.
+                                    236 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 254: }
+                                    237 ; genEndFunction
+      00E17A 1E 02            [ 2]  238 	ldw	x, (2, sp)
+      00E17C 5B 06            [ 2]  239 	addw	sp, #6
+      00E17E FC               [ 2]  240 	jp	(x)
+                                    241 ;	Total TIM2_TimeBaseInit function size at codegen: 5 bytes.
+                                    242 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 274: void TIM2_PrescalerConfig(TIM2_Prescaler_TypeDef Prescaler,
+                                    243 ; genLabel
+                                    244 ;	-----------------------------------------
+                                    245 ;	 function TIM2_PrescalerConfig
+                                    246 ;	-----------------------------------------
+                                    247 ;	Register assignment is optimal.
+                                    248 ;	Stack space usage: 0 bytes.
+      00E17F                        249 _TIM2_PrescalerConfig:
+                                    250 ; genReceive
+                                    251 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 282: TIM2->PSCR = (uint8_t)(Prescaler);
+                                    252 ; genPointerSet
+      00E17F C7 52 5E         [ 1]  253 	ld	0x525e, a
+                                    254 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 287: TIM2->EGR |= TIM_EGR_UG ;
+                                    255 ; genPointerGet
+      00E182 C6 52 58         [ 1]  256 	ld	a, 0x5258
+                                    257 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 285: if (TIM2_PSCReloadMode == TIM2_PSCReloadMode_Immediate)
+                                    258 ; genIfx
+      00E185 0D 03            [ 1]  259 	tnz	(0x03, sp)
+                                    260 ; peephole j5 changed absolute to relative unconditional jump.
+      00E187 27 07            [ 1]  261 	jreq	00102$
+                                    262 ; peephole j10 removed jra by using inverse jump logic
+                                    263 ; peephole j30 removed unused label 00113$.
+                                    264 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 287: TIM2->EGR |= TIM_EGR_UG ;
+                                    265 ; genOr
+      00E189 AA 01            [ 1]  266 	or	a, #0x01
+                                    267 ; genPointerSet
+      00E18B C7 52 58         [ 1]  268 	ld	0x5258, a
+                                    269 ; genGoto
+      00E18E 20 05            [ 2]  270 	jra	00104$
+                                    271 ; peephole j5 changed absolute to relative unconditional jump.
+                                    272 ; genLabel
+      00E190                        273 00102$:
+                                    274 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 291: TIM2->EGR &= (uint8_t)(~TIM_EGR_UG) ;
+                                    275 ; genAnd
+      00E190 A4 FE            [ 1]  276 	and	a, #0xfe
+                                    277 ; genPointerSet
+      00E192 C7 52 58         [ 1]  278 	ld	0x5258, a
+                                    279 ; genLabel
+      00E195                        280 00104$:
+                                    281 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 293: }
+                                    282 ; genEndFunction
+      00E195 85               [ 2]  283 	popw	x
+      00E196 84               [ 1]  284 	pop	a
+      00E197 FC               [ 2]  285 	jp	(x)
+                                    286 ;	Total TIM2_PrescalerConfig function size at codegen: 3 bytes.
+                                    287 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 306: void TIM2_CounterModeConfig(TIM2_CounterMode_TypeDef TIM2_CounterMode)
+                                    288 ; genLabel
+                                    289 ;	-----------------------------------------
+                                    290 ;	 function TIM2_CounterModeConfig
+                                    291 ;	-----------------------------------------
+                                    292 ;	Register assignment is optimal.
+                                    293 ;	Stack space usage: 1 bytes.
+      00E198                        294 _TIM2_CounterModeConfig:
+      00E198 88               [ 1]  295 	push	a
+                                    296 ; genReceive
+      00E199 6B 01            [ 1]  297 	ld	(0x01, sp), a
+                                    298 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 313: tmpcr1 = TIM2->CR1;
+                                    299 ; genPointerGet
+      00E19B C6 52 50         [ 1]  300 	ld	a, 0x5250
+                                    301 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 316: tmpcr1 &= (uint8_t)((uint8_t)(~TIM_CR1_CMS) & (uint8_t)(~TIM_CR1_DIR));
+                                    302 ; genAnd
+      00E19E A4 8F            [ 1]  303 	and	a, #0x8f
+                                    304 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 319: tmpcr1 |= (uint8_t)TIM2_CounterMode;
+                                    305 ; genOr
+      00E1A0 1A 01            [ 1]  306 	or	a, (0x01, sp)
+                                    307 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 321: TIM2->CR1 = tmpcr1;
+                                    308 ; genPointerSet
+      00E1A2 C7 52 50         [ 1]  309 	ld	0x5250, a
+                                    310 ; genLabel
+                                    311 ; peephole j30 removed unused label 00101$.
+                                    312 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 322: }
+                                    313 ; genEndFunction
+      00E1A5 84               [ 1]  314 	pop	a
+      00E1A6 81               [ 4]  315 	ret
+                                    316 ;	Total TIM2_CounterModeConfig function size at codegen: 2 bytes.
+                                    317 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 330: void TIM2_SetCounter(uint16_t Counter)
+                                    318 ; genLabel
+                                    319 ;	-----------------------------------------
+                                    320 ;	 function TIM2_SetCounter
+                                    321 ;	-----------------------------------------
+                                    322 ;	Register assignment is optimal.
+                                    323 ;	Stack space usage: 0 bytes.
+      00E1A7                        324 _TIM2_SetCounter:
+                                    325 ; genReceive
+                                    326 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 334: TIM2->CNTRH = (uint8_t)(Counter >> 8);
+                                    327 ; genGetByte
+      00E1A7 9E               [ 1]  328 	ld	a, xh
+                                    329 ; genPointerSet
+      00E1A8 C7 52 5C         [ 1]  330 	ld	0x525c, a
+                                    331 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 335: TIM2->CNTRL = (uint8_t)(Counter);
+                                    332 ; genCast
+                                    333 ; genAssign
+      00E1AB 9F               [ 1]  334 	ld	a, xl
+                                    335 ; genPointerSet
+      00E1AC C7 52 5D         [ 1]  336 	ld	0x525d, a
+                                    337 ; genLabel
+                                    338 ; peephole j30 removed unused label 00101$.
+                                    339 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 336: }
+                                    340 ; genEndFunction
+      00E1AF 81               [ 4]  341 	ret
+                                    342 ;	Total TIM2_SetCounter function size at codegen: 1 bytes.
+                                    343 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 344: void TIM2_SetAutoreload(uint16_t Autoreload)
+                                    344 ; genLabel
+                                    345 ;	-----------------------------------------
+                                    346 ;	 function TIM2_SetAutoreload
+                                    347 ;	-----------------------------------------
+                                    348 ;	Register assignment is optimal.
+                                    349 ;	Stack space usage: 0 bytes.
+      00E1B0                        350 _TIM2_SetAutoreload:
+                                    351 ; genReceive
+                                    352 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 347: TIM2->ARRH = (uint8_t)(Autoreload >> 8);
+                                    353 ; genGetByte
+      00E1B0 9E               [ 1]  354 	ld	a, xh
+                                    355 ; genPointerSet
+      00E1B1 C7 52 5F         [ 1]  356 	ld	0x525f, a
+                                    357 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 348: TIM2->ARRL = (uint8_t)(Autoreload);
+                                    358 ; genCast
+                                    359 ; genAssign
+      00E1B4 9F               [ 1]  360 	ld	a, xl
+                                    361 ; genPointerSet
+      00E1B5 C7 52 60         [ 1]  362 	ld	0x5260, a
+                                    363 ; genLabel
+                                    364 ; peephole j30 removed unused label 00101$.
+                                    365 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 349: }
+                                    366 ; genEndFunction
+      00E1B8 81               [ 4]  367 	ret
+                                    368 ;	Total TIM2_SetAutoreload function size at codegen: 1 bytes.
+                                    369 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 356: uint16_t TIM2_GetCounter(void)
+                                    370 ; genLabel
+                                    371 ;	-----------------------------------------
+                                    372 ;	 function TIM2_GetCounter
+                                    373 ;	-----------------------------------------
+                                    374 ;	Register assignment might be sub-optimal.
+                                    375 ;	Stack space usage: 2 bytes.
+      00E1B9                        376 _TIM2_GetCounter:
+      00E1B9 89               [ 2]  377 	pushw	x
+                                    378 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 361: tmpcntrh = TIM2->CNTRH;
+                                    379 ; genPointerGet
+      00E1BA C6 52 5C         [ 1]  380 	ld	a, 0x525c
+      00E1BD 95               [ 1]  381 	ld	xh, a
+                                    382 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 362: tmpcntrl = TIM2->CNTRL;
+                                    383 ; genPointerGet
+      00E1BE C6 52 5D         [ 1]  384 	ld	a, 0x525d
+                                    385 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 364: tmpcnt = (uint16_t)(tmpcntrl);
+                                    386 ; genCast
+                                    387 ; genAssign
+      00E1C1 97               [ 1]  388 	ld	xl, a
+                                    389 ; peephole 3 removed dead clrw of y.
+                                    390 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 365: tmpcnt |= (uint16_t)((uint16_t)tmpcntrh << 8);
+                                    391 ; genCast
+                                    392 ; genAssign
+                                    393 ; peephole 1 removed dead clear of a.
+                                    394 ; genLeftShiftLiteral
+      00E1C2 0F 02            [ 1]  395 	clr	(0x02, sp)
+                                    396 ; genOr
+                                    397 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 367: return ((uint16_t)tmpcnt);
+                                    398 ; genReturn
+                                    399 ; genLabel
+                                    400 ; peephole j30 removed unused label 00101$.
+                                    401 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 368: }
+                                    402 ; genEndFunction
+      00E1C4 5B 02            [ 2]  403 	addw	sp, #2
+      00E1C6 81               [ 4]  404 	ret
+                                    405 ;	Total TIM2_GetCounter function size at codegen: 3 bytes.
+                                    406 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 383: TIM2_Prescaler_TypeDef TIM2_GetPrescaler(void)
+                                    407 ; genLabel
+                                    408 ;	-----------------------------------------
+                                    409 ;	 function TIM2_GetPrescaler
+                                    410 ;	-----------------------------------------
+                                    411 ;	Register assignment is optimal.
+                                    412 ;	Stack space usage: 0 bytes.
+      00E1C7                        413 _TIM2_GetPrescaler:
+                                    414 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 386: return ((TIM2_Prescaler_TypeDef)TIM2->PSCR);
+                                    415 ; genPointerGet
+      00E1C7 C6 52 5E         [ 1]  416 	ld	a, 0x525e
+                                    417 ; genReturn
+                                    418 ; genLabel
+                                    419 ; peephole j30 removed unused label 00101$.
+                                    420 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 387: }
+                                    421 ; genEndFunction
+      00E1CA 81               [ 4]  422 	ret
+                                    423 ;	Total TIM2_GetPrescaler function size at codegen: 1 bytes.
+                                    424 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 396: void TIM2_UpdateDisableConfig(FunctionalState NewState)
+                                    425 ; genLabel
+                                    426 ;	-----------------------------------------
+                                    427 ;	 function TIM2_UpdateDisableConfig
+                                    428 ;	-----------------------------------------
+                                    429 ;	Register assignment is optimal.
+                                    430 ;	Stack space usage: 1 bytes.
+      00E1CB                        431 _TIM2_UpdateDisableConfig:
+      00E1CB 88               [ 1]  432 	push	a
+                                    433 ; genReceive
+      00E1CC 6B 01            [ 1]  434 	ld	(0x01, sp), a
+                                    435 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 404: TIM2->CR1 |= TIM_CR1_UDIS;
+                                    436 ; genPointerGet
+      00E1CE C6 52 50         [ 1]  437 	ld	a, 0x5250
+                                    438 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 402: if (NewState != DISABLE)
+                                    439 ; genIfx
+      00E1D1 0D 01            [ 1]  440 	tnz	(0x01, sp)
+                                    441 ; peephole j5 changed absolute to relative unconditional jump.
+      00E1D3 27 07            [ 1]  442 	jreq	00102$
+                                    443 ; peephole j10 removed jra by using inverse jump logic
+                                    444 ; peephole j30 removed unused label 00113$.
+                                    445 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 404: TIM2->CR1 |= TIM_CR1_UDIS;
+                                    446 ; genOr
+      00E1D5 AA 02            [ 1]  447 	or	a, #0x02
+                                    448 ; genPointerSet
+      00E1D7 C7 52 50         [ 1]  449 	ld	0x5250, a
+                                    450 ; genGoto
+      00E1DA 20 05            [ 2]  451 	jra	00104$
+                                    452 ; peephole j5 changed absolute to relative unconditional jump.
+                                    453 ; genLabel
+      00E1DC                        454 00102$:
+                                    455 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 408: TIM2->CR1 &= (uint8_t)(~TIM_CR1_UDIS);
+                                    456 ; genAnd
+      00E1DC A4 FD            [ 1]  457 	and	a, #0xfd
+                                    458 ; genPointerSet
+      00E1DE C7 52 50         [ 1]  459 	ld	0x5250, a
+                                    460 ; genLabel
+      00E1E1                        461 00104$:
+                                    462 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 410: }
+                                    463 ; genEndFunction
+      00E1E1 84               [ 1]  464 	pop	a
+      00E1E2 81               [ 4]  465 	ret
+                                    466 ;	Total TIM2_UpdateDisableConfig function size at codegen: 2 bytes.
+                                    467 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 420: void TIM2_UpdateRequestConfig(TIM2_UpdateSource_TypeDef TIM2_UpdateSource)
+                                    468 ; genLabel
+                                    469 ;	-----------------------------------------
+                                    470 ;	 function TIM2_UpdateRequestConfig
+                                    471 ;	-----------------------------------------
+                                    472 ;	Register assignment is optimal.
+                                    473 ;	Stack space usage: 1 bytes.
+      00E1E3                        474 _TIM2_UpdateRequestConfig:
+      00E1E3 88               [ 1]  475 	push	a
+                                    476 ; genReceive
+      00E1E4 6B 01            [ 1]  477 	ld	(0x01, sp), a
+                                    478 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 428: TIM2->CR1 |= TIM_CR1_URS ;
+                                    479 ; genPointerGet
+      00E1E6 C6 52 50         [ 1]  480 	ld	a, 0x5250
+                                    481 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 426: if (TIM2_UpdateSource == TIM2_UpdateSource_Regular)
+                                    482 ; genIfx
+      00E1E9 0D 01            [ 1]  483 	tnz	(0x01, sp)
+                                    484 ; peephole j5 changed absolute to relative unconditional jump.
+      00E1EB 27 07            [ 1]  485 	jreq	00102$
+                                    486 ; peephole j10 removed jra by using inverse jump logic
+                                    487 ; peephole j30 removed unused label 00113$.
+                                    488 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 428: TIM2->CR1 |= TIM_CR1_URS ;
+                                    489 ; genOr
+      00E1ED AA 04            [ 1]  490 	or	a, #0x04
+                                    491 ; genPointerSet
+      00E1EF C7 52 50         [ 1]  492 	ld	0x5250, a
+                                    493 ; genGoto
+      00E1F2 20 05            [ 2]  494 	jra	00104$
+                                    495 ; peephole j5 changed absolute to relative unconditional jump.
+                                    496 ; genLabel
+      00E1F4                        497 00102$:
+                                    498 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 432: TIM2->CR1 &= (uint8_t)(~TIM_CR1_URS);
+                                    499 ; genAnd
+      00E1F4 A4 FB            [ 1]  500 	and	a, #0xfb
+                                    501 ; genPointerSet
+      00E1F6 C7 52 50         [ 1]  502 	ld	0x5250, a
+                                    503 ; genLabel
+      00E1F9                        504 00104$:
+                                    505 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 434: }
+                                    506 ; genEndFunction
+      00E1F9 84               [ 1]  507 	pop	a
+      00E1FA 81               [ 4]  508 	ret
+                                    509 ;	Total TIM2_UpdateRequestConfig function size at codegen: 2 bytes.
+                                    510 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 442: void TIM2_ARRPreloadConfig(FunctionalState NewState)
+                                    511 ; genLabel
+                                    512 ;	-----------------------------------------
+                                    513 ;	 function TIM2_ARRPreloadConfig
+                                    514 ;	-----------------------------------------
+                                    515 ;	Register assignment is optimal.
+                                    516 ;	Stack space usage: 1 bytes.
+      00E1FB                        517 _TIM2_ARRPreloadConfig:
+      00E1FB 88               [ 1]  518 	push	a
+                                    519 ; genReceive
+      00E1FC 6B 01            [ 1]  520 	ld	(0x01, sp), a
+                                    521 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 450: TIM2->CR1 |= TIM_CR1_ARPE;
+                                    522 ; genPointerGet
+      00E1FE C6 52 50         [ 1]  523 	ld	a, 0x5250
+                                    524 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 448: if (NewState != DISABLE)
+                                    525 ; genIfx
+      00E201 0D 01            [ 1]  526 	tnz	(0x01, sp)
+                                    527 ; peephole j5 changed absolute to relative unconditional jump.
+      00E203 27 07            [ 1]  528 	jreq	00102$
+                                    529 ; peephole j10 removed jra by using inverse jump logic
+                                    530 ; peephole j30 removed unused label 00113$.
+                                    531 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 450: TIM2->CR1 |= TIM_CR1_ARPE;
+                                    532 ; genOr
+      00E205 AA 80            [ 1]  533 	or	a, #0x80
+                                    534 ; genPointerSet
+      00E207 C7 52 50         [ 1]  535 	ld	0x5250, a
+                                    536 ; genGoto
+      00E20A 20 05            [ 2]  537 	jra	00104$
+                                    538 ; peephole j5 changed absolute to relative unconditional jump.
+                                    539 ; genLabel
+      00E20C                        540 00102$:
+                                    541 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 454: TIM2->CR1 &= (uint8_t)(~TIM_CR1_ARPE);
+                                    542 ; genAnd
+      00E20C A4 7F            [ 1]  543 	and	a, #0x7f
+                                    544 ; genPointerSet
+      00E20E C7 52 50         [ 1]  545 	ld	0x5250, a
+                                    546 ; genLabel
+      00E211                        547 00104$:
+                                    548 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 456: }
+                                    549 ; genEndFunction
+      00E211 84               [ 1]  550 	pop	a
+      00E212 81               [ 4]  551 	ret
+                                    552 ;	Total TIM2_ARRPreloadConfig function size at codegen: 2 bytes.
+                                    553 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 466: void TIM2_SelectOnePulseMode(TIM2_OPMode_TypeDef TIM2_OPMode)
+                                    554 ; genLabel
+                                    555 ;	-----------------------------------------
+                                    556 ;	 function TIM2_SelectOnePulseMode
+                                    557 ;	-----------------------------------------
+                                    558 ;	Register assignment is optimal.
+                                    559 ;	Stack space usage: 1 bytes.
+      00E213                        560 _TIM2_SelectOnePulseMode:
+      00E213 88               [ 1]  561 	push	a
+                                    562 ; genReceive
+      00E214 6B 01            [ 1]  563 	ld	(0x01, sp), a
+                                    564 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 474: TIM2->CR1 |= TIM_CR1_OPM ;
+                                    565 ; genPointerGet
+      00E216 C6 52 50         [ 1]  566 	ld	a, 0x5250
+                                    567 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 472: if (TIM2_OPMode == TIM2_OPMode_Single)
+                                    568 ; genIfx
+      00E219 0D 01            [ 1]  569 	tnz	(0x01, sp)
+                                    570 ; peephole j5 changed absolute to relative unconditional jump.
+      00E21B 27 07            [ 1]  571 	jreq	00102$
+                                    572 ; peephole j10 removed jra by using inverse jump logic
+                                    573 ; peephole j30 removed unused label 00113$.
+                                    574 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 474: TIM2->CR1 |= TIM_CR1_OPM ;
+                                    575 ; genOr
+      00E21D AA 08            [ 1]  576 	or	a, #0x08
+                                    577 ; genPointerSet
+      00E21F C7 52 50         [ 1]  578 	ld	0x5250, a
+                                    579 ; genGoto
+      00E222 20 05            [ 2]  580 	jra	00104$
+                                    581 ; peephole j5 changed absolute to relative unconditional jump.
+                                    582 ; genLabel
+      00E224                        583 00102$:
+                                    584 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 478: TIM2->CR1 &= (uint8_t)(~TIM_CR1_OPM);
+                                    585 ; genAnd
+      00E224 A4 F7            [ 1]  586 	and	a, #0xf7
+                                    587 ; genPointerSet
+      00E226 C7 52 50         [ 1]  588 	ld	0x5250, a
+                                    589 ; genLabel
+      00E229                        590 00104$:
+                                    591 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 480: }
+                                    592 ; genEndFunction
+      00E229 84               [ 1]  593 	pop	a
+      00E22A 81               [ 4]  594 	ret
+                                    595 ;	Total TIM2_SelectOnePulseMode function size at codegen: 2 bytes.
+                                    596 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 488: void TIM2_Cmd(FunctionalState NewState)
+                                    597 ; genLabel
+                                    598 ;	-----------------------------------------
+                                    599 ;	 function TIM2_Cmd
+                                    600 ;	-----------------------------------------
+                                    601 ;	Register assignment is optimal.
+                                    602 ;	Stack space usage: 1 bytes.
+      00E22B                        603 _TIM2_Cmd:
+      00E22B 88               [ 1]  604 	push	a
+                                    605 ; genReceive
+      00E22C 6B 01            [ 1]  606 	ld	(0x01, sp), a
+                                    607 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 496: TIM2->CR1 |= TIM_CR1_CEN;
+                                    608 ; genPointerGet
+      00E22E C6 52 50         [ 1]  609 	ld	a, 0x5250
+                                    610 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 494: if (NewState != DISABLE)
+                                    611 ; genIfx
+      00E231 0D 01            [ 1]  612 	tnz	(0x01, sp)
+                                    613 ; peephole j5 changed absolute to relative unconditional jump.
+      00E233 27 07            [ 1]  614 	jreq	00102$
+                                    615 ; peephole j10 removed jra by using inverse jump logic
+                                    616 ; peephole j30 removed unused label 00113$.
+                                    617 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 496: TIM2->CR1 |= TIM_CR1_CEN;
+                                    618 ; genOr
+      00E235 AA 01            [ 1]  619 	or	a, #0x01
+                                    620 ; genPointerSet
+      00E237 C7 52 50         [ 1]  621 	ld	0x5250, a
+                                    622 ; genGoto
+      00E23A 20 05            [ 2]  623 	jra	00104$
+                                    624 ; peephole j5 changed absolute to relative unconditional jump.
+                                    625 ; genLabel
+      00E23C                        626 00102$:
+                                    627 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 500: TIM2->CR1 &= (uint8_t)(~TIM_CR1_CEN);
+                                    628 ; genAnd
+      00E23C A4 FE            [ 1]  629 	and	a, #0xfe
+                                    630 ; genPointerSet
+      00E23E C7 52 50         [ 1]  631 	ld	0x5250, a
+                                    632 ; genLabel
+      00E241                        633 00104$:
+                                    634 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 502: }
+                                    635 ; genEndFunction
+      00E241 84               [ 1]  636 	pop	a
+      00E242 81               [ 4]  637 	ret
+                                    638 ;	Total TIM2_Cmd function size at codegen: 2 bytes.
+                                    639 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 578: void TIM2_OC1Init(TIM2_OCMode_TypeDef TIM2_OCMode,
+                                    640 ; genLabel
+                                    641 ;	-----------------------------------------
+                                    642 ;	 function TIM2_OC1Init
+                                    643 ;	-----------------------------------------
+                                    644 ;	Register assignment is optimal.
+                                    645 ;	Stack space usage: 1 bytes.
+      00E243                        646 _TIM2_OC1Init:
+      00E243 88               [ 1]  647 	push	a
+                                    648 ; genReceive
+      00E244 6B 01            [ 1]  649 	ld	(0x01, sp), a
+                                    650 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 592: tmpccmr1 = TIM2->CCMR1;
+                                    651 ; genPointerGet
+      00E246 C6 52 59         [ 1]  652 	ld	a, 0x5259
+      00E249 97               [ 1]  653 	ld	xl, a
+                                    654 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 595: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    655 ; genPointerGet
+                                    656 ; genAnd
+                                    657 ; genPointerSet
+      00E24A 72 11 52 5B      [ 1]  658 	bres	0x525b, #0
+                                    659 ; peephole 204x replaced 'and' by 'bres' ('0x525b').
+                                    660 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 597: tmpccmr1 &= (uint8_t)(~TIM_CCMR_OCM);
+                                    661 ; genAnd
+      00E24E 9F               [ 1]  662 	ld	a, xl
+      00E24F A4 8F            [ 1]  663 	and	a, #0x8f
+                                    664 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 600: tmpccmr1 |= (uint8_t)TIM2_OCMode;
+                                    665 ; genOr
+      00E251 1A 01            [ 1]  666 	or	a, (0x01, sp)
+                                    667 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 602: TIM2->CCMR1 = tmpccmr1;
+                                    668 ; genPointerSet
+      00E253 C7 52 59         [ 1]  669 	ld	0x5259, a
+                                    670 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 595: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    671 ; genPointerGet
+      00E256 C6 52 5B         [ 1]  672 	ld	a, 0x525b
+                                    673 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 605: if (TIM2_OutputState == TIM2_OutputState_Enable)
+                                    674 ; genIfx
+      00E259 0D 04            [ 1]  675 	tnz	(0x04, sp)
+                                    676 ; peephole j5 changed absolute to relative unconditional jump.
+      00E25B 27 07            [ 1]  677 	jreq	00102$
+                                    678 ; peephole j10 removed jra by using inverse jump logic
+                                    679 ; peephole j30 removed unused label 00133$.
+                                    680 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 607: TIM2->CCER1 |= TIM_CCER1_CC1E;
+                                    681 ; genOr
+      00E25D AA 01            [ 1]  682 	or	a, #0x01
+                                    683 ; genPointerSet
+      00E25F C7 52 5B         [ 1]  684 	ld	0x525b, a
+                                    685 ; genGoto
+      00E262 20 05            [ 2]  686 	jra	00103$
+                                    687 ; peephole j5 changed absolute to relative unconditional jump.
+                                    688 ; genLabel
+      00E264                        689 00102$:
+                                    690 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 611: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    691 ; genAnd
+      00E264 A4 FE            [ 1]  692 	and	a, #0xfe
+                                    693 ; genPointerSet
+      00E266 C7 52 5B         [ 1]  694 	ld	0x525b, a
+                                    695 ; genLabel
+      00E269                        696 00103$:
+                                    697 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 595: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    698 ; genPointerGet
+      00E269 C6 52 5B         [ 1]  699 	ld	a, 0x525b
+                                    700 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 615: if (TIM2_OCPolarity == TIM2_OCPolarity_Low)
+                                    701 ; genIfx
+      00E26C 0D 07            [ 1]  702 	tnz	(0x07, sp)
+                                    703 ; peephole j5 changed absolute to relative unconditional jump.
+      00E26E 27 07            [ 1]  704 	jreq	00105$
+                                    705 ; peephole j10 removed jra by using inverse jump logic
+                                    706 ; peephole j30 removed unused label 00134$.
+                                    707 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 617: TIM2->CCER1 |= TIM_CCER1_CC1P;
+                                    708 ; genOr
+      00E270 AA 02            [ 1]  709 	or	a, #0x02
+                                    710 ; genPointerSet
+      00E272 C7 52 5B         [ 1]  711 	ld	0x525b, a
+                                    712 ; genGoto
+      00E275 20 05            [ 2]  713 	jra	00106$
+                                    714 ; peephole j5 changed absolute to relative unconditional jump.
+                                    715 ; genLabel
+      00E277                        716 00105$:
+                                    717 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 621: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1P);
+                                    718 ; genAnd
+      00E277 A4 FD            [ 1]  719 	and	a, #0xfd
+                                    720 ; genPointerSet
+      00E279 C7 52 5B         [ 1]  721 	ld	0x525b, a
+                                    722 ; genLabel
+      00E27C                        723 00106$:
+                                    724 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 627: TIM2->OISR |= TIM_OISR_OIS1;
+                                    725 ; genPointerGet
+      00E27C C6 52 66         [ 1]  726 	ld	a, 0x5266
+                                    727 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 625: if (TIM2_OCIdleState == TIM2_OCIdleState_Set)
+                                    728 ; genIfx
+      00E27F 0D 08            [ 1]  729 	tnz	(0x08, sp)
+                                    730 ; peephole j5 changed absolute to relative unconditional jump.
+      00E281 27 07            [ 1]  731 	jreq	00108$
+                                    732 ; peephole j10 removed jra by using inverse jump logic
+                                    733 ; peephole j30 removed unused label 00135$.
+                                    734 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 627: TIM2->OISR |= TIM_OISR_OIS1;
+                                    735 ; genOr
+      00E283 AA 01            [ 1]  736 	or	a, #0x01
+                                    737 ; genPointerSet
+      00E285 C7 52 66         [ 1]  738 	ld	0x5266, a
+                                    739 ; genGoto
+      00E288 20 05            [ 2]  740 	jra	00109$
+                                    741 ; peephole j5 changed absolute to relative unconditional jump.
+                                    742 ; genLabel
+      00E28A                        743 00108$:
+                                    744 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 631: TIM2->OISR &= (uint8_t)(~TIM_OISR_OIS1);
+                                    745 ; genAnd
+      00E28A A4 FE            [ 1]  746 	and	a, #0xfe
+                                    747 ; genPointerSet
+      00E28C C7 52 66         [ 1]  748 	ld	0x5266, a
+                                    749 ; genLabel
+      00E28F                        750 00109$:
+                                    751 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 635: TIM2->CCR1H = (uint8_t)(TIM2_Pulse >> 8);
+                                    752 ; genGetByte
+      00E28F 7B 05            [ 1]  753 	ld	a, (0x05, sp)
+                                    754 ; genPointerSet
+      00E291 C7 52 61         [ 1]  755 	ld	0x5261, a
+                                    756 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 636: TIM2->CCR1L = (uint8_t)(TIM2_Pulse);
+                                    757 ; genCast
+                                    758 ; genAssign
+      00E294 7B 06            [ 1]  759 	ld	a, (0x06, sp)
+                                    760 ; genPointerSet
+      00E296 C7 52 62         [ 1]  761 	ld	0x5262, a
+                                    762 ; genLabel
+                                    763 ; peephole j30 removed unused label 00110$.
+                                    764 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 637: }
+                                    765 ; genEndFunction
+      00E299 1E 02            [ 2]  766 	ldw	x, (2, sp)
+      00E29B 5B 08            [ 2]  767 	addw	sp, #8
+      00E29D FC               [ 2]  768 	jp	(x)
+                                    769 ;	Total TIM2_OC1Init function size at codegen: 5 bytes.
+                                    770 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 664: void TIM2_OC2Init(TIM2_OCMode_TypeDef TIM2_OCMode,
+                                    771 ; genLabel
+                                    772 ;	-----------------------------------------
+                                    773 ;	 function TIM2_OC2Init
+                                    774 ;	-----------------------------------------
+                                    775 ;	Register assignment is optimal.
+                                    776 ;	Stack space usage: 1 bytes.
+      00E29E                        777 _TIM2_OC2Init:
+      00E29E 88               [ 1]  778 	push	a
+                                    779 ; genReceive
+      00E29F 6B 01            [ 1]  780 	ld	(0x01, sp), a
+                                    781 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 678: tmpccmr2 = TIM2->CCMR2;
+                                    782 ; genPointerGet
+      00E2A1 C6 52 5A         [ 1]  783 	ld	a, 0x525a
+      00E2A4 97               [ 1]  784 	ld	xl, a
+                                    785 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 681: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E);
+                                    786 ; genPointerGet
+                                    787 ; genAnd
+                                    788 ; genPointerSet
+      00E2A5 72 19 52 5B      [ 1]  789 	bres	0x525b, #4
+                                    790 ; peephole 204x replaced 'and' by 'bres' ('0x525b').
+                                    791 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 684: tmpccmr2 &= (uint8_t)(~TIM_CCMR_OCM);
+                                    792 ; genAnd
+      00E2A9 9F               [ 1]  793 	ld	a, xl
+      00E2AA A4 8F            [ 1]  794 	and	a, #0x8f
+                                    795 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 687: tmpccmr2 |= (uint8_t)TIM2_OCMode;
+                                    796 ; genOr
+      00E2AC 1A 01            [ 1]  797 	or	a, (0x01, sp)
+                                    798 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 689: TIM2->CCMR2 = tmpccmr2;
+                                    799 ; genPointerSet
+      00E2AE C7 52 5A         [ 1]  800 	ld	0x525a, a
+                                    801 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 681: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E);
+                                    802 ; genPointerGet
+      00E2B1 C6 52 5B         [ 1]  803 	ld	a, 0x525b
+                                    804 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 692: if (TIM2_OutputState == TIM2_OutputState_Enable)
+                                    805 ; genIfx
+      00E2B4 0D 04            [ 1]  806 	tnz	(0x04, sp)
+                                    807 ; peephole j5 changed absolute to relative unconditional jump.
+      00E2B6 27 07            [ 1]  808 	jreq	00102$
+                                    809 ; peephole j10 removed jra by using inverse jump logic
+                                    810 ; peephole j30 removed unused label 00133$.
+                                    811 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 694: TIM2->CCER1 |= TIM_CCER1_CC2E;
+                                    812 ; genOr
+      00E2B8 AA 10            [ 1]  813 	or	a, #0x10
+                                    814 ; genPointerSet
+      00E2BA C7 52 5B         [ 1]  815 	ld	0x525b, a
+                                    816 ; genGoto
+      00E2BD 20 05            [ 2]  817 	jra	00103$
+                                    818 ; peephole j5 changed absolute to relative unconditional jump.
+                                    819 ; genLabel
+      00E2BF                        820 00102$:
+                                    821 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 698: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E);
+                                    822 ; genAnd
+      00E2BF A4 EF            [ 1]  823 	and	a, #0xef
+                                    824 ; genPointerSet
+      00E2C1 C7 52 5B         [ 1]  825 	ld	0x525b, a
+                                    826 ; genLabel
+      00E2C4                        827 00103$:
+                                    828 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 681: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E);
+                                    829 ; genPointerGet
+      00E2C4 C6 52 5B         [ 1]  830 	ld	a, 0x525b
+                                    831 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 702: if (TIM2_OCPolarity == TIM2_OCPolarity_Low)
+                                    832 ; genIfx
+      00E2C7 0D 07            [ 1]  833 	tnz	(0x07, sp)
+                                    834 ; peephole j5 changed absolute to relative unconditional jump.
+      00E2C9 27 07            [ 1]  835 	jreq	00105$
+                                    836 ; peephole j10 removed jra by using inverse jump logic
+                                    837 ; peephole j30 removed unused label 00134$.
+                                    838 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 704: TIM2->CCER1 |= TIM_CCER1_CC2P;
+                                    839 ; genOr
+      00E2CB AA 20            [ 1]  840 	or	a, #0x20
+                                    841 ; genPointerSet
+      00E2CD C7 52 5B         [ 1]  842 	ld	0x525b, a
+                                    843 ; genGoto
+      00E2D0 20 05            [ 2]  844 	jra	00106$
+                                    845 ; peephole j5 changed absolute to relative unconditional jump.
+                                    846 ; genLabel
+      00E2D2                        847 00105$:
+                                    848 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 708: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2P);
+                                    849 ; genAnd
+      00E2D2 A4 DF            [ 1]  850 	and	a, #0xdf
+                                    851 ; genPointerSet
+      00E2D4 C7 52 5B         [ 1]  852 	ld	0x525b, a
+                                    853 ; genLabel
+      00E2D7                        854 00106$:
+                                    855 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 715: TIM2->OISR |= TIM_OISR_OIS2;
+                                    856 ; genPointerGet
+      00E2D7 C6 52 66         [ 1]  857 	ld	a, 0x5266
+                                    858 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 713: if (TIM2_OCIdleState == TIM2_OCIdleState_Set)
+                                    859 ; genIfx
+      00E2DA 0D 08            [ 1]  860 	tnz	(0x08, sp)
+                                    861 ; peephole j5 changed absolute to relative unconditional jump.
+      00E2DC 27 07            [ 1]  862 	jreq	00108$
+                                    863 ; peephole j10 removed jra by using inverse jump logic
+                                    864 ; peephole j30 removed unused label 00135$.
+                                    865 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 715: TIM2->OISR |= TIM_OISR_OIS2;
+                                    866 ; genOr
+      00E2DE AA 04            [ 1]  867 	or	a, #0x04
+                                    868 ; genPointerSet
+      00E2E0 C7 52 66         [ 1]  869 	ld	0x5266, a
+                                    870 ; genGoto
+      00E2E3 20 05            [ 2]  871 	jra	00109$
+                                    872 ; peephole j5 changed absolute to relative unconditional jump.
+                                    873 ; genLabel
+      00E2E5                        874 00108$:
+                                    875 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 719: TIM2->OISR &= (uint8_t)(~TIM_OISR_OIS2);
+                                    876 ; genAnd
+      00E2E5 A4 FB            [ 1]  877 	and	a, #0xfb
+                                    878 ; genPointerSet
+      00E2E7 C7 52 66         [ 1]  879 	ld	0x5266, a
+                                    880 ; genLabel
+      00E2EA                        881 00109$:
+                                    882 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 723: TIM2->CCR2H = (uint8_t)(TIM2_Pulse >> 8);
+                                    883 ; genGetByte
+      00E2EA 7B 05            [ 1]  884 	ld	a, (0x05, sp)
+                                    885 ; genPointerSet
+      00E2EC C7 52 63         [ 1]  886 	ld	0x5263, a
+                                    887 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 724: TIM2->CCR2L = (uint8_t)(TIM2_Pulse);
+                                    888 ; genCast
+                                    889 ; genAssign
+      00E2EF 7B 06            [ 1]  890 	ld	a, (0x06, sp)
+                                    891 ; genPointerSet
+      00E2F1 C7 52 64         [ 1]  892 	ld	0x5264, a
+                                    893 ; genLabel
+                                    894 ; peephole j30 removed unused label 00110$.
+                                    895 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 725: }
+                                    896 ; genEndFunction
+      00E2F4 1E 02            [ 2]  897 	ldw	x, (2, sp)
+      00E2F6 5B 08            [ 2]  898 	addw	sp, #8
+      00E2F8 FC               [ 2]  899 	jp	(x)
+                                    900 ;	Total TIM2_OC2Init function size at codegen: 5 bytes.
+                                    901 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 754: void TIM2_BKRConfig(TIM2_OSSIState_TypeDef TIM2_OSSIState,
+                                    902 ; genLabel
+                                    903 ;	-----------------------------------------
+                                    904 ;	 function TIM2_BKRConfig
+                                    905 ;	-----------------------------------------
+                                    906 ;	Register assignment is optimal.
+                                    907 ;	Stack space usage: 1 bytes.
+      00E2F9                        908 _TIM2_BKRConfig:
+      00E2F9 88               [ 1]  909 	push	a
+                                    910 ; genReceive
+                                    911 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 772: TIM2->BKR = (uint8_t)((uint8_t)((uint8_t)((uint8_t)((uint8_t)TIM2_OSSIState | (uint8_t)TIM2_LockLevel) | \
+                                    912 ; genOr
+      00E2FA 1A 04            [ 1]  913 	or	a, (0x04, sp)
+      00E2FC 6B 01            [ 1]  914 	ld	(0x01, sp), a
+                                    915 ; genOr
+      00E2FE 7B 05            [ 1]  916 	ld	a, (0x05, sp)
+      00E300 1A 06            [ 1]  917 	or	a, (0x06, sp)
+                                    918 ; genOr
+      00E302 1A 01            [ 1]  919 	or	a, (0x01, sp)
+                                    920 ; genOr
+      00E304 1A 07            [ 1]  921 	or	a, (0x07, sp)
+                                    922 ; genPointerSet
+      00E306 C7 52 65         [ 1]  923 	ld	0x5265, a
+                                    924 ; genLabel
+                                    925 ; peephole j30 removed unused label 00101$.
+                                    926 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 775: }
+                                    927 ; genEndFunction
+      00E309 1E 02            [ 2]  928 	ldw	x, (2, sp)
+      00E30B 5B 07            [ 2]  929 	addw	sp, #7
+      00E30D FC               [ 2]  930 	jp	(x)
+                                    931 ;	Total TIM2_BKRConfig function size at codegen: 5 bytes.
+                                    932 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 783: void TIM2_CtrlPWMOutputs(FunctionalState NewState)
+                                    933 ; genLabel
+                                    934 ;	-----------------------------------------
+                                    935 ;	 function TIM2_CtrlPWMOutputs
+                                    936 ;	-----------------------------------------
+                                    937 ;	Register assignment is optimal.
+                                    938 ;	Stack space usage: 1 bytes.
+      00E30E                        939 _TIM2_CtrlPWMOutputs:
+      00E30E 88               [ 1]  940 	push	a
+                                    941 ; genReceive
+      00E30F 6B 01            [ 1]  942 	ld	(0x01, sp), a
+                                    943 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 792: TIM2->BKR |= TIM_BKR_MOE ;
+                                    944 ; genPointerGet
+      00E311 C6 52 65         [ 1]  945 	ld	a, 0x5265
+                                    946 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 790: if (NewState != DISABLE)
+                                    947 ; genIfx
+      00E314 0D 01            [ 1]  948 	tnz	(0x01, sp)
+                                    949 ; peephole j5 changed absolute to relative unconditional jump.
+      00E316 27 07            [ 1]  950 	jreq	00102$
+                                    951 ; peephole j10 removed jra by using inverse jump logic
+                                    952 ; peephole j30 removed unused label 00113$.
+                                    953 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 792: TIM2->BKR |= TIM_BKR_MOE ;
+                                    954 ; genOr
+      00E318 AA 80            [ 1]  955 	or	a, #0x80
+                                    956 ; genPointerSet
+      00E31A C7 52 65         [ 1]  957 	ld	0x5265, a
+                                    958 ; genGoto
+      00E31D 20 05            [ 2]  959 	jra	00104$
+                                    960 ; peephole j5 changed absolute to relative unconditional jump.
+                                    961 ; genLabel
+      00E31F                        962 00102$:
+                                    963 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 796: TIM2->BKR &= (uint8_t)(~TIM_BKR_MOE) ;
+                                    964 ; genAnd
+      00E31F A4 7F            [ 1]  965 	and	a, #0x7f
+                                    966 ; genPointerSet
+      00E321 C7 52 65         [ 1]  967 	ld	0x5265, a
+                                    968 ; genLabel
+      00E324                        969 00104$:
+                                    970 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 798: }
+                                    971 ; genEndFunction
+      00E324 84               [ 1]  972 	pop	a
+      00E325 81               [ 4]  973 	ret
+                                    974 ;	Total TIM2_CtrlPWMOutputs function size at codegen: 2 bytes.
+                                    975 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 818: void TIM2_SelectOCxM(TIM2_Channel_TypeDef TIM2_Channel,
+                                    976 ; genLabel
+                                    977 ;	-----------------------------------------
+                                    978 ;	 function TIM2_SelectOCxM
+                                    979 ;	-----------------------------------------
+                                    980 ;	Register assignment is optimal.
+                                    981 ;	Stack space usage: 1 bytes.
+      00E326                        982 _TIM2_SelectOCxM:
+      00E326 88               [ 1]  983 	push	a
+                                    984 ; genReceive
+      00E327 6B 01            [ 1]  985 	ld	(0x01, sp), a
+                                    986 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 828: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    987 ; genPointerGet
+      00E329 C6 52 5B         [ 1]  988 	ld	a, 0x525b
+                                    989 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 825: if (TIM2_Channel == TIM2_Channel_1)
+                                    990 ; genIfx
+      00E32C 0D 01            [ 1]  991 	tnz	(0x01, sp)
+                                    992 ; peephole j5 changed absolute to relative unconditional jump.
+      00E32E 26 17            [ 1]  993 	jrne	00102$
+                                    994 ; peephole j7 removed jra by using inverse jump logic
+                                    995 ; peephole j30 removed unused label 00113$.
+                                    996 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 828: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E);
+                                    997 ; genAnd
+      00E330 A4 FE            [ 1]  998 	and	a, #0xfe
+                                    999 ; genPointerSet
+      00E332 C7 52 5B         [ 1] 1000 	ld	0x525b, a
+                                   1001 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 831: TIM2->CCMR1 &= (uint8_t)(~TIM_CCMR_OCM);
+                                   1002 ; genPointerGet
+      00E335 C6 52 59         [ 1] 1003 	ld	a, 0x5259
+                                   1004 ; genAnd
+      00E338 A4 8F            [ 1] 1005 	and	a, #0x8f
+                                   1006 ; genPointerSet
+      00E33A C7 52 59         [ 1] 1007 	ld	0x5259, a
+                                   1008 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 834: TIM2->CCMR1 |= (uint8_t)TIM2_OCMode;
+                                   1009 ; genPointerGet
+      00E33D C6 52 59         [ 1] 1010 	ld	a, 0x5259
+                                   1011 ; genOr
+      00E340 1A 04            [ 1] 1012 	or	a, (0x04, sp)
+                                   1013 ; genPointerSet
+      00E342 C7 52 59         [ 1] 1014 	ld	0x5259, a
+                                   1015 ; genGoto
+      00E345 20 15            [ 2] 1016 	jra	00104$
+                                   1017 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1018 ; genLabel
+      00E347                       1019 00102$:
+                                   1020 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 839: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E);
+                                   1021 ; genAnd
+      00E347 A4 EF            [ 1] 1022 	and	a, #0xef
+                                   1023 ; genPointerSet
+      00E349 C7 52 5B         [ 1] 1024 	ld	0x525b, a
+                                   1025 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 842: TIM2->CCMR2 &= (uint8_t)(~TIM_CCMR_OCM);
+                                   1026 ; genPointerGet
+      00E34C C6 52 5A         [ 1] 1027 	ld	a, 0x525a
+                                   1028 ; genAnd
+      00E34F A4 8F            [ 1] 1029 	and	a, #0x8f
+                                   1030 ; genPointerSet
+      00E351 C7 52 5A         [ 1] 1031 	ld	0x525a, a
+                                   1032 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 845: TIM2->CCMR2 |= (uint8_t)TIM2_OCMode;
+                                   1033 ; genPointerGet
+      00E354 C6 52 5A         [ 1] 1034 	ld	a, 0x525a
+                                   1035 ; genOr
+      00E357 1A 04            [ 1] 1036 	or	a, (0x04, sp)
+                                   1037 ; genPointerSet
+      00E359 C7 52 5A         [ 1] 1038 	ld	0x525a, a
+                                   1039 ; genLabel
+      00E35C                       1040 00104$:
+                                   1041 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 847: }
+                                   1042 ; genEndFunction
+      00E35C 84               [ 1] 1043 	pop	a
+      00E35D 85               [ 2] 1044 	popw	x
+      00E35E 84               [ 1] 1045 	pop	a
+      00E35F FC               [ 2] 1046 	jp	(x)
+                                   1047 ;	Total TIM2_SelectOCxM function size at codegen: 4 bytes.
+                                   1048 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 855: void TIM2_SetCompare1(uint16_t Compare)
+                                   1049 ; genLabel
+                                   1050 ;	-----------------------------------------
+                                   1051 ;	 function TIM2_SetCompare1
+                                   1052 ;	-----------------------------------------
+                                   1053 ;	Register assignment is optimal.
+                                   1054 ;	Stack space usage: 0 bytes.
+      00E360                       1055 _TIM2_SetCompare1:
+                                   1056 ; genReceive
+                                   1057 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 858: TIM2->CCR1H = (uint8_t)(Compare >> 8);
+                                   1058 ; genGetByte
+      00E360 9E               [ 1] 1059 	ld	a, xh
+                                   1060 ; genPointerSet
+      00E361 C7 52 61         [ 1] 1061 	ld	0x5261, a
+                                   1062 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 859: TIM2->CCR1L = (uint8_t)(Compare);
+                                   1063 ; genCast
+                                   1064 ; genAssign
+      00E364 9F               [ 1] 1065 	ld	a, xl
+                                   1066 ; genPointerSet
+      00E365 C7 52 62         [ 1] 1067 	ld	0x5262, a
+                                   1068 ; genLabel
+                                   1069 ; peephole j30 removed unused label 00101$.
+                                   1070 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 860: }
+                                   1071 ; genEndFunction
+      00E368 81               [ 4] 1072 	ret
+                                   1073 ;	Total TIM2_SetCompare1 function size at codegen: 1 bytes.
+                                   1074 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 868: void TIM2_SetCompare2(uint16_t Compare)
+                                   1075 ; genLabel
+                                   1076 ;	-----------------------------------------
+                                   1077 ;	 function TIM2_SetCompare2
+                                   1078 ;	-----------------------------------------
+                                   1079 ;	Register assignment is optimal.
+                                   1080 ;	Stack space usage: 0 bytes.
+      00E369                       1081 _TIM2_SetCompare2:
+                                   1082 ; genReceive
+                                   1083 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 871: TIM2->CCR2H = (uint8_t)(Compare >> 8);
+                                   1084 ; genGetByte
+      00E369 9E               [ 1] 1085 	ld	a, xh
+                                   1086 ; genPointerSet
+      00E36A C7 52 63         [ 1] 1087 	ld	0x5263, a
+                                   1088 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 872: TIM2->CCR2L = (uint8_t)(Compare);
+                                   1089 ; genCast
+                                   1090 ; genAssign
+      00E36D 9F               [ 1] 1091 	ld	a, xl
+                                   1092 ; genPointerSet
+      00E36E C7 52 64         [ 1] 1093 	ld	0x5264, a
+                                   1094 ; genLabel
+                                   1095 ; peephole j30 removed unused label 00101$.
+                                   1096 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 873: }
+                                   1097 ; genEndFunction
+      00E371 81               [ 4] 1098 	ret
+                                   1099 ;	Total TIM2_SetCompare2 function size at codegen: 1 bytes.
+                                   1100 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 883: void TIM2_ForcedOC1Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
+                                   1101 ; genLabel
+                                   1102 ;	-----------------------------------------
+                                   1103 ;	 function TIM2_ForcedOC1Config
+                                   1104 ;	-----------------------------------------
+                                   1105 ;	Register assignment is optimal.
+                                   1106 ;	Stack space usage: 1 bytes.
+      00E372                       1107 _TIM2_ForcedOC1Config:
+      00E372 88               [ 1] 1108 	push	a
+                                   1109 ; genReceive
+      00E373 6B 01            [ 1] 1110 	ld	(0x01, sp), a
+                                   1111 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 890: tmpccmr1 = TIM2->CCMR1;
+                                   1112 ; genPointerGet
+      00E375 C6 52 59         [ 1] 1113 	ld	a, 0x5259
+                                   1114 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 893: tmpccmr1 &= (uint8_t)(~TIM_CCMR_OCM);
+                                   1115 ; genAnd
+      00E378 A4 8F            [ 1] 1116 	and	a, #0x8f
+                                   1117 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 896: tmpccmr1 |= (uint8_t)TIM2_ForcedAction;
+                                   1118 ; genOr
+      00E37A 1A 01            [ 1] 1119 	or	a, (0x01, sp)
+                                   1120 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 898: TIM2->CCMR1 = tmpccmr1;
+                                   1121 ; genPointerSet
+      00E37C C7 52 59         [ 1] 1122 	ld	0x5259, a
+                                   1123 ; genLabel
+                                   1124 ; peephole j30 removed unused label 00101$.
+                                   1125 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 899: }
+                                   1126 ; genEndFunction
+      00E37F 84               [ 1] 1127 	pop	a
+      00E380 81               [ 4] 1128 	ret
+                                   1129 ;	Total TIM2_ForcedOC1Config function size at codegen: 2 bytes.
+                                   1130 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 909: void TIM2_ForcedOC2Config(TIM2_ForcedAction_TypeDef TIM2_ForcedAction)
+                                   1131 ; genLabel
+                                   1132 ;	-----------------------------------------
+                                   1133 ;	 function TIM2_ForcedOC2Config
+                                   1134 ;	-----------------------------------------
+                                   1135 ;	Register assignment is optimal.
+                                   1136 ;	Stack space usage: 1 bytes.
+      00E381                       1137 _TIM2_ForcedOC2Config:
+      00E381 88               [ 1] 1138 	push	a
+                                   1139 ; genReceive
+      00E382 6B 01            [ 1] 1140 	ld	(0x01, sp), a
+                                   1141 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 916: tmpccmr2 = TIM2->CCMR2;
+                                   1142 ; genPointerGet
+      00E384 C6 52 5A         [ 1] 1143 	ld	a, 0x525a
+                                   1144 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 919: tmpccmr2 &= (uint8_t)(~TIM_CCMR_OCM);
+                                   1145 ; genAnd
+      00E387 A4 8F            [ 1] 1146 	and	a, #0x8f
+                                   1147 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 922: tmpccmr2 |= (uint8_t)TIM2_ForcedAction;
+                                   1148 ; genOr
+      00E389 1A 01            [ 1] 1149 	or	a, (0x01, sp)
+                                   1150 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 924: TIM2->CCMR2 = tmpccmr2;
+                                   1151 ; genPointerSet
+      00E38B C7 52 5A         [ 1] 1152 	ld	0x525a, a
+                                   1153 ; genLabel
+                                   1154 ; peephole j30 removed unused label 00101$.
+                                   1155 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 925: }
+                                   1156 ; genEndFunction
+      00E38E 84               [ 1] 1157 	pop	a
+      00E38F 81               [ 4] 1158 	ret
+                                   1159 ;	Total TIM2_ForcedOC2Config function size at codegen: 2 bytes.
+                                   1160 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 933: void TIM2_OC1PreloadConfig(FunctionalState NewState)
+                                   1161 ; genLabel
+                                   1162 ;	-----------------------------------------
+                                   1163 ;	 function TIM2_OC1PreloadConfig
+                                   1164 ;	-----------------------------------------
+                                   1165 ;	Register assignment is optimal.
+                                   1166 ;	Stack space usage: 1 bytes.
+      00E390                       1167 _TIM2_OC1PreloadConfig:
+      00E390 88               [ 1] 1168 	push	a
+                                   1169 ; genReceive
+      00E391 6B 01            [ 1] 1170 	ld	(0x01, sp), a
+                                   1171 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 941: TIM2->CCMR1 |= TIM_CCMR_OCxPE ;
+                                   1172 ; genPointerGet
+      00E393 C6 52 59         [ 1] 1173 	ld	a, 0x5259
+                                   1174 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 939: if (NewState != DISABLE)
+                                   1175 ; genIfx
+      00E396 0D 01            [ 1] 1176 	tnz	(0x01, sp)
+                                   1177 ; peephole j5 changed absolute to relative unconditional jump.
+      00E398 27 07            [ 1] 1178 	jreq	00102$
+                                   1179 ; peephole j10 removed jra by using inverse jump logic
+                                   1180 ; peephole j30 removed unused label 00113$.
+                                   1181 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 941: TIM2->CCMR1 |= TIM_CCMR_OCxPE ;
+                                   1182 ; genOr
+      00E39A AA 08            [ 1] 1183 	or	a, #0x08
+                                   1184 ; genPointerSet
+      00E39C C7 52 59         [ 1] 1185 	ld	0x5259, a
+                                   1186 ; genGoto
+      00E39F 20 05            [ 2] 1187 	jra	00104$
+                                   1188 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1189 ; genLabel
+      00E3A1                       1190 00102$:
+                                   1191 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 945: TIM2->CCMR1 &= (uint8_t)(~TIM_CCMR_OCxPE) ;
+                                   1192 ; genAnd
+      00E3A1 A4 F7            [ 1] 1193 	and	a, #0xf7
+                                   1194 ; genPointerSet
+      00E3A3 C7 52 59         [ 1] 1195 	ld	0x5259, a
+                                   1196 ; genLabel
+      00E3A6                       1197 00104$:
+                                   1198 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 947: }
+                                   1199 ; genEndFunction
+      00E3A6 84               [ 1] 1200 	pop	a
+      00E3A7 81               [ 4] 1201 	ret
+                                   1202 ;	Total TIM2_OC1PreloadConfig function size at codegen: 2 bytes.
+                                   1203 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 955: void TIM2_OC2PreloadConfig(FunctionalState NewState)
+                                   1204 ; genLabel
+                                   1205 ;	-----------------------------------------
+                                   1206 ;	 function TIM2_OC2PreloadConfig
+                                   1207 ;	-----------------------------------------
+                                   1208 ;	Register assignment is optimal.
+                                   1209 ;	Stack space usage: 1 bytes.
+      00E3A8                       1210 _TIM2_OC2PreloadConfig:
+      00E3A8 88               [ 1] 1211 	push	a
+                                   1212 ; genReceive
+      00E3A9 6B 01            [ 1] 1213 	ld	(0x01, sp), a
+                                   1214 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 963: TIM2->CCMR2 |= TIM_CCMR_OCxPE ;
+                                   1215 ; genPointerGet
+      00E3AB C6 52 5A         [ 1] 1216 	ld	a, 0x525a
+                                   1217 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 961: if (NewState != DISABLE)
+                                   1218 ; genIfx
+      00E3AE 0D 01            [ 1] 1219 	tnz	(0x01, sp)
+                                   1220 ; peephole j5 changed absolute to relative unconditional jump.
+      00E3B0 27 07            [ 1] 1221 	jreq	00102$
+                                   1222 ; peephole j10 removed jra by using inverse jump logic
+                                   1223 ; peephole j30 removed unused label 00113$.
+                                   1224 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 963: TIM2->CCMR2 |= TIM_CCMR_OCxPE ;
+                                   1225 ; genOr
+      00E3B2 AA 08            [ 1] 1226 	or	a, #0x08
+                                   1227 ; genPointerSet
+      00E3B4 C7 52 5A         [ 1] 1228 	ld	0x525a, a
+                                   1229 ; genGoto
+      00E3B7 20 05            [ 2] 1230 	jra	00104$
+                                   1231 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1232 ; genLabel
+      00E3B9                       1233 00102$:
+                                   1234 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 967: TIM2->CCMR2 &= (uint8_t)(~TIM_CCMR_OCxPE) ;
+                                   1235 ; genAnd
+      00E3B9 A4 F7            [ 1] 1236 	and	a, #0xf7
+                                   1237 ; genPointerSet
+      00E3BB C7 52 5A         [ 1] 1238 	ld	0x525a, a
+                                   1239 ; genLabel
+      00E3BE                       1240 00104$:
+                                   1241 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 969: }
+                                   1242 ; genEndFunction
+      00E3BE 84               [ 1] 1243 	pop	a
+      00E3BF 81               [ 4] 1244 	ret
+                                   1245 ;	Total TIM2_OC2PreloadConfig function size at codegen: 2 bytes.
+                                   1246 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 977: void TIM2_OC1FastConfig(FunctionalState NewState)
+                                   1247 ; genLabel
+                                   1248 ;	-----------------------------------------
+                                   1249 ;	 function TIM2_OC1FastConfig
+                                   1250 ;	-----------------------------------------
+                                   1251 ;	Register assignment is optimal.
+                                   1252 ;	Stack space usage: 1 bytes.
+      00E3C0                       1253 _TIM2_OC1FastConfig:
+      00E3C0 88               [ 1] 1254 	push	a
+                                   1255 ; genReceive
+      00E3C1 6B 01            [ 1] 1256 	ld	(0x01, sp), a
+                                   1257 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 985: TIM2->CCMR1 |= TIM_CCMR_OCxFE ;
+                                   1258 ; genPointerGet
+      00E3C3 C6 52 59         [ 1] 1259 	ld	a, 0x5259
+                                   1260 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 983: if (NewState != DISABLE)
+                                   1261 ; genIfx
+      00E3C6 0D 01            [ 1] 1262 	tnz	(0x01, sp)
+                                   1263 ; peephole j5 changed absolute to relative unconditional jump.
+      00E3C8 27 07            [ 1] 1264 	jreq	00102$
+                                   1265 ; peephole j10 removed jra by using inverse jump logic
+                                   1266 ; peephole j30 removed unused label 00113$.
+                                   1267 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 985: TIM2->CCMR1 |= TIM_CCMR_OCxFE ;
+                                   1268 ; genOr
+      00E3CA AA 04            [ 1] 1269 	or	a, #0x04
+                                   1270 ; genPointerSet
+      00E3CC C7 52 59         [ 1] 1271 	ld	0x5259, a
+                                   1272 ; genGoto
+      00E3CF 20 05            [ 2] 1273 	jra	00104$
+                                   1274 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1275 ; genLabel
+      00E3D1                       1276 00102$:
+                                   1277 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 989: TIM2->CCMR1 &= (uint8_t)(~TIM_CCMR_OCxFE) ;
+                                   1278 ; genAnd
+      00E3D1 A4 FB            [ 1] 1279 	and	a, #0xfb
+                                   1280 ; genPointerSet
+      00E3D3 C7 52 59         [ 1] 1281 	ld	0x5259, a
+                                   1282 ; genLabel
+      00E3D6                       1283 00104$:
+                                   1284 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 991: }
+                                   1285 ; genEndFunction
+      00E3D6 84               [ 1] 1286 	pop	a
+      00E3D7 81               [ 4] 1287 	ret
+                                   1288 ;	Total TIM2_OC1FastConfig function size at codegen: 2 bytes.
+                                   1289 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1000: void TIM2_OC2FastConfig(FunctionalState NewState)
+                                   1290 ; genLabel
+                                   1291 ;	-----------------------------------------
+                                   1292 ;	 function TIM2_OC2FastConfig
+                                   1293 ;	-----------------------------------------
+                                   1294 ;	Register assignment is optimal.
+                                   1295 ;	Stack space usage: 1 bytes.
+      00E3D8                       1296 _TIM2_OC2FastConfig:
+      00E3D8 88               [ 1] 1297 	push	a
+                                   1298 ; genReceive
+      00E3D9 6B 01            [ 1] 1299 	ld	(0x01, sp), a
+                                   1300 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1008: TIM2->CCMR2 |= TIM_CCMR_OCxFE ;
+                                   1301 ; genPointerGet
+      00E3DB C6 52 5A         [ 1] 1302 	ld	a, 0x525a
+                                   1303 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1006: if (NewState != DISABLE)
+                                   1304 ; genIfx
+      00E3DE 0D 01            [ 1] 1305 	tnz	(0x01, sp)
+                                   1306 ; peephole j5 changed absolute to relative unconditional jump.
+      00E3E0 27 07            [ 1] 1307 	jreq	00102$
+                                   1308 ; peephole j10 removed jra by using inverse jump logic
+                                   1309 ; peephole j30 removed unused label 00113$.
+                                   1310 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1008: TIM2->CCMR2 |= TIM_CCMR_OCxFE ;
+                                   1311 ; genOr
+      00E3E2 AA 04            [ 1] 1312 	or	a, #0x04
+                                   1313 ; genPointerSet
+      00E3E4 C7 52 5A         [ 1] 1314 	ld	0x525a, a
+                                   1315 ; genGoto
+      00E3E7 20 05            [ 2] 1316 	jra	00104$
+                                   1317 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1318 ; genLabel
+      00E3E9                       1319 00102$:
+                                   1320 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1012: TIM2->CCMR2 &= (uint8_t)(~TIM_CCMR_OCxFE) ;
+                                   1321 ; genAnd
+      00E3E9 A4 FB            [ 1] 1322 	and	a, #0xfb
+                                   1323 ; genPointerSet
+      00E3EB C7 52 5A         [ 1] 1324 	ld	0x525a, a
+                                   1325 ; genLabel
+      00E3EE                       1326 00104$:
+                                   1327 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1014: }
+                                   1328 ; genEndFunction
+      00E3EE 84               [ 1] 1329 	pop	a
+      00E3EF 81               [ 4] 1330 	ret
+                                   1331 ;	Total TIM2_OC2FastConfig function size at codegen: 2 bytes.
+                                   1332 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1024: void TIM2_OC1PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+                                   1333 ; genLabel
+                                   1334 ;	-----------------------------------------
+                                   1335 ;	 function TIM2_OC1PolarityConfig
+                                   1336 ;	-----------------------------------------
+                                   1337 ;	Register assignment is optimal.
+                                   1338 ;	Stack space usage: 1 bytes.
+      00E3F0                       1339 _TIM2_OC1PolarityConfig:
+      00E3F0 88               [ 1] 1340 	push	a
+                                   1341 ; genReceive
+      00E3F1 6B 01            [ 1] 1342 	ld	(0x01, sp), a
+                                   1343 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1032: TIM2->CCER1 |= TIM_CCER1_CC1P ;
+                                   1344 ; genPointerGet
+      00E3F3 C6 52 5B         [ 1] 1345 	ld	a, 0x525b
+                                   1346 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1030: if (TIM2_OCPolarity == TIM2_OCPolarity_Low)
+                                   1347 ; genIfx
+      00E3F6 0D 01            [ 1] 1348 	tnz	(0x01, sp)
+                                   1349 ; peephole j5 changed absolute to relative unconditional jump.
+      00E3F8 27 07            [ 1] 1350 	jreq	00102$
+                                   1351 ; peephole j10 removed jra by using inverse jump logic
+                                   1352 ; peephole j30 removed unused label 00113$.
+                                   1353 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1032: TIM2->CCER1 |= TIM_CCER1_CC1P ;
+                                   1354 ; genOr
+      00E3FA AA 02            [ 1] 1355 	or	a, #0x02
+                                   1356 ; genPointerSet
+      00E3FC C7 52 5B         [ 1] 1357 	ld	0x525b, a
+                                   1358 ; genGoto
+      00E3FF 20 05            [ 2] 1359 	jra	00104$
+                                   1360 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1361 ; genLabel
+      00E401                       1362 00102$:
+                                   1363 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1036: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1P) ;
+                                   1364 ; genAnd
+      00E401 A4 FD            [ 1] 1365 	and	a, #0xfd
+                                   1366 ; genPointerSet
+      00E403 C7 52 5B         [ 1] 1367 	ld	0x525b, a
+                                   1368 ; genLabel
+      00E406                       1369 00104$:
+                                   1370 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1038: }
+                                   1371 ; genEndFunction
+      00E406 84               [ 1] 1372 	pop	a
+      00E407 81               [ 4] 1373 	ret
+                                   1374 ;	Total TIM2_OC1PolarityConfig function size at codegen: 2 bytes.
+                                   1375 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1048: void TIM2_OC2PolarityConfig(TIM2_OCPolarity_TypeDef TIM2_OCPolarity)
+                                   1376 ; genLabel
+                                   1377 ;	-----------------------------------------
+                                   1378 ;	 function TIM2_OC2PolarityConfig
+                                   1379 ;	-----------------------------------------
+                                   1380 ;	Register assignment is optimal.
+                                   1381 ;	Stack space usage: 1 bytes.
+      00E408                       1382 _TIM2_OC2PolarityConfig:
+      00E408 88               [ 1] 1383 	push	a
+                                   1384 ; genReceive
+      00E409 6B 01            [ 1] 1385 	ld	(0x01, sp), a
+                                   1386 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1056: TIM2->CCER1 |= TIM_CCER1_CC2P ;
+                                   1387 ; genPointerGet
+      00E40B C6 52 5B         [ 1] 1388 	ld	a, 0x525b
+                                   1389 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1054: if (TIM2_OCPolarity == TIM2_OCPolarity_Low)
+                                   1390 ; genIfx
+      00E40E 0D 01            [ 1] 1391 	tnz	(0x01, sp)
+                                   1392 ; peephole j5 changed absolute to relative unconditional jump.
+      00E410 27 07            [ 1] 1393 	jreq	00102$
+                                   1394 ; peephole j10 removed jra by using inverse jump logic
+                                   1395 ; peephole j30 removed unused label 00113$.
+                                   1396 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1056: TIM2->CCER1 |= TIM_CCER1_CC2P ;
+                                   1397 ; genOr
+      00E412 AA 20            [ 1] 1398 	or	a, #0x20
+                                   1399 ; genPointerSet
+      00E414 C7 52 5B         [ 1] 1400 	ld	0x525b, a
+                                   1401 ; genGoto
+      00E417 20 05            [ 2] 1402 	jra	00104$
+                                   1403 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1404 ; genLabel
+      00E419                       1405 00102$:
+                                   1406 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1060: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2P) ;
+                                   1407 ; genAnd
+      00E419 A4 DF            [ 1] 1408 	and	a, #0xdf
+                                   1409 ; genPointerSet
+      00E41B C7 52 5B         [ 1] 1410 	ld	0x525b, a
+                                   1411 ; genLabel
+      00E41E                       1412 00104$:
+                                   1413 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1062: }
+                                   1414 ; genEndFunction
+      00E41E 84               [ 1] 1415 	pop	a
+      00E41F 81               [ 4] 1416 	ret
+                                   1417 ;	Total TIM2_OC2PolarityConfig function size at codegen: 2 bytes.
+                                   1418 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1074: void TIM2_CCxCmd(TIM2_Channel_TypeDef TIM2_Channel,
+                                   1419 ; genLabel
+                                   1420 ;	-----------------------------------------
+                                   1421 ;	 function TIM2_CCxCmd
+                                   1422 ;	-----------------------------------------
+                                   1423 ;	Register assignment is optimal.
+                                   1424 ;	Stack space usage: 1 bytes.
+      00E420                       1425 _TIM2_CCxCmd:
+      00E420 88               [ 1] 1426 	push	a
+                                   1427 ; genReceive
+      00E421 6B 01            [ 1] 1428 	ld	(0x01, sp), a
+                                   1429 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1086: TIM2->CCER1 |= TIM_CCER1_CC1E ;
+                                   1430 ; genPointerGet
+      00E423 C6 52 5B         [ 1] 1431 	ld	a, 0x525b
+                                   1432 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1081: if (TIM2_Channel == TIM2_Channel_1)
+                                   1433 ; genIfx
+      00E426 0D 01            [ 1] 1434 	tnz	(0x01, sp)
+                                   1435 ; peephole j5 changed absolute to relative unconditional jump.
+      00E428 26 12            [ 1] 1436 	jrne	00108$
+                                   1437 ; peephole j7 removed jra by using inverse jump logic
+                                   1438 ; peephole j30 removed unused label 00133$.
+                                   1439 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1084: if (NewState != DISABLE)
+                                   1440 ; genIfx
+      00E42A 0D 04            [ 1] 1441 	tnz	(0x04, sp)
+                                   1442 ; peephole j5 changed absolute to relative unconditional jump.
+      00E42C 27 07            [ 1] 1443 	jreq	00102$
+                                   1444 ; peephole j10 removed jra by using inverse jump logic
+                                   1445 ; peephole j30 removed unused label 00134$.
+                                   1446 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1086: TIM2->CCER1 |= TIM_CCER1_CC1E ;
+                                   1447 ; genOr
+      00E42E AA 01            [ 1] 1448 	or	a, #0x01
+                                   1449 ; genPointerSet
+      00E430 C7 52 5B         [ 1] 1450 	ld	0x525b, a
+                                   1451 ; genGoto
+      00E433 20 17            [ 2] 1452 	jra	00110$
+                                   1453 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1454 ; genLabel
+      00E435                       1455 00102$:
+                                   1456 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1090: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1E) ;
+                                   1457 ; genAnd
+      00E435 A4 FE            [ 1] 1458 	and	a, #0xfe
+                                   1459 ; genPointerSet
+      00E437 C7 52 5B         [ 1] 1460 	ld	0x525b, a
+                                   1461 ; genGoto
+      00E43A 20 10            [ 2] 1462 	jra	00110$
+                                   1463 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1464 ; genLabel
+      00E43C                       1465 00108$:
+                                   1466 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1097: if (NewState != DISABLE)
+                                   1467 ; genIfx
+      00E43C 0D 04            [ 1] 1468 	tnz	(0x04, sp)
+                                   1469 ; peephole j5 changed absolute to relative unconditional jump.
+      00E43E 27 07            [ 1] 1470 	jreq	00105$
+                                   1471 ; peephole j10 removed jra by using inverse jump logic
+                                   1472 ; peephole j30 removed unused label 00135$.
+                                   1473 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1099: TIM2->CCER1 |= TIM_CCER1_CC2E;
+                                   1474 ; genOr
+      00E440 AA 10            [ 1] 1475 	or	a, #0x10
+                                   1476 ; genPointerSet
+      00E442 C7 52 5B         [ 1] 1477 	ld	0x525b, a
+                                   1478 ; genGoto
+      00E445 20 05            [ 2] 1479 	jra	00110$
+                                   1480 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1481 ; genLabel
+      00E447                       1482 00105$:
+                                   1483 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1103: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2E) ;
+                                   1484 ; genAnd
+      00E447 A4 EF            [ 1] 1485 	and	a, #0xef
+                                   1486 ; genPointerSet
+      00E449 C7 52 5B         [ 1] 1487 	ld	0x525b, a
+                                   1488 ; genLabel
+      00E44C                       1489 00110$:
+                                   1490 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1106: }
+                                   1491 ; genEndFunction
+      00E44C 84               [ 1] 1492 	pop	a
+      00E44D 85               [ 2] 1493 	popw	x
+      00E44E 84               [ 1] 1494 	pop	a
+      00E44F FC               [ 2] 1495 	jp	(x)
+                                   1496 ;	Total TIM2_CCxCmd function size at codegen: 4 bytes.
+                                   1497 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1184: void TIM2_ICInit(TIM2_Channel_TypeDef TIM2_Channel,
+                                   1498 ; genLabel
+                                   1499 ;	-----------------------------------------
+                                   1500 ;	 function TIM2_ICInit
+                                   1501 ;	-----------------------------------------
+                                   1502 ;	Register assignment is optimal.
+                                   1503 ;	Stack space usage: 0 bytes.
+      00E450                       1504 _TIM2_ICInit:
+                                   1505 ; genReceive
+                                   1506 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1193: if (TIM2_Channel == TIM2_Channel_1)
+                                   1507 ; genIfx
+      00E450 4D               [ 1] 1508 	tnz	a
+                                   1509 ; peephole j5 changed absolute to relative unconditional jump.
+      00E451 26 12            [ 1] 1510 	jrne	00102$
+                                   1511 ; peephole j7 removed jra by using inverse jump logic
+                                   1512 ; peephole j30 removed unused label 00113$.
+                                   1513 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1196: TI1_Config(TIM2_ICPolarity, TIM2_ICSelection, TIM2_ICFilter);
+                                   1514 ; genIPush
+      00E453 7B 06            [ 1] 1515 	ld	a, (0x06, sp)
+      00E455 88               [ 1] 1516 	push	a
+                                   1517 ; genIPush
+      00E456 7B 05            [ 1] 1518 	ld	a, (0x05, sp)
+      00E458 88               [ 1] 1519 	push	a
+                                   1520 ; genSend
+      00E459 7B 05            [ 1] 1521 	ld	a, (0x05, sp)
+                                   1522 ; genCall
+      00E45B CD E7 23         [ 4] 1523 	call	_TI1_Config
+                                   1524 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1199: TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+                                   1525 ; genSend
+      00E45E 7B 05            [ 1] 1526 	ld	a, (0x05, sp)
+                                   1527 ; genCall
+      00E460 CD E5 03         [ 4] 1528 	call	_TIM2_SetIC1Prescaler
+                                   1529 ; genGoto
+      00E463 20 10            [ 2] 1530 	jra	00104$
+                                   1531 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1532 ; genLabel
+      00E465                       1533 00102$:
+                                   1534 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1204: TI2_Config(TIM2_ICPolarity, TIM2_ICSelection, TIM2_ICFilter);
+                                   1535 ; genIPush
+      00E465 7B 06            [ 1] 1536 	ld	a, (0x06, sp)
+      00E467 88               [ 1] 1537 	push	a
+                                   1538 ; genIPush
+      00E468 7B 05            [ 1] 1539 	ld	a, (0x05, sp)
+      00E46A 88               [ 1] 1540 	push	a
+                                   1541 ; genSend
+      00E46B 7B 05            [ 1] 1542 	ld	a, (0x05, sp)
+                                   1543 ; genCall
+      00E46D CD E7 60         [ 4] 1544 	call	_TI2_Config
+                                   1545 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1207: TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+                                   1546 ; genSend
+      00E470 7B 05            [ 1] 1547 	ld	a, (0x05, sp)
+                                   1548 ; genCall
+      00E472 CD E5 12         [ 4] 1549 	call	_TIM2_SetIC2Prescaler
+                                   1550 ; genLabel
+      00E475                       1551 00104$:
+                                   1552 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1209: }
+                                   1553 ; genEndFunction
+      00E475 1E 01            [ 2] 1554 	ldw	x, (1, sp)
+      00E477 5B 06            [ 2] 1555 	addw	sp, #6
+      00E479 FC               [ 2] 1556 	jp	(x)
+                                   1557 ;	Total TIM2_ICInit function size at codegen: 5 bytes.
+                                   1558 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1235: void TIM2_PWMIConfig(TIM2_Channel_TypeDef TIM2_Channel,
+                                   1559 ; genLabel
+                                   1560 ;	-----------------------------------------
+                                   1561 ;	 function TIM2_PWMIConfig
+                                   1562 ;	-----------------------------------------
+                                   1563 ;	Register assignment is optimal.
+                                   1564 ;	Stack space usage: 2 bytes.
+      00E47A                       1565 _TIM2_PWMIConfig:
+      00E47A 89               [ 2] 1566 	pushw	x
+                                   1567 ; genReceive
+      00E47B 97               [ 1] 1568 	ld	xl, a
+                                   1569 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1248: if (TIM2_ICPolarity == TIM2_ICPolarity_Rising)
+                                   1570 ; genIfx
+      00E47C 0D 05            [ 1] 1571 	tnz	(0x05, sp)
+                                   1572 ; peephole j5 changed absolute to relative unconditional jump.
+      00E47E 26 05            [ 1] 1573 	jrne	00102$
+                                   1574 ; peephole j7 removed jra by using inverse jump logic
+                                   1575 ; peephole j30 removed unused label 00133$.
+                                   1576 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1250: icpolarity = TIM2_ICPolarity_Falling;
+                                   1577 ; genAssign
+      00E480 A6 01            [ 1] 1578 	ld	a, #0x01
+      00E482 6B 02            [ 1] 1579 	ld	(0x02, sp), a
+                                   1580 ; genGoto
+                                   1581 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1582 ; genLabel
+                                   1583 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1254: icpolarity = TIM2_ICPolarity_Rising;
+                                   1584 ; genAssign
+                                   1585 ; genLabel
+      00E484 C5                    1586 	.byte 0xc5
+                                   1587 ; peephole jrf7 used bcp opcode to jump over 2-byte instruction.
+      00E485                       1588 00102$:
+      00E485 0F 02            [ 1] 1589 	clr	(0x02, sp)
+      00E487                       1590 00103$:
+                                   1591 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1258: if (TIM2_ICSelection == TIM2_ICSelection_DirectTI)
+                                   1592 ; genCmpEQorNE
+      00E487 7B 06            [ 1] 1593 	ld	a, (0x06, sp)
+      00E489 4A               [ 1] 1594 	dec	a
+                                   1595 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1596 ; peephole j10 removed jra by using inverse jump logic
+                                   1597 ; peephole j30 removed unused label 00135$.
+                                   1598 ; peephole j5 changed absolute to relative unconditional jump.
+      00E48A 26 06            [ 1] 1599 	jrne	00105$
+                                   1600 ; peephole j7 removed jra by using inverse jump logic
+                                   1601 ; peephole j30 removed unused label 00136$.
+                                   1602 ; skipping generated iCode
+                                   1603 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1260: icselection = TIM2_ICSelection_IndirectTI;
+                                   1604 ; genAssign
+      00E48C A6 02            [ 1] 1605 	ld	a, #0x02
+      00E48E 6B 01            [ 1] 1606 	ld	(0x01, sp), a
+                                   1607 ; genGoto
+      00E490 20 04            [ 2] 1608 	jra	00106$
+                                   1609 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1610 ; genLabel
+      00E492                       1611 00105$:
+                                   1612 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1264: icselection = TIM2_ICSelection_DirectTI;
+                                   1613 ; genAssign
+      00E492 A6 01            [ 1] 1614 	ld	a, #0x01
+      00E494 6B 01            [ 1] 1615 	ld	(0x01, sp), a
+                                   1616 ; genLabel
+      00E496                       1617 00106$:
+                                   1618 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1277: TI2_Config((TIM2_ICPolarity_TypeDef)icpolarity, (TIM2_ICSelection_TypeDef)icselection, TIM2_ICFilter);
+                                   1619 ; genCast
+      00E496 4F               [ 1] 1620 	clr	a
+      00E497 11 02            [ 1] 1621 	cp	a, (0x02, sp)
+      00E499 49               [ 1] 1622 	rlc	a
+      00E49A 6B 02            [ 1] 1623 	ld	(0x02, sp), a
+                                   1624 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1267: if (TIM2_Channel == TIM2_Channel_1)
+                                   1625 ; genIfx
+      00E49C 9F               [ 1] 1626 	ld	a, xl
+      00E49D 4D               [ 1] 1627 	tnz	a
+                                   1628 ; peephole j5 changed absolute to relative unconditional jump.
+      00E49E 26 22            [ 1] 1629 	jrne	00108$
+                                   1630 ; peephole j7 removed jra by using inverse jump logic
+                                   1631 ; peephole j30 removed unused label 00137$.
+                                   1632 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1270: TI1_Config(TIM2_ICPolarity, TIM2_ICSelection,
+                                   1633 ; genIPush
+      00E4A0 7B 08            [ 1] 1634 	ld	a, (0x08, sp)
+      00E4A2 88               [ 1] 1635 	push	a
+                                   1636 ; genIPush
+      00E4A3 7B 07            [ 1] 1637 	ld	a, (0x07, sp)
+      00E4A5 88               [ 1] 1638 	push	a
+                                   1639 ; genSend
+      00E4A6 7B 07            [ 1] 1640 	ld	a, (0x07, sp)
+                                   1641 ; genCall
+      00E4A8 CD E7 23         [ 4] 1642 	call	_TI1_Config
+                                   1643 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1274: TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+                                   1644 ; genSend
+      00E4AB 7B 07            [ 1] 1645 	ld	a, (0x07, sp)
+                                   1646 ; genCall
+      00E4AD CD E5 03         [ 4] 1647 	call	_TIM2_SetIC1Prescaler
+                                   1648 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1277: TI2_Config((TIM2_ICPolarity_TypeDef)icpolarity, (TIM2_ICSelection_TypeDef)icselection, TIM2_ICFilter);
+                                   1649 ; genIPush
+      00E4B0 7B 08            [ 1] 1650 	ld	a, (0x08, sp)
+      00E4B2 88               [ 1] 1651 	push	a
+                                   1652 ; genIPush
+      00E4B3 7B 02            [ 1] 1653 	ld	a, (0x02, sp)
+      00E4B5 88               [ 1] 1654 	push	a
+                                   1655 ; genSend
+      00E4B6 7B 04            [ 1] 1656 	ld	a, (0x04, sp)
+                                   1657 ; genCall
+      00E4B8 CD E7 60         [ 4] 1658 	call	_TI2_Config
+                                   1659 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1280: TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+                                   1660 ; genSend
+      00E4BB 7B 07            [ 1] 1661 	ld	a, (0x07, sp)
+                                   1662 ; genCall
+      00E4BD CD E5 12         [ 4] 1663 	call	_TIM2_SetIC2Prescaler
+                                   1664 ; genGoto
+      00E4C0 20 20            [ 2] 1665 	jra	00110$
+                                   1666 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1667 ; genLabel
+      00E4C2                       1668 00108$:
+                                   1669 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1285: TI2_Config(TIM2_ICPolarity, TIM2_ICSelection,
+                                   1670 ; genIPush
+      00E4C2 7B 08            [ 1] 1671 	ld	a, (0x08, sp)
+      00E4C4 88               [ 1] 1672 	push	a
+                                   1673 ; genIPush
+      00E4C5 7B 07            [ 1] 1674 	ld	a, (0x07, sp)
+      00E4C7 88               [ 1] 1675 	push	a
+                                   1676 ; genSend
+      00E4C8 7B 07            [ 1] 1677 	ld	a, (0x07, sp)
+                                   1678 ; genCall
+      00E4CA CD E7 60         [ 4] 1679 	call	_TI2_Config
+                                   1680 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1289: TIM2_SetIC2Prescaler(TIM2_ICPrescaler);
+                                   1681 ; genSend
+      00E4CD 7B 07            [ 1] 1682 	ld	a, (0x07, sp)
+                                   1683 ; genCall
+      00E4CF CD E5 12         [ 4] 1684 	call	_TIM2_SetIC2Prescaler
+                                   1685 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1292: TI1_Config((TIM2_ICPolarity_TypeDef)icpolarity, (TIM2_ICSelection_TypeDef)icselection, TIM2_ICFilter);
+                                   1686 ; genIPush
+      00E4D2 7B 08            [ 1] 1687 	ld	a, (0x08, sp)
+      00E4D4 88               [ 1] 1688 	push	a
+                                   1689 ; genIPush
+      00E4D5 7B 02            [ 1] 1690 	ld	a, (0x02, sp)
+      00E4D7 88               [ 1] 1691 	push	a
+                                   1692 ; genSend
+      00E4D8 7B 04            [ 1] 1693 	ld	a, (0x04, sp)
+                                   1694 ; genCall
+      00E4DA CD E7 23         [ 4] 1695 	call	_TI1_Config
+                                   1696 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1295: TIM2_SetIC1Prescaler(TIM2_ICPrescaler);
+                                   1697 ; genSend
+      00E4DD 7B 07            [ 1] 1698 	ld	a, (0x07, sp)
+                                   1699 ; genCall
+      00E4DF CD E5 03         [ 4] 1700 	call	_TIM2_SetIC1Prescaler
+                                   1701 ; genLabel
+      00E4E2                       1702 00110$:
+                                   1703 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1297: }
+                                   1704 ; genEndFunction
+      00E4E2 1E 03            [ 2] 1705 	ldw	x, (3, sp)
+      00E4E4 5B 08            [ 2] 1706 	addw	sp, #8
+      00E4E6 FC               [ 2] 1707 	jp	(x)
+                                   1708 ;	Total TIM2_PWMIConfig function size at codegen: 5 bytes.
+                                   1709 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1304: uint16_t TIM2_GetCapture1(void)
+                                   1710 ; genLabel
+                                   1711 ;	-----------------------------------------
+                                   1712 ;	 function TIM2_GetCapture1
+                                   1713 ;	-----------------------------------------
+                                   1714 ;	Register assignment might be sub-optimal.
+                                   1715 ;	Stack space usage: 2 bytes.
+      00E4E7                       1716 _TIM2_GetCapture1:
+      00E4E7 89               [ 2] 1717 	pushw	x
+                                   1718 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1309: tmpccr1h = TIM2->CCR1H;
+                                   1719 ; genPointerGet
+      00E4E8 C6 52 61         [ 1] 1720 	ld	a, 0x5261
+      00E4EB 95               [ 1] 1721 	ld	xh, a
+                                   1722 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1310: tmpccr1l = TIM2->CCR1L;
+                                   1723 ; genPointerGet
+      00E4EC C6 52 62         [ 1] 1724 	ld	a, 0x5262
+                                   1725 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1312: tmpccr1 = (uint16_t)(tmpccr1l);
+                                   1726 ; genCast
+                                   1727 ; genAssign
+      00E4EF 97               [ 1] 1728 	ld	xl, a
+                                   1729 ; peephole 3 removed dead clrw of y.
+                                   1730 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1313: tmpccr1 |= (uint16_t)((uint16_t)tmpccr1h << 8);
+                                   1731 ; genCast
+                                   1732 ; genAssign
+                                   1733 ; peephole 1 removed dead clear of a.
+                                   1734 ; genLeftShiftLiteral
+      00E4F0 0F 02            [ 1] 1735 	clr	(0x02, sp)
+                                   1736 ; genOr
+                                   1737 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1315: return ((uint16_t)tmpccr1);
+                                   1738 ; genReturn
+                                   1739 ; genLabel
+                                   1740 ; peephole j30 removed unused label 00101$.
+                                   1741 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1316: }
+                                   1742 ; genEndFunction
+      00E4F2 5B 02            [ 2] 1743 	addw	sp, #2
+      00E4F4 81               [ 4] 1744 	ret
+                                   1745 ;	Total TIM2_GetCapture1 function size at codegen: 3 bytes.
+                                   1746 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1323: uint16_t TIM2_GetCapture2(void)
+                                   1747 ; genLabel
+                                   1748 ;	-----------------------------------------
+                                   1749 ;	 function TIM2_GetCapture2
+                                   1750 ;	-----------------------------------------
+                                   1751 ;	Register assignment might be sub-optimal.
+                                   1752 ;	Stack space usage: 2 bytes.
+      00E4F5                       1753 _TIM2_GetCapture2:
+      00E4F5 89               [ 2] 1754 	pushw	x
+                                   1755 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1328: tmpccr2h = TIM2->CCR2H;
+                                   1756 ; genPointerGet
+      00E4F6 C6 52 63         [ 1] 1757 	ld	a, 0x5263
+      00E4F9 95               [ 1] 1758 	ld	xh, a
+                                   1759 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1329: tmpccr2l = TIM2->CCR2L;
+                                   1760 ; genPointerGet
+      00E4FA C6 52 64         [ 1] 1761 	ld	a, 0x5264
+                                   1762 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1331: tmpccr2 = (uint16_t)(tmpccr2l);
+                                   1763 ; genCast
+                                   1764 ; genAssign
+      00E4FD 97               [ 1] 1765 	ld	xl, a
+                                   1766 ; peephole 3 removed dead clrw of y.
+                                   1767 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1332: tmpccr2 |= (uint16_t)((uint16_t)tmpccr2h << 8);
+                                   1768 ; genCast
+                                   1769 ; genAssign
+                                   1770 ; peephole 1 removed dead clear of a.
+                                   1771 ; genLeftShiftLiteral
+      00E4FE 0F 02            [ 1] 1772 	clr	(0x02, sp)
+                                   1773 ; genOr
+                                   1774 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1334: return ((uint16_t)tmpccr2);
+                                   1775 ; genReturn
+                                   1776 ; genLabel
+                                   1777 ; peephole j30 removed unused label 00101$.
+                                   1778 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1335: }
+                                   1779 ; genEndFunction
+      00E500 5B 02            [ 2] 1780 	addw	sp, #2
+      00E502 81               [ 4] 1781 	ret
+                                   1782 ;	Total TIM2_GetCapture2 function size at codegen: 3 bytes.
+                                   1783 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1347: void TIM2_SetIC1Prescaler(TIM2_ICPSC_TypeDef TIM2_IC1Prescaler)
+                                   1784 ; genLabel
+                                   1785 ;	-----------------------------------------
+                                   1786 ;	 function TIM2_SetIC1Prescaler
+                                   1787 ;	-----------------------------------------
+                                   1788 ;	Register assignment is optimal.
+                                   1789 ;	Stack space usage: 1 bytes.
+      00E503                       1790 _TIM2_SetIC1Prescaler:
+      00E503 88               [ 1] 1791 	push	a
+                                   1792 ; genReceive
+      00E504 6B 01            [ 1] 1793 	ld	(0x01, sp), a
+                                   1794 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1354: tmpccmr1 = TIM2->CCMR1;
+                                   1795 ; genPointerGet
+      00E506 C6 52 59         [ 1] 1796 	ld	a, 0x5259
+                                   1797 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1357: tmpccmr1 &= (uint8_t)(~TIM_CCMR_ICxPSC);
+                                   1798 ; genAnd
+      00E509 A4 F3            [ 1] 1799 	and	a, #0xf3
+                                   1800 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1360: tmpccmr1 |= (uint8_t)TIM2_IC1Prescaler;
+                                   1801 ; genOr
+      00E50B 1A 01            [ 1] 1802 	or	a, (0x01, sp)
+                                   1803 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1362: TIM2->CCMR1 = tmpccmr1;
+                                   1804 ; genPointerSet
+      00E50D C7 52 59         [ 1] 1805 	ld	0x5259, a
+                                   1806 ; genLabel
+                                   1807 ; peephole j30 removed unused label 00101$.
+                                   1808 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1363: }
+                                   1809 ; genEndFunction
+      00E510 84               [ 1] 1810 	pop	a
+      00E511 81               [ 4] 1811 	ret
+                                   1812 ;	Total TIM2_SetIC1Prescaler function size at codegen: 2 bytes.
+                                   1813 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1375: void TIM2_SetIC2Prescaler(TIM2_ICPSC_TypeDef TIM2_IC2Prescaler)
+                                   1814 ; genLabel
+                                   1815 ;	-----------------------------------------
+                                   1816 ;	 function TIM2_SetIC2Prescaler
+                                   1817 ;	-----------------------------------------
+                                   1818 ;	Register assignment is optimal.
+                                   1819 ;	Stack space usage: 1 bytes.
+      00E512                       1820 _TIM2_SetIC2Prescaler:
+      00E512 88               [ 1] 1821 	push	a
+                                   1822 ; genReceive
+      00E513 6B 01            [ 1] 1823 	ld	(0x01, sp), a
+                                   1824 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1382: tmpccmr2 = TIM2->CCMR2;
+                                   1825 ; genPointerGet
+      00E515 C6 52 5A         [ 1] 1826 	ld	a, 0x525a
+                                   1827 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1385: tmpccmr2 &= (uint8_t)(~TIM_CCMR_ICxPSC);
+                                   1828 ; genAnd
+      00E518 A4 F3            [ 1] 1829 	and	a, #0xf3
+                                   1830 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1388: tmpccmr2 |= (uint8_t)TIM2_IC2Prescaler;
+                                   1831 ; genOr
+      00E51A 1A 01            [ 1] 1832 	or	a, (0x01, sp)
+                                   1833 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1390: TIM2->CCMR2 = tmpccmr2;
+                                   1834 ; genPointerSet
+      00E51C C7 52 5A         [ 1] 1835 	ld	0x525a, a
+                                   1836 ; genLabel
+                                   1837 ; peephole j30 removed unused label 00101$.
+                                   1838 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1391: }
+                                   1839 ; genEndFunction
+      00E51F 84               [ 1] 1840 	pop	a
+      00E520 81               [ 4] 1841 	ret
+                                   1842 ;	Total TIM2_SetIC2Prescaler function size at codegen: 2 bytes.
+                                   1843 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1422: void TIM2_ITConfig(TIM2_IT_TypeDef TIM2_IT, FunctionalState NewState)
+                                   1844 ; genLabel
+                                   1845 ;	-----------------------------------------
+                                   1846 ;	 function TIM2_ITConfig
+                                   1847 ;	-----------------------------------------
+                                   1848 ;	Register assignment is optimal.
+                                   1849 ;	Stack space usage: 1 bytes.
+      00E521                       1850 _TIM2_ITConfig:
+      00E521 88               [ 1] 1851 	push	a
+                                   1852 ; genReceive
+                                   1853 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1431: TIM2->IER |= (uint8_t)TIM2_IT;
+                                   1854 ; genPointerGet
+      00E522 AE 52 55         [ 2] 1855 	ldw	x, #0x5255
+      00E525 88               [ 1] 1856 	push	a
+      00E526 F6               [ 1] 1857 	ld	a, (x)
+      00E527 6B 02            [ 1] 1858 	ld	(0x02, sp), a
+      00E529 84               [ 1] 1859 	pop	a
+                                   1860 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1428: if (NewState != DISABLE)
+                                   1861 ; genIfx
+      00E52A 0D 04            [ 1] 1862 	tnz	(0x04, sp)
+                                   1863 ; peephole j5 changed absolute to relative unconditional jump.
+      00E52C 27 07            [ 1] 1864 	jreq	00102$
+                                   1865 ; peephole j10 removed jra by using inverse jump logic
+                                   1866 ; peephole j30 removed unused label 00113$.
+                                   1867 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1431: TIM2->IER |= (uint8_t)TIM2_IT;
+                                   1868 ; genOr
+      00E52E 1A 01            [ 1] 1869 	or	a, (0x01, sp)
+                                   1870 ; genPointerSet
+      00E530 C7 52 55         [ 1] 1871 	ld	0x5255, a
+                                   1872 ; genGoto
+      00E533 20 06            [ 2] 1873 	jra	00104$
+                                   1874 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1875 ; genLabel
+      00E535                       1876 00102$:
+                                   1877 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1436: TIM2->IER &= (uint8_t)(~(uint8_t)TIM2_IT);
+                                   1878 ; genCpl
+      00E535 43               [ 1] 1879 	cpl	a
+                                   1880 ; genAnd
+      00E536 14 01            [ 1] 1881 	and	a, (0x01, sp)
+                                   1882 ; genPointerSet
+      00E538 C7 52 55         [ 1] 1883 	ld	0x5255, a
+                                   1884 ; genLabel
+      00E53B                       1885 00104$:
+                                   1886 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1438: }
+                                   1887 ; genEndFunction
+      00E53B 84               [ 1] 1888 	pop	a
+      00E53C 85               [ 2] 1889 	popw	x
+      00E53D 84               [ 1] 1890 	pop	a
+      00E53E FC               [ 2] 1891 	jp	(x)
+                                   1892 ;	Total TIM2_ITConfig function size at codegen: 4 bytes.
+                                   1893 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1451: void TIM2_GenerateEvent(TIM2_EventSource_TypeDef TIM2_EventSource)
+                                   1894 ; genLabel
+                                   1895 ;	-----------------------------------------
+                                   1896 ;	 function TIM2_GenerateEvent
+                                   1897 ;	-----------------------------------------
+                                   1898 ;	Register assignment is optimal.
+                                   1899 ;	Stack space usage: 1 bytes.
+      00E53F                       1900 _TIM2_GenerateEvent:
+      00E53F 88               [ 1] 1901 	push	a
+                                   1902 ; genReceive
+      00E540 6B 01            [ 1] 1903 	ld	(0x01, sp), a
+                                   1904 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1457: TIM2->EGR |= (uint8_t)TIM2_EventSource;
+                                   1905 ; genPointerGet
+      00E542 C6 52 58         [ 1] 1906 	ld	a, 0x5258
+                                   1907 ; genOr
+      00E545 1A 01            [ 1] 1908 	or	a, (0x01, sp)
+                                   1909 ; genPointerSet
+      00E547 C7 52 58         [ 1] 1910 	ld	0x5258, a
+                                   1911 ; genLabel
+                                   1912 ; peephole j30 removed unused label 00101$.
+                                   1913 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1458: }
+                                   1914 ; genEndFunction
+      00E54A 84               [ 1] 1915 	pop	a
+      00E54B 81               [ 4] 1916 	ret
+                                   1917 ;	Total TIM2_GenerateEvent function size at codegen: 2 bytes.
+                                   1918 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1473: FlagStatus TIM2_GetFlagStatus(TIM2_FLAG_TypeDef TIM2_FLAG)
+                                   1919 ; genLabel
+                                   1920 ;	-----------------------------------------
+                                   1921 ;	 function TIM2_GetFlagStatus
+                                   1922 ;	-----------------------------------------
+                                   1923 ;	Register assignment might be sub-optimal.
+                                   1924 ;	Stack space usage: 1 bytes.
+      00E54C                       1925 _TIM2_GetFlagStatus:
+      00E54C 88               [ 1] 1926 	push	a
+                                   1927 ; genReceive
+                                   1928 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1481: tim2_flag_l = (uint8_t)(TIM2->SR1 & (uint8_t)(TIM2_FLAG));
+                                   1929 ; genPointerGet
+      00E54D C6 52 56         [ 1] 1930 	ld	a, 0x5256
+      00E550 6B 01            [ 1] 1931 	ld	(0x01, sp), a
+                                   1932 ; genCast
+                                   1933 ; genAssign
+      00E552 9F               [ 1] 1934 	ld	a, xl
+                                   1935 ; genAnd
+      00E553 14 01            [ 1] 1936 	and	a, (0x01, sp)
+      00E555 6B 01            [ 1] 1937 	ld	(0x01, sp), a
+                                   1938 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1482: tim2_flag_h = (uint8_t)(TIM2->SR2 & (uint8_t)((uint16_t)TIM2_FLAG >> 8));
+                                   1939 ; genPointerGet
+      00E557 C6 52 57         [ 1] 1940 	ld	a, 0x5257
+                                   1941 ; genCast
+                                   1942 ; genAssign
+                                   1943 ; genGetByte
+                                   1944 ; genAnd
+      00E55A 89               [ 2] 1945 	pushw	x
+      00E55B 14 01            [ 1] 1946 	and	a, (1, sp)
+      00E55D 85               [ 2] 1947 	popw	x
+                                   1948 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1484: if ((uint8_t)(tim2_flag_l | tim2_flag_h) != 0)
+                                   1949 ; genOr
+                                   1950 ; genIfx
+      00E55E 1A 01            [ 1] 1951 	or	a, (0x01, sp)
+                                   1952 ; peephole 23 removed redundant tnz.
+                                   1953 ; peephole j5 changed absolute to relative unconditional jump.
+      00E560 27 03            [ 1] 1954 	jreq	00102$
+                                   1955 ; peephole j10 removed jra by using inverse jump logic
+                                   1956 ; peephole j30 removed unused label 00113$.
+                                   1957 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1486: bitstatus = SET;
+                                   1958 ; genAssign
+      00E562 A6 01            [ 1] 1959 	ld	a, #0x01
+                                   1960 ; genGoto
+                                   1961 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1962 ; genLabel
+                                   1963 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1490: bitstatus = RESET;
+                                   1964 ; genAssign
+                                   1965 ; genLabel
+      00E564 21                    1966 	.byte 0x21
+                                   1967 ; peephole jrf1 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      00E565                       1968 00102$:
+      00E565 4F               [ 1] 1969 	clr	a
+      00E566                       1970 00103$:
+                                   1971 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1492: return ((FlagStatus)bitstatus);
+                                   1972 ; genReturn
+                                   1973 ; genLabel
+                                   1974 ; peephole j30 removed unused label 00104$.
+                                   1975 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1493: }
+                                   1976 ; genEndFunction
+      00E566 5B 01            [ 2] 1977 	addw	sp, #1
+      00E568 81               [ 4] 1978 	ret
+                                   1979 ;	Total TIM2_GetFlagStatus function size at codegen: 3 bytes.
+                                   1980 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1506: void TIM2_ClearFlag(TIM2_FLAG_TypeDef TIM2_FLAG)
+                                   1981 ; genLabel
+                                   1982 ;	-----------------------------------------
+                                   1983 ;	 function TIM2_ClearFlag
+                                   1984 ;	-----------------------------------------
+                                   1985 ;	Register assignment might be sub-optimal.
+                                   1986 ;	Stack space usage: 0 bytes.
+      00E569                       1987 _TIM2_ClearFlag:
+                                   1988 ; genReceive
+                                   1989 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1511: TIM2->SR1 = (uint8_t)(~(uint8_t)(TIM2_FLAG));
+                                   1990 ; genCast
+                                   1991 ; genAssign
+      00E569 9F               [ 1] 1992 	ld	a, xl
+                                   1993 ; genCpl
+      00E56A 43               [ 1] 1994 	cpl	a
+                                   1995 ; genPointerSet
+      00E56B C7 52 56         [ 1] 1996 	ld	0x5256, a
+                                   1997 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1512: TIM2->SR2 = (uint8_t)(~(uint8_t)((uint16_t)TIM2_FLAG >> 8));
+                                   1998 ; genCast
+                                   1999 ; genAssign
+      00E56E 9E               [ 1] 2000 	ld	a, xh
+                                   2001 ; genGetByte
+                                   2002 ; genCpl
+      00E56F 43               [ 1] 2003 	cpl	a
+                                   2004 ; genPointerSet
+      00E570 C7 52 57         [ 1] 2005 	ld	0x5257, a
+                                   2006 ; genLabel
+                                   2007 ; peephole j30 removed unused label 00101$.
+                                   2008 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1513: }
+                                   2009 ; genEndFunction
+      00E573 81               [ 4] 2010 	ret
+                                   2011 ;	Total TIM2_ClearFlag function size at codegen: 1 bytes.
+                                   2012 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1526: ITStatus TIM2_GetITStatus(TIM2_IT_TypeDef TIM2_IT)
+                                   2013 ; genLabel
+                                   2014 ;	-----------------------------------------
+                                   2015 ;	 function TIM2_GetITStatus
+                                   2016 ;	-----------------------------------------
+                                   2017 ;	Register assignment is optimal.
+                                   2018 ;	Stack space usage: 2 bytes.
+      00E574                       2019 _TIM2_GetITStatus:
+      00E574 89               [ 2] 2020 	pushw	x
+                                   2021 ; genReceive
+      00E575 6B 02            [ 1] 2022 	ld	(0x02, sp), a
+                                   2023 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1535: TIM2_itStatus = (uint8_t)(TIM2->SR1 & (uint8_t)TIM2_IT);
+                                   2024 ; genPointerGet
+      00E577 C6 52 56         [ 1] 2025 	ld	a, 0x5256
+                                   2026 ; genAnd
+      00E57A 14 02            [ 1] 2027 	and	a, (0x02, sp)
+      00E57C 6B 01            [ 1] 2028 	ld	(0x01, sp), a
+                                   2029 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1537: TIM2_itEnable = (uint8_t)(TIM2->IER & (uint8_t)TIM2_IT);
+                                   2030 ; genPointerGet
+      00E57E C6 52 55         [ 1] 2031 	ld	a, 0x5255
+                                   2032 ; genAnd
+      00E581 14 02            [ 1] 2033 	and	a, (0x02, sp)
+                                   2034 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1539: if ((TIM2_itStatus != (uint8_t)RESET ) && (TIM2_itEnable != (uint8_t)RESET))
+                                   2035 ; genIfx
+      00E583 0D 01            [ 1] 2036 	tnz	(0x01, sp)
+                                   2037 ; peephole j5 changed absolute to relative unconditional jump.
+      00E585 27 06            [ 1] 2038 	jreq	00102$
+                                   2039 ; peephole j10 removed jra by using inverse jump logic
+                                   2040 ; peephole j30 removed unused label 00121$.
+                                   2041 ; genIfx
+      00E587 4D               [ 1] 2042 	tnz	a
+                                   2043 ; peephole j5 changed absolute to relative unconditional jump.
+      00E588 27 03            [ 1] 2044 	jreq	00102$
+                                   2045 ; peephole j10 removed jra by using inverse jump logic
+                                   2046 ; peephole j30 removed unused label 00122$.
+                                   2047 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1541: bitstatus = (ITStatus)SET;
+                                   2048 ; genAssign
+      00E58A A6 01            [ 1] 2049 	ld	a, #0x01
+                                   2050 ; genGoto
+                                   2051 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2052 ; genLabel
+                                   2053 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1545: bitstatus = (ITStatus)RESET;
+                                   2054 ; genAssign
+                                   2055 ; genLabel
+      00E58C 21                    2056 	.byte 0x21
+                                   2057 ; peephole jrf1 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      00E58D                       2058 00102$:
+      00E58D 4F               [ 1] 2059 	clr	a
+      00E58E                       2060 00103$:
+                                   2061 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1547: return ((ITStatus)bitstatus);
+                                   2062 ; genReturn
+                                   2063 ; genLabel
+                                   2064 ; peephole j30 removed unused label 00105$.
+                                   2065 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1548: }
+                                   2066 ; genEndFunction
+      00E58E 85               [ 2] 2067 	popw	x
+      00E58F 81               [ 4] 2068 	ret
+                                   2069 ;	Total TIM2_GetITStatus function size at codegen: 2 bytes.
+                                   2070 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1561: void TIM2_ClearITPendingBit(TIM2_IT_TypeDef TIM2_IT)
+                                   2071 ; genLabel
+                                   2072 ;	-----------------------------------------
+                                   2073 ;	 function TIM2_ClearITPendingBit
+                                   2074 ;	-----------------------------------------
+                                   2075 ;	Register assignment is optimal.
+                                   2076 ;	Stack space usage: 0 bytes.
+      00E590                       2077 _TIM2_ClearITPendingBit:
+                                   2078 ; genReceive
+                                   2079 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1567: TIM2->SR1 = (uint8_t)(~(uint8_t)TIM2_IT);
+                                   2080 ; genCpl
+      00E590 43               [ 1] 2081 	cpl	a
+                                   2082 ; genPointerSet
+      00E591 C7 52 56         [ 1] 2083 	ld	0x5256, a
+                                   2084 ; genLabel
+                                   2085 ; peephole j30 removed unused label 00101$.
+                                   2086 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1568: }
+                                   2087 ; genEndFunction
+      00E594 81               [ 4] 2088 	ret
+                                   2089 ;	Total TIM2_ClearITPendingBit function size at codegen: 1 bytes.
+                                   2090 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1581: void TIM2_DMACmd( TIM2_DMASource_TypeDef TIM2_DMASource, FunctionalState NewState)
+                                   2091 ; genLabel
+                                   2092 ;	-----------------------------------------
+                                   2093 ;	 function TIM2_DMACmd
+                                   2094 ;	-----------------------------------------
+                                   2095 ;	Register assignment is optimal.
+                                   2096 ;	Stack space usage: 1 bytes.
+      00E595                       2097 _TIM2_DMACmd:
+      00E595 88               [ 1] 2098 	push	a
+                                   2099 ; genReceive
+                                   2100 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1590: TIM2->DER |= TIM2_DMASource;
+                                   2101 ; genPointerGet
+      00E596 AE 52 54         [ 2] 2102 	ldw	x, #0x5254
+      00E599 88               [ 1] 2103 	push	a
+      00E59A F6               [ 1] 2104 	ld	a, (x)
+      00E59B 6B 02            [ 1] 2105 	ld	(0x02, sp), a
+      00E59D 84               [ 1] 2106 	pop	a
+                                   2107 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1587: if (NewState != DISABLE)
+                                   2108 ; genIfx
+      00E59E 0D 04            [ 1] 2109 	tnz	(0x04, sp)
+                                   2110 ; peephole j5 changed absolute to relative unconditional jump.
+      00E5A0 27 07            [ 1] 2111 	jreq	00102$
+                                   2112 ; peephole j10 removed jra by using inverse jump logic
+                                   2113 ; peephole j30 removed unused label 00113$.
+                                   2114 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1590: TIM2->DER |= TIM2_DMASource;
+                                   2115 ; genOr
+      00E5A2 1A 01            [ 1] 2116 	or	a, (0x01, sp)
+                                   2117 ; genPointerSet
+      00E5A4 C7 52 54         [ 1] 2118 	ld	0x5254, a
+                                   2119 ; genGoto
+      00E5A7 20 06            [ 2] 2120 	jra	00104$
+                                   2121 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2122 ; genLabel
+      00E5A9                       2123 00102$:
+                                   2124 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1595: TIM2->DER &= (uint8_t)(~TIM2_DMASource);
+                                   2125 ; genCpl
+      00E5A9 43               [ 1] 2126 	cpl	a
+                                   2127 ; genAnd
+      00E5AA 14 01            [ 1] 2128 	and	a, (0x01, sp)
+                                   2129 ; genPointerSet
+      00E5AC C7 52 54         [ 1] 2130 	ld	0x5254, a
+                                   2131 ; genLabel
+      00E5AF                       2132 00104$:
+                                   2133 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1597: }
+                                   2134 ; genEndFunction
+      00E5AF 84               [ 1] 2135 	pop	a
+      00E5B0 85               [ 2] 2136 	popw	x
+      00E5B1 84               [ 1] 2137 	pop	a
+      00E5B2 FC               [ 2] 2138 	jp	(x)
+                                   2139 ;	Total TIM2_DMACmd function size at codegen: 4 bytes.
+                                   2140 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1605: void TIM2_SelectCCDMA(FunctionalState NewState)
+                                   2141 ; genLabel
+                                   2142 ;	-----------------------------------------
+                                   2143 ;	 function TIM2_SelectCCDMA
+                                   2144 ;	-----------------------------------------
+                                   2145 ;	Register assignment is optimal.
+                                   2146 ;	Stack space usage: 1 bytes.
+      00E5B3                       2147 _TIM2_SelectCCDMA:
+      00E5B3 88               [ 1] 2148 	push	a
+                                   2149 ; genReceive
+      00E5B4 6B 01            [ 1] 2150 	ld	(0x01, sp), a
+                                   2151 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1613: TIM2->CR2 |= TIM_CR2_CCDS;
+                                   2152 ; genPointerGet
+      00E5B6 C6 52 51         [ 1] 2153 	ld	a, 0x5251
+                                   2154 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1610: if (NewState != DISABLE)
+                                   2155 ; genIfx
+      00E5B9 0D 01            [ 1] 2156 	tnz	(0x01, sp)
+                                   2157 ; peephole j5 changed absolute to relative unconditional jump.
+      00E5BB 27 07            [ 1] 2158 	jreq	00102$
+                                   2159 ; peephole j10 removed jra by using inverse jump logic
+                                   2160 ; peephole j30 removed unused label 00113$.
+                                   2161 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1613: TIM2->CR2 |= TIM_CR2_CCDS;
+                                   2162 ; genOr
+      00E5BD AA 08            [ 1] 2163 	or	a, #0x08
+                                   2164 ; genPointerSet
+      00E5BF C7 52 51         [ 1] 2165 	ld	0x5251, a
+                                   2166 ; genGoto
+      00E5C2 20 05            [ 2] 2167 	jra	00104$
+                                   2168 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2169 ; genLabel
+      00E5C4                       2170 00102$:
+                                   2171 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1618: TIM2->CR2 &= (uint8_t)(~TIM_CR2_CCDS);
+                                   2172 ; genAnd
+      00E5C4 A4 F7            [ 1] 2173 	and	a, #0xf7
+                                   2174 ; genPointerSet
+      00E5C6 C7 52 51         [ 1] 2175 	ld	0x5251, a
+                                   2176 ; genLabel
+      00E5C9                       2177 00104$:
+                                   2178 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1620: }
+                                   2179 ; genEndFunction
+      00E5C9 84               [ 1] 2180 	pop	a
+      00E5CA 81               [ 4] 2181 	ret
+                                   2182 ;	Total TIM2_SelectCCDMA function size at codegen: 2 bytes.
+                                   2183 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1644: void TIM2_InternalClockConfig(void)
+                                   2184 ; genLabel
+                                   2185 ;	-----------------------------------------
+                                   2186 ;	 function TIM2_InternalClockConfig
+                                   2187 ;	-----------------------------------------
+                                   2188 ;	Register assignment is optimal.
+                                   2189 ;	Stack space usage: 0 bytes.
+      00E5CB                       2190 _TIM2_InternalClockConfig:
+                                   2191 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1647: TIM2->SMCR &=  (uint8_t)(~TIM_SMCR_SMS);
+                                   2192 ; genPointerGet
+      00E5CB C6 52 52         [ 1] 2193 	ld	a, 0x5252
+                                   2194 ; genAnd
+      00E5CE A4 F8            [ 1] 2195 	and	a, #0xf8
+                                   2196 ; genPointerSet
+      00E5D0 C7 52 52         [ 1] 2197 	ld	0x5252, a
+                                   2198 ; genLabel
+                                   2199 ; peephole j30 removed unused label 00101$.
+                                   2200 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1648: }
+                                   2201 ; genEndFunction
+      00E5D3 81               [ 4] 2202 	ret
+                                   2203 ;	Total TIM2_InternalClockConfig function size at codegen: 1 bytes.
+                                   2204 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1665: void TIM2_TIxExternalClockConfig(TIM2_TIxExternalCLK1Source_TypeDef TIM2_TIxExternalCLKSource,
+                                   2205 ; genLabel
+                                   2206 ;	-----------------------------------------
+                                   2207 ;	 function TIM2_TIxExternalClockConfig
+                                   2208 ;	-----------------------------------------
+                                   2209 ;	Register assignment is optimal.
+                                   2210 ;	Stack space usage: 1 bytes.
+      00E5D4                       2211 _TIM2_TIxExternalClockConfig:
+      00E5D4 88               [ 1] 2212 	push	a
+                                   2213 ; genReceive
+                                   2214 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1675: if (TIM2_TIxExternalCLKSource == TIM2_TIxExternalCLK1Source_TI2)
+                                   2215 ; genCmpEQorNE
+      00E5D5 6B 01            [ 1] 2216 	ld	(0x01, sp), a
+                                   2217 ; peephole 4a removed redundant load from (0x01, sp) into a.
+      00E5D7 A1 60            [ 1] 2218 	cp	a, #0x60
+                                   2219 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2220 ; peephole j10 removed jra by using inverse jump logic
+                                   2221 ; peephole j30 removed unused label 00114$.
+                                   2222 ; peephole j5 changed absolute to relative unconditional jump.
+      00E5D9 26 0C            [ 1] 2223 	jrne	00102$
+                                   2224 ; peephole j7 removed jra by using inverse jump logic
+                                   2225 ; peephole j30 removed unused label 00115$.
+                                   2226 ; skipping generated iCode
+                                   2227 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1677: TI2_Config(TIM2_ICPolarity, TIM2_ICSelection_DirectTI, ICFilter);
+                                   2228 ; genIPush
+      00E5DB 7B 05            [ 1] 2229 	ld	a, (0x05, sp)
+      00E5DD 88               [ 1] 2230 	push	a
+                                   2231 ; genIPush
+      00E5DE 4B 01            [ 1] 2232 	push	#0x01
+                                   2233 ; genSend
+      00E5E0 7B 06            [ 1] 2234 	ld	a, (0x06, sp)
+                                   2235 ; genCall
+      00E5E2 CD E7 60         [ 4] 2236 	call	_TI2_Config
+                                   2237 ; genGoto
+      00E5E5 20 0A            [ 2] 2238 	jra	00103$
+                                   2239 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2240 ; genLabel
+      00E5E7                       2241 00102$:
+                                   2242 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1681: TI1_Config(TIM2_ICPolarity, TIM2_ICSelection_DirectTI, ICFilter);
+                                   2243 ; genIPush
+      00E5E7 7B 05            [ 1] 2244 	ld	a, (0x05, sp)
+      00E5E9 88               [ 1] 2245 	push	a
+                                   2246 ; genIPush
+      00E5EA 4B 01            [ 1] 2247 	push	#0x01
+                                   2248 ; genSend
+      00E5EC 7B 06            [ 1] 2249 	ld	a, (0x06, sp)
+                                   2250 ; genCall
+      00E5EE CD E7 23         [ 4] 2251 	call	_TI1_Config
+                                   2252 ; genLabel
+      00E5F1                       2253 00103$:
+                                   2254 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1685: TIM2_SelectInputTrigger((TIM2_TRGSelection_TypeDef)TIM2_TIxExternalCLKSource);
+                                   2255 ; genSend
+      00E5F1 7B 01            [ 1] 2256 	ld	a, (0x01, sp)
+                                   2257 ; genCall
+      00E5F3 CD E6 4B         [ 4] 2258 	call	_TIM2_SelectInputTrigger
+                                   2259 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1688: TIM2->SMCR |= (uint8_t)(TIM2_SlaveMode_External1);
+                                   2260 ; genPointerGet
+      00E5F6 C6 52 52         [ 1] 2261 	ld	a, 0x5252
+                                   2262 ; genOr
+      00E5F9 AA 07            [ 1] 2263 	or	a, #0x07
+                                   2264 ; genPointerSet
+      00E5FB C7 52 52         [ 1] 2265 	ld	0x5252, a
+                                   2266 ; genLabel
+                                   2267 ; peephole j30 removed unused label 00104$.
+                                   2268 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1689: }
+                                   2269 ; genEndFunction
+      00E5FE 1E 02            [ 2] 2270 	ldw	x, (2, sp)
+      00E600 5B 05            [ 2] 2271 	addw	sp, #5
+      00E602 FC               [ 2] 2272 	jp	(x)
+                                   2273 ;	Total TIM2_TIxExternalClockConfig function size at codegen: 5 bytes.
+                                   2274 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1707: void TIM2_ETRClockMode1Config(TIM2_ExtTRGPSC_TypeDef TIM2_ExtTRGPrescaler,
+                                   2275 ; genLabel
+                                   2276 ;	-----------------------------------------
+                                   2277 ;	 function TIM2_ETRClockMode1Config
+                                   2278 ;	-----------------------------------------
+                                   2279 ;	Register assignment is optimal.
+                                   2280 ;	Stack space usage: 0 bytes.
+      00E603                       2281 _TIM2_ETRClockMode1Config:
+                                   2282 ; genReceive
+      00E603 97               [ 1] 2283 	ld	xl, a
+                                   2284 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1712: TIM2_ETRConfig(TIM2_ExtTRGPrescaler, TIM2_ExtTRGPolarity, ExtTRGFilter);
+                                   2285 ; genIPush
+      00E604 7B 04            [ 1] 2286 	ld	a, (0x04, sp)
+      00E606 88               [ 1] 2287 	push	a
+                                   2288 ; genIPush
+      00E607 7B 04            [ 1] 2289 	ld	a, (0x04, sp)
+      00E609 88               [ 1] 2290 	push	a
+                                   2291 ; genSend
+      00E60A 9F               [ 1] 2292 	ld	a, xl
+                                   2293 ; genCall
+      00E60B CD E6 90         [ 4] 2294 	call	_TIM2_ETRConfig
+                                   2295 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1715: TIM2->SMCR &= (uint8_t)(~TIM_SMCR_SMS);
+                                   2296 ; genPointerGet
+      00E60E C6 52 52         [ 1] 2297 	ld	a, 0x5252
+                                   2298 ; genAnd
+      00E611 A4 F8            [ 1] 2299 	and	a, #0xf8
+                                   2300 ; genPointerSet
+      00E613 C7 52 52         [ 1] 2301 	ld	0x5252, a
+                                   2302 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1716: TIM2->SMCR |= (uint8_t)(TIM2_SlaveMode_External1);
+                                   2303 ; genPointerGet
+      00E616 C6 52 52         [ 1] 2304 	ld	a, 0x5252
+                                   2305 ; genOr
+      00E619 AA 07            [ 1] 2306 	or	a, #0x07
+                                   2307 ; genPointerSet
+      00E61B C7 52 52         [ 1] 2308 	ld	0x5252, a
+                                   2309 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1719: TIM2->SMCR &= (uint8_t)(~TIM_SMCR_TS);
+                                   2310 ; genPointerGet
+      00E61E C6 52 52         [ 1] 2311 	ld	a, 0x5252
+                                   2312 ; genAnd
+      00E621 A4 8F            [ 1] 2313 	and	a, #0x8f
+                                   2314 ; genPointerSet
+      00E623 C7 52 52         [ 1] 2315 	ld	0x5252, a
+                                   2316 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1720: TIM2->SMCR |= (uint8_t)((TIM2_TRGSelection_TypeDef)TIM2_TRGSelection_ETRF);
+                                   2317 ; genPointerGet
+      00E626 C6 52 52         [ 1] 2318 	ld	a, 0x5252
+                                   2319 ; genOr
+      00E629 AA 70            [ 1] 2320 	or	a, #0x70
+                                   2321 ; genPointerSet
+      00E62B C7 52 52         [ 1] 2322 	ld	0x5252, a
+                                   2323 ; genLabel
+                                   2324 ; peephole j30 removed unused label 00101$.
+                                   2325 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1721: }
+                                   2326 ; genEndFunction
+      00E62E 1E 01            [ 2] 2327 	ldw	x, (1, sp)
+      00E630 5B 04            [ 2] 2328 	addw	sp, #4
+      00E632 FC               [ 2] 2329 	jp	(x)
+                                   2330 ;	Total TIM2_ETRClockMode1Config function size at codegen: 5 bytes.
+                                   2331 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1739: void TIM2_ETRClockMode2Config(TIM2_ExtTRGPSC_TypeDef TIM2_ExtTRGPrescaler,
+                                   2332 ; genLabel
+                                   2333 ;	-----------------------------------------
+                                   2334 ;	 function TIM2_ETRClockMode2Config
+                                   2335 ;	-----------------------------------------
+                                   2336 ;	Register assignment is optimal.
+                                   2337 ;	Stack space usage: 0 bytes.
+      00E633                       2338 _TIM2_ETRClockMode2Config:
+                                   2339 ; genReceive
+      00E633 97               [ 1] 2340 	ld	xl, a
+                                   2341 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1744: TIM2_ETRConfig(TIM2_ExtTRGPrescaler, TIM2_ExtTRGPolarity, ExtTRGFilter);
+                                   2342 ; genIPush
+      00E634 7B 04            [ 1] 2343 	ld	a, (0x04, sp)
+      00E636 88               [ 1] 2344 	push	a
+                                   2345 ; genIPush
+      00E637 7B 04            [ 1] 2346 	ld	a, (0x04, sp)
+      00E639 88               [ 1] 2347 	push	a
+                                   2348 ; genSend
+      00E63A 9F               [ 1] 2349 	ld	a, xl
+                                   2350 ; genCall
+      00E63B CD E6 90         [ 4] 2351 	call	_TIM2_ETRConfig
+                                   2352 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1747: TIM2->ETR |= TIM_ETR_ECE ;
+                                   2353 ; genPointerGet
+      00E63E C6 52 53         [ 1] 2354 	ld	a, 0x5253
+                                   2355 ; genOr
+      00E641 AA 40            [ 1] 2356 	or	a, #0x40
+                                   2357 ; genPointerSet
+      00E643 C7 52 53         [ 1] 2358 	ld	0x5253, a
+                                   2359 ; genLabel
+                                   2360 ; peephole j30 removed unused label 00101$.
+                                   2361 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1748: }
+                                   2362 ; genEndFunction
+      00E646 1E 01            [ 2] 2363 	ldw	x, (1, sp)
+      00E648 5B 04            [ 2] 2364 	addw	sp, #4
+      00E64A FC               [ 2] 2365 	jp	(x)
+                                   2366 ;	Total TIM2_ETRClockMode2Config function size at codegen: 5 bytes.
+                                   2367 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1799: void TIM2_SelectInputTrigger(TIM2_TRGSelection_TypeDef TIM2_InputTriggerSource)
+                                   2368 ; genLabel
+                                   2369 ;	-----------------------------------------
+                                   2370 ;	 function TIM2_SelectInputTrigger
+                                   2371 ;	-----------------------------------------
+                                   2372 ;	Register assignment is optimal.
+                                   2373 ;	Stack space usage: 1 bytes.
+      00E64B                       2374 _TIM2_SelectInputTrigger:
+      00E64B 88               [ 1] 2375 	push	a
+                                   2376 ; genReceive
+      00E64C 6B 01            [ 1] 2377 	ld	(0x01, sp), a
+                                   2378 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1806: tmpsmcr = TIM2->SMCR;
+                                   2379 ; genPointerGet
+      00E64E C6 52 52         [ 1] 2380 	ld	a, 0x5252
+                                   2381 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1809: tmpsmcr &= (uint8_t)(~TIM_SMCR_TS);
+                                   2382 ; genAnd
+      00E651 A4 8F            [ 1] 2383 	and	a, #0x8f
+                                   2384 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1810: tmpsmcr |= (uint8_t)TIM2_InputTriggerSource;
+                                   2385 ; genOr
+      00E653 1A 01            [ 1] 2386 	or	a, (0x01, sp)
+                                   2387 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1812: TIM2->SMCR = (uint8_t)tmpsmcr;
+                                   2388 ; genPointerSet
+      00E655 C7 52 52         [ 1] 2389 	ld	0x5252, a
+                                   2390 ; genLabel
+                                   2391 ; peephole j30 removed unused label 00101$.
+                                   2392 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1813: }
+                                   2393 ; genEndFunction
+      00E658 84               [ 1] 2394 	pop	a
+      00E659 81               [ 4] 2395 	ret
+                                   2396 ;	Total TIM2_SelectInputTrigger function size at codegen: 2 bytes.
+                                   2397 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1827: void TIM2_SelectOutputTrigger(TIM2_TRGOSource_TypeDef TIM2_TRGOSource)
+                                   2398 ; genLabel
+                                   2399 ;	-----------------------------------------
+                                   2400 ;	 function TIM2_SelectOutputTrigger
+                                   2401 ;	-----------------------------------------
+                                   2402 ;	Register assignment is optimal.
+                                   2403 ;	Stack space usage: 1 bytes.
+      00E65A                       2404 _TIM2_SelectOutputTrigger:
+      00E65A 88               [ 1] 2405 	push	a
+                                   2406 ; genReceive
+      00E65B 6B 01            [ 1] 2407 	ld	(0x01, sp), a
+                                   2408 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1834: tmpcr2 = TIM2->CR2;
+                                   2409 ; genPointerGet
+      00E65D C6 52 51         [ 1] 2410 	ld	a, 0x5251
+                                   2411 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1837: tmpcr2 &= (uint8_t)(~TIM_CR2_MMS);
+                                   2412 ; genAnd
+      00E660 A4 8F            [ 1] 2413 	and	a, #0x8f
+                                   2414 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1840: tmpcr2 |=  (uint8_t)TIM2_TRGOSource;
+                                   2415 ; genOr
+      00E662 1A 01            [ 1] 2416 	or	a, (0x01, sp)
+                                   2417 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1842: TIM2->CR2 = tmpcr2;
+                                   2418 ; genPointerSet
+      00E664 C7 52 51         [ 1] 2419 	ld	0x5251, a
+                                   2420 ; genLabel
+                                   2421 ; peephole j30 removed unused label 00101$.
+                                   2422 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1843: }
+                                   2423 ; genEndFunction
+      00E667 84               [ 1] 2424 	pop	a
+      00E668 81               [ 4] 2425 	ret
+                                   2426 ;	Total TIM2_SelectOutputTrigger function size at codegen: 2 bytes.
+                                   2427 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1855: void TIM2_SelectSlaveMode(TIM2_SlaveMode_TypeDef TIM2_SlaveMode)
+                                   2428 ; genLabel
+                                   2429 ;	-----------------------------------------
+                                   2430 ;	 function TIM2_SelectSlaveMode
+                                   2431 ;	-----------------------------------------
+                                   2432 ;	Register assignment is optimal.
+                                   2433 ;	Stack space usage: 1 bytes.
+      00E669                       2434 _TIM2_SelectSlaveMode:
+      00E669 88               [ 1] 2435 	push	a
+                                   2436 ; genReceive
+      00E66A 6B 01            [ 1] 2437 	ld	(0x01, sp), a
+                                   2438 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1862: tmpsmcr = TIM2->SMCR;
+                                   2439 ; genPointerGet
+      00E66C C6 52 52         [ 1] 2440 	ld	a, 0x5252
+                                   2441 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1865: tmpsmcr &= (uint8_t)(~TIM_SMCR_SMS);
+                                   2442 ; genAnd
+      00E66F A4 F8            [ 1] 2443 	and	a, #0xf8
+                                   2444 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1868: tmpsmcr |= (uint8_t)TIM2_SlaveMode;
+                                   2445 ; genOr
+      00E671 1A 01            [ 1] 2446 	or	a, (0x01, sp)
+                                   2447 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1870: TIM2->SMCR = tmpsmcr;
+                                   2448 ; genPointerSet
+      00E673 C7 52 52         [ 1] 2449 	ld	0x5252, a
+                                   2450 ; genLabel
+                                   2451 ; peephole j30 removed unused label 00101$.
+                                   2452 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1871: }
+                                   2453 ; genEndFunction
+      00E676 84               [ 1] 2454 	pop	a
+      00E677 81               [ 4] 2455 	ret
+                                   2456 ;	Total TIM2_SelectSlaveMode function size at codegen: 2 bytes.
+                                   2457 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1879: void TIM2_SelectMasterSlaveMode(FunctionalState NewState)
+                                   2458 ; genLabel
+                                   2459 ;	-----------------------------------------
+                                   2460 ;	 function TIM2_SelectMasterSlaveMode
+                                   2461 ;	-----------------------------------------
+                                   2462 ;	Register assignment is optimal.
+                                   2463 ;	Stack space usage: 1 bytes.
+      00E678                       2464 _TIM2_SelectMasterSlaveMode:
+      00E678 88               [ 1] 2465 	push	a
+                                   2466 ; genReceive
+      00E679 6B 01            [ 1] 2467 	ld	(0x01, sp), a
+                                   2468 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1887: TIM2->SMCR |= TIM_SMCR_MSM;
+                                   2469 ; genPointerGet
+      00E67B C6 52 52         [ 1] 2470 	ld	a, 0x5252
+                                   2471 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1885: if (NewState != DISABLE)
+                                   2472 ; genIfx
+      00E67E 0D 01            [ 1] 2473 	tnz	(0x01, sp)
+                                   2474 ; peephole j5 changed absolute to relative unconditional jump.
+      00E680 27 07            [ 1] 2475 	jreq	00102$
+                                   2476 ; peephole j10 removed jra by using inverse jump logic
+                                   2477 ; peephole j30 removed unused label 00113$.
+                                   2478 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1887: TIM2->SMCR |= TIM_SMCR_MSM;
+                                   2479 ; genOr
+      00E682 AA 80            [ 1] 2480 	or	a, #0x80
+                                   2481 ; genPointerSet
+      00E684 C7 52 52         [ 1] 2482 	ld	0x5252, a
+                                   2483 ; genGoto
+      00E687 20 05            [ 2] 2484 	jra	00104$
+                                   2485 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2486 ; genLabel
+      00E689                       2487 00102$:
+                                   2488 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1891: TIM2->SMCR &= (uint8_t)(~TIM_SMCR_MSM);
+                                   2489 ; genAnd
+      00E689 A4 7F            [ 1] 2490 	and	a, #0x7f
+                                   2491 ; genPointerSet
+      00E68B C7 52 52         [ 1] 2492 	ld	0x5252, a
+                                   2493 ; genLabel
+      00E68E                       2494 00104$:
+                                   2495 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1893: }
+                                   2496 ; genEndFunction
+      00E68E 84               [ 1] 2497 	pop	a
+      00E68F 81               [ 4] 2498 	ret
+                                   2499 ;	Total TIM2_SelectMasterSlaveMode function size at codegen: 2 bytes.
+                                   2500 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1911: void TIM2_ETRConfig(TIM2_ExtTRGPSC_TypeDef TIM2_ExtTRGPrescaler,
+                                   2501 ; genLabel
+                                   2502 ;	-----------------------------------------
+                                   2503 ;	 function TIM2_ETRConfig
+                                   2504 ;	-----------------------------------------
+                                   2505 ;	Register assignment is optimal.
+                                   2506 ;	Stack space usage: 1 bytes.
+      00E690                       2507 _TIM2_ETRConfig:
+      00E690 88               [ 1] 2508 	push	a
+                                   2509 ; genReceive
+      00E691 97               [ 1] 2510 	ld	xl, a
+                                   2511 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1921: TIM2->ETR |= (uint8_t)((uint8_t)((uint8_t)TIM2_ExtTRGPrescaler | (uint8_t)TIM2_ExtTRGPolarity)
+                                   2512 ; genPointerGet
+      00E692 C6 52 53         [ 1] 2513 	ld	a, 0x5253
+      00E695 6B 01            [ 1] 2514 	ld	(0x01, sp), a
+                                   2515 ; genOr
+      00E697 9F               [ 1] 2516 	ld	a, xl
+      00E698 1A 04            [ 1] 2517 	or	a, (0x04, sp)
+                                   2518 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1922: | (uint8_t)ExtTRGFilter);
+                                   2519 ; genOr
+      00E69A 1A 05            [ 1] 2520 	or	a, (0x05, sp)
+                                   2521 ; genOr
+      00E69C 1A 01            [ 1] 2522 	or	a, (0x01, sp)
+                                   2523 ; genPointerSet
+      00E69E C7 52 53         [ 1] 2524 	ld	0x5253, a
+                                   2525 ; genLabel
+                                   2526 ; peephole j30 removed unused label 00101$.
+                                   2527 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1923: }
+                                   2528 ; genEndFunction
+      00E6A1 1E 02            [ 2] 2529 	ldw	x, (2, sp)
+      00E6A3 5B 05            [ 2] 2530 	addw	sp, #5
+      00E6A5 FC               [ 2] 2531 	jp	(x)
+                                   2532 ;	Total TIM2_ETRConfig function size at codegen: 5 bytes.
+                                   2533 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1958: void TIM2_EncoderInterfaceConfig(TIM2_EncoderMode_TypeDef TIM2_EncoderMode,
+                                   2534 ; genLabel
+                                   2535 ;	-----------------------------------------
+                                   2536 ;	 function TIM2_EncoderInterfaceConfig
+                                   2537 ;	-----------------------------------------
+                                   2538 ;	Register assignment might be sub-optimal.
+                                   2539 ;	Stack space usage: 2 bytes.
+      00E6A6                       2540 _TIM2_EncoderInterfaceConfig:
+      00E6A6 89               [ 2] 2541 	pushw	x
+                                   2542 ; genReceive
+      00E6A7 6B 02            [ 1] 2543 	ld	(0x02, sp), a
+                                   2544 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1971: tmpsmcr = TIM2->SMCR;
+                                   2545 ; genPointerGet
+      00E6A9 C6 52 52         [ 1] 2546 	ld	a, 0x5252
+      00E6AC 95               [ 1] 2547 	ld	xh, a
+                                   2548 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1972: tmpccmr1 = TIM2->CCMR1;
+                                   2549 ; genPointerGet
+      00E6AD C6 52 59         [ 1] 2550 	ld	a, 0x5259
+      00E6B0 97               [ 1] 2551 	ld	xl, a
+                                   2552 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1973: tmpccmr2 = TIM2->CCMR2;
+                                   2553 ; genPointerGet
+      00E6B1 C6 52 5A         [ 1] 2554 	ld	a, 0x525a
+      00E6B4 90 97            [ 1] 2555 	ld	yl, a
+                                   2556 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1976: tmpsmcr &= (uint8_t)(TIM_SMCR_MSM | TIM_SMCR_TS)  ;
+                                   2557 ; genAnd
+      00E6B6 9E               [ 1] 2558 	ld	a, xh
+      00E6B7 A4 F0            [ 1] 2559 	and	a, #0xf0
+                                   2560 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1977: tmpsmcr |= (uint8_t)TIM2_EncoderMode;
+                                   2561 ; genOr
+      00E6B9 1A 02            [ 1] 2562 	or	a, (0x02, sp)
+                                   2563 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1980: tmpccmr1 &= (uint8_t)(~TIM_CCMR_CCxS);
+                                   2564 ; genAnd
+      00E6BB 01               [ 1] 2565 	rrwa	x
+                                   2566 ; peephole r3 used rrwa.
+      00E6BC A4 FC            [ 1] 2567 	and	a, #0xfc
+      00E6BE 97               [ 1] 2568 	ld	xl, a
+                                   2569 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1981: tmpccmr2 &= (uint8_t)(~TIM_CCMR_CCxS);
+                                   2570 ; genAnd
+      00E6BF 90 9F            [ 1] 2571 	ld	a, yl
+      00E6C1 A4 FC            [ 1] 2572 	and	a, #0xfc
+                                   2573 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1982: tmpccmr1 |= TIM_CCMR_TIxDirect_Set;
+                                   2574 ; genOr
+      00E6C3 88               [ 1] 2575 	push	a
+      00E6C4 54               [ 2] 2576 	srlw	x
+      00E6C5 99               [ 1] 2577 	scf
+      00E6C6 59               [ 2] 2578 	rlcw	x
+      00E6C7 84               [ 1] 2579 	pop	a
+                                   2580 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1983: tmpccmr2 |= TIM_CCMR_TIxDirect_Set;
+                                   2581 ; genOr
+      00E6C8 AA 01            [ 1] 2582 	or	a, #0x01
+      00E6CA 6B 01            [ 1] 2583 	ld	(0x01, sp), a
+                                   2584 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1988: TIM2->CCER1 |= TIM_CCER1_CC1P ;
+                                   2585 ; genPointerGet
+      00E6CC C6 52 5B         [ 1] 2586 	ld	a, 0x525b
+                                   2587 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1986: if (TIM2_IC1Polarity == TIM2_ICPolarity_Falling)
+                                   2588 ; genIfx
+      00E6CF 0D 05            [ 1] 2589 	tnz	(0x05, sp)
+                                   2590 ; peephole j5 changed absolute to relative unconditional jump.
+      00E6D1 27 07            [ 1] 2591 	jreq	00102$
+                                   2592 ; peephole j10 removed jra by using inverse jump logic
+                                   2593 ; peephole j30 removed unused label 00123$.
+                                   2594 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1988: TIM2->CCER1 |= TIM_CCER1_CC1P ;
+                                   2595 ; genOr
+      00E6D3 AA 02            [ 1] 2596 	or	a, #0x02
+                                   2597 ; genPointerSet
+      00E6D5 C7 52 5B         [ 1] 2598 	ld	0x525b, a
+                                   2599 ; genGoto
+      00E6D8 20 05            [ 2] 2600 	jra	00103$
+                                   2601 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2602 ; genLabel
+      00E6DA                       2603 00102$:
+                                   2604 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1992: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1P) ;
+                                   2605 ; genAnd
+      00E6DA A4 FD            [ 1] 2606 	and	a, #0xfd
+                                   2607 ; genPointerSet
+      00E6DC C7 52 5B         [ 1] 2608 	ld	0x525b, a
+                                   2609 ; genLabel
+      00E6DF                       2610 00103$:
+                                   2611 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1988: TIM2->CCER1 |= TIM_CCER1_CC1P ;
+                                   2612 ; genPointerGet
+      00E6DF C6 52 5B         [ 1] 2613 	ld	a, 0x525b
+                                   2614 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1995: if (TIM2_IC2Polarity == TIM2_ICPolarity_Falling)
+                                   2615 ; genIfx
+      00E6E2 0D 06            [ 1] 2616 	tnz	(0x06, sp)
+                                   2617 ; peephole j5 changed absolute to relative unconditional jump.
+      00E6E4 27 07            [ 1] 2618 	jreq	00105$
+                                   2619 ; peephole j10 removed jra by using inverse jump logic
+                                   2620 ; peephole j30 removed unused label 00124$.
+                                   2621 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 1997: TIM2->CCER1 |= TIM_CCER1_CC2P ;
+                                   2622 ; genOr
+      00E6E6 AA 20            [ 1] 2623 	or	a, #0x20
+                                   2624 ; genPointerSet
+      00E6E8 C7 52 5B         [ 1] 2625 	ld	0x525b, a
+                                   2626 ; genGoto
+      00E6EB 20 05            [ 2] 2627 	jra	00106$
+                                   2628 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2629 ; genLabel
+      00E6ED                       2630 00105$:
+                                   2631 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2001: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2P) ;
+                                   2632 ; genAnd
+      00E6ED A4 DF            [ 1] 2633 	and	a, #0xdf
+                                   2634 ; genPointerSet
+      00E6EF C7 52 5B         [ 1] 2635 	ld	0x525b, a
+                                   2636 ; genLabel
+      00E6F2                       2637 00106$:
+                                   2638 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2004: TIM2->SMCR = tmpsmcr;
+                                   2639 ; genPointerSet
+      00E6F2 90 AE 52 52      [ 2] 2640 	ldw	y, #0x5252
+      00E6F6 9E               [ 1] 2641 	ld	a, xh
+      00E6F7 90 F7            [ 1] 2642 	ld	(y), a
+                                   2643 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2005: TIM2->CCMR1 = tmpccmr1;
+                                   2644 ; genPointerSet
+      00E6F9 90 AE 52 59      [ 2] 2645 	ldw	y, #0x5259
+      00E6FD 9F               [ 1] 2646 	ld	a, xl
+      00E6FE 90 F7            [ 1] 2647 	ld	(y), a
+                                   2648 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2006: TIM2->CCMR2 = tmpccmr2;
+                                   2649 ; genPointerSet
+      00E700 AE 52 5A         [ 2] 2650 	ldw	x, #0x525a
+      00E703 7B 01            [ 1] 2651 	ld	a, (0x01, sp)
+      00E705 F7               [ 1] 2652 	ld	(x), a
+                                   2653 ; genLabel
+                                   2654 ; peephole j30 removed unused label 00107$.
+                                   2655 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2007: }
+                                   2656 ; genEndFunction
+      00E706 1E 03            [ 2] 2657 	ldw	x, (3, sp)
+      00E708 5B 06            [ 2] 2658 	addw	sp, #6
+      00E70A FC               [ 2] 2659 	jp	(x)
+                                   2660 ;	Total TIM2_EncoderInterfaceConfig function size at codegen: 5 bytes.
+                                   2661 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2015: void TIM2_SelectHallSensor(FunctionalState NewState)
+                                   2662 ; genLabel
+                                   2663 ;	-----------------------------------------
+                                   2664 ;	 function TIM2_SelectHallSensor
+                                   2665 ;	-----------------------------------------
+                                   2666 ;	Register assignment is optimal.
+                                   2667 ;	Stack space usage: 1 bytes.
+      00E70B                       2668 _TIM2_SelectHallSensor:
+      00E70B 88               [ 1] 2669 	push	a
+                                   2670 ; genReceive
+      00E70C 6B 01            [ 1] 2671 	ld	(0x01, sp), a
+                                   2672 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2023: TIM2->CR2 |= TIM_CR2_TI1S;
+                                   2673 ; genPointerGet
+      00E70E C6 52 51         [ 1] 2674 	ld	a, 0x5251
+                                   2675 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2021: if (NewState != DISABLE)
+                                   2676 ; genIfx
+      00E711 0D 01            [ 1] 2677 	tnz	(0x01, sp)
+                                   2678 ; peephole j5 changed absolute to relative unconditional jump.
+      00E713 27 07            [ 1] 2679 	jreq	00102$
+                                   2680 ; peephole j10 removed jra by using inverse jump logic
+                                   2681 ; peephole j30 removed unused label 00113$.
+                                   2682 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2023: TIM2->CR2 |= TIM_CR2_TI1S;
+                                   2683 ; genOr
+      00E715 AA 80            [ 1] 2684 	or	a, #0x80
+                                   2685 ; genPointerSet
+      00E717 C7 52 51         [ 1] 2686 	ld	0x5251, a
+                                   2687 ; genGoto
+      00E71A 20 05            [ 2] 2688 	jra	00104$
+                                   2689 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2690 ; genLabel
+      00E71C                       2691 00102$:
+                                   2692 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2027: TIM2->CR2 &= (uint8_t)(~TIM_CR2_TI1S);
+                                   2693 ; genAnd
+      00E71C A4 7F            [ 1] 2694 	and	a, #0x7f
+                                   2695 ; genPointerSet
+      00E71E C7 52 51         [ 1] 2696 	ld	0x5251, a
+                                   2697 ; genLabel
+      00E721                       2698 00104$:
+                                   2699 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2029: }
+                                   2700 ; genEndFunction
+      00E721 84               [ 1] 2701 	pop	a
+      00E722 81               [ 4] 2702 	ret
+                                   2703 ;	Total TIM2_SelectHallSensor function size at codegen: 2 bytes.
+                                   2704 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2050: static void TI1_Config(TIM2_ICPolarity_TypeDef TIM2_ICPolarity, \
+                                   2705 ; genLabel
+                                   2706 ;	-----------------------------------------
+                                   2707 ;	 function TI1_Config
+                                   2708 ;	-----------------------------------------
+                                   2709 ;	Register assignment might be sub-optimal.
+                                   2710 ;	Stack space usage: 1 bytes.
+      00E723                       2711 _TI1_Config:
+      00E723 88               [ 1] 2712 	push	a
+                                   2713 ; genReceive
+                                   2714 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2055: uint8_t tmpicpolarity = TIM2_ICPolarity;
+                                   2715 ; genCast
+                                   2716 ; genAssign
+      00E724 97               [ 1] 2717 	ld	xl, a
+                                   2718 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2056: tmpccmr1 = TIM2->CCMR1;
+                                   2719 ; genPointerGet
+      00E725 C6 52 59         [ 1] 2720 	ld	a, 0x5259
+      00E728 95               [ 1] 2721 	ld	xh, a
+                                   2722 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2064: TIM2->CCER1 &=  (uint8_t)(~TIM_CCER1_CC1E);
+                                   2723 ; genPointerGet
+                                   2724 ; genAnd
+                                   2725 ; genPointerSet
+      00E729 72 11 52 5B      [ 1] 2726 	bres	0x525b, #0
+                                   2727 ; peephole 204x replaced 'and' by 'bres' ('0x525b').
+                                   2728 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2067: tmpccmr1 &= (uint8_t)(~TIM_CCMR_CCxS) & (uint8_t)(~TIM_CCMR_ICxF);
+                                   2729 ; genAnd
+      00E72D 9E               [ 1] 2730 	ld	a, xh
+      00E72E A4 0C            [ 1] 2731 	and	a, #0x0c
+      00E730 6B 01            [ 1] 2732 	ld	(0x01, sp), a
+                                   2733 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2068: tmpccmr1 |= (uint8_t)(((uint8_t)(TIM2_ICSelection)) | ((uint8_t)(TIM2_ICFilter << 4)));
+                                   2734 ; genLeftShiftLiteral
+      00E732 7B 05            [ 1] 2735 	ld	a, (0x05, sp)
+      00E734 4E               [ 1] 2736 	swap	a
+      00E735 A4 F0            [ 1] 2737 	and	a, #0xf0
+                                   2738 ; genOr
+      00E737 1A 04            [ 1] 2739 	or	a, (0x04, sp)
+                                   2740 ; genOr
+      00E739 1A 01            [ 1] 2741 	or	a, (0x01, sp)
+                                   2742 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2070: TIM2->CCMR1 = tmpccmr1;
+                                   2743 ; genPointerSet
+      00E73B C7 52 59         [ 1] 2744 	ld	0x5259, a
+                                   2745 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2064: TIM2->CCER1 &=  (uint8_t)(~TIM_CCER1_CC1E);
+                                   2746 ; genPointerGet
+      00E73E C6 52 5B         [ 1] 2747 	ld	a, 0x525b
+                                   2748 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2073: if (tmpicpolarity == (uint8_t)(TIM2_ICPolarity_Falling))
+                                   2749 ; genCmpEQorNE
+      00E741 88               [ 1] 2750 	push	a
+      00E742 9F               [ 1] 2751 	ld	a, xl
+      00E743 4A               [ 1] 2752 	dec	a
+      00E744 84               [ 1] 2753 	pop	a
+                                   2754 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2755 ; peephole j10 removed jra by using inverse jump logic
+                                   2756 ; peephole j30 removed unused label 00114$.
+                                   2757 ; peephole j5 changed absolute to relative unconditional jump.
+      00E745 26 07            [ 1] 2758 	jrne	00102$
+                                   2759 ; peephole j7 removed jra by using inverse jump logic
+                                   2760 ; peephole j30 removed unused label 00115$.
+                                   2761 ; skipping generated iCode
+                                   2762 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2075: TIM2->CCER1 |= TIM_CCER1_CC1P;
+                                   2763 ; genOr
+      00E747 AA 02            [ 1] 2764 	or	a, #0x02
+                                   2765 ; genPointerSet
+      00E749 C7 52 5B         [ 1] 2766 	ld	0x525b, a
+                                   2767 ; genGoto
+      00E74C 20 05            [ 2] 2768 	jra	00103$
+                                   2769 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2770 ; genLabel
+      00E74E                       2771 00102$:
+                                   2772 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2079: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC1P);
+                                   2773 ; genAnd
+      00E74E A4 FD            [ 1] 2774 	and	a, #0xfd
+                                   2775 ; genPointerSet
+      00E750 C7 52 5B         [ 1] 2776 	ld	0x525b, a
+                                   2777 ; genLabel
+      00E753                       2778 00103$:
+                                   2779 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2083: TIM2->CCER1 |=  TIM_CCER1_CC1E;
+                                   2780 ; genPointerGet
+      00E753 C6 52 5B         [ 1] 2781 	ld	a, 0x525b
+                                   2782 ; genOr
+      00E756 AA 01            [ 1] 2783 	or	a, #0x01
+                                   2784 ; genPointerSet
+      00E758 C7 52 5B         [ 1] 2785 	ld	0x525b, a
+                                   2786 ; genLabel
+                                   2787 ; peephole j30 removed unused label 00104$.
+                                   2788 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2084: }
+                                   2789 ; genEndFunction
+      00E75B 1E 02            [ 2] 2790 	ldw	x, (2, sp)
+      00E75D 5B 05            [ 2] 2791 	addw	sp, #5
+      00E75F FC               [ 2] 2792 	jp	(x)
+                                   2793 ;	Total TI1_Config function size at codegen: 5 bytes.
+                                   2794 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2101: static void TI2_Config(TIM2_ICPolarity_TypeDef TIM2_ICPolarity,
+                                   2795 ; genLabel
+                                   2796 ;	-----------------------------------------
+                                   2797 ;	 function TI2_Config
+                                   2798 ;	-----------------------------------------
+                                   2799 ;	Register assignment might be sub-optimal.
+                                   2800 ;	Stack space usage: 1 bytes.
+      00E760                       2801 _TI2_Config:
+      00E760 88               [ 1] 2802 	push	a
+                                   2803 ; genReceive
+                                   2804 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2106: uint8_t tmpicpolarity = TIM2_ICPolarity;
+                                   2805 ; genCast
+                                   2806 ; genAssign
+      00E761 97               [ 1] 2807 	ld	xl, a
+                                   2808 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2113: tmpccmr2 = TIM2->CCMR2;
+                                   2809 ; genPointerGet
+      00E762 C6 52 5A         [ 1] 2810 	ld	a, 0x525a
+      00E765 95               [ 1] 2811 	ld	xh, a
+                                   2812 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2116: TIM2->CCER1 &=  (uint8_t)(~TIM_CCER1_CC2E);
+                                   2813 ; genPointerGet
+                                   2814 ; genAnd
+                                   2815 ; genPointerSet
+      00E766 72 19 52 5B      [ 1] 2816 	bres	0x525b, #4
+                                   2817 ; peephole 204x replaced 'and' by 'bres' ('0x525b').
+                                   2818 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2119: tmpccmr2 &= (uint8_t)(~TIM_CCMR_CCxS) & (uint8_t)(~TIM_CCMR_ICxF);
+                                   2819 ; genAnd
+      00E76A 9E               [ 1] 2820 	ld	a, xh
+      00E76B A4 0C            [ 1] 2821 	and	a, #0x0c
+      00E76D 6B 01            [ 1] 2822 	ld	(0x01, sp), a
+                                   2823 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2120: tmpccmr2 |= (uint8_t)(((uint8_t)(TIM2_ICSelection)) | ((uint8_t)(TIM2_ICFilter << 4)));
+                                   2824 ; genLeftShiftLiteral
+      00E76F 7B 05            [ 1] 2825 	ld	a, (0x05, sp)
+      00E771 4E               [ 1] 2826 	swap	a
+      00E772 A4 F0            [ 1] 2827 	and	a, #0xf0
+                                   2828 ; genOr
+      00E774 1A 04            [ 1] 2829 	or	a, (0x04, sp)
+                                   2830 ; genOr
+      00E776 1A 01            [ 1] 2831 	or	a, (0x01, sp)
+                                   2832 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2122: TIM2->CCMR2 = tmpccmr2;
+                                   2833 ; genPointerSet
+      00E778 C7 52 5A         [ 1] 2834 	ld	0x525a, a
+                                   2835 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2116: TIM2->CCER1 &=  (uint8_t)(~TIM_CCER1_CC2E);
+                                   2836 ; genPointerGet
+      00E77B C6 52 5B         [ 1] 2837 	ld	a, 0x525b
+                                   2838 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2125: if (tmpicpolarity == TIM2_ICPolarity_Falling)
+                                   2839 ; genCmpEQorNE
+      00E77E 88               [ 1] 2840 	push	a
+      00E77F 9F               [ 1] 2841 	ld	a, xl
+      00E780 4A               [ 1] 2842 	dec	a
+      00E781 84               [ 1] 2843 	pop	a
+                                   2844 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2845 ; peephole j10 removed jra by using inverse jump logic
+                                   2846 ; peephole j30 removed unused label 00114$.
+                                   2847 ; peephole j5 changed absolute to relative unconditional jump.
+      00E782 26 07            [ 1] 2848 	jrne	00102$
+                                   2849 ; peephole j7 removed jra by using inverse jump logic
+                                   2850 ; peephole j30 removed unused label 00115$.
+                                   2851 ; skipping generated iCode
+                                   2852 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2127: TIM2->CCER1 |= TIM_CCER1_CC2P ;
+                                   2853 ; genOr
+      00E784 AA 20            [ 1] 2854 	or	a, #0x20
+                                   2855 ; genPointerSet
+      00E786 C7 52 5B         [ 1] 2856 	ld	0x525b, a
+                                   2857 ; genGoto
+      00E789 20 05            [ 2] 2858 	jra	00103$
+                                   2859 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2860 ; genLabel
+      00E78B                       2861 00102$:
+                                   2862 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2131: TIM2->CCER1 &= (uint8_t)(~TIM_CCER1_CC2P) ;
+                                   2863 ; genAnd
+      00E78B A4 DF            [ 1] 2864 	and	a, #0xdf
+                                   2865 ; genPointerSet
+      00E78D C7 52 5B         [ 1] 2866 	ld	0x525b, a
+                                   2867 ; genLabel
+      00E790                       2868 00103$:
+                                   2869 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2135: TIM2->CCER1 |=  TIM_CCER1_CC2E;
+                                   2870 ; genPointerGet
+      00E790 C6 52 5B         [ 1] 2871 	ld	a, 0x525b
+                                   2872 ; genOr
+      00E793 AA 10            [ 1] 2873 	or	a, #0x10
+                                   2874 ; genPointerSet
+      00E795 C7 52 5B         [ 1] 2875 	ld	0x525b, a
+                                   2876 ; genLabel
+                                   2877 ; peephole j30 removed unused label 00104$.
+                                   2878 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim2.c: 2136: }
+                                   2879 ; genEndFunction
+      00E798 1E 02            [ 2] 2880 	ldw	x, (2, sp)
+      00E79A 5B 05            [ 2] 2881 	addw	sp, #5
+      00E79C FC               [ 2] 2882 	jp	(x)
+                                   2883 ;	Total TI2_Config function size at codegen: 5 bytes.
+                                   2884 	.area CODE
+                                   2885 	.area CONST
+                                   2886 	.area INITIALIZER
+                                   2887 	.area CABS (ABS)

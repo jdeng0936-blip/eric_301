@@ -1,0 +1,50 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  9 _FLASH_DeInit                                                  00002E GR
+  9 _FLASH_EraseBlock                                              0001AF GR
+  9 _FLASH_EraseByte                                               00006F GR
+  9 _FLASH_EraseOptionByte                                         0000B3 GR
+  9 _FLASH_GetBootSize                                             0000CD GR
+  9 _FLASH_GetCodeSize                                             0000E5 GR
+  9 _FLASH_GetFlagStatus                                           000115 GR
+  9 _FLASH_GetPowerStatus                                          00013E GR
+  9 _FLASH_GetProgrammingTime                                      000010 GR
+  9 _FLASH_GetReadOutProtectionStatus                              0000C2 GR
+  9 _FLASH_ITConfig                                                0000FD GR
+  9 _FLASH_Lock                                                    000058 GR
+  9 _FLASH_PowerRunModeConfig                                      000126 GR
+  9 _FLASH_PowerWaitModeConfig                                     000016 GR
+  9 _FLASH_ProgramBlock                                            000144 GR
+  9 _FLASH_ProgramByte                                             000065 GR
+  9 _FLASH_ProgramOptionByte                                       00009E GR
+  9 _FLASH_ProgramWord                                             000077 GR
+  9 _FLASH_ReadByte                                                000096 GR
+  9 _FLASH_SetProgrammingTime                                      000000 GR
+  9 _FLASH_Unlock                                                  00003E GR
+  9 _FLASH_WaitForLastOperation                                    0001DC GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      0   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      0   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    20C   flags    0
+   A CABS                                       size      0   flags    8
+

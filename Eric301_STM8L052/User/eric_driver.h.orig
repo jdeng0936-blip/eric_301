@@ -1,0 +1,48 @@
+#include "stm8l15x.h"
+
+//定义LED与按键接口
+#define LED_PORT  GPIOD
+#define LED_PINS  GPIO_Pin_0
+#define KEY_PORT  GPIOB
+#define KEY_PINS  GPIO_Pin_1
+
+//使用位操作定义
+#define K_UP		GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_0);//pe0
+#define K_DOWN 		GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4);//pe4
+#define K_LEFT 		GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1);//pe1
+#define K_RIGHT 	GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3);//pe3
+#define K_MENU  	GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2);//pe2
+
+//****定义键值*****************
+#define KEY_UP					0x1
+#define KEY_DOWN                0x2
+#define KEY_LEFT                0x3
+#define KEY_RIGHT               0x4
+#define KEY_MENU                0x5
+
+struct _KEY_CTR
+{
+	uint8_t   val;
+	uint8_t   state;
+	uint16_t  dly;
+};
+typedef struct _KEY_CTR KEY_CTR;
+
+
+
+#define I2C_HOST_ADDR  0xaa
+#define I2C1_WRITE_ADDRESS7  0x12
+#define I2C1_READ_ADDRESS7   0x34
+
+void CLK_Config(void);
+void TIM2_Init(void);
+void Uart1_Init(void);
+void IIC_Init(void);
+void init_rtc(void);
+void rtc_get_time(char *buf);
+void rtc_get_date(char *buf);
+
+
+
+
+

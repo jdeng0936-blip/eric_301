@@ -1,0 +1,589 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8l15x_gpio
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _GPIO_DeInit
+                                     11 	.globl _GPIO_Init
+                                     12 	.globl _GPIO_ExternalPullUpConfig
+                                     13 	.globl _GPIO_Write
+                                     14 	.globl _GPIO_WriteBit
+                                     15 	.globl _GPIO_SetBits
+                                     16 	.globl _GPIO_ResetBits
+                                     17 	.globl _GPIO_ToggleBits
+                                     18 	.globl _GPIO_ReadInputData
+                                     19 	.globl _GPIO_ReadOutputData
+                                     20 	.globl _GPIO_ReadInputDataBit
+                                     21 	.globl _GPIO_ReadOutputDataBit
+                                     22 ;--------------------------------------------------------
+                                     23 ; ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area DATA
+                                     26 ;--------------------------------------------------------
+                                     27 ; ram data
+                                     28 ;--------------------------------------------------------
+                                     29 	.area INITIALIZED
+                                     30 ;--------------------------------------------------------
+                                     31 ; absolute external ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area DABS (ABS)
+                                     34 
+                                     35 ; default segment ordering for linker
+                                     36 	.area HOME
+                                     37 	.area GSINIT
+                                     38 	.area GSFINAL
+                                     39 	.area CONST
+                                     40 	.area INITIALIZER
+                                     41 	.area CODE
+                                     42 
+                                     43 ;--------------------------------------------------------
+                                     44 ; global & static initialisations
+                                     45 ;--------------------------------------------------------
+                                     46 	.area HOME
+                                     47 	.area GSINIT
+                                     48 	.area GSFINAL
+                                     49 	.area GSINIT
+                                     50 ;--------------------------------------------------------
+                                     51 ; Home
+                                     52 ;--------------------------------------------------------
+                                     53 	.area HOME
+                                     54 	.area HOME
+                                     55 ;--------------------------------------------------------
+                                     56 ; code
+                                     57 ;--------------------------------------------------------
+                                     58 	.area CODE
+                                     59 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 96: void GPIO_DeInit(GPIO_TypeDef* GPIOx)
+                                     60 ; genLabel
+                                     61 ;	-----------------------------------------
+                                     62 ;	 function GPIO_DeInit
+                                     63 ;	-----------------------------------------
+                                     64 ;	Register assignment might be sub-optimal.
+                                     65 ;	Stack space usage: 0 bytes.
+      00CDD7                         66 _GPIO_DeInit:
+                                     67 ; genReceive
+                                     68 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 98: GPIOx->CR2 = GPIO_CR2_RESET_VALUE; /* Reset Control Register 2 */
+                                     69 ; genPlus
+                                     70 ; peephole 5w replaced exgw-ldw by ldw.
+      00CDD7 90 93            [ 1]   71 	ldw	y, x
+                                     72 ; genPointerSet
+                                     73 ; peephole 9a moved addition of offset into clear instruction
+      00CDD9 6F 04            [ 1]   74 	clr	(0x0004, x)
+                                     75 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 99: GPIOx->ODR = GPIO_ODR_RESET_VALUE; /* Reset Output Data Register */
+                                     76 ; genPointerSet
+      00CDDB 90 7F            [ 1]   77 	clr	(y)
+                                     78 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 100: GPIOx->DDR = GPIO_DDR_RESET_VALUE; /* Reset Data Direction Register */
+                                     79 ; genPlus
+      00CDDD 93               [ 1]   80 	ldw	x, y
+                                     81 ; genPointerSet
+                                     82 ; peephole 10i moved addition of offset into instruction
+      00CDDE 6F 02            [ 1]   83 	clr	(0x02, x)
+                                     84 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 101: GPIOx->CR1 = GPIO_CR1_RESET_VALUE; /* Reset Control Register 1 */
+                                     85 ; genPlus
+      00CDE0 93               [ 1]   86 	ldw	x, y
+                                     87 ; genPointerSet
+                                     88 ; peephole 9a moved addition of offset into clear instruction
+      00CDE1 6F 03            [ 1]   89 	clr	(0x0003, x)
+                                     90 ; genLabel
+                                     91 ; peephole j30 removed unused label 00101$.
+                                     92 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 102: }
+                                     93 ; genEndFunction
+      00CDE3 81               [ 4]   94 	ret
+                                     95 ;	Total GPIO_DeInit function size at codegen: 1 bytes.
+                                     96 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 133: void GPIO_Init(GPIO_TypeDef* GPIOx, uint8_t GPIO_Pin, GPIO_Mode_TypeDef GPIO_Mode)
+                                     97 ; genLabel
+                                     98 ;	-----------------------------------------
+                                     99 ;	 function GPIO_Init
+                                    100 ;	-----------------------------------------
+                                    101 ;	Register assignment might be sub-optimal.
+                                    102 ;	Stack space usage: 9 bytes.
+      00CDE4                        103 _GPIO_Init:
+      00CDE4 52 09            [ 2]  104 	sub	sp, #9
+                                    105 ; genReceive
+      00CDE6 1F 08            [ 2]  106 	ldw	(0x08, sp), x
+                                    107 ; genReceive
+      00CDE8 6B 07            [ 1]  108 	ld	(0x07, sp), a
+                                    109 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 143: GPIOx->CR2 &= (uint8_t)(~(GPIO_Pin));
+                                    110 ; genPlus
+      00CDEA 1E 08            [ 2]  111 	ldw	x, (0x08, sp)
+      00CDEC 1C 00 04         [ 2]  112 	addw	x, #0x0004
+                                    113 ; genPointerGet
+      00CDEF 1F 03            [ 2]  114 	ldw	(0x03, sp), x
+                                    115 ; peephole 13 removed redundant load from (0x03, sp) into x.
+      00CDF1 F6               [ 1]  116 	ld	a, (x)
+                                    117 ; genCpl
+      00CDF2 88               [ 1]  118 	push	a
+      00CDF3 7B 08            [ 1]  119 	ld	a, (0x08, sp)
+      00CDF5 43               [ 1]  120 	cpl	a
+      00CDF6 6B 06            [ 1]  121 	ld	(0x06, sp), a
+      00CDF8 84               [ 1]  122 	pop	a
+                                    123 ; genAnd
+      00CDF9 14 05            [ 1]  124 	and	a, (0x05, sp)
+                                    125 ; genPointerSet
+      00CDFB 1E 03            [ 2]  126 	ldw	x, (0x03, sp)
+      00CDFD F7               [ 1]  127 	ld	(x), a
+                                    128 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 159: GPIOx->DDR |= GPIO_Pin;
+                                    129 ; genPlus
+      00CDFE 1E 08            [ 2]  130 	ldw	x, (0x08, sp)
+      00CE00 5C               [ 1]  131 	incw	x
+      00CE01 5C               [ 1]  132 	incw	x
+      00CE02 1F 01            [ 2]  133 	ldw	(0x01, sp), x
+                                    134 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 149: if ((((uint8_t)(GPIO_Mode)) & (uint8_t)0x80) != (uint8_t)0x00) /* Output mode */
+                                    135 ; genAnd
+      00CE04 0D 0C            [ 1]  136 	tnz	(0x0c, sp)
+                                    137 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE06 2A 1D            [ 1]  138 	jrpl	00105$
+                                    139 ; peephole j8 removed jra by using inverse jump logic
+                                    140 ; peephole j30 removed unused label 00143$.
+                                    141 ; skipping generated iCode
+                                    142 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 153: GPIOx->ODR |= GPIO_Pin;
+                                    143 ; genCast
+                                    144 ; genAssign
+      00CE08 1E 08            [ 2]  145 	ldw	x, (0x08, sp)
+                                    146 ; genPointerGet
+      00CE0A F6               [ 1]  147 	ld	a, (x)
+                                    148 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 151: if ((((uint8_t)(GPIO_Mode)) & (uint8_t)0x10) != (uint8_t)0x00) /* High level */
+                                    149 ; genAnd
+      00CE0B 88               [ 1]  150 	push	a
+      00CE0C 7B 0D            [ 1]  151 	ld	a, (0x0d, sp)
+      00CE0E A5 10            [ 1]  152 	bcp	a, #0x10
+      00CE10 84               [ 1]  153 	pop	a
+                                    154 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE11 27 05            [ 1]  155 	jreq	00102$
+                                    156 ; peephole j10 removed jra by using inverse jump logic
+                                    157 ; peephole j30 removed unused label 00144$.
+                                    158 ; skipping generated iCode
+                                    159 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 153: GPIOx->ODR |= GPIO_Pin;
+                                    160 ; genOr
+      00CE13 1A 07            [ 1]  161 	or	a, (0x07, sp)
+                                    162 ; genPointerSet
+      00CE15 F7               [ 1]  163 	ld	(x), a
+                                    164 ; genGoto
+      00CE16 20 03            [ 2]  165 	jra	00103$
+                                    166 ; peephole j5 changed absolute to relative unconditional jump.
+                                    167 ; genLabel
+      00CE18                        168 00102$:
+                                    169 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 156: GPIOx->ODR &= (uint8_t)(~(GPIO_Pin));
+                                    170 ; genAnd
+      00CE18 14 05            [ 1]  171 	and	a, (0x05, sp)
+                                    172 ; genPointerSet
+      00CE1A F7               [ 1]  173 	ld	(x), a
+                                    174 ; genLabel
+      00CE1B                        175 00103$:
+                                    176 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 159: GPIOx->DDR |= GPIO_Pin;
+                                    177 ; genPointerGet
+      00CE1B 1E 01            [ 2]  178 	ldw	x, (0x01, sp)
+      00CE1D F6               [ 1]  179 	ld	a, (x)
+                                    180 ; genOr
+      00CE1E 1A 07            [ 1]  181 	or	a, (0x07, sp)
+                                    182 ; genPointerSet
+      00CE20 1E 01            [ 2]  183 	ldw	x, (0x01, sp)
+      00CE22 F7               [ 1]  184 	ld	(x), a
+                                    185 ; genGoto
+      00CE23 20 08            [ 2]  186 	jra	00106$
+                                    187 ; peephole j5 changed absolute to relative unconditional jump.
+                                    188 ; genLabel
+      00CE25                        189 00105$:
+                                    190 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 163: GPIOx->DDR &= (uint8_t)(~(GPIO_Pin));
+                                    191 ; genPointerGet
+      00CE25 1E 01            [ 2]  192 	ldw	x, (0x01, sp)
+      00CE27 F6               [ 1]  193 	ld	a, (x)
+                                    194 ; genAnd
+      00CE28 14 05            [ 1]  195 	and	a, (0x05, sp)
+                                    196 ; genPointerSet
+      00CE2A 1E 01            [ 2]  197 	ldw	x, (0x01, sp)
+      00CE2C F7               [ 1]  198 	ld	(x), a
+                                    199 ; genLabel
+      00CE2D                        200 00106$:
+                                    201 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 172: GPIOx->CR1 |= GPIO_Pin;
+                                    202 ; genPlus
+      00CE2D 1E 08            [ 2]  203 	ldw	x, (0x08, sp)
+      00CE2F 1C 00 03         [ 2]  204 	addw	x, #0x0003
+                                    205 ; genPointerGet
+      00CE32 F6               [ 1]  206 	ld	a, (x)
+      00CE33 6B 06            [ 1]  207 	ld	(0x06, sp), a
+                                    208 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 170: if ((((uint8_t)(GPIO_Mode)) & (uint8_t)0x40) != (uint8_t)0x00) /* Pull-Up or Push-Pull */
+                                    209 ; genAnd
+      00CE35 7B 0C            [ 1]  210 	ld	a, (0x0c, sp)
+      00CE37 A5 40            [ 1]  211 	bcp	a, #0x40
+                                    212 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE39 27 07            [ 1]  213 	jreq	00108$
+                                    214 ; peephole j10 removed jra by using inverse jump logic
+                                    215 ; peephole j30 removed unused label 00145$.
+                                    216 ; skipping generated iCode
+                                    217 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 172: GPIOx->CR1 |= GPIO_Pin;
+                                    218 ; genOr
+      00CE3B 7B 06            [ 1]  219 	ld	a, (0x06, sp)
+      00CE3D 1A 07            [ 1]  220 	or	a, (0x07, sp)
+                                    221 ; genPointerSet
+      00CE3F F7               [ 1]  222 	ld	(x), a
+                                    223 ; genGoto
+      00CE40 20 05            [ 2]  224 	jra	00109$
+                                    225 ; peephole j5 changed absolute to relative unconditional jump.
+                                    226 ; genLabel
+      00CE42                        227 00108$:
+                                    228 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 175: GPIOx->CR1 &= (uint8_t)(~(GPIO_Pin));
+                                    229 ; genAnd
+      00CE42 7B 06            [ 1]  230 	ld	a, (0x06, sp)
+      00CE44 14 05            [ 1]  231 	and	a, (0x05, sp)
+                                    232 ; genPointerSet
+      00CE46 F7               [ 1]  233 	ld	(x), a
+                                    234 ; genLabel
+      00CE47                        235 00109$:
+                                    236 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 143: GPIOx->CR2 &= (uint8_t)(~(GPIO_Pin));
+                                    237 ; genPointerGet
+      00CE47 1E 03            [ 2]  238 	ldw	x, (0x03, sp)
+      00CE49 F6               [ 1]  239 	ld	a, (x)
+                                    240 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 182: if ((((uint8_t)(GPIO_Mode)) & (uint8_t)0x20) != (uint8_t)0x00) /* Interrupt or Slow slope */
+                                    241 ; genAnd
+      00CE4A 88               [ 1]  242 	push	a
+      00CE4B 7B 0D            [ 1]  243 	ld	a, (0x0d, sp)
+      00CE4D A5 20            [ 1]  244 	bcp	a, #0x20
+      00CE4F 84               [ 1]  245 	pop	a
+                                    246 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE50 27 07            [ 1]  247 	jreq	00111$
+                                    248 ; peephole j10 removed jra by using inverse jump logic
+                                    249 ; peephole j30 removed unused label 00146$.
+                                    250 ; skipping generated iCode
+                                    251 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 184: GPIOx->CR2 |= GPIO_Pin;
+                                    252 ; genOr
+      00CE52 1A 07            [ 1]  253 	or	a, (0x07, sp)
+                                    254 ; genPointerSet
+      00CE54 1E 03            [ 2]  255 	ldw	x, (0x03, sp)
+      00CE56 F7               [ 1]  256 	ld	(x), a
+                                    257 ; genGoto
+      00CE57 20 05            [ 2]  258 	jra	00113$
+                                    259 ; peephole j5 changed absolute to relative unconditional jump.
+                                    260 ; genLabel
+      00CE59                        261 00111$:
+                                    262 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 187: GPIOx->CR2 &= (uint8_t)(~(GPIO_Pin));
+                                    263 ; genAnd
+      00CE59 14 05            [ 1]  264 	and	a, (0x05, sp)
+                                    265 ; genPointerSet
+      00CE5B 1E 03            [ 2]  266 	ldw	x, (0x03, sp)
+      00CE5D F7               [ 1]  267 	ld	(x), a
+                                    268 ; genLabel
+      00CE5E                        269 00113$:
+                                    270 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 190: }
+                                    271 ; genEndFunction
+      00CE5E 5B 09            [ 2]  272 	addw	sp, #9
+      00CE60 85               [ 2]  273 	popw	x
+      00CE61 84               [ 1]  274 	pop	a
+      00CE62 FC               [ 2]  275 	jp	(x)
+                                    276 ;	Total GPIO_Init function size at codegen: 5 bytes.
+                                    277 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 209: void GPIO_ExternalPullUpConfig(GPIO_TypeDef* GPIOx, uint8_t GPIO_Pin, FunctionalState NewState)
+                                    278 ; genLabel
+                                    279 ;	-----------------------------------------
+                                    280 ;	 function GPIO_ExternalPullUpConfig
+                                    281 ;	-----------------------------------------
+                                    282 ;	Register assignment might be sub-optimal.
+                                    283 ;	Stack space usage: 1 bytes.
+      00CE63                        284 _GPIO_ExternalPullUpConfig:
+      00CE63 88               [ 1]  285 	push	a
+                                    286 ; genReceive
+                                    287 ; genReceive
+                                    288 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 217: GPIOx->CR1 |= GPIO_Pin;
+                                    289 ; genPlus
+      00CE64 1C 00 03         [ 2]  290 	addw	x, #0x0003
+                                    291 ; genPointerGet
+      00CE67 88               [ 1]  292 	push	a
+      00CE68 F6               [ 1]  293 	ld	a, (x)
+      00CE69 6B 02            [ 1]  294 	ld	(0x02, sp), a
+      00CE6B 84               [ 1]  295 	pop	a
+                                    296 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 215: if (NewState != DISABLE) /* External Pull-Up Set*/
+                                    297 ; genIfx
+      00CE6C 0D 04            [ 1]  298 	tnz	(0x04, sp)
+                                    299 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE6E 27 05            [ 1]  300 	jreq	00102$
+                                    301 ; peephole j10 removed jra by using inverse jump logic
+                                    302 ; peephole j30 removed unused label 00113$.
+                                    303 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 217: GPIOx->CR1 |= GPIO_Pin;
+                                    304 ; genOr
+      00CE70 1A 01            [ 1]  305 	or	a, (0x01, sp)
+                                    306 ; genPointerSet
+      00CE72 F7               [ 1]  307 	ld	(x), a
+                                    308 ; genGoto
+      00CE73 20 04            [ 2]  309 	jra	00104$
+                                    310 ; peephole j5 changed absolute to relative unconditional jump.
+                                    311 ; genLabel
+      00CE75                        312 00102$:
+                                    313 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 220: GPIOx->CR1 &= (uint8_t)(~(GPIO_Pin));
+                                    314 ; genCpl
+      00CE75 43               [ 1]  315 	cpl	a
+                                    316 ; genAnd
+      00CE76 14 01            [ 1]  317 	and	a, (0x01, sp)
+                                    318 ; genPointerSet
+      00CE78 F7               [ 1]  319 	ld	(x), a
+                                    320 ; genLabel
+      00CE79                        321 00104$:
+                                    322 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 222: }
+                                    323 ; genEndFunction
+      00CE79 84               [ 1]  324 	pop	a
+      00CE7A 85               [ 2]  325 	popw	x
+      00CE7B 84               [ 1]  326 	pop	a
+      00CE7C FC               [ 2]  327 	jp	(x)
+                                    328 ;	Total GPIO_ExternalPullUpConfig function size at codegen: 4 bytes.
+                                    329 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 248: void GPIO_Write(GPIO_TypeDef* GPIOx, uint8_t GPIO_PortVal)
+                                    330 ; genLabel
+                                    331 ;	-----------------------------------------
+                                    332 ;	 function GPIO_Write
+                                    333 ;	-----------------------------------------
+                                    334 ;	Register assignment is optimal.
+                                    335 ;	Stack space usage: 0 bytes.
+      00CE7D                        336 _GPIO_Write:
+                                    337 ; genReceive
+                                    338 ; genReceive
+                                    339 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 250: GPIOx->ODR = GPIO_PortVal;
+                                    340 ; genPointerSet
+      00CE7D F7               [ 1]  341 	ld	(x), a
+                                    342 ; genLabel
+                                    343 ; peephole j30 removed unused label 00101$.
+                                    344 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 251: }
+                                    345 ; genEndFunction
+      00CE7E 81               [ 4]  346 	ret
+                                    347 ;	Total GPIO_Write function size at codegen: 1 bytes.
+                                    348 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 270: void GPIO_WriteBit(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin, BitAction GPIO_BitVal)
+                                    349 ; genLabel
+                                    350 ;	-----------------------------------------
+                                    351 ;	 function GPIO_WriteBit
+                                    352 ;	-----------------------------------------
+                                    353 ;	Register assignment might be sub-optimal.
+                                    354 ;	Stack space usage: 1 bytes.
+      00CE7F                        355 _GPIO_WriteBit:
+      00CE7F 88               [ 1]  356 	push	a
+                                    357 ; genReceive
+                                    358 ; genReceive
+                                    359 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 278: GPIOx->ODR |= GPIO_Pin;
+                                    360 ; genCast
+                                    361 ; genAssign
+                                    362 ; genPointerGet
+      00CE80 88               [ 1]  363 	push	a
+      00CE81 F6               [ 1]  364 	ld	a, (x)
+      00CE82 6B 02            [ 1]  365 	ld	(0x02, sp), a
+      00CE84 84               [ 1]  366 	pop	a
+                                    367 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 276: if (GPIO_BitVal != RESET)
+                                    368 ; genIfx
+      00CE85 0D 04            [ 1]  369 	tnz	(0x04, sp)
+                                    370 ; peephole j5 changed absolute to relative unconditional jump.
+      00CE87 27 05            [ 1]  371 	jreq	00102$
+                                    372 ; peephole j10 removed jra by using inverse jump logic
+                                    373 ; peephole j30 removed unused label 00113$.
+                                    374 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 278: GPIOx->ODR |= GPIO_Pin;
+                                    375 ; genOr
+      00CE89 1A 01            [ 1]  376 	or	a, (0x01, sp)
+                                    377 ; genPointerSet
+      00CE8B F7               [ 1]  378 	ld	(x), a
+                                    379 ; genGoto
+      00CE8C 20 04            [ 2]  380 	jra	00104$
+                                    381 ; peephole j5 changed absolute to relative unconditional jump.
+                                    382 ; genLabel
+      00CE8E                        383 00102$:
+                                    384 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 283: GPIOx->ODR &= (uint8_t)(~GPIO_Pin);
+                                    385 ; genCpl
+      00CE8E 43               [ 1]  386 	cpl	a
+                                    387 ; genAnd
+      00CE8F 14 01            [ 1]  388 	and	a, (0x01, sp)
+                                    389 ; genPointerSet
+      00CE91 F7               [ 1]  390 	ld	(x), a
+                                    391 ; genLabel
+      00CE92                        392 00104$:
+                                    393 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 285: }
+                                    394 ; genEndFunction
+      00CE92 84               [ 1]  395 	pop	a
+      00CE93 85               [ 2]  396 	popw	x
+      00CE94 84               [ 1]  397 	pop	a
+      00CE95 FC               [ 2]  398 	jp	(x)
+                                    399 ;	Total GPIO_WriteBit function size at codegen: 4 bytes.
+                                    400 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 303: void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint8_t GPIO_Pin)
+                                    401 ; genLabel
+                                    402 ;	-----------------------------------------
+                                    403 ;	 function GPIO_SetBits
+                                    404 ;	-----------------------------------------
+                                    405 ;	Register assignment might be sub-optimal.
+                                    406 ;	Stack space usage: 1 bytes.
+      00CE96                        407 _GPIO_SetBits:
+      00CE96 88               [ 1]  408 	push	a
+                                    409 ; genReceive
+                                    410 ; genReceive
+      00CE97 6B 01            [ 1]  411 	ld	(0x01, sp), a
+                                    412 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 305: GPIOx->ODR |= GPIO_Pin;
+                                    413 ; genCast
+                                    414 ; genAssign
+                                    415 ; genPointerGet
+      00CE99 F6               [ 1]  416 	ld	a, (x)
+                                    417 ; genOr
+      00CE9A 1A 01            [ 1]  418 	or	a, (0x01, sp)
+                                    419 ; genPointerSet
+      00CE9C F7               [ 1]  420 	ld	(x), a
+                                    421 ; genLabel
+                                    422 ; peephole j30 removed unused label 00101$.
+                                    423 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 306: }
+                                    424 ; genEndFunction
+      00CE9D 84               [ 1]  425 	pop	a
+      00CE9E 81               [ 4]  426 	ret
+                                    427 ;	Total GPIO_SetBits function size at codegen: 2 bytes.
+                                    428 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 324: void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint8_t GPIO_Pin)
+                                    429 ; genLabel
+                                    430 ;	-----------------------------------------
+                                    431 ;	 function GPIO_ResetBits
+                                    432 ;	-----------------------------------------
+                                    433 ;	Register assignment might be sub-optimal.
+                                    434 ;	Stack space usage: 1 bytes.
+      00CE9F                        435 _GPIO_ResetBits:
+      00CE9F 88               [ 1]  436 	push	a
+                                    437 ; genReceive
+                                    438 ; genReceive
+                                    439 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 326: GPIOx->ODR &= (uint8_t)(~GPIO_Pin);
+                                    440 ; genCast
+                                    441 ; genAssign
+                                    442 ; genPointerGet
+      00CEA0 88               [ 1]  443 	push	a
+      00CEA1 F6               [ 1]  444 	ld	a, (x)
+      00CEA2 6B 02            [ 1]  445 	ld	(0x02, sp), a
+      00CEA4 84               [ 1]  446 	pop	a
+                                    447 ; genCpl
+      00CEA5 43               [ 1]  448 	cpl	a
+                                    449 ; genAnd
+      00CEA6 14 01            [ 1]  450 	and	a, (0x01, sp)
+                                    451 ; genPointerSet
+      00CEA8 F7               [ 1]  452 	ld	(x), a
+                                    453 ; genLabel
+                                    454 ; peephole j30 removed unused label 00101$.
+                                    455 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 327: }
+                                    456 ; genEndFunction
+      00CEA9 84               [ 1]  457 	pop	a
+      00CEAA 81               [ 4]  458 	ret
+                                    459 ;	Total GPIO_ResetBits function size at codegen: 2 bytes.
+                                    460 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 336: void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint8_t GPIO_Pin)
+                                    461 ; genLabel
+                                    462 ;	-----------------------------------------
+                                    463 ;	 function GPIO_ToggleBits
+                                    464 ;	-----------------------------------------
+                                    465 ;	Register assignment might be sub-optimal.
+                                    466 ;	Stack space usage: 1 bytes.
+      00CEAB                        467 _GPIO_ToggleBits:
+      00CEAB 88               [ 1]  468 	push	a
+                                    469 ; genReceive
+                                    470 ; genReceive
+      00CEAC 6B 01            [ 1]  471 	ld	(0x01, sp), a
+                                    472 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 338: GPIOx->ODR ^= GPIO_Pin;
+                                    473 ; genCast
+                                    474 ; genAssign
+                                    475 ; genPointerGet
+      00CEAE F6               [ 1]  476 	ld	a, (x)
+                                    477 ; genXor
+      00CEAF 18 01            [ 1]  478 	xor	a, (0x01, sp)
+                                    479 ; genPointerSet
+      00CEB1 F7               [ 1]  480 	ld	(x), a
+                                    481 ; genLabel
+                                    482 ; peephole j30 removed unused label 00101$.
+                                    483 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 339: }
+                                    484 ; genEndFunction
+      00CEB2 84               [ 1]  485 	pop	a
+      00CEB3 81               [ 4]  486 	ret
+                                    487 ;	Total GPIO_ToggleBits function size at codegen: 2 bytes.
+                                    488 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 347: uint8_t GPIO_ReadInputData(GPIO_TypeDef* GPIOx)
+                                    489 ; genLabel
+                                    490 ;	-----------------------------------------
+                                    491 ;	 function GPIO_ReadInputData
+                                    492 ;	-----------------------------------------
+                                    493 ;	Register assignment might be sub-optimal.
+                                    494 ;	Stack space usage: 0 bytes.
+      00CEB4                        495 _GPIO_ReadInputData:
+                                    496 ; genReceive
+                                    497 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 349: return ((uint8_t)GPIOx->IDR);
+                                    498 ; genAssign
+                                    499 ; genPointerGet
+      00CEB4 E6 01            [ 1]  500 	ld	a, (0x1, x)
+                                    501 ; genReturn
+                                    502 ; genLabel
+                                    503 ; peephole j30 removed unused label 00101$.
+                                    504 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 350: }
+                                    505 ; genEndFunction
+      00CEB6 81               [ 4]  506 	ret
+                                    507 ;	Total GPIO_ReadInputData function size at codegen: 1 bytes.
+                                    508 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 358: uint8_t GPIO_ReadOutputData(GPIO_TypeDef* GPIOx)
+                                    509 ; genLabel
+                                    510 ;	-----------------------------------------
+                                    511 ;	 function GPIO_ReadOutputData
+                                    512 ;	-----------------------------------------
+                                    513 ;	Register assignment is optimal.
+                                    514 ;	Stack space usage: 0 bytes.
+      00CEB7                        515 _GPIO_ReadOutputData:
+                                    516 ; genReceive
+                                    517 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 360: return ((uint8_t)GPIOx->ODR);
+                                    518 ; genPointerGet
+      00CEB7 F6               [ 1]  519 	ld	a, (x)
+                                    520 ; genReturn
+                                    521 ; genLabel
+                                    522 ; peephole j30 removed unused label 00101$.
+                                    523 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 361: }
+                                    524 ; genEndFunction
+      00CEB8 81               [ 4]  525 	ret
+                                    526 ;	Total GPIO_ReadOutputData function size at codegen: 1 bytes.
+                                    527 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 378: BitStatus GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin)
+                                    528 ; genLabel
+                                    529 ;	-----------------------------------------
+                                    530 ;	 function GPIO_ReadInputDataBit
+                                    531 ;	-----------------------------------------
+                                    532 ;	Register assignment might be sub-optimal.
+                                    533 ;	Stack space usage: 1 bytes.
+      00CEB9                        534 _GPIO_ReadInputDataBit:
+      00CEB9 88               [ 1]  535 	push	a
+                                    536 ; genReceive
+                                    537 ; genReceive
+      00CEBA 6B 01            [ 1]  538 	ld	(0x01, sp), a
+                                    539 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 380: return ((BitStatus)(GPIOx->IDR & (uint8_t)GPIO_Pin));
+                                    540 ; genAssign
+                                    541 ; genPointerGet
+      00CEBC E6 01            [ 1]  542 	ld	a, (0x1, x)
+                                    543 ; genAnd
+      00CEBE 14 01            [ 1]  544 	and	a, (0x01, sp)
+                                    545 ; genCast
+      00CEC0 40               [ 1]  546 	neg	a
+      00CEC1 4F               [ 1]  547 	clr	a
+      00CEC2 49               [ 1]  548 	rlc	a
+                                    549 ; genReturn
+                                    550 ; genLabel
+                                    551 ; peephole j30 removed unused label 00101$.
+                                    552 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 381: }
+                                    553 ; genEndFunction
+      00CEC3 5B 01            [ 2]  554 	addw	sp, #1
+      00CEC5 81               [ 4]  555 	ret
+                                    556 ;	Total GPIO_ReadInputDataBit function size at codegen: 3 bytes.
+                                    557 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 389: BitStatus GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin)
+                                    558 ; genLabel
+                                    559 ;	-----------------------------------------
+                                    560 ;	 function GPIO_ReadOutputDataBit
+                                    561 ;	-----------------------------------------
+                                    562 ;	Register assignment might be sub-optimal.
+                                    563 ;	Stack space usage: 1 bytes.
+      00CEC6                        564 _GPIO_ReadOutputDataBit:
+      00CEC6 88               [ 1]  565 	push	a
+                                    566 ; genReceive
+                                    567 ; genReceive
+      00CEC7 6B 01            [ 1]  568 	ld	(0x01, sp), a
+                                    569 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 391: return ((BitStatus)(GPIOx->ODR & (uint8_t)GPIO_Pin));
+                                    570 ; genPointerGet
+      00CEC9 F6               [ 1]  571 	ld	a, (x)
+                                    572 ; genAnd
+      00CECA 14 01            [ 1]  573 	and	a, (0x01, sp)
+                                    574 ; genCast
+      00CECC 40               [ 1]  575 	neg	a
+      00CECD 4F               [ 1]  576 	clr	a
+      00CECE 49               [ 1]  577 	rlc	a
+                                    578 ; genReturn
+                                    579 ; genLabel
+                                    580 ; peephole j30 removed unused label 00101$.
+                                    581 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_gpio.c: 392: }
+                                    582 ; genEndFunction
+      00CECF 5B 01            [ 2]  583 	addw	sp, #1
+      00CED1 81               [ 4]  584 	ret
+                                    585 ;	Total GPIO_ReadOutputDataBit function size at codegen: 3 bytes.
+                                    586 	.area CODE
+                                    587 	.area CONST
+                                    588 	.area INITIALIZER
+                                    589 	.area CABS (ABS)

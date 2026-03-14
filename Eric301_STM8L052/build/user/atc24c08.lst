@@ -1,0 +1,518 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module atc24c08
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _ATC24C08_I2C_Init
+                                     11 	.globl _I2C_WriteOneByteDataToSlave
+                                     12 	.globl _I2C_ReadOneByteDataFromSlave
+                                     13 	.globl _delay_100ms
+                                     14 ;--------------------------------------------------------
+                                     15 ; ram data
+                                     16 ;--------------------------------------------------------
+                                     17 	.area DATA
+                                     18 ;--------------------------------------------------------
+                                     19 ; ram data
+                                     20 ;--------------------------------------------------------
+                                     21 	.area INITIALIZED
+                                     22 ;--------------------------------------------------------
+                                     23 ; absolute external ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area DABS (ABS)
+                                     26 
+                                     27 ; default segment ordering for linker
+                                     28 	.area HOME
+                                     29 	.area GSINIT
+                                     30 	.area GSFINAL
+                                     31 	.area CONST
+                                     32 	.area INITIALIZER
+                                     33 	.area CODE
+                                     34 
+                                     35 ;--------------------------------------------------------
+                                     36 ; global & static initialisations
+                                     37 ;--------------------------------------------------------
+                                     38 	.area HOME
+                                     39 	.area GSINIT
+                                     40 	.area GSFINAL
+                                     41 	.area GSINIT
+                                     42 ;--------------------------------------------------------
+                                     43 ; Home
+                                     44 ;--------------------------------------------------------
+                                     45 	.area HOME
+                                     46 	.area HOME
+                                     47 ;--------------------------------------------------------
+                                     48 ; code
+                                     49 ;--------------------------------------------------------
+                                     50 	.area CODE
+                                     51 ;	User/atc24c08.c: 42: void delay_100ms(void)
+                                     52 ; genLabel
+                                     53 ;	-----------------------------------------
+                                     54 ;	 function delay_100ms
+                                     55 ;	-----------------------------------------
+                                     56 ;	Register assignment is optimal.
+                                     57 ;	Stack space usage: 0 bytes.
+      000000                         58 _delay_100ms:
+                                     59 ;	User/atc24c08.c: 48: for(i=0;i<255;i++)//2*255个指令周期
+                                     60 ; genAssign
+      000000 5F               [ 1]   61 	clrw	x
+                                     62 ;	User/atc24c08.c: 50: for(j=0;j<255;j++);//2*255个指令周期
+                                     63 ; genLabel
+      000001                         64 00110$:
+                                     65 ; genAssign
+      000001 A6 FF            [ 1]   66 	ld	a, #0xff
+                                     67 ; genLabel
+      000003                         68 00105$:
+                                     69 ; genMinus
+                                     70 ; genIfx
+      000003 4A               [ 1]   71 	dec	a
+                                     72 ; peephole 24 removed redundant tnz.
+                                     73 ; peephole j5 changed absolute to relative unconditional jump.
+      000004 26 FD            [ 1]   74 	jrne	00105$
+                                     75 ; peephole j7 removed jra by using inverse jump logic
+                                     76 ; peephole j30 removed unused label 00133$.
+                                     77 ;	User/atc24c08.c: 48: for(i=0;i<255;i++)//2*255个指令周期
+                                     78 ; genPlus
+      000006 5C               [ 1]   79 	incw	x
+                                     80 ; genCmp
+                                     81 ; genCmpTnz
+      000007 9F               [ 1]   82 	ld	a, xl
+      000008 A1 FF            [ 1]   83 	cp	a, #0xff
+                                     84 ; peephole j5 changed absolute to relative unconditional jump.
+      00000A 25 F5            [ 1]   85 	jrc	00110$
+                                     86 ; peephole j9 removed jra by using inverse jump logic
+                                     87 ; peephole j30 removed unused label 00134$.
+                                     88 ; skipping generated iCode
+                                     89 ; genLabel
+                                     90 ; peephole j30 removed unused label 00108$.
+                                     91 ;	User/atc24c08.c: 60: }
+                                     92 ; genEndFunction
+      00000C 81               [ 4]   93 	ret
+                                     94 ;	Total delay_100ms function size at codegen: 1 bytes.
+                                     95 ;	User/atc24c08.c: 78: uint8_t I2C_ReadOneByteDataFromSlave(uint8_t address)
+                                     96 ; genLabel
+                                     97 ;	-----------------------------------------
+                                     98 ;	 function I2C_ReadOneByteDataFromSlave
+                                     99 ;	-----------------------------------------
+                                    100 ;	Register assignment is optimal.
+                                    101 ;	Stack space usage: 2 bytes.
+      00000D                        102 _I2C_ReadOneByteDataFromSlave:
+      00000D 89               [ 2]  103 	pushw	x
+                                    104 ; genReceive
+      00000E 6B 02            [ 1]  105 	ld	(0x02, sp), a
+                                    106 ;	User/atc24c08.c: 88: I2C1->CR2 |= I2C_CR2_START;//产生一个起始条件
+                                    107 ; genPointerGet
+                                    108 ; genOr
+                                    109 ; genPointerSet
+      000010 72 10 52 11      [ 1]  110 	bset	0x5211, #0
+                                    111 ; peephole 202x replaced 'or' by 'bset' ('0x5211').
+                                    112 ;	User/atc24c08.c: 90: while(!((I2C1->SR1 & I2C_SR1_SB)));//读SR1寄存器，清除SB标志位
+                                    113 ; genLabel
+      000014                        114 00101$:
+                                    115 ; genPointerGet
+      000014 C6 52 17         [ 1]  116 	ld	a, 0x5217
+                                    117 ; genAnd
+      000017 44               [ 1]  118 	srl	a
+                                    119 ; peephole j5 changed absolute to relative unconditional jump.
+      000018 24 FA            [ 1]  120 	jrnc	00101$
+                                    121 ; peephole j6 removed jra by using inverse jump logic
+                                    122 ; peephole j30 removed unused label 00223$.
+                                    123 ; skipping generated iCode
+                                    124 ;	User/atc24c08.c: 92: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    125 ;	genInline
+      00001A 9D               [ 1]  126 	nop
+                                    127 ;	genInline
+      00001B 9D               [ 1]  128 	nop
+                                    129 ;	genInline
+      00001C 9D               [ 1]  130 	nop
+                                    131 ;	genInline
+      00001D 9D               [ 1]  132 	nop
+                                    133 ;	genInline
+      00001E 9D               [ 1]  134 	nop
+                                    135 ;	User/atc24c08.c: 98: I2C1->DR=0xA0;//发送从设备地址
+                                    136 ; genPointerSet
+      00001F 35 A0 52 16      [ 1]  137 	mov	0x5216+0, #0xa0
+                                    138 ;	User/atc24c08.c: 100: while(!((I2C1->SR1 & I2C_SR1_ADDR)));//读SR1寄存器，清除ADDR标志位
+                                    139 ; genLabel
+      000023                        140 00104$:
+                                    141 ; genPointerGet
+      000023 C6 52 17         [ 1]  142 	ld	a, 0x5217
+                                    143 ; genAnd
+      000026 A5 02            [ 1]  144 	bcp	a, #0x02
+                                    145 ; peephole j5 changed absolute to relative unconditional jump.
+      000028 27 F9            [ 1]  146 	jreq	00104$
+                                    147 ; peephole j10 removed jra by using inverse jump logic
+                                    148 ; peephole j30 removed unused label 00224$.
+                                    149 ; skipping generated iCode
+                                    150 ;	User/atc24c08.c: 102: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    151 ;	genInline
+      00002A 9D               [ 1]  152 	nop
+                                    153 ;	genInline
+      00002B 9D               [ 1]  154 	nop
+                                    155 ;	genInline
+      00002C 9D               [ 1]  156 	nop
+                                    157 ;	genInline
+      00002D 9D               [ 1]  158 	nop
+                                    159 ;	genInline
+      00002E 9D               [ 1]  160 	nop
+                                    161 ;	User/atc24c08.c: 104: if(!(I2C1->SR3 & I2C_SR3_TRA))return 1;//读SR3寄存器，清除ADDR标志位
+                                    162 ; genPointerGet
+      00002F C6 52 19         [ 1]  163 	ld	a, 0x5219
+                                    164 ; genAnd
+      000032 A5 04            [ 1]  165 	bcp	a, #0x04
+                                    166 ; peephole j5 changed absolute to relative unconditional jump.
+      000034 26 04            [ 1]  167 	jrne	00108$
+                                    168 ; peephole j7 removed jra by using inverse jump logic
+                                    169 ; peephole j30 removed unused label 00225$.
+                                    170 ; skipping generated iCode
+                                    171 ; genReturn
+      000036 A6 01            [ 1]  172 	ld	a, #0x01
+      000038 20 48            [ 2]  173 	jra	00123$
+                                    174 ; peephole j5 changed absolute to relative unconditional jump.
+                                    175 ; genLabel
+      00003A                        176 00108$:
+                                    177 ;	User/atc24c08.c: 114: I2C1->DR=address;
+                                    178 ; genPointerSet
+      00003A AE 52 16         [ 2]  179 	ldw	x, #0x5216
+      00003D 7B 02            [ 1]  180 	ld	a, (0x02, sp)
+      00003F F7               [ 1]  181 	ld	(x), a
+                                    182 ;	User/atc24c08.c: 116: while(!((I2C1->SR1 & I2C_SR1_BTF)));//等待地址发送完成
+                                    183 ; genLabel
+      000040                        184 00109$:
+                                    185 ; genPointerGet
+      000040 C6 52 17         [ 1]  186 	ld	a, 0x5217
+                                    187 ; genAnd
+      000043 A5 04            [ 1]  188 	bcp	a, #0x04
+                                    189 ; peephole j5 changed absolute to relative unconditional jump.
+      000045 27 F9            [ 1]  190 	jreq	00109$
+                                    191 ; peephole j10 removed jra by using inverse jump logic
+                                    192 ; peephole j30 removed unused label 00226$.
+                                    193 ; skipping generated iCode
+                                    194 ;	User/atc24c08.c: 118: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    195 ;	genInline
+      000047 9D               [ 1]  196 	nop
+                                    197 ;	genInline
+      000048 9D               [ 1]  198 	nop
+                                    199 ;	genInline
+      000049 9D               [ 1]  200 	nop
+                                    201 ;	genInline
+      00004A 9D               [ 1]  202 	nop
+                                    203 ;	genInline
+      00004B 9D               [ 1]  204 	nop
+                                    205 ;	User/atc24c08.c: 124: I2C1->CR2 |= I2C_CR2_START;//重复产生一个起始条件
+                                    206 ; genPointerGet
+                                    207 ; genOr
+                                    208 ; genPointerSet
+      00004C 72 10 52 11      [ 1]  209 	bset	0x5211, #0
+                                    210 ; peephole 202x replaced 'or' by 'bset' ('0x5211').
+                                    211 ;	User/atc24c08.c: 126: while(!((I2C1->SR1 & I2C_SR1_SB)));//读SR1寄存器，清除SB标志位
+                                    212 ; genLabel
+      000050                        213 00112$:
+                                    214 ; genPointerGet
+      000050 C6 52 17         [ 1]  215 	ld	a, 0x5217
+                                    216 ; genAnd
+      000053 44               [ 1]  217 	srl	a
+                                    218 ; peephole j5 changed absolute to relative unconditional jump.
+      000054 24 FA            [ 1]  219 	jrnc	00112$
+                                    220 ; peephole j6 removed jra by using inverse jump logic
+                                    221 ; peephole j30 removed unused label 00227$.
+                                    222 ; skipping generated iCode
+                                    223 ;	User/atc24c08.c: 128: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    224 ;	genInline
+      000056 9D               [ 1]  225 	nop
+                                    226 ;	genInline
+      000057 9D               [ 1]  227 	nop
+                                    228 ;	genInline
+      000058 9D               [ 1]  229 	nop
+                                    230 ;	genInline
+      000059 9D               [ 1]  231 	nop
+                                    232 ;	genInline
+      00005A 9D               [ 1]  233 	nop
+                                    234 ;	User/atc24c08.c: 134: I2C1->DR=0xA1;//发送从设备地址
+                                    235 ; genPointerSet
+      00005B 35 A1 52 16      [ 1]  236 	mov	0x5216+0, #0xa1
+                                    237 ;	User/atc24c08.c: 136: while(!((I2C1->SR1 & I2C_SR1_ADDR)));//读SR1寄存器，清除ADDR标志位
+                                    238 ; genLabel
+      00005F                        239 00115$:
+                                    240 ; genPointerGet
+      00005F C6 52 17         [ 1]  241 	ld	a, 0x5217
+                                    242 ; genAnd
+      000062 A5 02            [ 1]  243 	bcp	a, #0x02
+                                    244 ; peephole j5 changed absolute to relative unconditional jump.
+      000064 27 F9            [ 1]  245 	jreq	00115$
+                                    246 ; peephole j10 removed jra by using inverse jump logic
+                                    247 ; peephole j30 removed unused label 00228$.
+                                    248 ; skipping generated iCode
+                                    249 ;	User/atc24c08.c: 138: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    250 ;	genInline
+      000066 9D               [ 1]  251 	nop
+                                    252 ;	genInline
+      000067 9D               [ 1]  253 	nop
+                                    254 ;	genInline
+      000068 9D               [ 1]  255 	nop
+                                    256 ;	genInline
+      000069 9D               [ 1]  257 	nop
+                                    258 ;	genInline
+      00006A 9D               [ 1]  259 	nop
+                                    260 ;	User/atc24c08.c: 140: if((I2C1->SR3 & I2C_SR3_TRA))return 1;//读SR3寄存器，清除ADDR标志位
+                                    261 ; genPointerGet
+                                    262 ; genAnd
+                                    263 ; peephole j531x replaced 'ld-bcp-jrne' by 'btjt' ('0x5219').
+                                    264 ; peephole j5 changed absolute to relative unconditional jump.
+      00006B 72 05 52 19 04   [ 2]  265 	btjf	0x5219, #2, 00120$
+                                    266 ; peephole j33 removed jra by using inverse bit-test-jump logic
+                                    267 ; peephole j30 removed unused label 00229$.
+                                    268 ; skipping generated iCode
+                                    269 ; genReturn
+      000070 A6 01            [ 1]  270 	ld	a, #0x01
+      000072 20 0E            [ 2]  271 	jra	00123$
+                                    272 ; peephole j5 changed absolute to relative unconditional jump.
+                                    273 ;	User/atc24c08.c: 142: while(!((I2C1->SR1 & I2C_SR1_RXNE)));//等待地址发送完成
+                                    274 ; genLabel
+      000074                        275 00120$:
+                                    276 ; genPointerGet
+                                    277 ; genAnd
+                                    278 ; peephole j531x replaced 'ld-bcp-jrne' by 'btjt' ('0x5217').
+                                    279 ; peephole j5 changed absolute to relative unconditional jump.
+      000074 72 0D 52 17 FB   [ 2]  280 	btjf	0x5217, #6, 00120$
+                                    281 ; peephole j33 removed jra by using inverse bit-test-jump logic
+                                    282 ; peephole j30 removed unused label 00230$.
+                                    283 ; skipping generated iCode
+                                    284 ;	User/atc24c08.c: 148: I2C1->CR2 |= I2C_CR2_STOP;
+                                    285 ; genPointerGet
+                                    286 ; genOr
+                                    287 ; genPointerSet
+      000079 72 12 52 11      [ 1]  288 	bset	0x5211, #1
+                                    289 ; peephole 202x replaced 'or' by 'bset' ('0x5211').
+                                    290 ;	User/atc24c08.c: 154: t=I2C1->DR;
+                                    291 ; genPointerGet
+      00007D C6 52 16         [ 1]  292 	ld	a, 0x5216
+                                    293 ;	User/atc24c08.c: 158: return t;
+                                    294 ; genReturn
+      000080 6B 01            [ 1]  295 	ld	(0x01, sp), a
+                                    296 ; peephole 4a removed redundant load from (0x01, sp) into a.
+                                    297 ; genLabel
+      000082                        298 00123$:
+                                    299 ;	User/atc24c08.c: 160: }
+                                    300 ; genEndFunction
+      000082 85               [ 2]  301 	popw	x
+      000083 81               [ 4]  302 	ret
+                                    303 ;	Total I2C_ReadOneByteDataFromSlave function size at codegen: 2 bytes.
+                                    304 ;	User/atc24c08.c: 178: uint8_t I2C_WriteOneByteDataToSlave(uint8_t address,uint8_t dat)
+                                    305 ; genLabel
+                                    306 ;	-----------------------------------------
+                                    307 ;	 function I2C_WriteOneByteDataToSlave
+                                    308 ;	-----------------------------------------
+                                    309 ;	Register assignment is optimal.
+                                    310 ;	Stack space usage: 1 bytes.
+      000084                        311 _I2C_WriteOneByteDataToSlave:
+      000084 88               [ 1]  312 	push	a
+                                    313 ; genReceive
+      000085 97               [ 1]  314 	ld	xl, a
+                                    315 ;	User/atc24c08.c: 186: I2C1->CR2 |= I2C_CR2_START;//产生一个起始条件
+                                    316 ; genPointerGet
+                                    317 ; genOr
+                                    318 ; genPointerSet
+      000086 72 10 52 11      [ 1]  319 	bset	0x5211, #0
+                                    320 ; peephole 202x replaced 'or' by 'bset' ('0x5211').
+                                    321 ;	User/atc24c08.c: 188: while(!((I2C1->SR1 & I2C_SR1_SB)));
+                                    322 ; genLabel
+      00008A                        323 00101$:
+                                    324 ; genPointerGet
+      00008A C6 52 17         [ 1]  325 	ld	a, 0x5217
+                                    326 ; genAnd
+      00008D 44               [ 1]  327 	srl	a
+                                    328 ; peephole j5 changed absolute to relative unconditional jump.
+      00008E 24 FA            [ 1]  329 	jrnc	00101$
+                                    330 ; peephole j6 removed jra by using inverse jump logic
+                                    331 ; peephole j30 removed unused label 00207$.
+                                    332 ; skipping generated iCode
+                                    333 ;	User/atc24c08.c: 190: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    334 ;	genInline
+      000090 9D               [ 1]  335 	nop
+                                    336 ;	genInline
+      000091 9D               [ 1]  337 	nop
+                                    338 ;	genInline
+      000092 9D               [ 1]  339 	nop
+                                    340 ;	genInline
+      000093 9D               [ 1]  341 	nop
+                                    342 ;	genInline
+      000094 9D               [ 1]  343 	nop
+                                    344 ;	User/atc24c08.c: 192: I2C1->DR=0xA0;
+                                    345 ; genPointerSet
+      000095 35 A0 52 16      [ 1]  346 	mov	0x5216+0, #0xa0
+                                    347 ;	User/atc24c08.c: 198: while(!((I2C1->SR1 & I2C_SR1_ADDR)));
+                                    348 ; genLabel
+      000099                        349 00104$:
+                                    350 ; genPointerGet
+      000099 C6 52 17         [ 1]  351 	ld	a, 0x5217
+                                    352 ; genAnd
+      00009C A5 02            [ 1]  353 	bcp	a, #0x02
+                                    354 ; peephole j5 changed absolute to relative unconditional jump.
+      00009E 27 F9            [ 1]  355 	jreq	00104$
+                                    356 ; peephole j10 removed jra by using inverse jump logic
+                                    357 ; peephole j30 removed unused label 00208$.
+                                    358 ; skipping generated iCode
+                                    359 ;	User/atc24c08.c: 200: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    360 ;	genInline
+      0000A0 9D               [ 1]  361 	nop
+                                    362 ;	genInline
+      0000A1 9D               [ 1]  363 	nop
+                                    364 ;	genInline
+      0000A2 9D               [ 1]  365 	nop
+                                    366 ;	genInline
+      0000A3 9D               [ 1]  367 	nop
+                                    368 ;	genInline
+      0000A4 9D               [ 1]  369 	nop
+                                    370 ;	User/atc24c08.c: 202: if(!(I2C1->SR3 & I2C_SR3_TRA))return 1;//读SR3寄存器，清除ADDR标志位
+                                    371 ; genPointerGet
+      0000A5 C6 52 19         [ 1]  372 	ld	a, 0x5219
+                                    373 ; genAnd
+      0000A8 A5 04            [ 1]  374 	bcp	a, #0x04
+                                    375 ; peephole j5 changed absolute to relative unconditional jump.
+      0000AA 26 04            [ 1]  376 	jrne	00109$
+                                    377 ; peephole j7 removed jra by using inverse jump logic
+                                    378 ; peephole j30 removed unused label 00209$.
+                                    379 ; skipping generated iCode
+                                    380 ; genReturn
+      0000AC A6 01            [ 1]  381 	ld	a, #0x01
+      0000AE 20 2D            [ 2]  382 	jra	00121$
+                                    383 ; peephole j5 changed absolute to relative unconditional jump.
+                                    384 ;	User/atc24c08.c: 208: while(!((I2C1->SR1 & I2C_SR1_TXE)));
+                                    385 ; genLabel
+      0000B0                        386 00109$:
+                                    387 ; genPointerGet
+                                    388 ; genAnd
+      0000B0 C6 52 17         [ 1]  389 	ld	a, 0x5217
+                                    390 ; peephole 30 removed redundant tnz.
+                                    391 ; peephole j5 changed absolute to relative unconditional jump.
+      0000B3 2A FB            [ 1]  392 	jrpl	00109$
+                                    393 ; peephole j8 removed jra by using inverse jump logic
+                                    394 ; peephole j30 removed unused label 00210$.
+                                    395 ; skipping generated iCode
+                                    396 ;	User/atc24c08.c: 210: I2C1->DR=address;
+                                    397 ; genPointerSet
+      0000B5 90 AE 52 16      [ 2]  398 	ldw	y, #0x5216
+      0000B9 9F               [ 1]  399 	ld	a, xl
+      0000BA 90 F7            [ 1]  400 	ld	(y), a
+                                    401 ;	User/atc24c08.c: 216: while(!((I2C1->SR1 & I2C_SR1_TXE)));
+                                    402 ; genLabel
+      0000BC                        403 00112$:
+                                    404 ; genPointerGet
+                                    405 ; genAnd
+      0000BC C6 52 17         [ 1]  406 	ld	a, 0x5217
+                                    407 ; peephole 30 removed redundant tnz.
+                                    408 ; peephole j5 changed absolute to relative unconditional jump.
+      0000BF 2A FB            [ 1]  409 	jrpl	00112$
+                                    410 ; peephole j8 removed jra by using inverse jump logic
+                                    411 ; peephole j30 removed unused label 00211$.
+                                    412 ; skipping generated iCode
+                                    413 ;	User/atc24c08.c: 218: I2C1->DR=dat;
+                                    414 ; genPointerSet
+      0000C1 AE 52 16         [ 2]  415 	ldw	x, #0x5216
+      0000C4 7B 04            [ 1]  416 	ld	a, (0x04, sp)
+      0000C6 F7               [ 1]  417 	ld	(x), a
+                                    418 ;	User/atc24c08.c: 220: while(!((I2C1->SR1 & I2C_SR1_TXE)));
+                                    419 ; genLabel
+      0000C7                        420 00115$:
+                                    421 ; genPointerGet
+                                    422 ; genAnd
+      0000C7 C6 52 17         [ 1]  423 	ld	a, 0x5217
+                                    424 ; peephole 30 removed redundant tnz.
+                                    425 ; peephole j5 changed absolute to relative unconditional jump.
+      0000CA 2A FB            [ 1]  426 	jrpl	00115$
+                                    427 ; peephole j8 removed jra by using inverse jump logic
+                                    428 ; peephole j30 removed unused label 00212$.
+                                    429 ; skipping generated iCode
+                                    430 ;	User/atc24c08.c: 222: while(!((I2C1->SR1 & I2C_SR1_BTF)));
+                                    431 ; genLabel
+      0000CC                        432 00118$:
+                                    433 ; genPointerGet
+      0000CC C6 52 17         [ 1]  434 	ld	a, 0x5217
+                                    435 ; genAnd
+      0000CF A5 04            [ 1]  436 	bcp	a, #0x04
+                                    437 ; peephole j5 changed absolute to relative unconditional jump.
+      0000D1 27 F9            [ 1]  438 	jreq	00118$
+                                    439 ; peephole j10 removed jra by using inverse jump logic
+                                    440 ; peephole j30 removed unused label 00213$.
+                                    441 ; skipping generated iCode
+                                    442 ;	User/atc24c08.c: 224: _5NOPS;//根据数据手册,检测到标志位后,需插入5个NOP进行延时
+                                    443 ;	genInline
+      0000D3 9D               [ 1]  444 	nop
+                                    445 ;	genInline
+      0000D4 9D               [ 1]  446 	nop
+                                    447 ;	genInline
+      0000D5 9D               [ 1]  448 	nop
+                                    449 ;	genInline
+      0000D6 9D               [ 1]  450 	nop
+                                    451 ;	genInline
+      0000D7 9D               [ 1]  452 	nop
+                                    453 ;	User/atc24c08.c: 230: I2C1->CR2 |= I2C_CR2_STOP;
+                                    454 ; genPointerGet
+                                    455 ; genOr
+                                    456 ; genPointerSet
+      0000D8 72 12 52 11      [ 1]  457 	bset	0x5211, #1
+                                    458 ; peephole 202x replaced 'or' by 'bset' ('0x5211').
+                                    459 ;	User/atc24c08.c: 232: return 0;
+                                    460 ; genReturn
+      0000DC 4F               [ 1]  461 	clr	a
+                                    462 ; genLabel
+      0000DD                        463 00121$:
+                                    464 ;	User/atc24c08.c: 234: }
+                                    465 ; genEndFunction
+      0000DD 5B 01            [ 2]  466 	addw	sp, #1
+      0000DF 85               [ 2]  467 	popw	x
+      0000E0 5B 01            [ 2]  468 	addw	sp, #1
+      0000E2 FC               [ 2]  469 	jp	(x)
+                                    470 ;	Total I2C_WriteOneByteDataToSlave function size at codegen: 6 bytes.
+                                    471 ;	User/atc24c08.c: 253: void ATC24C08_I2C_Init(void)
+                                    472 ; genLabel
+                                    473 ;	-----------------------------------------
+                                    474 ;	 function ATC24C08_I2C_Init
+                                    475 ;	-----------------------------------------
+                                    476 ;	Register assignment is optimal.
+                                    477 ;	Stack space usage: 0 bytes.
+      0000E3                        478 _ATC24C08_I2C_Init:
+                                    479 ;	User/atc24c08.c: 259: CLK->PCKENR1 |= CLK_PCKENR1_I2C1;//
+                                    480 ; genPointerGet
+                                    481 ; genOr
+                                    482 ; genPointerSet
+      0000E3 72 16 50 C3      [ 1]  483 	bset	0x50c3, #3
+                                    484 ; peephole 202x replaced 'or' by 'bset' ('0x50c3').
+                                    485 ;	User/atc24c08.c: 261: I2C1->CR1 &= (uint8_t)(~I2C_CR1_PE);
+                                    486 ; genPointerGet
+                                    487 ; genAnd
+                                    488 ; genPointerSet
+      0000E7 72 11 52 10      [ 1]  489 	bres	0x5210, #0
+                                    490 ; peephole 204x replaced 'and' by 'bres' ('0x5210').
+                                    491 ;	User/atc24c08.c: 267: I2C1->FREQR = 0x02;//2MHz
+                                    492 ; genPointerSet
+      0000EB 35 02 52 12      [ 1]  493 	mov	0x5212+0, #0x02
+                                    494 ;	User/atc24c08.c: 285: I2C1->CCRH = 0; //Standard mode I2C
+                                    495 ; genPointerSet
+      0000EF 35 00 52 1C      [ 1]  496 	mov	0x521c+0, #0x00
+                                    497 ;	User/atc24c08.c: 287: I2C1->CCRL = 10;    //SCK低电平时间配置
+                                    498 ; genPointerSet
+      0000F3 35 0A 52 1B      [ 1]  499 	mov	0x521b+0, #0x0a
+                                    500 ;	User/atc24c08.c: 301: I2C1->TRISER = 3;//in standard mode, the maximum allowed SCL rise time is 1000 ns.
+                                    501 ; genPointerSet
+      0000F7 35 03 52 1D      [ 1]  502 	mov	0x521d+0, #0x03
+                                    503 ;	User/atc24c08.c: 306: I2C1->CR1 |= I2C_CR1_PE;//
+                                    504 ; genPointerGet
+                                    505 ; genOr
+                                    506 ; genPointerSet
+      0000FB 72 10 52 10      [ 1]  507 	bset	0x5210, #0
+                                    508 ; peephole 202x replaced 'or' by 'bset' ('0x5210').
+                                    509 ; genLabel
+                                    510 ; peephole j30 removed unused label 00101$.
+                                    511 ;	User/atc24c08.c: 310: }
+                                    512 ; genEndFunction
+      0000FF 81               [ 4]  513 	ret
+                                    514 ;	Total ATC24C08_I2C_Init function size at codegen: 1 bytes.
+                                    515 	.area CODE
+                                    516 	.area CONST
+                                    517 	.area INITIALIZER
+                                    518 	.area CABS (ABS)

@@ -1,0 +1,726 @@
+ASxxxx Linker V03.00/V05.40 + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           
+     00000000  l_CABS                          
+     00000000  l_DABS                          
+     00000000  l__CODE                         
+     00000000  s_CABS                          
+     00000000  s_DABS                          
+     00000000  s__CODE                         
+     00000001  l_SSEG                          
+     00000001  s_DATA                          
+     00000003  l_GSFINAL                       
+     00000087  l_HOME                          
+     000000CC  l_INITIALIZED                   
+     000000CC  l_INITIALIZER                   
+     0000011A  l_GSINIT                        
+     00000498  l_DATA                          
+     00000499  s_INITIALIZED                   
+     000007FF  s_SSEG                          
+     00000E7A  l_CONST                         
+     00005DE0  l_CODE                          
+     00008000  s_HOME                          
+     00008088  s_GSINIT                        
+     000081A2  s_GSFINAL                       
+     000081A5  s_CONST                         
+     0000901F  s_INITIALIZER                   
+     000090EB  s_CODE                          
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+HOME                                00008000    00000087 =         135. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+DATA                                00000001    00000498 =        1176. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000001  _u1buf                             eric_driver
+     0000010C  _single_trg                        eric_proc
+     0000010D  _MsgSystem                         eric_proc
+     0000022F  _recd                              eric_proc
+     00000239  _lrecd                             eric_proc
+     00000243  _m_cfg                             eric_proc
+     0000029B  _c_ackcfg                          eric_proc
+     000002A3  _m_query                           eric_proc
+     000002AB  _c_ackquery                        eric_proc
+     0000032B  _rsUbuf                            eric_proc
+     000003AB  _pkt1                              eric_proc
+     00000461  _datestr                           menu
+     00000471  _timestr                           menu
+     00000481  _tempstr                           menu
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+INITIALIZED                         00000499    000000CC =         204. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000499  _key                               eric_driver
+     0000049D  _data_index                        eric_driver
+     000004A0  _dmabuf                            eric_driver
+     000004B4  _Verfin                            eric_driver
+     000004B8  _strokeA                           eric_proc
+     000004C5  _strokeB                           eric_proc
+     000004D2  _strokeC                           eric_proc
+     000004DF  _ticks                             eric_proc
+     00000529  _selfid                            eric_proc
+     0000052D  _r485id                            eric_proc
+     0000052E  _r485rlt                           eric_proc
+     0000053D  _menu_index                        menu
+     0000053E  _adjustdt                          menu
+     00000563  _delay_halt                        menu
+     00000564  _language                          menu
+ASxxxx Linker V03.00/V05.40 + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT                              00008088    0000011A =         282. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSFINAL                             000081A2    00000003 =           3. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CONST                               000081A5    00000E7A =        3706. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000081A5  _dindex                            eric_driver
+     00008259  _MenuTab                           menu
+     0000842A  _char_8x12                         st7565r_lcd
+     0000869A  _hz_12x12                          st7565r_lcd
+     000089B2  _char_7x8                          st7565r_lcd
+     00008C0A  _logo                              st7565r_lcd
+     0000901A  _SYSDivFactor                      stm8l15x_clk
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+INITIALIZER                         0000901F    000000CC =         204. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000090EB  _delay_100ms                       atc24c08
+     000090F8  _I2C_ReadOneByteDataFromSlave      atc24c08
+     0000916F  _I2C_WriteOneByteDataToSlave       atc24c08
+     000091CE  _ATC24C08_I2C_Init                 atc24c08
+     000091EB  _Delay                             eric_driver
+     000091FB  _CLK_Config                        eric_driver
+     00009213  _TIM2_Init                         eric_driver
+     00009235  _TIM4_Init                         eric_driver
+     00009254  _Uart1_Init                        eric_driver
+     000092A7  _Uart1_Send                        eric_driver
+     000092D5  _Uart1_Recv                        eric_driver
+     00009313  _Check_U1buf                       eric_driver
+     0000932F  _I2C_WriteByte                     eric_driver
+     000093E0  _I2C_ReadByte                      eric_driver
+     000094DB  _Save_Stat                         eric_driver
+     00009509  _Load_Stat                         eric_driver
+     00009532  _IIC_Init                          eric_driver
+     00009569  _Save_Data                         eric_driver
+     000095C3  _Load_Data                         eric_driver
+     00009725  _init_rtc                          eric_driver
+     000097B4  _rtc_set_datetime                  eric_driver
+     0000984D  _rtc_get_datetime                  eric_driver
+     00009884  _Read_Key                          eric_driver
+     000098DF  _Scan_Key                          eric_driver
+     000099C7  _ADC_Config                        eric_driver
+     000099FE  _DMA_Config                        eric_driver
+     00009B24  _mini_sprintf                      eric_proc
+     00009C48  _System_GetMode                    eric_proc
+     00009C4C  _System_InitMode                   eric_proc
+     00009C58  _Record_GetStat                    eric_proc
+     00009C66  _Record_GetRecd                    eric_proc
+     00009C6A  _Record_GetLRecd                   eric_proc
+     00009C6E  _Storage_SaveAllStats              eric_proc
+     00009C74  _Record_SaveNew                    eric_proc
+     00009C94  _Record_LoadHistory                eric_proc
+     00009C9A  _CRC_GetModbus16                   eric_proc
+     00009CF2  _InitMsg                           eric_proc
+     00009D28  _SendMsg                           eric_proc
+     00009D7E  _RevMsg                            eric_proc
+     00009DBE  _A_Fxn                             eric_proc
+     00009ED2  _B_Fxn                             eric_proc
+     00009FE6  _C_Fxn                             eric_proc
+     0000A0FC  _Rev16                             eric_proc
+     0000A109  _crc_verify                        eric_proc
+     0000A141  _Pkt_485ackquery                   eric_proc
+     0000A228  _Get_Record                        eric_proc
+     0000A2C0  _Rs485_GetCfg                      eric_proc
+     0000A377  _Rs485_Proc                        eric_proc
+     0000A5AC  _Chk_State                         eric_proc
+     0000A5E4  _Storage_SaveSettings              eric_proc
+ASxxxx Linker V03.00/V05.40 + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000A63C  _Storage_ClearHistory              eric_proc
+     0000A65E  _Storage_FactoryReset              eric_proc
+     0000A6DB  _Storage_Init                      eric_proc
+     0000A816  _main                              main
+     0000ABD0  _Menu_Proc                         menu
+     0000AF6E  _DspOne                            menu
+     0000B042  _DspOne_Plus                       menu
+     0000B116  _DspTwo                            menu
+     0000B204  _DspTwo_Plus                       menu
+     0000B2F2  _DspThree                          menu
+     0000B59C  _Show_Phase_Rec                    menu
+     0000B7B0  _DspFour                           menu
+     0000B7F5  _Left_Four                         menu
+     0000B803  _Right_Four                        menu
+     0000B812  _show_datetime                     menu
+     0000B9DA  _DspFive                           menu
+     0000B9DD  _Up_Five                           menu
+     0000BA7D  _Down_Five                         menu
+     0000BB41  _Left_Five                         menu
+     0000BB4E  _Right_Five                        menu
+     0000BB65  _Menu_Five                         menu
+     0000BC38  _DspSix                            menu
+     0000BCA9  _Menu_Four                         menu
+     0000BCAC  _Sys_Reset                         menu
+     0000BCAF  _ST7565_IO_Delay                   st7565r_lcd
+     0000BCBF  _ST7565_Write                      st7565r_lcd
+     0000BD26  _writec                            st7565r_lcd
+     0000BD2C  _writed                            st7565r_lcd
+     0000BD32  _lcd_init                          st7565r_lcd
+     0000BDCF  _lcd_address                       st7565r_lcd
+     0000BDED  _clear_screen                      st7565r_lcd
+     0000BE0E  _show_str_8x12                     st7565r_lcd
+     0000BEC6  _show_str_7x8                      st7565r_lcd
+     0000BF49  _show_hz_12x12                     st7565r_lcd
+     0000BFD2  _show_pic_128x64                   st7565r_lcd
+     0000C00B  _NonHandledInterrupt               stm8l15x_it
+     0000C00C  _TRAP_IRQHandler                   stm8l15x_it
+     0000C00D  _FLASH_IRQHandler                  stm8l15x_it
+     0000C00E  _DMA1_CHANNEL0_1_IRQHandler        stm8l15x_it
+     0000C05D  _DMA1_CHANNEL2_3_IRQHandler        stm8l15x_it
+     0000C05E  _RTC_CSSLSE_IRQHandler             stm8l15x_it
+     0000C05F  _EXTIE_F_PVD_IRQHandler            stm8l15x_it
+     0000C060  _EXTIB_G_IRQHandler                stm8l15x_it
+     0000C061  _EXTID_H_IRQHandler                stm8l15x_it
+     0000C062  _EXTI0_IRQHandler                  stm8l15x_it
+     0000C069  _EXTI1_IRQHandler                  stm8l15x_it
+     0000C071  _EXTI2_IRQHandler                  stm8l15x_it
+     0000C079  _EXTI3_IRQHandler                  stm8l15x_it
+     0000C081  _EXTI4_IRQHandler                  stm8l15x_it
+     0000C089  _EXTI5_IRQHandler                  stm8l15x_it
+     0000C0C2  _EXTI6_IRQHandler                  stm8l15x_it
+ASxxxx Linker V03.00/V05.40 + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000C0FB  _EXTI7_IRQHandler                  stm8l15x_it
+     0000C134  _LCD_AES_IRQHandler                stm8l15x_it
+     0000C135  _SWITCH_CSS_BREAK_DAC_IRQHandler   stm8l15x_it
+     0000C136  _ADC1_COMP_IRQHandler              stm8l15x_it
+     0000C137  _TIM2_UPD_OVF_TRG_BRK_USART2_TX_   stm8l15x_it
+     0000C17A  _TIM2_CC_USART2_RX_IRQHandler      stm8l15x_it
+     0000C17B  _TIM3_UPD_OVF_TRG_BRK_USART3_TX_   stm8l15x_it
+     0000C17C  _TIM3_CC_USART3_RX_IRQHandler      stm8l15x_it
+     0000C17D  _TIM1_UPD_OVF_TRG_COM_IRQHandler   stm8l15x_it
+     0000C17E  _TIM1_CC_IRQHandler                stm8l15x_it
+     0000C17F  _TIM4_UPD_OVF_TRG_IRQHandler       stm8l15x_it
+     0000C1C6  _SPI1_IRQHandler                   stm8l15x_it
+     0000C1C7  _USART1_TX_TIM5_UPD_OVF_TRG_BRK_   stm8l15x_it
+     0000C1C8  _USART1_RX_TIM5_CC_IRQHandler      stm8l15x_it
+     0000C21F  _I2C1_SPI2_IRQHandler              stm8l15x_it
+     0000C220  _ADC_DeInit                        stm8l15x_adc
+     0000C25A  _ADC_Init                          stm8l15x_adc
+     0000C27A  _ADC_Cmd                           stm8l15x_adc
+     0000C28C  _ADC_SoftwareStartConv             stm8l15x_adc
+     0000C291  _ADC_ExternalTrigConfig            stm8l15x_adc
+     0000C2A6  _ADC_AnalogWatchdogChannelSelect   stm8l15x_adc
+     0000C2B4  _ADC_AnalogWatchdogThresholdsCon   stm8l15x_adc
+     0000C2CE  _ADC_AnalogWatchdogConfig          stm8l15x_adc
+     0000C2F5  _ADC_TempSensorCmd                 stm8l15x_adc
+     0000C30D  _ADC_VrefintCmd                    stm8l15x_adc
+     0000C325  _ADC_ChannelCmd                    stm8l15x_adc
+     0000C34E  _ADC_SamplingTimeConfig            stm8l15x_adc
+     0000C379  _ADC_SchmittTriggerConfig          stm8l15x_adc
+     0000C3A3  _ADC_GetConversionValue            stm8l15x_adc
+     0000C3B2  _ADC_DMACmd                        stm8l15x_adc
+     0000C3C7  _ADC_ITConfig                      stm8l15x_adc
+     0000C3DE  _ADC_GetFlagStatus                 stm8l15x_adc
+     0000C3EE  _ADC_ClearFlag                     stm8l15x_adc
+     0000C3F4  _ADC_GetITStatus                   stm8l15x_adc
+     0000C421  _ADC_ClearITPendingBit             stm8l15x_adc
+     0000C43A  _CLK_DeInit                        stm8l15x_clk
+     0000C47B  _CLK_HSICmd                        stm8l15x_clk
+     0000C493  _CLK_AdjustHSICalibrationValue     stm8l15x_clk
+     0000C49F  _CLK_LSICmd                        stm8l15x_clk
+     0000C4B7  _CLK_HSEConfig                     stm8l15x_clk
+     0000C4CC  _CLK_LSEConfig                     stm8l15x_clk
+     0000C4E1  _CLK_ClockSecuritySystemEnable     stm8l15x_clk
+     0000C4E6  _CLK_ClockSecuritySytemDeglitchC   stm8l15x_clk
+     0000C4FE  _CLK_CCOConfig                     stm8l15x_clk
+     0000C506  _CLK_SYSCLKSourceConfig            stm8l15x_clk
+     0000C50A  _CLK_GetSYSCLKSource               stm8l15x_clk
+     0000C50E  _CLK_GetClockFreq                  stm8l15x_clk
+     0000C561  _CLK_SYSCLKDivConfig               stm8l15x_clk
+     0000C565  _CLK_SYSCLKSourceSwitchCmd         stm8l15x_clk
+     0000C57D  _CLK_RTCClockConfig                stm8l15x_clk
+     0000C585  _CLK_BEEPClockConfig               stm8l15x_clk
+ASxxxx Linker V03.00/V05.40 + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000C589  _CLK_PeripheralClockConfig         stm8l15x_clk
+     0000C5F1  _CLK_LSEClockSecuritySystemEnabl   stm8l15x_clk
+     0000C5F6  _CLK_RTCCLKSwitchOnLSEFailureEna   stm8l15x_clk
+     0000C5FB  _CLK_HaltConfig                    stm8l15x_clk
+     0000C619  _CLK_MainRegulatorCmd              stm8l15x_clk
+     0000C631  _CLK_ITConfig                      stm8l15x_clk
+     0000C696  _CLK_GetFlagStatus                 stm8l15x_clk
+     0000C704  _CLK_ClearFlag                     stm8l15x_clk
+     0000C709  _CLK_GetITStatus                   stm8l15x_clk
+     0000C743  _CLK_ClearITPendingBit             stm8l15x_clk
+     0000C753  _DMA_GlobalDeInit                  stm8l15x_dma
+     0000C75C  _DMA_DeInit                        stm8l15x_dma
+     0000C788  _DMA_Init                          stm8l15x_dma
+     0000C7D0  _DMA_GlobalCmd                     stm8l15x_dma
+     0000C7E8  _DMA_Cmd                           stm8l15x_dma
+     0000C7FA  _DMA_SetTimeOut                    stm8l15x_dma
+     0000C804  _DMA_SetCurrDataCounter            stm8l15x_dma
+     0000C808  _DMA_GetCurrDataCounter            stm8l15x_dma
+     0000C80B  _DMA_ITConfig                      stm8l15x_dma
+     0000C822  _DMA_GetFlagStatus                 stm8l15x_dma
+     0000C875  _DMA_ClearFlag                     stm8l15x_dma
+     0000C8A7  _DMA_GetITStatus                   stm8l15x_dma
+     0000C8E2  _DMA_ClearITPendingBit             stm8l15x_dma
+     0000C90F  _EXTI_DeInit                       stm8l15x_exti
+     0000C930  _EXTI_SetPinSensitivity            stm8l15x_exti
+     0000CA0B  _EXTI_SelectPort                   stm8l15x_exti
+     0000CA47  _EXTI_SetHalfPortSelection         stm8l15x_exti
+     0000CA85  _EXTI_SetPortSensitivity           stm8l15x_exti
+     0000CAF3  _EXTI_GetPinSensitivity            stm8l15x_exti
+     0000CB6A  _EXTI_GetPortSensitivity           stm8l15x_exti
+     0000CB93  _EXTI_GetITStatus                  stm8l15x_exti
+     0000CBB6  _EXTI_ClearITPendingBit            stm8l15x_exti
+     0000CBCB  _FLASH_SetProgrammingTime          stm8l15x_flash
+     0000CBDB  _FLASH_GetProgrammingTime          stm8l15x_flash
+     0000CBE1  _FLASH_PowerWaitModeConfig         stm8l15x_flash
+     0000CBF9  _FLASH_DeInit                      stm8l15x_flash
+     0000CC09  _FLASH_Unlock                      stm8l15x_flash
+     0000CC23  _FLASH_Lock                        stm8l15x_flash
+     0000CC30  _FLASH_ProgramByte                 stm8l15x_flash
+     0000CC3A  _FLASH_EraseByte                   stm8l15x_flash
+     0000CC42  _FLASH_ProgramWord                 stm8l15x_flash
+     0000CC61  _FLASH_ReadByte                    stm8l15x_flash
+     0000CC69  _FLASH_ProgramOptionByte           stm8l15x_flash
+     0000CC7E  _FLASH_EraseOptionByte             stm8l15x_flash
+     0000CC8D  _FLASH_GetReadOutProtectionStatu   stm8l15x_flash
+     0000CC98  _FLASH_GetBootSize                 stm8l15x_flash
+     0000CCB0  _FLASH_GetCodeSize                 stm8l15x_flash
+     0000CCC8  _FLASH_ITConfig                    stm8l15x_flash
+     0000CCE0  _FLASH_GetFlagStatus               stm8l15x_flash
+     0000CCF1  _FLASH_PowerRunModeConfig          stm8l15x_flash
+     0000CD09  _FLASH_GetPowerStatus              stm8l15x_flash
+ASxxxx Linker V03.00/V05.40 + sdld,  page 13.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000CD0F  _FLASH_ProgramBlock                stm8l15x_flash
+     0000CD7A  _FLASH_EraseBlock                  stm8l15x_flash
+     0000CDA7  _FLASH_WaitForLastOperation        stm8l15x_flash
+     0000CDD7  _GPIO_DeInit                       stm8l15x_gpio
+     0000CDE4  _GPIO_Init                         stm8l15x_gpio
+     0000CE63  _GPIO_ExternalPullUpConfig         stm8l15x_gpio
+     0000CE7D  _GPIO_Write                        stm8l15x_gpio
+     0000CE7F  _GPIO_WriteBit                     stm8l15x_gpio
+     0000CE96  _GPIO_SetBits                      stm8l15x_gpio
+     0000CE9F  _GPIO_ResetBits                    stm8l15x_gpio
+     0000CEAB  _GPIO_ToggleBits                   stm8l15x_gpio
+     0000CEB4  _GPIO_ReadInputData                stm8l15x_gpio
+     0000CEB7  _GPIO_ReadOutputData               stm8l15x_gpio
+     0000CEB9  _GPIO_ReadInputDataBit             stm8l15x_gpio
+     0000CEC6  _GPIO_ReadOutputDataBit            stm8l15x_gpio
+     0000CED2  _I2C_DeInit                        stm8l15x_i2c
+     0000CEF3  _I2C_Init                          stm8l15x_i2c
+     0000D06B  _I2C_Cmd                           stm8l15x_i2c
+     0000D07D  _I2C_GeneralCallCmd                stm8l15x_i2c
+     0000D08F  _I2C_GenerateSTART                 stm8l15x_i2c
+     0000D0A2  _I2C_GenerateSTOP                  stm8l15x_i2c
+     0000D0B5  _I2C_SoftwareResetCmd              stm8l15x_i2c
+     0000D0C8  _I2C_StretchClockCmd               stm8l15x_i2c
+     0000D0DA  _I2C_ARPCmd                        stm8l15x_i2c
+     0000D0EC  _I2C_AcknowledgeConfig             stm8l15x_i2c
+     0000D0FF  _I2C_OwnAddress2Config             stm8l15x_i2c
+     0000D113  _I2C_DualAddressCmd                stm8l15x_i2c
+     0000D128  _I2C_AckPositionConfig             stm8l15x_i2c
+     0000D135  _I2C_SMBusAlertConfig              stm8l15x_i2c
+     0000D148  _I2C_FastModeDutyCycleConfig       stm8l15x_i2c
+     0000D15E  _I2C_Send7bitAddress               stm8l15x_i2c
+     0000D16F  _I2C_SendData                      stm8l15x_i2c
+     0000D174  _I2C_ReceiveData                   stm8l15x_i2c
+     0000D177  _I2C_TransmitPEC                   stm8l15x_i2c
+     0000D18A  _I2C_CalculatePEC                  stm8l15x_i2c
+     0000D19C  _I2C_PECPositionConfig             stm8l15x_i2c
+     0000D1A9  _I2C_GetPEC                        stm8l15x_i2c
+     0000D1AC  _I2C_DMACmd                        stm8l15x_i2c
+     0000D1C1  _I2C_DMALastTransferCmd            stm8l15x_i2c
+     0000D1D6  _I2C_ITConfig                      stm8l15x_i2c
+     0000D1F3  _I2C_ReadRegister                  stm8l15x_i2c
+     0000D208  _I2C_CheckEvent                    stm8l15x_i2c
+     0000D247  _I2C_GetLastEvent                  stm8l15x_i2c
+     0000D26E  _I2C_GetFlagStatus                 stm8l15x_i2c
+     0000D2A2  _I2C_ClearFlag                     stm8l15x_i2c
+     0000D2B4  _I2C_GetITStatus                   stm8l15x_i2c
+     0000D304  _I2C_ClearITPendingBit             stm8l15x_i2c
+     0000D316  _ITC_GetCPUCC                      stm8l15x_itc
+     0000D31A  _ITC_DeInit                        stm8l15x_itc
+     0000D33B  _ITC_GetSoftIntStatus              stm8l15x_itc
+     0000D341  _ITC_GetSoftwarePriority           stm8l15x_itc
+ASxxxx Linker V03.00/V05.40 + sdld,  page 14.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000D3EE  _ITC_SetSoftwarePriority           stm8l15x_itc
+     0000D4F0  _PWR_DeInit                        stm8l15x_pwr
+     0000D4F9  _PWR_PVDLevelConfig                stm8l15x_pwr
+     0000D50E  _PWR_PVDCmd                        stm8l15x_pwr
+     0000D526  _PWR_FastWakeUpCmd                 stm8l15x_pwr
+     0000D53E  _PWR_UltraLowPowerCmd              stm8l15x_pwr
+     0000D556  _PWR_PVDITConfig                   stm8l15x_pwr
+     0000D56E  _PWR_GetFlagStatus                 stm8l15x_pwr
+     0000D58E  _PWR_PVDClearFlag                  stm8l15x_pwr
+     0000D593  _PWR_PVDGetITStatus                stm8l15x_pwr
+     0000D5AE  _PWR_PVDClearITPendingBit          stm8l15x_pwr
+     0000D5B3  _RST_GetFlagStatus                 stm8l15x_rst
+     0000D5C3  _RST_ClearFlag                     stm8l15x_rst
+     0000D5C7  _RST_GPOutputEnable                stm8l15x_rst
+     0000D5CC  _RTC_DeInit                        stm8l15x_rtc
+     0000D697  _RTC_Init                          stm8l15x_rtc
+     0000D6E0  _RTC_StructInit                    stm8l15x_rtc
+     0000D6F0  _RTC_WriteProtectionCmd            stm8l15x_rtc
+     0000D701  _RTC_EnterInitMode                 stm8l15x_rtc
+     0000D722  _RTC_ExitInitMode                  stm8l15x_rtc
+     0000D727  _RTC_WaitForSynchro                stm8l15x_rtc
+     0000D753  _RTC_RatioCmd                      stm8l15x_rtc
+     0000D777  _RTC_BypassShadowCmd               stm8l15x_rtc
+     0000D79B  _RTC_SetTime                       stm8l15x_rtc
+     0000D827  _RTC_TimeStructInit                stm8l15x_rtc
+     0000D834  _RTC_GetTime                       stm8l15x_rtc
+     0000D886  _RTC_GetSubSecond                  stm8l15x_rtc
+     0000D897  _RTC_SetDate                       stm8l15x_rtc
+     0000D93E  _RTC_DateStructInit                stm8l15x_rtc
+     0000D952  _RTC_GetDate                       stm8l15x_rtc
+     0000D9AB  _RTC_SetAlarm                      stm8l15x_rtc
+     0000DAA3  _RTC_AlarmStructInit               stm8l15x_rtc
+     0000DABD  _RTC_GetAlarm                      stm8l15x_rtc
+     0000DB6F  _RTC_AlarmCmd                      stm8l15x_rtc
+     0000DBB7  _RTC_AlarmSubSecondConfig          stm8l15x_rtc
+     0000DBF2  _RTC_WakeUpClockConfig             stm8l15x_rtc
+     0000DC17  _RTC_SetWakeUpCounter              stm8l15x_rtc
+     0000DC2C  _RTC_GetWakeUpCounter              stm8l15x_rtc
+     0000DC3A  _RTC_WakeUpCmd                     stm8l15x_rtc
+     0000DC78  _RTC_DayLightSavingConfig          stm8l15x_rtc
+     0000DC9F  _RTC_GetStoreOperation             stm8l15x_rtc
+     0000DCA5  _RTC_OutputConfig                  stm8l15x_rtc
+     0000DCCC  _RTC_SynchroShiftConfig            stm8l15x_rtc
+     0000DD07  _RTC_SmoothCalibConfig             stm8l15x_rtc
+     0000DD49  _RTC_CalibOutputConfig             stm8l15x_rtc
+     0000DD6D  _RTC_CalibOutputCmd                stm8l15x_rtc
+     0000DD91  _RTC_TamperLevelConfig             stm8l15x_rtc
+     0000DDBB  _RTC_TamperFilterConfig            stm8l15x_rtc
+     0000DDDC  _RTC_TamperSamplingFreqConfig      stm8l15x_rtc
+     0000DDFD  _RTC_TamperPinsPrechargeDuration   stm8l15x_rtc
+     0000DE1E  _RTC_TamperCmd                     stm8l15x_rtc
+ASxxxx Linker V03.00/V05.40 + sdld,  page 15.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000DE48  _RTC_ITConfig                      stm8l15x_rtc
+     0000DE90  _RTC_GetFlagStatus                 stm8l15x_rtc
+     0000DEB5  _RTC_ClearFlag                     stm8l15x_rtc
+     0000DEC2  _RTC_GetITStatus                   stm8l15x_rtc
+     0000DEE6  _RTC_ClearITPendingBit             stm8l15x_rtc
+     0000DF16  _SYSCFG_RIDeInit                   stm8l15x_syscfg
+     0000DF3B  _SYSCFG_RITIMInputCaptureConfig    stm8l15x_syscfg
+     0000DF50  _SYSCFG_RIAnalogSwitchConfig       stm8l15x_syscfg
+     0000DFA8  _SYSCFG_RIIOSwitchConfig           stm8l15x_syscfg
+     0000E028  _SYSCFG_RIResistorConfig           stm8l15x_syscfg
+     0000E046  _SYSCFG_REMAPDeInit                stm8l15x_syscfg
+     0000E053  _SYSCFG_REMAPPinConfig             stm8l15x_syscfg
+     0000E0C7  _SYSCFG_REMAPDMAChannelConfig      stm8l15x_syscfg
+     0000E0EE  _TIM2_DeInit                       stm8l15x_tim2
+     0000E153  _TIM2_TimeBaseInit                 stm8l15x_tim2
+     0000E17F  _TIM2_PrescalerConfig              stm8l15x_tim2
+     0000E198  _TIM2_CounterModeConfig            stm8l15x_tim2
+     0000E1A7  _TIM2_SetCounter                   stm8l15x_tim2
+     0000E1B0  _TIM2_SetAutoreload                stm8l15x_tim2
+     0000E1B9  _TIM2_GetCounter                   stm8l15x_tim2
+     0000E1C7  _TIM2_GetPrescaler                 stm8l15x_tim2
+     0000E1CB  _TIM2_UpdateDisableConfig          stm8l15x_tim2
+     0000E1E3  _TIM2_UpdateRequestConfig          stm8l15x_tim2
+     0000E1FB  _TIM2_ARRPreloadConfig             stm8l15x_tim2
+     0000E213  _TIM2_SelectOnePulseMode           stm8l15x_tim2
+     0000E22B  _TIM2_Cmd                          stm8l15x_tim2
+     0000E243  _TIM2_OC1Init                      stm8l15x_tim2
+     0000E29E  _TIM2_OC2Init                      stm8l15x_tim2
+     0000E2F9  _TIM2_BKRConfig                    stm8l15x_tim2
+     0000E30E  _TIM2_CtrlPWMOutputs               stm8l15x_tim2
+     0000E326  _TIM2_SelectOCxM                   stm8l15x_tim2
+     0000E360  _TIM2_SetCompare1                  stm8l15x_tim2
+     0000E369  _TIM2_SetCompare2                  stm8l15x_tim2
+     0000E372  _TIM2_ForcedOC1Config              stm8l15x_tim2
+     0000E381  _TIM2_ForcedOC2Config              stm8l15x_tim2
+     0000E390  _TIM2_OC1PreloadConfig             stm8l15x_tim2
+     0000E3A8  _TIM2_OC2PreloadConfig             stm8l15x_tim2
+     0000E3C0  _TIM2_OC1FastConfig                stm8l15x_tim2
+     0000E3D8  _TIM2_OC2FastConfig                stm8l15x_tim2
+     0000E3F0  _TIM2_OC1PolarityConfig            stm8l15x_tim2
+     0000E408  _TIM2_OC2PolarityConfig            stm8l15x_tim2
+     0000E420  _TIM2_CCxCmd                       stm8l15x_tim2
+     0000E450  _TIM2_ICInit                       stm8l15x_tim2
+     0000E47A  _TIM2_PWMIConfig                   stm8l15x_tim2
+     0000E4E7  _TIM2_GetCapture1                  stm8l15x_tim2
+     0000E4F5  _TIM2_GetCapture2                  stm8l15x_tim2
+     0000E503  _TIM2_SetIC1Prescaler              stm8l15x_tim2
+     0000E512  _TIM2_SetIC2Prescaler              stm8l15x_tim2
+     0000E521  _TIM2_ITConfig                     stm8l15x_tim2
+     0000E53F  _TIM2_GenerateEvent                stm8l15x_tim2
+     0000E54C  _TIM2_GetFlagStatus                stm8l15x_tim2
+ASxxxx Linker V03.00/V05.40 + sdld,  page 16.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000E569  _TIM2_ClearFlag                    stm8l15x_tim2
+     0000E574  _TIM2_GetITStatus                  stm8l15x_tim2
+     0000E590  _TIM2_ClearITPendingBit            stm8l15x_tim2
+     0000E595  _TIM2_DMACmd                       stm8l15x_tim2
+     0000E5B3  _TIM2_SelectCCDMA                  stm8l15x_tim2
+     0000E5CB  _TIM2_InternalClockConfig          stm8l15x_tim2
+     0000E5D4  _TIM2_TIxExternalClockConfig       stm8l15x_tim2
+     0000E603  _TIM2_ETRClockMode1Config          stm8l15x_tim2
+     0000E633  _TIM2_ETRClockMode2Config          stm8l15x_tim2
+     0000E64B  _TIM2_SelectInputTrigger           stm8l15x_tim2
+     0000E65A  _TIM2_SelectOutputTrigger          stm8l15x_tim2
+     0000E669  _TIM2_SelectSlaveMode              stm8l15x_tim2
+     0000E678  _TIM2_SelectMasterSlaveMode        stm8l15x_tim2
+     0000E690  _TIM2_ETRConfig                    stm8l15x_tim2
+     0000E6A6  _TIM2_EncoderInterfaceConfig       stm8l15x_tim2
+     0000E70B  _TIM2_SelectHallSensor             stm8l15x_tim2
+     0000E79D  _TIM4_DeInit                       stm8l15x_tim4
+     0000E7BE  _TIM4_TimeBaseInit                 stm8l15x_tim4
+     0000E7D0  _TIM4_PrescalerConfig              stm8l15x_tim4
+     0000E7E9  _TIM4_SetCounter                   stm8l15x_tim4
+     0000E7ED  _TIM4_SetAutoreload                stm8l15x_tim4
+     0000E7F1  _TIM4_GetCounter                   stm8l15x_tim4
+     0000E7F5  _TIM4_GetPrescaler                 stm8l15x_tim4
+     0000E7F9  _TIM4_UpdateDisableConfig          stm8l15x_tim4
+     0000E811  _TIM4_UpdateRequestConfig          stm8l15x_tim4
+     0000E829  _TIM4_ARRPreloadConfig             stm8l15x_tim4
+     0000E841  _TIM4_SelectOnePulseMode           stm8l15x_tim4
+     0000E859  _TIM4_Cmd                          stm8l15x_tim4
+     0000E871  _TIM4_ITConfig                     stm8l15x_tim4
+     0000E88F  _TIM4_GenerateEvent                stm8l15x_tim4
+     0000E89C  _TIM4_GetFlagStatus                stm8l15x_tim4
+     0000E8AD  _TIM4_ClearFlag                    stm8l15x_tim4
+     0000E8B2  _TIM4_GetITStatus                  stm8l15x_tim4
+     0000E8CE  _TIM4_ClearITPendingBit            stm8l15x_tim4
+     0000E8D3  _TIM4_DMACmd                       stm8l15x_tim4
+     0000E8F1  _TIM4_InternalClockConfig          stm8l15x_tim4
+     0000E8FA  _TIM4_SelectInputTrigger           stm8l15x_tim4
+     0000E909  _TIM4_SelectOutputTrigger          stm8l15x_tim4
+     0000E918  _TIM4_SelectSlaveMode              stm8l15x_tim4
+     0000E927  _TIM4_SelectMasterSlaveMode        stm8l15x_tim4
+     0000E93F  _USART_DeInit                      stm8l15x_usart
+     0000E956  _USART_Init                        stm8l15x_usart
+     0000E9D3  _USART_ClockInit                   stm8l15x_usart
+     0000EA0D  _USART_Cmd                         stm8l15x_usart
+     0000EA22  _USART_SetPrescaler                stm8l15x_usart
+     0000EA27  _USART_SendBreak                   stm8l15x_usart
+     0000EA2F  _USART_ReceiveData8                stm8l15x_usart
+     0000EA32  _USART_ReceiveData9                stm8l15x_usart
+     0000EA4D  _USART_SendData8                   stm8l15x_usart
+     0000EA50  _USART_SendData9                   stm8l15x_usart
+     0000EA75  _USART_ReceiverWakeUpCmd           stm8l15x_usart
+ASxxxx Linker V03.00/V05.40 + sdld,  page 17.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODE                                000090EB    00005DE0 =       24032. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000EA8A  _USART_SetAddress                  stm8l15x_usart
+     0000EA99  _USART_WakeUpConfig                stm8l15x_usart
+     0000EAA8  _USART_HalfDuplexCmd               stm8l15x_usart
+     0000EABD  _USART_SmartCardCmd                stm8l15x_usart
+     0000EAD2  _USART_SmartCardNACKCmd            stm8l15x_usart
+     0000EAE7  _USART_SetGuardTime                stm8l15x_usart
+     0000EAEC  _USART_IrDAConfig                  stm8l15x_usart
+     0000EB01  _USART_IrDACmd                     stm8l15x_usart
+     0000EB16  _USART_DMACmd                      stm8l15x_usart
+     0000EB30  _USART_ITConfig                    stm8l15x_usart
+     0000EBBF  _USART_GetFlagStatus               stm8l15x_usart
+     0000EBE7  _USART_ClearFlag                   stm8l15x_usart
+     0000EBF3  _USART_GetITStatus                 stm8l15x_usart
+     0000EC8B  _USART_ClearITPendingBit           stm8l15x_usart
+     0000EC94  _WWDG_Init                         stm8l15x_wwdg
+     0000ECA7  _WWDG_SetWindowValue               stm8l15x_wwdg
+     0000ECB8  _WWDG_SetCounter                   stm8l15x_wwdg
+     0000ECBE  _WWDG_Enable                       stm8l15x_wwdg
+     0000ECC4  _WWDG_GetCounter                   stm8l15x_wwdg
+     0000ECC8  _WWDG_SWReset                      stm8l15x_wwdg
+     0000ECCD  __mulint                           
+     0000ECEA  __modulong                         _modulong
+     0000ED50  __divulong                         _divulong
+     0000EDAB  ___memcpy                          
+     0000EDAB  _memcpy                            
+     0000EDFE  _memset                            _memset
+     0000EE1E  ___sdcc_external_startup           _startup
+     0000EE20  __mullong                          
+     0000EE9C  __modsint                          
+     0000EEB4  __divsint                          
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 18.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+SSEG                                000007FF    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 19.
+
+Files Linked                              [ module(s) ]
+
+build/user/stm8_ivt.rel                   [  ]
+build/user/atc24c08.rel                   [ atc24c08 ]
+build/user/eric_driver.rel                [ eric_driver ]
+build/user/eric_proc.rel                  [ eric_proc ]
+build/user/main.rel                       [ main ]
+build/user/menu.rel                       [ menu ]
+build/user/st7565r_lcd.rel                [ st7565r_lcd ]
+build/user/stm8l15x_it.rel                [ stm8l15x_it ]
+build/stdperiph/stm8l15x_adc.rel          [ stm8l15x_adc ]
+build/stdperiph/stm8l15x_clk.rel          [ stm8l15x_clk ]
+build/stdperiph/stm8l15x_dma.rel          [ stm8l15x_dma ]
+build/stdperiph/stm8l15x_exti.rel         [ stm8l15x_exti ]
+build/stdperiph/stm8l15x_flash.rel        [ stm8l15x_flash ]
+build/stdperiph/stm8l15x_gpio.rel         [ stm8l15x_gpio ]
+build/stdperiph/stm8l15x_i2c.rel          [ stm8l15x_i2c ]
+build/stdperiph/stm8l15x_itc.rel          [ stm8l15x_itc ]
+build/stdperiph/stm8l15x_pwr.rel          [ stm8l15x_pwr ]
+build/stdperiph/stm8l15x_rst.rel          [ stm8l15x_rst ]
+build/stdperiph/stm8l15x_rtc.rel          [ stm8l15x_rtc ]
+build/stdperiph/stm8l15x_syscfg.rel       [ stm8l15x_syscfg ]
+build/stdperiph/stm8l15x_tim2.rel         [ stm8l15x_tim2 ]
+build/stdperiph/stm8l15x_tim4.rel         [ stm8l15x_tim4 ]
+build/stdperiph/stm8l15x_usart.rel        [ stm8l15x_usart ]
+build/stdperiph/stm8l15x_wwdg.rel         [ stm8l15x_wwdg ]
+
+
+Libraries Linked                          [ object file ]
+
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _mulint.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _modulong.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _divulong.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ memcpy.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _memset.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _startup.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _mullong.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _modsint.rel ]
+/usr/local/bin/../share/sdcc/lib/stm8/stm8.lib
+                                          [ _divsint.rel ]
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 20.
+
+User Base Address Definitions
+
+HOME = 0x8000
+DATA = 0x0001
+HOME=0x8000
+GSINIT=0x8088
+SSEG=0x07FF
+
+

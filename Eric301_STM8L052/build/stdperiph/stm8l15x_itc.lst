@@ -1,0 +1,614 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8l15x_itc
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _ITC_GetCPUCC
+                                     11 	.globl _ITC_DeInit
+                                     12 	.globl _ITC_GetSoftIntStatus
+                                     13 	.globl _ITC_GetSoftwarePriority
+                                     14 	.globl _ITC_SetSoftwarePriority
+                                     15 ;--------------------------------------------------------
+                                     16 ; ram data
+                                     17 ;--------------------------------------------------------
+                                     18 	.area DATA
+                                     19 ;--------------------------------------------------------
+                                     20 ; ram data
+                                     21 ;--------------------------------------------------------
+                                     22 	.area INITIALIZED
+                                     23 ;--------------------------------------------------------
+                                     24 ; absolute external ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area DABS (ABS)
+                                     27 
+                                     28 ; default segment ordering for linker
+                                     29 	.area HOME
+                                     30 	.area GSINIT
+                                     31 	.area GSFINAL
+                                     32 	.area CONST
+                                     33 	.area INITIALIZER
+                                     34 	.area CODE
+                                     35 
+                                     36 ;--------------------------------------------------------
+                                     37 ; global & static initialisations
+                                     38 ;--------------------------------------------------------
+                                     39 	.area HOME
+                                     40 	.area GSINIT
+                                     41 	.area GSFINAL
+                                     42 	.area GSINIT
+                                     43 ;--------------------------------------------------------
+                                     44 ; Home
+                                     45 ;--------------------------------------------------------
+                                     46 	.area HOME
+                                     47 	.area HOME
+                                     48 ;--------------------------------------------------------
+                                     49 ; code
+                                     50 ;--------------------------------------------------------
+                                     51 	.area CODE
+                                     52 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 56: uint8_t ITC_GetCPUCC(void)
+                                     53 ; genLabel
+                                     54 ;	-----------------------------------------
+                                     55 ;	 function ITC_GetCPUCC
+                                     56 ;	-----------------------------------------
+                                     57 ;	Register assignment is optimal.
+                                     58 ;	Stack space usage: 0 bytes.
+      000000                         59 _ITC_GetCPUCC:
+                                     60 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 65: __asm__("push cc");
+                                     61 ;	genInline
+      000000 8A               [ 1]   62 	push	cc
+                                     63 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 66: __asm__("pop a");
+                                     64 ;	genInline
+      000001 84               [ 1]   65 	pop	a
+                                     66 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 67: return 0;
+                                     67 ; genReturn
+      000002 4F               [ 1]   68 	clr	a
+                                     69 ; genLabel
+                                     70 ; peephole j30 removed unused label 00101$.
+                                     71 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 72: }
+                                     72 ; genEndFunction
+      000003 81               [ 4]   73 	ret
+                                     74 ;	Total ITC_GetCPUCC function size at codegen: 1 bytes.
+                                     75 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 91: void ITC_DeInit(void)
+                                     76 ; genLabel
+                                     77 ;	-----------------------------------------
+                                     78 ;	 function ITC_DeInit
+                                     79 ;	-----------------------------------------
+                                     80 ;	Register assignment is optimal.
+                                     81 ;	Stack space usage: 0 bytes.
+      000004                         82 _ITC_DeInit:
+                                     83 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 93: ITC->ISPR1 = ITC_SPRX_RESET_VALUE;
+                                     84 ; genPointerSet
+      000004 35 FF 7F 70      [ 1]   85 	mov	0x7f70+0, #0xff
+                                     86 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 94: ITC->ISPR2 = ITC_SPRX_RESET_VALUE;
+                                     87 ; genPointerSet
+      000008 35 FF 7F 71      [ 1]   88 	mov	0x7f71+0, #0xff
+                                     89 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 95: ITC->ISPR3 = ITC_SPRX_RESET_VALUE;
+                                     90 ; genPointerSet
+      00000C 35 FF 7F 72      [ 1]   91 	mov	0x7f72+0, #0xff
+                                     92 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 96: ITC->ISPR4 = ITC_SPRX_RESET_VALUE;
+                                     93 ; genPointerSet
+      000010 35 FF 7F 73      [ 1]   94 	mov	0x7f73+0, #0xff
+                                     95 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 97: ITC->ISPR5 = ITC_SPRX_RESET_VALUE;
+                                     96 ; genPointerSet
+      000014 35 FF 7F 74      [ 1]   97 	mov	0x7f74+0, #0xff
+                                     98 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 98: ITC->ISPR6 = ITC_SPRX_RESET_VALUE;
+                                     99 ; genPointerSet
+      000018 35 FF 7F 75      [ 1]  100 	mov	0x7f75+0, #0xff
+                                    101 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 99: ITC->ISPR7 = ITC_SPRX_RESET_VALUE;
+                                    102 ; genPointerSet
+      00001C 35 FF 7F 76      [ 1]  103 	mov	0x7f76+0, #0xff
+                                    104 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 100: ITC->ISPR8 = ITC_SPRX_RESET_VALUE;
+                                    105 ; genPointerSet
+      000020 35 FF 7F 77      [ 1]  106 	mov	0x7f77+0, #0xff
+                                    107 ; genLabel
+                                    108 ; peephole j30 removed unused label 00101$.
+                                    109 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 101: }
+                                    110 ; genEndFunction
+      000024 81               [ 4]  111 	ret
+                                    112 ;	Total ITC_DeInit function size at codegen: 1 bytes.
+                                    113 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 108: uint8_t ITC_GetSoftIntStatus(void)
+                                    114 ; genLabel
+                                    115 ;	-----------------------------------------
+                                    116 ;	 function ITC_GetSoftIntStatus
+                                    117 ;	-----------------------------------------
+                                    118 ;	Register assignment is optimal.
+                                    119 ;	Stack space usage: 0 bytes.
+      000025                        120 _ITC_GetSoftIntStatus:
+                                    121 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 110: return ((uint8_t)(ITC_GetCPUCC() & CPU_SOFT_INT_DISABLED));
+                                    122 ; genCall
+      000025 CDr00r00         [ 4]  123 	call	_ITC_GetCPUCC
+                                    124 ; genAnd
+      000028 A4 28            [ 1]  125 	and	a, #0x28
+                                    126 ; genReturn
+                                    127 ; genLabel
+                                    128 ; peephole j30 removed unused label 00101$.
+                                    129 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 111: }
+                                    130 ; genEndFunction
+      00002A 81               [ 4]  131 	ret
+                                    132 ;	Total ITC_GetSoftIntStatus function size at codegen: 1 bytes.
+                                    133 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 118: ITC_PriorityLevel_TypeDef ITC_GetSoftwarePriority(IRQn_TypeDef IRQn)
+                                    134 ; genLabel
+                                    135 ;	-----------------------------------------
+                                    136 ;	 function ITC_GetSoftwarePriority
+                                    137 ;	-----------------------------------------
+                                    138 ;	Register assignment might be sub-optimal.
+                                    139 ;	Stack space usage: 2 bytes.
+      00002B                        140 _ITC_GetSoftwarePriority:
+      00002B 89               [ 2]  141 	pushw	x
+                                    142 ; genReceive
+      00002C 97               [ 1]  143 	ld	xl, a
+                                    144 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 120: uint8_t Value = 0;
+                                    145 ; genAssign
+      00002D 4F               [ 1]  146 	clr	a
+                                    147 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 127: Mask = (uint8_t)(0x03U << ((IRQn % 4U) * 2U));
+                                    148 ; genCast
+                                    149 ; genAssign
+      00002E 90 93            [ 1]  150 	ldw	y, x
+                                    151 ; genAnd
+      000030 88               [ 1]  152 	push	a
+      000031 90 9F            [ 1]  153 	ld	a, yl
+      000033 A4 03            [ 1]  154 	and	a, #0x03
+      000035 95               [ 1]  155 	ld	xh, a
+      000036 84               [ 1]  156 	pop	a
+                                    157 ; genCast
+                                    158 ; genAssign
+                                    159 ; genLeftShiftLiteral
+      000037 02               [ 1]  160 	rlwa	x
+      000038 6B 01            [ 1]  161 	ld	(0x01, sp), a
+      00003A 01               [ 1]  162 	rrwa	x
+      00003B 08 01            [ 1]  163 	sll	(0x01, sp)
+                                    164 ; genLeftShift
+      00003D 88               [ 1]  165 	push	a
+      00003E A6 03            [ 1]  166 	ld	a, #0x03
+      000040 6B 03            [ 1]  167 	ld	(0x03, sp), a
+      000042 7B 02            [ 1]  168 	ld	a, (0x02, sp)
+      000044 27 05            [ 1]  169 	jreq	00142$
+      000046                        170 00141$:
+      000046 08 03            [ 1]  171 	sll	(0x03, sp)
+      000048 4A               [ 1]  172 	dec	a
+      000049 26 FB            [ 1]  173 	jrne	00141$
+      00004B                        174 00142$:
+                                    175 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 129: switch (IRQn)
+                                    176 ; genCmp
+                                    177 ; genCmpTnz
+                                    178 ; peephole 6 removed dead pop / push pair.
+      00004B 9F               [ 1]  179 	ld	a, xl
+      00004C A1 1D            [ 1]  180 	cp	a, #0x1d
+      00004E 84               [ 1]  181 	pop	a
+                                    182 ; peephole j5 changed absolute to relative unconditional jump.
+      00004F 22 7A            [ 1]  183 	jrugt	00131$
+                                    184 ; peephole j17 removed jp by using inverse jump logic
+                                    185 ; peephole j30 removed unused label 00143$.
+                                    186 ; skipping generated iCode
+                                    187 ; genJumpTab
+      000051 02               [ 1]  188 	rlwa	x
+      000052 4F               [ 1]  189 	clr	a
+      000053 01               [ 1]  190 	rrwa	x
+      000054 58               [ 2]  191 	sllw	x
+      000055 DEu00u59         [ 2]  192 	ldw	x, (#00144$, x)
+      000058 FC               [ 2]  193 	jp	(x)
+      000059                        194 00144$:
+      000059r00rCB                  195 	.dw	#00131$
+      00005Br00r95                  196 	.dw	#00103$
+      00005Dr00r95                  197 	.dw	#00103$
+      00005Fr00r95                  198 	.dw	#00103$
+      000061r00r9C                  199 	.dw	#00107$
+      000063r00r9C                  200 	.dw	#00107$
+      000065r00r9C                  201 	.dw	#00107$
+      000067r00r9C                  202 	.dw	#00107$
+      000069r00rA3                  203 	.dw	#00111$
+      00006Br00rA3                  204 	.dw	#00111$
+      00006Dr00rA3                  205 	.dw	#00111$
+      00006Fr00rA3                  206 	.dw	#00111$
+      000071r00rAA                  207 	.dw	#00115$
+      000073r00rAA                  208 	.dw	#00115$
+      000075r00rAA                  209 	.dw	#00115$
+      000077r00rAA                  210 	.dw	#00115$
+      000079r00rB1                  211 	.dw	#00119$
+      00007Br00rB1                  212 	.dw	#00119$
+      00007Dr00rB1                  213 	.dw	#00119$
+      00007Fr00rB1                  214 	.dw	#00119$
+      000081r00rB8                  215 	.dw	#00123$
+      000083r00rB8                  216 	.dw	#00123$
+      000085r00rB8                  217 	.dw	#00123$
+      000087r00rB8                  218 	.dw	#00123$
+      000089r00rBF                  219 	.dw	#00127$
+      00008Br00rBF                  220 	.dw	#00127$
+      00008Dr00rBF                  221 	.dw	#00127$
+      00008Fr00rBF                  222 	.dw	#00127$
+      000091r00rC6                  223 	.dw	#00129$
+      000093r00rC6                  224 	.dw	#00129$
+                                    225 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 133: case DMA1_CHANNEL2_3_IRQn:
+                                    226 ; genLabel
+      000095                        227 00103$:
+                                    228 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 134: Value = (uint8_t)(ITC->ISPR1 & Mask); /* Read software priority */
+                                    229 ; genPointerGet
+      000095 C6 7F 70         [ 1]  230 	ld	a, 0x7f70
+                                    231 ; genAnd
+      000098 14 02            [ 1]  232 	and	a, (0x02, sp)
+                                    233 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 135: break;
+                                    234 ; genGoto
+      00009A 20 2F            [ 2]  235 	jra	00131$
+                                    236 ; peephole j5 changed absolute to relative unconditional jump.
+                                    237 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 141: case EXTID_IRQn:
+                                    238 ; genLabel
+      00009C                        239 00107$:
+                                    240 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 151: Value = (uint8_t)(ITC->ISPR2 & Mask); /* Read software priority */
+                                    241 ; genPointerGet
+      00009C C6 7F 71         [ 1]  242 	ld	a, 0x7f71
+                                    243 ; genAnd
+      00009F 14 02            [ 1]  244 	and	a, (0x02, sp)
+                                    245 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 152: break;
+                                    246 ; genGoto
+      0000A1 20 28            [ 2]  247 	jra	00131$
+                                    248 ; peephole j5 changed absolute to relative unconditional jump.
+                                    249 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 157: case EXTI3_IRQn:
+                                    250 ; genLabel
+      0000A3                        251 00111$:
+                                    252 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 158: Value = (uint8_t)(ITC->ISPR3 & Mask); /* Read software priority */
+                                    253 ; genPointerGet
+      0000A3 C6 7F 72         [ 1]  254 	ld	a, 0x7f72
+                                    255 ; genAnd
+      0000A6 14 02            [ 1]  256 	and	a, (0x02, sp)
+                                    257 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 159: break;
+                                    258 ; genGoto
+      0000A8 20 21            [ 2]  259 	jra	00131$
+                                    260 ; peephole j5 changed absolute to relative unconditional jump.
+                                    261 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 164: case EXTI7_IRQn:
+                                    262 ; genLabel
+      0000AA                        263 00115$:
+                                    264 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 165: Value = (uint8_t)(ITC->ISPR4 & Mask); /* Read software priority */
+                                    265 ; genPointerGet
+      0000AA C6 7F 73         [ 1]  266 	ld	a, 0x7f73
+                                    267 ; genAnd
+      0000AD 14 02            [ 1]  268 	and	a, (0x02, sp)
+                                    269 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 166: break;
+                                    270 ; genGoto
+      0000AF 20 1A            [ 2]  271 	jra	00131$
+                                    272 ; peephole j5 changed absolute to relative unconditional jump.
+                                    273 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 176: case TIM2_UPD_OVF_TRG_BRK_IRQn:
+                                    274 ; genLabel
+      0000B1                        275 00119$:
+                                    276 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 183: Value = (uint8_t)(ITC->ISPR5 & Mask); /* Read software priority */
+                                    277 ; genPointerGet
+      0000B1 C6 7F 74         [ 1]  278 	ld	a, 0x7f74
+                                    279 ; genAnd
+      0000B4 14 02            [ 1]  280 	and	a, (0x02, sp)
+                                    281 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 184: break;
+                                    282 ; genGoto
+      0000B6 20 13            [ 2]  283 	jra	00131$
+                                    284 ; peephole j5 changed absolute to relative unconditional jump.
+                                    285 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 193: case TIM3_CC_IRQn:
+                                    286 ; genLabel
+      0000B8                        287 00123$:
+                                    288 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 199: Value = (uint8_t)(ITC->ISPR6 & Mask); /* Read software priority */
+                                    289 ; genPointerGet
+      0000B8 C6 7F 75         [ 1]  290 	ld	a, 0x7f75
+                                    291 ; genAnd
+      0000BB 14 02            [ 1]  292 	and	a, (0x02, sp)
+                                    293 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 200: break;
+                                    294 ; genGoto
+      0000BD 20 0C            [ 2]  295 	jra	00131$
+                                    296 ; peephole j5 changed absolute to relative unconditional jump.
+                                    297 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 209: case USART1_TX_IRQn:
+                                    298 ; genLabel
+      0000BF                        299 00127$:
+                                    300 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 213: Value = (uint8_t)(ITC->ISPR7 & Mask); /* Read software priority */
+                                    301 ; genPointerGet
+      0000BF C6 7F 76         [ 1]  302 	ld	a, 0x7f76
+                                    303 ; genAnd
+      0000C2 14 02            [ 1]  304 	and	a, (0x02, sp)
+                                    305 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 214: break;
+                                    306 ; genGoto
+      0000C4 20 05            [ 2]  307 	jra	00131$
+                                    308 ; peephole j5 changed absolute to relative unconditional jump.
+                                    309 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 219: case I2C1_IRQn:
+                                    310 ; genLabel
+      0000C6                        311 00129$:
+                                    312 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 224: Value = (uint8_t)(ITC->ISPR8 & Mask); /* Read software priority */
+                                    313 ; genPointerGet
+      0000C6 C6 7F 77         [ 1]  314 	ld	a, 0x7f77
+                                    315 ; genAnd
+      0000C9 14 02            [ 1]  316 	and	a, (0x02, sp)
+                                    317 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 229: }
+                                    318 ; genLabel
+      0000CB                        319 00131$:
+                                    320 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 231: Value >>= (uint8_t)((IRQn % 4u) * 2u);
+                                    321 ; genRightShift
+      0000CB 88               [ 1]  322 	push	a
+      0000CC 7B 02            [ 1]  323 	ld	a, (0x02, sp)
+      0000CE 27 05            [ 1]  324 	jreq	00146$
+      0000D0                        325 00145$:
+      0000D0 04 01            [ 1]  326 	srl	(1, sp)
+      0000D2 4A               [ 1]  327 	dec	a
+      0000D3 26 FB            [ 1]  328 	jrne	00145$
+      0000D5                        329 00146$:
+      0000D5 84               [ 1]  330 	pop	a
+                                    331 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 233: return((ITC_PriorityLevel_TypeDef)Value);
+                                    332 ; genReturn
+                                    333 ; genLabel
+                                    334 ; peephole j30 removed unused label 00132$.
+                                    335 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 235: }
+                                    336 ; genEndFunction
+      0000D6 85               [ 2]  337 	popw	x
+      0000D7 81               [ 4]  338 	ret
+                                    339 ;	Total ITC_GetSoftwarePriority function size at codegen: 2 bytes.
+                                    340 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 254: void ITC_SetSoftwarePriority(IRQn_TypeDef IRQn, ITC_PriorityLevel_TypeDef ITC_PriorityLevel)
+                                    341 ; genLabel
+                                    342 ;	-----------------------------------------
+                                    343 ;	 function ITC_SetSoftwarePriority
+                                    344 ;	-----------------------------------------
+                                    345 ;	Register assignment might be sub-optimal.
+                                    346 ;	Stack space usage: 2 bytes.
+      0000D8                        347 _ITC_SetSoftwarePriority:
+      0000D8 89               [ 2]  348 	pushw	x
+                                    349 ; genReceive
+                                    350 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 268: Mask = (uint8_t)(~(uint8_t)(0x03U << ((IRQn % 4U) * 2U)));
+                                    351 ; genCast
+                                    352 ; genAssign
+      0000D9 97               [ 1]  353 	ld	xl, a
+                                    354 ; peephole 4 removed redundant load from xl into a.
+                                    355 ; genAnd
+      0000DA A4 03            [ 1]  356 	and	a, #0x03
+                                    357 ; genCast
+                                    358 ; genAssign
+                                    359 ; genLeftShiftLiteral
+      0000DC 48               [ 1]  360 	sll	a
+      0000DD 95               [ 1]  361 	ld	xh, a
+                                    362 ; genLeftShift
+      0000DE A6 03            [ 1]  363 	ld	a, #0x03
+      0000E0 88               [ 1]  364 	push	a
+      0000E1 9E               [ 1]  365 	ld	a, xh
+      0000E2 4D               [ 1]  366 	tnz	a
+      0000E3 27 05            [ 1]  367 	jreq	00142$
+      0000E5                        368 00141$:
+      0000E5 08 01            [ 1]  369 	sll	(1, sp)
+      0000E7 4A               [ 1]  370 	dec	a
+      0000E8 26 FB            [ 1]  371 	jrne	00141$
+      0000EA                        372 00142$:
+      0000EA 84               [ 1]  373 	pop	a
+                                    374 ; genCpl
+      0000EB 43               [ 1]  375 	cpl	a
+      0000EC 6B 01            [ 1]  376 	ld	(0x01, sp), a
+                                    377 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 270: NewPriority = (uint8_t)((uint8_t)(ITC_PriorityLevel) << ((IRQn % 4U) * 2U));
+                                    378 ; genLeftShift
+      0000EE 7B 05            [ 1]  379 	ld	a, (0x05, sp)
+      0000F0 88               [ 1]  380 	push	a
+      0000F1 9E               [ 1]  381 	ld	a, xh
+      0000F2 4D               [ 1]  382 	tnz	a
+      0000F3 27 05            [ 1]  383 	jreq	00144$
+      0000F5                        384 00143$:
+      0000F5 08 01            [ 1]  385 	sll	(1, sp)
+      0000F7 4A               [ 1]  386 	dec	a
+      0000F8 26 FB            [ 1]  387 	jrne	00143$
+      0000FA                        388 00144$:
+      0000FA 84               [ 1]  389 	pop	a
+      0000FB 6B 02            [ 1]  390 	ld	(0x02, sp), a
+                                    391 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 272: switch (IRQn)
+                                    392 ; genCmp
+                                    393 ; genCmpTnz
+      0000FD 9F               [ 1]  394 	ld	a, xl
+      0000FE A1 1D            [ 1]  395 	cp	a, #0x1d
+      000100 23 03            [ 2]  396 	jrule	00145$
+      000102 CCr01rD6         [ 2]  397 	jp	00132$
+      000105                        398 00145$:
+                                    399 ; skipping generated iCode
+                                    400 ; genJumpTab
+      000105 4F               [ 1]  401 	clr	a
+      000106 95               [ 1]  402 	ld	xh, a
+      000107 58               [ 2]  403 	sllw	x
+      000108 DEu01u0C         [ 2]  404 	ldw	x, (#00146$, x)
+      00010B FC               [ 2]  405 	jp	(x)
+      00010C                        406 00146$:
+      00010Cr01rD6                  407 	.dw	#00132$
+      00010Er01r48                  408 	.dw	#00103$
+      000110r01r48                  409 	.dw	#00103$
+      000112r01r48                  410 	.dw	#00103$
+      000114r01r5A                  411 	.dw	#00107$
+      000116r01r5A                  412 	.dw	#00107$
+      000118r01r5A                  413 	.dw	#00107$
+      00011Ar01r5A                  414 	.dw	#00107$
+      00011Cr01r6C                  415 	.dw	#00111$
+      00011Er01r6C                  416 	.dw	#00111$
+      000120r01r6C                  417 	.dw	#00111$
+      000122r01r6C                  418 	.dw	#00111$
+      000124r01r7E                  419 	.dw	#00115$
+      000126r01r7E                  420 	.dw	#00115$
+      000128r01r7E                  421 	.dw	#00115$
+      00012Ar01r7E                  422 	.dw	#00115$
+      00012Cr01r90                  423 	.dw	#00119$
+      00012Er01r90                  424 	.dw	#00119$
+      000130r01r90                  425 	.dw	#00119$
+      000132r01r90                  426 	.dw	#00119$
+      000134r01rA2                  427 	.dw	#00123$
+      000136r01rA2                  428 	.dw	#00123$
+      000138r01rA2                  429 	.dw	#00123$
+      00013Ar01rA2                  430 	.dw	#00123$
+      00013Cr01rB4                  431 	.dw	#00127$
+      00013Er01rB4                  432 	.dw	#00127$
+      000140r01rB4                  433 	.dw	#00127$
+      000142r01rB4                  434 	.dw	#00127$
+      000144r01rC6                  435 	.dw	#00129$
+      000146r01rC6                  436 	.dw	#00129$
+                                    437 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 276: case DMA1_CHANNEL2_3_IRQn:
+                                    438 ; genLabel
+      000148                        439 00103$:
+                                    440 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 277: ITC->ISPR1 &= Mask;
+                                    441 ; genPointerGet
+      000148 C6 7F 70         [ 1]  442 	ld	a, 0x7f70
+                                    443 ; genAnd
+      00014B 14 01            [ 1]  444 	and	a, (0x01, sp)
+                                    445 ; genPointerSet
+      00014D C7 7F 70         [ 1]  446 	ld	0x7f70, a
+                                    447 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 278: ITC->ISPR1 |= NewPriority;
+                                    448 ; genPointerGet
+      000150 C6 7F 70         [ 1]  449 	ld	a, 0x7f70
+                                    450 ; genOr
+      000153 1A 02            [ 1]  451 	or	a, (0x02, sp)
+                                    452 ; genPointerSet
+      000155 C7 7F 70         [ 1]  453 	ld	0x7f70, a
+                                    454 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 279: break;
+                                    455 ; genGoto
+      000158 20 7C            [ 2]  456 	jra	00132$
+                                    457 ; peephole j5 changed absolute to relative unconditional jump.
+                                    458 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 285: case EXTID_IRQn:
+                                    459 ; genLabel
+      00015A                        460 00107$:
+                                    461 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 295: ITC->ISPR2 &= Mask;
+                                    462 ; genPointerGet
+      00015A C6 7F 71         [ 1]  463 	ld	a, 0x7f71
+                                    464 ; genAnd
+      00015D 14 01            [ 1]  465 	and	a, (0x01, sp)
+                                    466 ; genPointerSet
+      00015F C7 7F 71         [ 1]  467 	ld	0x7f71, a
+                                    468 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 296: ITC->ISPR2 |= NewPriority;
+                                    469 ; genPointerGet
+      000162 C6 7F 71         [ 1]  470 	ld	a, 0x7f71
+                                    471 ; genOr
+      000165 1A 02            [ 1]  472 	or	a, (0x02, sp)
+                                    473 ; genPointerSet
+      000167 C7 7F 71         [ 1]  474 	ld	0x7f71, a
+                                    475 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 297: break;
+                                    476 ; genGoto
+      00016A 20 6A            [ 2]  477 	jra	00132$
+                                    478 ; peephole j5 changed absolute to relative unconditional jump.
+                                    479 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 302: case EXTI3_IRQn:
+                                    480 ; genLabel
+      00016C                        481 00111$:
+                                    482 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 303: ITC->ISPR3 &= Mask;
+                                    483 ; genPointerGet
+      00016C C6 7F 72         [ 1]  484 	ld	a, 0x7f72
+                                    485 ; genAnd
+      00016F 14 01            [ 1]  486 	and	a, (0x01, sp)
+                                    487 ; genPointerSet
+      000171 C7 7F 72         [ 1]  488 	ld	0x7f72, a
+                                    489 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 304: ITC->ISPR3 |= NewPriority;
+                                    490 ; genPointerGet
+      000174 C6 7F 72         [ 1]  491 	ld	a, 0x7f72
+                                    492 ; genOr
+      000177 1A 02            [ 1]  493 	or	a, (0x02, sp)
+                                    494 ; genPointerSet
+      000179 C7 7F 72         [ 1]  495 	ld	0x7f72, a
+                                    496 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 305: break;
+                                    497 ; genGoto
+      00017C 20 58            [ 2]  498 	jra	00132$
+                                    499 ; peephole j5 changed absolute to relative unconditional jump.
+                                    500 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 310: case EXTI7_IRQn:
+                                    501 ; genLabel
+      00017E                        502 00115$:
+                                    503 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 311: ITC->ISPR4 &= Mask;
+                                    504 ; genPointerGet
+      00017E C6 7F 73         [ 1]  505 	ld	a, 0x7f73
+                                    506 ; genAnd
+      000181 14 01            [ 1]  507 	and	a, (0x01, sp)
+                                    508 ; genPointerSet
+      000183 C7 7F 73         [ 1]  509 	ld	0x7f73, a
+                                    510 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 312: ITC->ISPR4 |= NewPriority;
+                                    511 ; genPointerGet
+      000186 C6 7F 73         [ 1]  512 	ld	a, 0x7f73
+                                    513 ; genOr
+      000189 1A 02            [ 1]  514 	or	a, (0x02, sp)
+                                    515 ; genPointerSet
+      00018B C7 7F 73         [ 1]  516 	ld	0x7f73, a
+                                    517 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 313: break;
+                                    518 ; genGoto
+      00018E 20 46            [ 2]  519 	jra	00132$
+                                    520 ; peephole j5 changed absolute to relative unconditional jump.
+                                    521 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 322: case TIM2_UPD_OVF_TRG_BRK_IRQn:
+                                    522 ; genLabel
+      000190                        523 00119$:
+                                    524 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 329: ITC->ISPR5 &= Mask;
+                                    525 ; genPointerGet
+      000190 C6 7F 74         [ 1]  526 	ld	a, 0x7f74
+                                    527 ; genAnd
+      000193 14 01            [ 1]  528 	and	a, (0x01, sp)
+                                    529 ; genPointerSet
+      000195 C7 7F 74         [ 1]  530 	ld	0x7f74, a
+                                    531 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 330: ITC->ISPR5 |= NewPriority;
+                                    532 ; genPointerGet
+      000198 C6 7F 74         [ 1]  533 	ld	a, 0x7f74
+                                    534 ; genOr
+      00019B 1A 02            [ 1]  535 	or	a, (0x02, sp)
+                                    536 ; genPointerSet
+      00019D C7 7F 74         [ 1]  537 	ld	0x7f74, a
+                                    538 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 331: break;
+                                    539 ; genGoto
+      0001A0 20 34            [ 2]  540 	jra	00132$
+                                    541 ; peephole j5 changed absolute to relative unconditional jump.
+                                    542 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 339: case TIM3_CC_IRQn:
+                                    543 ; genLabel
+      0001A2                        544 00123$:
+                                    545 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 345: ITC->ISPR6 &= Mask;
+                                    546 ; genPointerGet
+      0001A2 C6 7F 75         [ 1]  547 	ld	a, 0x7f75
+                                    548 ; genAnd
+      0001A5 14 01            [ 1]  549 	and	a, (0x01, sp)
+                                    550 ; genPointerSet
+      0001A7 C7 7F 75         [ 1]  551 	ld	0x7f75, a
+                                    552 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 346: ITC->ISPR6 |= NewPriority;
+                                    553 ; genPointerGet
+      0001AA C6 7F 75         [ 1]  554 	ld	a, 0x7f75
+                                    555 ; genOr
+      0001AD 1A 02            [ 1]  556 	or	a, (0x02, sp)
+                                    557 ; genPointerSet
+      0001AF C7 7F 75         [ 1]  558 	ld	0x7f75, a
+                                    559 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 347: break;
+                                    560 ; genGoto
+      0001B2 20 22            [ 2]  561 	jra	00132$
+                                    562 ; peephole j5 changed absolute to relative unconditional jump.
+                                    563 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 356: case USART1_TX_IRQn:
+                                    564 ; genLabel
+      0001B4                        565 00127$:
+                                    566 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 360: ITC->ISPR7 &= Mask;
+                                    567 ; genPointerGet
+      0001B4 C6 7F 76         [ 1]  568 	ld	a, 0x7f76
+                                    569 ; genAnd
+      0001B7 14 01            [ 1]  570 	and	a, (0x01, sp)
+                                    571 ; genPointerSet
+      0001B9 C7 7F 76         [ 1]  572 	ld	0x7f76, a
+                                    573 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 361: ITC->ISPR7 |= NewPriority;
+                                    574 ; genPointerGet
+      0001BC C6 7F 76         [ 1]  575 	ld	a, 0x7f76
+                                    576 ; genOr
+      0001BF 1A 02            [ 1]  577 	or	a, (0x02, sp)
+                                    578 ; genPointerSet
+      0001C1 C7 7F 76         [ 1]  579 	ld	0x7f76, a
+                                    580 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 362: break;
+                                    581 ; genGoto
+      0001C4 20 10            [ 2]  582 	jra	00132$
+                                    583 ; peephole j5 changed absolute to relative unconditional jump.
+                                    584 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 367: case I2C1_IRQn:
+                                    585 ; genLabel
+      0001C6                        586 00129$:
+                                    587 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 372: ITC->ISPR8 &= Mask;
+                                    588 ; genPointerGet
+      0001C6 C6 7F 77         [ 1]  589 	ld	a, 0x7f77
+                                    590 ; genAnd
+      0001C9 14 01            [ 1]  591 	and	a, (0x01, sp)
+                                    592 ; genPointerSet
+      0001CB C7 7F 77         [ 1]  593 	ld	0x7f77, a
+                                    594 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 373: ITC->ISPR8 |= NewPriority;
+                                    595 ; genPointerGet
+      0001CE C6 7F 77         [ 1]  596 	ld	a, 0x7f77
+                                    597 ; genOr
+      0001D1 1A 02            [ 1]  598 	or	a, (0x02, sp)
+                                    599 ; genPointerSet
+      0001D3 C7 7F 77         [ 1]  600 	ld	0x7f77, a
+                                    601 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 378: }
+                                    602 ; genLabel
+      0001D6                        603 00132$:
+                                    604 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_itc.c: 379: }
+                                    605 ; genEndFunction
+      0001D6 85               [ 2]  606 	popw	x
+      0001D7 85               [ 2]  607 	popw	x
+      0001D8 84               [ 1]  608 	pop	a
+      0001D9 FC               [ 2]  609 	jp	(x)
+                                    610 ;	Total ITC_SetSoftwarePriority function size at codegen: 4 bytes.
+                                    611 	.area CODE
+                                    612 	.area CONST
+                                    613 	.area INITIALIZER
+                                    614 	.area CABS (ABS)

@@ -1,0 +1,1177 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _main
+                                     11 	.globl _DMA_Config
+                                     12 	.globl _ADC_Config
+                                     13 	.globl _init_rtc
+                                     14 	.globl _IIC_Init
+                                     15 	.globl _Uart1_Send
+                                     16 	.globl _Uart1_Init
+                                     17 	.globl _TIM4_Init
+                                     18 	.globl _TIM2_Init
+                                     19 	.globl _CLK_Config
+                                     20 	.globl _Delay
+                                     21 	.globl _Menu_Proc
+                                     22 	.globl _lcd_init
+                                     23 	.globl _Storage_SaveAllStats
+                                     24 	.globl _Record_GetStat
+                                     25 	.globl _System_InitMode
+                                     26 	.globl _System_GetMode
+                                     27 	.globl _Storage_Init
+                                     28 	.globl _C_Fxn
+                                     29 	.globl _B_Fxn
+                                     30 	.globl _A_Fxn
+                                     31 	.globl _Chk_State
+                                     32 	.globl _Rs485_Proc
+                                     33 	.globl _RevMsg
+                                     34 	.globl _SendMsg
+                                     35 	.globl _WWDG_Init
+                                     36 	.globl _PWR_UltraLowPowerCmd
+                                     37 	.globl _PWR_FastWakeUpCmd
+                                     38 	.globl _ITC_SetSoftwarePriority
+                                     39 	.globl _GPIO_Init
+                                     40 	.globl _EXTI_SetPinSensitivity
+                                     41 	.globl _EXTI_DeInit
+                                     42 	.globl _ADC_SoftwareStartConv
+                                     43 ;--------------------------------------------------------
+                                     44 ; ram data
+                                     45 ;--------------------------------------------------------
+                                     46 	.area DATA
+      000000                         47 _main_last_ph_10000_693:
+      000000                         48 	.ds 1
+      000001                         49 _main_last_t_10000_693:
+      000001                         50 	.ds 4
+      000005                         51 _main_version_10000_693:
+      000005                         52 	.ds 32
+                                     53 ;--------------------------------------------------------
+                                     54 ; ram data
+                                     55 ;--------------------------------------------------------
+                                     56 	.area INITIALIZED
+                                     57 ;--------------------------------------------------------
+                                     58 ; Stack segment in internal ram
+                                     59 ;--------------------------------------------------------
+                                     60 	.area SSEG
+      000000                         61 __start__stack:
+      000000                         62 	.ds	1
+                                     63 
+                                     64 ;--------------------------------------------------------
+                                     65 ; absolute external ram data
+                                     66 ;--------------------------------------------------------
+                                     67 	.area DABS (ABS)
+                                     68 
+                                     69 ; default segment ordering for linker
+                                     70 	.area HOME
+                                     71 	.area GSINIT
+                                     72 	.area GSFINAL
+                                     73 	.area CONST
+                                     74 	.area INITIALIZER
+                                     75 	.area CODE
+                                     76 
+                                     77 ;--------------------------------------------------------
+                                     78 ; interrupt vector
+                                     79 ;--------------------------------------------------------
+                                     80 	.area HOME
+      000000                         81 __interrupt_vect:
+      000000 82v00u00u00             82 	int s_GSINIT ; reset
+                                     83 ;--------------------------------------------------------
+                                     84 ; global & static initialisations
+                                     85 ;--------------------------------------------------------
+                                     86 	.area HOME
+                                     87 	.area GSINIT
+                                     88 	.area GSFINAL
+                                     89 	.area GSINIT
+      000000 CDr00r00         [ 4]   90 	call	___sdcc_external_startup
+      000003 4D               [ 1]   91 	tnz	a
+      000004 27 03            [ 1]   92 	jreq	__sdcc_init_data
+      000006 CCr00r04         [ 2]   93 	jp	__sdcc_program_startup
+      000009                         94 __sdcc_init_data:
+                                     95 ; stm8_genXINIT() start
+      000009 AEr00r00         [ 2]   96 	ldw x, #l_DATA
+      00000C 27 07            [ 1]   97 	jreq	00002$
+      00000E                         98 00001$:
+      00000E 72 4FuFFuFF      [ 1]   99 	clr (s_DATA - 1, x)
+      000012 5A               [ 2]  100 	decw x
+      000013 26 F9            [ 1]  101 	jrne	00001$
+      000015                        102 00002$:
+      000015 AEr00r00         [ 2]  103 	ldw	x, #l_INITIALIZER
+      000018 27 09            [ 1]  104 	jreq	00004$
+      00001A                        105 00003$:
+      00001A D6uFFuFF         [ 1]  106 	ld	a, (s_INITIALIZER - 1, x)
+      00001D D7uFFuFF         [ 1]  107 	ld	(s_INITIALIZED - 1, x), a
+      000020 5A               [ 2]  108 	decw	x
+      000021 26 F7            [ 1]  109 	jrne	00003$
+      000023                        110 00004$:
+                                    111 ; stm8_genXINIT() end
+                                    112 ;	User/main.c: 23: static uint8_t last_ph = 0; //上一次的相位
+                                    113 ; genAssign
+      000023 72 5Fu00u00      [ 1]  114 	clr	_main_last_ph_10000_693+0
+                                    115 ;	User/main.c: 24: static uint32_t last_t = 0; //相邻上一次触发的时间，用于比较两次是不是相邻两项（如AB）同时导通
+                                    116 ; genAssign
+      000027 5F               [ 1]  117 	clrw	x
+      000028 CFu00u03         [ 2]  118 	ldw	_main_last_t_10000_693+2, x
+      00002B CFu00u01         [ 2]  119 	ldw	_main_last_t_10000_693+0, x
+                                    120 ;	User/main.c: 25: static char version[32] = "Eric301 V1.2\r\n2024-4-10";
+                                    121 ; skipping iCode since result will be rematerialized
+                                    122 ; genPointerSet
+      00002E 35 45u00u05      [ 1]  123 	mov	_main_version_10000_693+0, #0x45
+                                    124 ; skipping iCode since result will be rematerialized
+                                    125 ; genPointerSet
+      000032 35 72u00u06      [ 1]  126 	mov	_main_version_10000_693+1, #0x72
+                                    127 ; skipping iCode since result will be rematerialized
+                                    128 ; genPointerSet
+      000036 35 69u00u07      [ 1]  129 	mov	_main_version_10000_693+2, #0x69
+                                    130 ; skipping iCode since result will be rematerialized
+                                    131 ; genPointerSet
+      00003A 35 63u00u08      [ 1]  132 	mov	_main_version_10000_693+3, #0x63
+                                    133 ; skipping iCode since result will be rematerialized
+                                    134 ; genPointerSet
+      00003E 35 33u00u09      [ 1]  135 	mov	_main_version_10000_693+4, #0x33
+                                    136 ; skipping iCode since result will be rematerialized
+                                    137 ; genPointerSet
+      000042 35 30u00u0A      [ 1]  138 	mov	_main_version_10000_693+5, #0x30
+                                    139 ; skipping iCode since result will be rematerialized
+                                    140 ; genPointerSet
+      000046 35 31u00u0B      [ 1]  141 	mov	_main_version_10000_693+6, #0x31
+                                    142 ; skipping iCode since result will be rematerialized
+                                    143 ; genPointerSet
+      00004A 35 20u00u0C      [ 1]  144 	mov	_main_version_10000_693+7, #0x20
+                                    145 ; skipping iCode since result will be rematerialized
+                                    146 ; genPointerSet
+      00004E 35 56u00u0D      [ 1]  147 	mov	_main_version_10000_693+8, #0x56
+                                    148 ; skipping iCode since result will be rematerialized
+                                    149 ; genPointerSet
+      000052 35 31u00u0E      [ 1]  150 	mov	_main_version_10000_693+9, #0x31
+                                    151 ; skipping iCode since result will be rematerialized
+                                    152 ; genPointerSet
+      000056 35 2Eu00u0F      [ 1]  153 	mov	_main_version_10000_693+10, #0x2e
+                                    154 ; skipping iCode since result will be rematerialized
+                                    155 ; genPointerSet
+      00005A 35 32u00u10      [ 1]  156 	mov	_main_version_10000_693+11, #0x32
+                                    157 ; skipping iCode since result will be rematerialized
+                                    158 ; genPointerSet
+      00005E 35 0Du00u11      [ 1]  159 	mov	_main_version_10000_693+12, #0x0d
+                                    160 ; skipping iCode since result will be rematerialized
+                                    161 ; genPointerSet
+      000062 35 0Au00u12      [ 1]  162 	mov	_main_version_10000_693+13, #0x0a
+                                    163 ; skipping iCode since result will be rematerialized
+                                    164 ; genPointerSet
+      000066 35 32u00u13      [ 1]  165 	mov	_main_version_10000_693+14, #0x32
+                                    166 ; skipping iCode since result will be rematerialized
+                                    167 ; genPointerSet
+      00006A 35 30u00u14      [ 1]  168 	mov	_main_version_10000_693+15, #0x30
+                                    169 ; skipping iCode since result will be rematerialized
+                                    170 ; genPointerSet
+      00006E 35 32u00u15      [ 1]  171 	mov	_main_version_10000_693+16, #0x32
+                                    172 ; skipping iCode since result will be rematerialized
+                                    173 ; genPointerSet
+      000072 35 34u00u16      [ 1]  174 	mov	_main_version_10000_693+17, #0x34
+                                    175 ; skipping iCode since result will be rematerialized
+                                    176 ; genPointerSet
+      000076 35 2Du00u17      [ 1]  177 	mov	_main_version_10000_693+18, #0x2d
+                                    178 ; skipping iCode since result will be rematerialized
+                                    179 ; genPointerSet
+      00007A 35 34u00u18      [ 1]  180 	mov	_main_version_10000_693+19, #0x34
+                                    181 ; skipping iCode since result will be rematerialized
+                                    182 ; genPointerSet
+      00007E 35 2Du00u19      [ 1]  183 	mov	_main_version_10000_693+20, #0x2d
+                                    184 ; skipping iCode since result will be rematerialized
+                                    185 ; genPointerSet
+      000082 35 31u00u1A      [ 1]  186 	mov	_main_version_10000_693+21, #0x31
+                                    187 ; skipping iCode since result will be rematerialized
+                                    188 ; genPointerSet
+      000086 35 30u00u1B      [ 1]  189 	mov	_main_version_10000_693+22, #0x30
+                                    190 ; skipping iCode since result will be rematerialized
+                                    191 ; genPointerSet
+      00008A 35 00u00u1C      [ 1]  192 	mov	_main_version_10000_693+23, #0x00
+                                    193 ; skipping iCode since result will be rematerialized
+                                    194 ; genPointerSet
+      00008E 35 00u00u1D      [ 1]  195 	mov	_main_version_10000_693+24, #0x00
+                                    196 ; skipping iCode since result will be rematerialized
+                                    197 ; genPointerSet
+      000092 35 00u00u1E      [ 1]  198 	mov	_main_version_10000_693+25, #0x00
+                                    199 ; skipping iCode since result will be rematerialized
+                                    200 ; genPointerSet
+      000096 35 00u00u1F      [ 1]  201 	mov	_main_version_10000_693+26, #0x00
+                                    202 ; skipping iCode since result will be rematerialized
+                                    203 ; genPointerSet
+      00009A 35 00u00u20      [ 1]  204 	mov	_main_version_10000_693+27, #0x00
+                                    205 ; skipping iCode since result will be rematerialized
+                                    206 ; genPointerSet
+      00009E 35 00u00u21      [ 1]  207 	mov	_main_version_10000_693+28, #0x00
+                                    208 ; skipping iCode since result will be rematerialized
+                                    209 ; genPointerSet
+      0000A2 35 00u00u22      [ 1]  210 	mov	_main_version_10000_693+29, #0x00
+                                    211 ; skipping iCode since result will be rematerialized
+                                    212 ; genPointerSet
+      0000A6 35 00u00u23      [ 1]  213 	mov	_main_version_10000_693+30, #0x00
+                                    214 ; skipping iCode since result will be rematerialized
+                                    215 ; genPointerSet
+      0000AA 35 00u00u24      [ 1]  216 	mov	_main_version_10000_693+31, #0x00
+                                    217 	.area GSFINAL
+      000000 CCr00r04         [ 2]  218 	jp	__sdcc_program_startup
+                                    219 ;--------------------------------------------------------
+                                    220 ; Home
+                                    221 ;--------------------------------------------------------
+                                    222 	.area HOME
+                                    223 	.area HOME
+      000004                        224 __sdcc_program_startup:
+      000004 CCr00r00         [ 2]  225 	jp	_main
+                                    226 ;	return from main will return to caller
+                                    227 ;--------------------------------------------------------
+                                    228 ; code
+                                    229 ;--------------------------------------------------------
+                                    230 	.area CODE
+                                    231 ;	User/main.c: 18: int main(void)
+                                    232 ; genLabel
+                                    233 ;	-----------------------------------------
+                                    234 ;	 function main
+                                    235 ;	-----------------------------------------
+                                    236 ;	Register assignment might be sub-optimal.
+                                    237 ;	Stack space usage: 19 bytes.
+      000000                        238 _main:
+      000000 52 13            [ 2]  239 	sub	sp, #19
+                                    240 ;	User/main.c: 27: Delay(30000);
+                                    241 ; genSend
+      000002 AE 75 30         [ 2]  242 	ldw	x, #0x7530
+                                    243 ; genCall
+      000005 CDr00r00         [ 4]  244 	call	_Delay
+                                    245 ;	User/main.c: 28: CLK_Config();
+                                    246 ; genCall
+      000008 CDr00r00         [ 4]  247 	call	_CLK_Config
+                                    248 ;	User/main.c: 29: Delay(30000);
+                                    249 ; genSend
+      00000B AE 75 30         [ 2]  250 	ldw	x, #0x7530
+                                    251 ; genCall
+      00000E CDr00r00         [ 4]  252 	call	_Delay
+                                    253 ;	User/main.c: 30: init_rtc();
+                                    254 ; genCall
+      000011 CDr00r00         [ 4]  255 	call	_init_rtc
+                                    256 ;	User/main.c: 31: Delay(30000);
+                                    257 ; genSend
+      000014 AE 75 30         [ 2]  258 	ldw	x, #0x7530
+                                    259 ; genCall
+      000017 CDr00r00         [ 4]  260 	call	_Delay
+                                    261 ;	User/main.c: 35: GPIO_Init(GPIOC, GPIO_Pin_4, GPIO_Mode_In_PU_IT); //输入上拉
+                                    262 ; genIPush
+      00001A 4B 60            [ 1]  263 	push	#0x60
+                                    264 ; genSend
+      00001C A6 10            [ 1]  265 	ld	a, #0x10
+                                    266 ; genSend
+      00001E AE 50 0A         [ 2]  267 	ldw	x, #0x500a
+                                    268 ; genCall
+      000021 CDr00r00         [ 4]  269 	call	_GPIO_Init
+                                    270 ;	User/main.c: 36: System_InitMode(); //读取AC_DEL(PC4)以决定是电池供电还是AC供电
+                                    271 ; genCall
+      000024 CDr00r00         [ 4]  272 	call	_System_InitMode
+                                    273 ;	User/main.c: 37: Delay(30000);
+                                    274 ; genSend
+      000027 AE 75 30         [ 2]  275 	ldw	x, #0x7530
+                                    276 ; genCall
+      00002A CDr00r00         [ 4]  277 	call	_Delay
+                                    278 ;	User/main.c: 40: GPIO_Init(GPIOA, GPIO_Pin_All, GPIO_Mode_Out_PP_Low_Slow);
+                                    279 ; genIPush
+      00002D 4B C0            [ 1]  280 	push	#0xc0
+                                    281 ; genSend
+      00002F A6 FF            [ 1]  282 	ld	a, #0xff
+                                    283 ; genSend
+      000031 AE 50 00         [ 2]  284 	ldw	x, #0x5000
+                                    285 ; genCall
+      000034 CDr00r00         [ 4]  286 	call	_GPIO_Init
+                                    287 ;	User/main.c: 41: GPIO_Init(GPIOB, GPIO_Pin_All, GPIO_Mode_Out_PP_Low_Slow);
+                                    288 ; genIPush
+      000037 4B C0            [ 1]  289 	push	#0xc0
+                                    290 ; genSend
+      000039 A6 FF            [ 1]  291 	ld	a, #0xff
+                                    292 ; genSend
+      00003B AE 50 05         [ 2]  293 	ldw	x, #0x5005
+                                    294 ; genCall
+      00003E CDr00r00         [ 4]  295 	call	_GPIO_Init
+                                    296 ;	User/main.c: 42: GPIO_Init(GPIOC, 0xEC, GPIO_Mode_Out_PP_Low_Slow);//除PC0，PC1(I2C1)，PC4
+                                    297 ; genIPush
+      000041 4B C0            [ 1]  298 	push	#0xc0
+                                    299 ; genSend
+      000043 A6 EC            [ 1]  300 	ld	a, #0xec
+                                    301 ; genSend
+      000045 AE 50 0A         [ 2]  302 	ldw	x, #0x500a
+                                    303 ; genCall
+      000048 CDr00r00         [ 4]  304 	call	_GPIO_Init
+                                    305 ;	User/main.c: 43: GPIO_Init(GPIOD, GPIO_Pin_All, GPIO_Mode_Out_PP_Low_Slow);
+                                    306 ; genIPush
+      00004B 4B C0            [ 1]  307 	push	#0xc0
+                                    308 ; genSend
+      00004D A6 FF            [ 1]  309 	ld	a, #0xff
+                                    310 ; genSend
+      00004F AE 50 0F         [ 2]  311 	ldw	x, #0x500f
+                                    312 ; genCall
+      000052 CDr00r00         [ 4]  313 	call	_GPIO_Init
+                                    314 ;	User/main.c: 44: GPIO_Init(GPIOE, GPIO_Pin_All, GPIO_Mode_Out_PP_Low_Slow);
+                                    315 ; genIPush
+      000055 4B C0            [ 1]  316 	push	#0xc0
+                                    317 ; genSend
+      000057 A6 FF            [ 1]  318 	ld	a, #0xff
+                                    319 ; genSend
+      000059 AE 50 14         [ 2]  320 	ldw	x, #0x5014
+                                    321 ; genCall
+      00005C CDr00r00         [ 4]  322 	call	_GPIO_Init
+                                    323 ;	User/main.c: 45: GPIO_Init(GPIOF, GPIO_Pin_All, GPIO_Mode_Out_PP_Low_Slow);
+                                    324 ; genIPush
+      00005F 4B C0            [ 1]  325 	push	#0xc0
+                                    326 ; genSend
+      000061 A6 FF            [ 1]  327 	ld	a, #0xff
+                                    328 ; genSend
+      000063 AE 50 19         [ 2]  329 	ldw	x, #0x5019
+                                    330 ; genCall
+      000066 CDr00r00         [ 4]  331 	call	_GPIO_Init
+                                    332 ;	User/main.c: 47: GPIO_Init(KEY_PORT, KEY_PINS, GPIO_Mode_In_PU_IT);//初始化按键,PE0~4
+                                    333 ; genIPush
+      000069 4B 60            [ 1]  334 	push	#0x60
+                                    335 ; genSend
+      00006B A6 1F            [ 1]  336 	ld	a, #0x1f
+                                    337 ; genSend
+      00006D AE 50 14         [ 2]  338 	ldw	x, #0x5014
+                                    339 ; genCall
+      000070 CDr00r00         [ 4]  340 	call	_GPIO_Init
+                                    341 ;	User/main.c: 48: GPIO_Init(GPIOB, GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7,
+                                    342 ; genIPush
+      000073 4B F0            [ 1]  343 	push	#0xf0
+                                    344 ; genSend
+      000075 A6 FE            [ 1]  345 	ld	a, #0xfe
+                                    346 ; genSend
+      000077 AE 50 05         [ 2]  347 	ldw	x, #0x5005
+                                    348 ; genCall
+      00007A CDr00r00         [ 4]  349 	call	_GPIO_Init
+                                    350 ;	User/main.c: 50: GPIO_Init(GPIOD, GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7, GPIO_Mode_In_PU_IT); //phase A、B、C
+                                    351 ; genIPush
+      00007D 4B 60            [ 1]  352 	push	#0x60
+                                    353 ; genSend
+      00007F A6 E0            [ 1]  354 	ld	a, #0xe0
+                                    355 ; genSend
+      000081 AE 50 0F         [ 2]  356 	ldw	x, #0x500f
+                                    357 ; genCall
+      000084 CDr00r00         [ 4]  358 	call	_GPIO_Init
+                                    359 ;	User/main.c: 52: lcd_init();
+                                    360 ; genCall
+      000087 CDr00r00         [ 4]  361 	call	_lcd_init
+                                    362 ;	User/main.c: 55: for (i = 0; i < 200; i++)
+                                    363 ; genAssign
+      00008A 4F               [ 1]  364 	clr	a
+                                    365 ; genLabel
+      00008B                        366 00136$:
+                                    367 ;	User/main.c: 57: Delay(0xffff);
+                                    368 ; genSend
+      00008B 88               [ 1]  369 	push	a
+      00008C 5F               [ 1]  370 	clrw	x
+      00008D 5A               [ 2]  371 	decw	x
+                                    372 ; genCall
+      00008E CDr00r00         [ 4]  373 	call	_Delay
+      000091 84               [ 1]  374 	pop	a
+                                    375 ;	User/main.c: 55: for (i = 0; i < 200; i++)
+                                    376 ; genPlus
+      000092 4C               [ 1]  377 	inc	a
+                                    378 ; genCmp
+                                    379 ; genCmpTnz
+      000093 A1 C8            [ 1]  380 	cp	a, #0xc8
+                                    381 ; peephole j5 changed absolute to relative unconditional jump.
+      000095 25 F4            [ 1]  382 	jrc	00136$
+                                    383 ; peephole j9 removed jra by using inverse jump logic
+                                    384 ; peephole j30 removed unused label 00262$.
+                                    385 ; skipping generated iCode
+                                    386 ;	User/main.c: 60: EXTI_DeInit(); //恢复中断的所有设置
+                                    387 ; genCall
+      000097 CDr00r00         [ 4]  388 	call	_EXTI_DeInit
+                                    389 ;	User/main.c: 62: ITC_SetSoftwarePriority(TIM2_UPD_OVF_TRG_BRK_IRQn, ITC_PriorityLevel_3);
+                                    390 ; genIPush
+      00009A 4B 03            [ 1]  391 	push	#0x03
+                                    392 ; genSend
+      00009C A6 13            [ 1]  393 	ld	a, #0x13
+                                    394 ; genCall
+      00009E CDr00r00         [ 4]  395 	call	_ITC_SetSoftwarePriority
+                                    396 ;	User/main.c: 63: ITC_SetSoftwarePriority(EXTI0_IRQn, ITC_PriorityLevel_1);
+                                    397 ; genIPush
+      0000A1 4B 01            [ 1]  398 	push	#0x01
+                                    399 ; genSend
+      0000A3 A6 08            [ 1]  400 	ld	a, #0x08
+                                    401 ; genCall
+      0000A5 CDr00r00         [ 4]  402 	call	_ITC_SetSoftwarePriority
+                                    403 ;	User/main.c: 64: ITC_SetSoftwarePriority(EXTI1_IRQn, ITC_PriorityLevel_1);
+                                    404 ; genIPush
+      0000A8 4B 01            [ 1]  405 	push	#0x01
+                                    406 ; genSend
+      0000AA A6 09            [ 1]  407 	ld	a, #0x09
+                                    408 ; genCall
+      0000AC CDr00r00         [ 4]  409 	call	_ITC_SetSoftwarePriority
+                                    410 ;	User/main.c: 65: ITC_SetSoftwarePriority(EXTI2_IRQn, ITC_PriorityLevel_1);
+                                    411 ; genIPush
+      0000AF 4B 01            [ 1]  412 	push	#0x01
+                                    413 ; genSend
+      0000B1 A6 0A            [ 1]  414 	ld	a, #0x0a
+                                    415 ; genCall
+      0000B3 CDr00r00         [ 4]  416 	call	_ITC_SetSoftwarePriority
+                                    417 ;	User/main.c: 66: ITC_SetSoftwarePriority(EXTI3_IRQn, ITC_PriorityLevel_1);
+                                    418 ; genIPush
+      0000B6 4B 01            [ 1]  419 	push	#0x01
+                                    420 ; genSend
+      0000B8 A6 0B            [ 1]  421 	ld	a, #0x0b
+                                    422 ; genCall
+      0000BA CDr00r00         [ 4]  423 	call	_ITC_SetSoftwarePriority
+                                    424 ;	User/main.c: 67: ITC_SetSoftwarePriority(EXTI4_IRQn, ITC_PriorityLevel_1);
+                                    425 ; genIPush
+      0000BD 4B 01            [ 1]  426 	push	#0x01
+                                    427 ; genSend
+      0000BF A6 0C            [ 1]  428 	ld	a, #0x0c
+                                    429 ; genCall
+      0000C1 CDr00r00         [ 4]  430 	call	_ITC_SetSoftwarePriority
+                                    431 ;	User/main.c: 69: ITC_SetSoftwarePriority(EXTI5_IRQn, ITC_PriorityLevel_1);
+                                    432 ; genIPush
+      0000C4 4B 01            [ 1]  433 	push	#0x01
+                                    434 ; genSend
+      0000C6 A6 0D            [ 1]  435 	ld	a, #0x0d
+                                    436 ; genCall
+      0000C8 CDr00r00         [ 4]  437 	call	_ITC_SetSoftwarePriority
+                                    438 ;	User/main.c: 70: ITC_SetSoftwarePriority(EXTI6_IRQn, ITC_PriorityLevel_1);
+                                    439 ; genIPush
+      0000CB 4B 01            [ 1]  440 	push	#0x01
+                                    441 ; genSend
+      0000CD A6 0E            [ 1]  442 	ld	a, #0x0e
+                                    443 ; genCall
+      0000CF CDr00r00         [ 4]  444 	call	_ITC_SetSoftwarePriority
+                                    445 ;	User/main.c: 71: ITC_SetSoftwarePriority(EXTI7_IRQn, ITC_PriorityLevel_1);
+                                    446 ; genIPush
+      0000D2 4B 01            [ 1]  447 	push	#0x01
+                                    448 ; genSend
+      0000D4 A6 0F            [ 1]  449 	ld	a, #0x0f
+                                    450 ; genCall
+      0000D6 CDr00r00         [ 4]  451 	call	_ITC_SetSoftwarePriority
+                                    452 ;	User/main.c: 73: EXTI_SetPinSensitivity(EXTI_Pin_0, EXTI_Trigger_Rising); //外部中断0，上沿触发，PE0，用于唤醒设备
+                                    453 ; genIPush
+      0000D9 4B 01            [ 1]  454 	push	#0x01
+                                    455 ; genSend
+      0000DB 4F               [ 1]  456 	clr	a
+                                    457 ; genCall
+      0000DC CDr00r00         [ 4]  458 	call	_EXTI_SetPinSensitivity
+                                    459 ;	User/main.c: 74: EXTI_SetPinSensitivity(EXTI_Pin_1, EXTI_Trigger_Rising); //外部中断1，上沿触发，PE1
+                                    460 ; genIPush
+      0000DF 4B 01            [ 1]  461 	push	#0x01
+                                    462 ; genSend
+      0000E1 A6 02            [ 1]  463 	ld	a, #0x02
+                                    464 ; genCall
+      0000E3 CDr00r00         [ 4]  465 	call	_EXTI_SetPinSensitivity
+                                    466 ;	User/main.c: 75: EXTI_SetPinSensitivity(EXTI_Pin_2, EXTI_Trigger_Rising); //外部中断2，上沿触发，PE2
+                                    467 ; genIPush
+      0000E6 4B 01            [ 1]  468 	push	#0x01
+                                    469 ; genSend
+      0000E8 A6 04            [ 1]  470 	ld	a, #0x04
+                                    471 ; genCall
+      0000EA CDr00r00         [ 4]  472 	call	_EXTI_SetPinSensitivity
+                                    473 ;	User/main.c: 76: EXTI_SetPinSensitivity(EXTI_Pin_3, EXTI_Trigger_Rising); //外部中断3，上沿触发，PE3
+                                    474 ; genIPush
+      0000ED 4B 01            [ 1]  475 	push	#0x01
+                                    476 ; genSend
+      0000EF A6 06            [ 1]  477 	ld	a, #0x06
+                                    478 ; genCall
+      0000F1 CDr00r00         [ 4]  479 	call	_EXTI_SetPinSensitivity
+                                    480 ;	User/main.c: 77: EXTI_SetPinSensitivity(EXTI_Pin_4, EXTI_Trigger_Rising_Falling); //外部中断4，上沿触发，PE4,PC4
+                                    481 ; genIPush
+      0000F4 4B 03            [ 1]  482 	push	#0x03
+                                    483 ; genSend
+      0000F6 A6 10            [ 1]  484 	ld	a, #0x10
+                                    485 ; genCall
+      0000F8 CDr00r00         [ 4]  486 	call	_EXTI_SetPinSensitivity
+                                    487 ;	User/main.c: 79: EXTI_SetPinSensitivity(EXTI_Pin_5, EXTI_Trigger_Rising_Falling);//外部中断5，上下沿触发，PD5
+                                    488 ; genIPush
+      0000FB 4B 03            [ 1]  489 	push	#0x03
+                                    490 ; genSend
+      0000FD A6 12            [ 1]  491 	ld	a, #0x12
+                                    492 ; genCall
+      0000FF CDr00r00         [ 4]  493 	call	_EXTI_SetPinSensitivity
+                                    494 ;	User/main.c: 80: EXTI_SetPinSensitivity(EXTI_Pin_6, EXTI_Trigger_Rising_Falling);//外部中断6，上下沿触发，PD6
+                                    495 ; genIPush
+      000102 4B 03            [ 1]  496 	push	#0x03
+                                    497 ; genSend
+      000104 A6 14            [ 1]  498 	ld	a, #0x14
+                                    499 ; genCall
+      000106 CDr00r00         [ 4]  500 	call	_EXTI_SetPinSensitivity
+                                    501 ;	User/main.c: 81: EXTI_SetPinSensitivity(EXTI_Pin_7, EXTI_Trigger_Rising_Falling);//外部中断7，上下沿触发，PD7
+                                    502 ; genIPush
+      000109 4B 03            [ 1]  503 	push	#0x03
+                                    504 ; genSend
+      00010B A6 16            [ 1]  505 	ld	a, #0x16
+                                    506 ; genCall
+      00010D CDr00r00         [ 4]  507 	call	_EXTI_SetPinSensitivity
+                                    508 ;	User/main.c: 83: if (System_GetMode() == 0)
+                                    509 ; genCall
+      000110 CDr00r00         [ 4]  510 	call	_System_GetMode
+                                    511 ; genIfx
+      000113 4D               [ 1]  512 	tnz	a
+                                    513 ; peephole j5 changed absolute to relative unconditional jump.
+      000114 26 0D            [ 1]  514 	jrne	00103$
+                                    515 ; peephole j7 removed jra by using inverse jump logic
+                                    516 ; peephole j30 removed unused label 00263$.
+                                    517 ;	User/main.c: 85: Uart1_Init();
+                                    518 ; genCall
+      000116 CDr00r00         [ 4]  519 	call	_Uart1_Init
+                                    520 ;	User/main.c: 86: Uart1_Send((uint8_t *)version, 32);
+                                    521 ; skipping iCode since result will be rematerialized
+                                    522 ; skipping iCode since result will be rematerialized
+                                    523 ; genIPush
+      000119 4B 20            [ 1]  524 	push	#0x20
+      00011B 4B 00            [ 1]  525 	push	#0x00
+                                    526 ; genSend
+      00011D AEr00r05         [ 2]  527 	ldw	x, #(_main_version_10000_693+0)
+                                    528 ; genCall
+      000120 CDr00r00         [ 4]  529 	call	_Uart1_Send
+                                    530 ; genLabel
+      000123                        531 00103$:
+                                    532 ;	User/main.c: 89: TIM2_Init();
+                                    533 ; genCall
+      000123 CDr00r00         [ 4]  534 	call	_TIM2_Init
+                                    535 ;	User/main.c: 90: TIM4_Init();
+                                    536 ; genCall
+      000126 CDr00r00         [ 4]  537 	call	_TIM4_Init
+                                    538 ;	User/main.c: 91: IIC_Init();//数据记录库初始化
+                                    539 ; genCall
+      000129 CDr00r00         [ 4]  540 	call	_IIC_Init
+                                    541 ;	User/main.c: 92: Storage_Init(); //加载系统设置和系统统计数据
+                                    542 ; genCall
+      00012C CDr00r00         [ 4]  543 	call	_Storage_Init
+                                    544 ;	User/main.c: 94: ADC_Config();
+                                    545 ; genCall
+      00012F CDr00r00         [ 4]  546 	call	_ADC_Config
+                                    547 ;	User/main.c: 95: DMA_Config();
+                                    548 ; genCall
+      000132 CDr00r00         [ 4]  549 	call	_DMA_Config
+                                    550 ;	User/main.c: 97: PWR_FastWakeUpCmd(ENABLE);  //快速唤醒使能
+                                    551 ; genSend
+      000135 A6 01            [ 1]  552 	ld	a, #0x01
+                                    553 ; genCall
+      000137 CDr00r00         [ 4]  554 	call	_PWR_FastWakeUpCmd
+                                    555 ;	User/main.c: 98: PWR_UltraLowPowerCmd(ENABLE);//超低功耗
+                                    556 ; genSend
+      00013A A6 01            [ 1]  557 	ld	a, #0x01
+                                    558 ; genCall
+      00013C CDr00r00         [ 4]  559 	call	_PWR_UltraLowPowerCmd
+                                    560 ;	User/main.c: 99: enableInterrupts();//使能中断
+                                    561 ;	genInline
+      00013F 9A               [ 1]  562 	rim
+                                    563 ;	User/main.c: 101: SendMsg(&MsgSystem, MSG_KEY_TIMER, KEY_RIGHT,  0); //开机显示第一个菜单
+                                    564 ; skipping iCode since result will be rematerialized
+                                    565 ; skipping iCode since result will be rematerialized
+                                    566 ; genIPush
+      000140 5F               [ 1]  567 	clrw	x
+      000141 89               [ 2]  568 	pushw	x
+      000142 5F               [ 1]  569 	clrw	x
+      000143 89               [ 2]  570 	pushw	x
+                                    571 ; genIPush
+      000144 4B 07            [ 1]  572 	push	#0x07
+      000146 5F               [ 1]  573 	clrw	x
+      000147 89               [ 2]  574 	pushw	x
+      000148 4B 00            [ 1]  575 	push	#0x00
+                                    576 ; genSend
+      00014A A6 02            [ 1]  577 	ld	a, #0x02
+                                    578 ; genSend
+      00014C AEr00r00         [ 2]  579 	ldw	x, #(_MsgSystem+0)
+                                    580 ; genCall
+      00014F CDr00r00         [ 4]  581 	call	_SendMsg
+                                    582 ;	User/main.c: 102: ADC_SoftwareStartConv(ADC1); //开启软件转换
+                                    583 ; genSend
+      000152 AE 53 40         [ 2]  584 	ldw	x, #0x5340
+                                    585 ; genCall
+      000155 CDr00r00         [ 4]  586 	call	_ADC_SoftwareStartConv
+                                    587 ;	User/main.c: 104: WWDG_Init(0x7f, 0x7f);
+                                    588 ; genIPush
+      000158 4B 7F            [ 1]  589 	push	#0x7f
+                                    590 ; genSend
+      00015A A6 7F            [ 1]  591 	ld	a, #0x7f
+                                    592 ; genCall
+      00015C CDr00r00         [ 4]  593 	call	_WWDG_Init
+                                    594 ;	User/main.c: 105: while (1)
+                                    595 ; genLabel
+      00015F                        596 00134$:
+                                    597 ;	User/main.c: 107: msg = RevMsg(&MsgSystem);  //由消息触发
+                                    598 ; genSend
+      00015F AEr00r00         [ 2]  599 	ldw	x, #(_MsgSystem+0)
+                                    600 ; genCall
+      000162 CDr00r00         [ 4]  601 	call	_RevMsg
+                                    602 ;	User/main.c: 108: if (msg == 0)
+                                    603 ; genIfx
+      000165 5D               [ 2]  604 	tnzw	x
+                                    605 ; peephole j5 changed absolute to relative unconditional jump.
+      000166 27 F7            [ 1]  606 	jreq	00134$
+                                    607 ; peephole j10 removed jra by using inverse jump logic
+                                    608 ; peephole j30 removed unused label 00264$.
+                                    609 ;	User/main.c: 113: if (msg->msgtype == MSG_TIMER)
+                                    610 ; genPointerGet
+      000168 F6               [ 1]  611 	ld	a, (x)
+                                    612 ; genCmpEQorNE
+      000169 6B 13            [ 1]  613 	ld	(0x13, sp), a
+                                    614 ; peephole 4 removed redundant load from (0x13, sp) into a.
+      00016B 4A               [ 1]  615 	dec	a
+                                    616 ; peephole j5 changed absolute to relative unconditional jump.
+                                    617 ; peephole j10 removed jra by using inverse jump logic
+                                    618 ; peephole j30 removed unused label 00266$.
+                                    619 ; peephole j5 changed absolute to relative unconditional jump.
+      00016C 26 17            [ 1]  620 	jrne	00131$
+                                    621 ; peephole j7 removed jra by using inverse jump logic
+                                    622 ; peephole j30 removed unused label 00267$.
+                                    623 ; skipping generated iCode
+                                    624 ;	User/main.c: 115: A_Fxn();
+                                    625 ; genCall
+      00016E CDr00r00         [ 4]  626 	call	_A_Fxn
+                                    627 ;	User/main.c: 116: B_Fxn();
+                                    628 ; genCall
+      000171 CDr00r00         [ 4]  629 	call	_B_Fxn
+                                    630 ;	User/main.c: 117: C_Fxn();
+                                    631 ; genCall
+      000174 CDr00r00         [ 4]  632 	call	_C_Fxn
+                                    633 ;	User/main.c: 119: if (System_GetMode() == 0) //AC
+                                    634 ; genCall
+      000177 CDr00r00         [ 4]  635 	call	_System_GetMode
+                                    636 ; genIfx
+      00017A 4D               [ 1]  637 	tnz	a
+                                    638 ; peephole j5 changed absolute to relative unconditional jump.
+      00017B 26 03            [ 1]  639 	jrne	00107$
+                                    640 ; peephole j7 removed jra by using inverse jump logic
+                                    641 ; peephole j30 removed unused label 00268$.
+                                    642 ;	User/main.c: 121: Rs485_Proc();    //rs485通信处理
+                                    643 ; genCall
+      00017D CDr00r00         [ 4]  644 	call	_Rs485_Proc
+                                    645 ; genLabel
+      000180                        646 00107$:
+                                    647 ;	User/main.c: 123: Chk_State();
+                                    648 ; genCall
+      000180 CDr00r00         [ 4]  649 	call	_Chk_State
+                                    650 ; genGoto
+      000183 20 DA            [ 2]  651 	jra	00134$
+                                    652 ; peephole j5 changed absolute to relative unconditional jump.
+                                    653 ; genLabel
+      000185                        654 00131$:
+                                    655 ;	User/main.c: 128: Menu_Proc(msg->msgval1, msg->msgval2);
+                                    656 ; genPlus
+      000185 9F               [ 1]  657 	ld	a, xl
+      000186 AB 05            [ 1]  658 	add	a, #0x05
+      000188 6B 02            [ 1]  659 	ld	(0x02, sp), a
+      00018A 9E               [ 1]  660 	ld	a, xh
+      00018B A9 00            [ 1]  661 	adc	a, #0x00
+      00018D 6B 01            [ 1]  662 	ld	(0x01, sp), a
+                                    663 ; genPlus
+      00018F 5C               [ 1]  664 	incw	x
+      000190 1F 0D            [ 2]  665 	ldw	(0x0d, sp), x
+                                    666 ;	User/main.c: 126: else if (msg->msgtype == MSG_KEY_TIMER)
+                                    667 ; genCmpEQorNE
+      000192 7B 13            [ 1]  668 	ld	a, (0x13, sp)
+      000194 A1 02            [ 1]  669 	cp	a, #0x02
+                                    670 ; peephole j5 changed absolute to relative unconditional jump.
+                                    671 ; peephole j10 removed jra by using inverse jump logic
+                                    672 ; peephole j30 removed unused label 00270$.
+                                    673 ; peephole j5 changed absolute to relative unconditional jump.
+      000196 26 18            [ 1]  674 	jrne	00128$
+                                    675 ; peephole j7 removed jra by using inverse jump logic
+                                    676 ; peephole j30 removed unused label 00271$.
+                                    677 ; skipping generated iCode
+                                    678 ;	User/main.c: 128: Menu_Proc(msg->msgval1, msg->msgval2);
+                                    679 ; genPointerGet
+      000198 1E 01            [ 2]  680 	ldw	x, (0x01, sp)
+      00019A 90 93            [ 1]  681 	ldw	y, x
+      00019C 90 EE 02         [ 2]  682 	ldw	y, (0x2, y)
+      00019F FE               [ 2]  683 	ldw	x, (x)
+      0001A0 1F 10            [ 2]  684 	ldw	(0x10, sp), x
+                                    685 ; genPointerGet
+      0001A2 1E 0D            [ 2]  686 	ldw	x, (0x0d, sp)
+      0001A4 E6 03            [ 1]  687 	ld	a, (0x3, x)
+                                    688 ; genIPush
+      0001A6 90 89            [ 2]  689 	pushw	y
+      0001A8 1E 12            [ 2]  690 	ldw	x, (0x12, sp)
+      0001AA 89               [ 2]  691 	pushw	x
+                                    692 ; genSend
+                                    693 ; genCall
+      0001AB CDr00r00         [ 4]  694 	call	_Menu_Proc
+                                    695 ; genGoto
+      0001AE 20 AF            [ 2]  696 	jra	00134$
+                                    697 ; peephole j5 changed absolute to relative unconditional jump.
+                                    698 ; genLabel
+      0001B0                        699 00128$:
+                                    700 ;	User/main.c: 130: else if (msg->msgtype == MSG_COUNT)
+                                    701 ; genCmpEQorNE
+      0001B0 7B 13            [ 1]  702 	ld	a, (0x13, sp)
+      0001B2 A1 03            [ 1]  703 	cp	a, #0x03
+                                    704 ; peephole j5 changed absolute to relative unconditional jump.
+      0001B4 27 03            [ 1]  705 	jreq	00274$
+                                    706 ; peephole j10 removed jra by using inverse jump logic
+                                    707 ; peephole j30 removed unused label 00273$.
+      0001B6 CCr03r33         [ 2]  708 	jp	00125$
+      0001B9                        709 00274$:
+                                    710 ; skipping generated iCode
+                                    711 ;	User/main.c: 132: phase = (msg->msgval1 >> 24) & 0xff;
+                                    712 ; genPointerGet
+      0001B9 1E 0D            [ 2]  713 	ldw	x, (0x0d, sp)
+      0001BB 90 93            [ 1]  714 	ldw	y, x
+      0001BD 90 EE 02         [ 2]  715 	ldw	y, (0x2, y)
+      0001C0 17 11            [ 2]  716 	ldw	(0x11, sp), y
+      0001C2 FE               [ 2]  717 	ldw	x, (x)
+      0001C3 1F 0F            [ 2]  718 	ldw	(0x0f, sp), x
+                                    719 ; genGetByte
+      0001C5 7B 0F            [ 1]  720 	ld	a, (0x0f, sp)
+                                    721 ;	User/main.c: 133: if (phase == A || phase == B || phase == C)
+                                    722 ; genCmpEQorNE
+      0001C7 6B 13            [ 1]  723 	ld	(0x13, sp), a
+                                    724 ; peephole 4 removed redundant load from (0x13, sp) into a.
+      0001C9 4A               [ 1]  725 	dec	a
+                                    726 ; peephole j5 changed absolute to relative unconditional jump.
+      0001CA 27 0C            [ 1]  727 	jreq	00113$
+                                    728 ; peephole j10 removed jra by using inverse jump logic
+                                    729 ; peephole j30 removed unused label 00276$.
+                                    730 ; skipping generated iCode
+                                    731 ; genCmpEQorNE
+      0001CC 7B 13            [ 1]  732 	ld	a, (0x13, sp)
+      0001CE A1 02            [ 1]  733 	cp	a, #0x02
+                                    734 ; peephole j5 changed absolute to relative unconditional jump.
+      0001D0 27 06            [ 1]  735 	jreq	00113$
+                                    736 ; peephole j10 removed jra by using inverse jump logic
+                                    737 ; peephole j30 removed unused label 00279$.
+                                    738 ; skipping generated iCode
+                                    739 ; genCmpEQorNE
+      0001D2 7B 13            [ 1]  740 	ld	a, (0x13, sp)
+      0001D4 A1 04            [ 1]  741 	cp	a, #0x04
+                                    742 ; peephole j5 changed absolute to relative unconditional jump.
+                                    743 ; peephole j10 removed jra by using inverse jump logic
+                                    744 ; peephole j30 removed unused label 00282$.
+                                    745 ; peephole j5 changed absolute to relative unconditional jump.
+      0001D6 26 87            [ 1]  746 	jrne	00134$
+                                    747 ; peephole j7 removed jra by using inverse jump logic
+                                    748 ; peephole j30 removed unused label 00283$.
+                                    749 ; skipping generated iCode
+                                    750 ; genLabel
+      0001D8                        751 00113$:
+                                    752 ;	User/main.c: 135: tlen = (msg->msgval1 & 0x00ffffff); //时长
+                                    753 ; genAnd
+      0001D8 16 11            [ 2]  754 	ldw	y, (0x11, sp)
+      0001DA 17 05            [ 2]  755 	ldw	(0x05, sp), y
+      0001DC 7B 10            [ 1]  756 	ld	a, (0x10, sp)
+      0001DE 6B 04            [ 1]  757 	ld	(0x04, sp), a
+      0001E0 0F 03            [ 1]  758 	clr	(0x03, sp)
+                                    759 ;	User/main.c: 136: interval = msg->msgval2 > last_t ? msg->msgval2 - last_t : last_t - msg->msgval2;
+                                    760 ; genPointerGet
+      0001E2 1E 01            [ 2]  761 	ldw	x, (0x01, sp)
+      0001E4 90 93            [ 1]  762 	ldw	y, x
+      0001E6 90 EE 02         [ 2]  763 	ldw	y, (0x2, y)
+      0001E9 17 0D            [ 2]  764 	ldw	(0x0d, sp), y
+      0001EB FE               [ 2]  765 	ldw	x, (x)
+      0001EC 1F 0B            [ 2]  766 	ldw	(0x0b, sp), x
+                                    767 ; genCmp
+                                    768 ; genCmpTnz
+      0001EE CEu00u03         [ 2]  769 	ldw	x, _main_last_t_10000_693+2
+      0001F1 13 0D            [ 2]  770 	cpw	x, (0x0d, sp)
+      0001F3 C6u00u02         [ 1]  771 	ld	a, _main_last_t_10000_693+1
+      0001F6 12 0C            [ 1]  772 	sbc	a, (0x0c, sp)
+      0001F8 C6u00u01         [ 1]  773 	ld	a, _main_last_t_10000_693+0
+      0001FB 12 0B            [ 1]  774 	sbc	a, (0x0b, sp)
+                                    775 ; peephole j5 changed absolute to relative unconditional jump.
+      0001FD 24 15            [ 1]  776 	jrnc	00140$
+                                    777 ; peephole j6 removed jra by using inverse jump logic
+                                    778 ; peephole j30 removed unused label 00284$.
+                                    779 ; skipping generated iCode
+                                    780 ; genMinus
+      0001FF 1E 0D            [ 2]  781 	ldw	x, (0x0d, sp)
+      000201 72 B0u00u03      [ 2]  782 	subw	x, _main_last_t_10000_693+2
+      000205 1F 11            [ 2]  783 	ldw	(0x11, sp), x
+      000207 7B 0C            [ 1]  784 	ld	a, (0x0c, sp)
+      000209 C2u00u02         [ 1]  785 	sbc	a, _main_last_t_10000_693+1
+      00020C 97               [ 1]  786 	ld	xl, a
+      00020D 7B 0B            [ 1]  787 	ld	a, (0x0b, sp)
+      00020F C2u00u01         [ 1]  788 	sbc	a, _main_last_t_10000_693+0
+                                    789 ; genGoto
+      000212 20 13            [ 2]  790 	jra	00141$
+                                    791 ; peephole j5 changed absolute to relative unconditional jump.
+                                    792 ; genLabel
+      000214                        793 00140$:
+                                    794 ; genMinus
+      000214 CEu00u03         [ 2]  795 	ldw	x, _main_last_t_10000_693+2
+      000217 72 F0 0D         [ 2]  796 	subw	x, (0x0d, sp)
+      00021A 1F 11            [ 2]  797 	ldw	(0x11, sp), x
+      00021C C6u00u02         [ 1]  798 	ld	a, _main_last_t_10000_693+1
+      00021F 12 0C            [ 1]  799 	sbc	a, (0x0c, sp)
+      000221 97               [ 1]  800 	ld	xl, a
+      000222 C6u00u01         [ 1]  801 	ld	a, _main_last_t_10000_693+0
+      000225 12 0B            [ 1]  802 	sbc	a, (0x0b, sp)
+                                    803 ; genLabel
+      000227                        804 00141$:
+                                    805 ; genAssign
+      000227 41               [ 1]  806 	exg	a, xl
+      000228 6B 10            [ 1]  807 	ld	(0x10, sp), a
+      00022A 41               [ 1]  808 	exg	a, xl
+      00022B 6B 0F            [ 1]  809 	ld	(0x0f, sp), a
+                                    810 ;	User/main.c: 144: SendMsg(&MsgSystem, MSG_KEY_TIMER, FRESH_DATA, (0x00ffffff & tlen) | (phase32 << 24));
+                                    811 ; genAnd
+      00022D 16 05            [ 2]  812 	ldw	y, (0x05, sp)
+      00022F 17 09            [ 2]  813 	ldw	(0x09, sp), y
+      000231 7B 04            [ 1]  814 	ld	a, (0x04, sp)
+      000233 6B 08            [ 1]  815 	ld	(0x08, sp), a
+      000235 0F 07            [ 1]  816 	clr	(0x07, sp)
+                                    817 ;	User/main.c: 137: if (interval <= 5) //间隔小于5ms判定为两相同时雷击
+                                    818 ; genCmp
+                                    819 ; genCmpTnz
+      000237 AE 00 05         [ 2]  820 	ldw	x, #0x0005
+      00023A 13 11            [ 2]  821 	cpw	x, (0x11, sp)
+      00023C 4F               [ 1]  822 	clr	a
+      00023D 12 10            [ 1]  823 	sbc	a, (0x10, sp)
+      00023F 4F               [ 1]  824 	clr	a
+      000240 12 0F            [ 1]  825 	sbc	a, (0x0f, sp)
+                                    826 ; peephole j5 changed absolute to relative unconditional jump.
+      000242 25 6F            [ 1]  827 	jrc	00111$
+                                    828 ; peephole j9 removed jra by using inverse jump logic
+                                    829 ; peephole j30 removed unused label 00285$.
+                                    830 ; skipping generated iCode
+                                    831 ;	User/main.c: 139: Record_GetStat(phase + last_ph)->tscount += 1; //两相总次数统计
+                                    832 ; genPlus
+      000244 7B 13            [ 1]  833 	ld	a, (0x13, sp)
+      000246 CBu00u00         [ 1]  834 	add	a, _main_last_ph_10000_693+0
+                                    835 ; genSend
+                                    836 ; genCall
+      000249 CDr00r00         [ 4]  837 	call	_Record_GetStat
+                                    838 ; genCast
+                                    839 ; genAssign
+                                    840 ; genPointerGet
+                                    841 ; peephole 5w replaced exgw-ldw by ldw.
+      00024C 90 93            [ 1]  842 	ldw	y, x
+      00024E FE               [ 2]  843 	ldw	x, (x)
+                                    844 ; genCast
+                                    845 ; genAssign
+                                    846 ; genPlus
+      00024F 5C               [ 1]  847 	incw	x
+                                    848 ; genCast
+                                    849 ; genAssign
+                                    850 ; genPointerSet
+      000250 90 FF            [ 2]  851 	ldw	(y), x
+                                    852 ;	User/main.c: 140: Record_GetStat(phase + last_ph)->tltotal += tlen; //两相总时长统计
+                                    853 ; genPlus
+      000252 7B 13            [ 1]  854 	ld	a, (0x13, sp)
+      000254 CBu00u00         [ 1]  855 	add	a, _main_last_ph_10000_693+0
+                                    856 ; genSend
+                                    857 ; genCall
+      000257 CDr00r00         [ 4]  858 	call	_Record_GetStat
+                                    859 ; genPlus
+      00025A 1C 00 06         [ 2]  860 	addw	x, #0x0006
+                                    861 ; genPointerGet
+      00025D 90 93            [ 1]  862 	ldw	y, x
+      00025F 90 EE 02         [ 2]  863 	ldw	y, (0x2, y)
+      000262 E6 01            [ 1]  864 	ld	a, (0x1, x)
+      000264 88               [ 1]  865 	push	a
+      000265 F6               [ 1]  866 	ld	a, (x)
+      000266 6B 0C            [ 1]  867 	ld	(0x0c, sp), a
+      000268 84               [ 1]  868 	pop	a
+                                    869 ; genPlus
+      000269 72 F9 05         [ 2]  870 	addw	y, (0x05, sp)
+      00026C 19 04            [ 1]  871 	adc	a, (0x04, sp)
+      00026E 6B 10            [ 1]  872 	ld	(0x10, sp), a
+      000270 7B 0B            [ 1]  873 	ld	a, (0x0b, sp)
+      000272 19 03            [ 1]  874 	adc	a, (0x03, sp)
+      000274 6B 0F            [ 1]  875 	ld	(0x0f, sp), a
+                                    876 ; genPointerSet
+      000276 EF 02            [ 2]  877 	ldw	(0x2, x), y
+      000278 16 0F            [ 2]  878 	ldw	y, (0x0f, sp)
+      00027A FF               [ 2]  879 	ldw	(x), y
+                                    880 ;	User/main.c: 141: Record_GetStat(phase + last_ph)->tlmax = tlen;
+                                    881 ; genPlus
+      00027B 7B 13            [ 1]  882 	ld	a, (0x13, sp)
+      00027D CBu00u00         [ 1]  883 	add	a, _main_last_ph_10000_693+0
+                                    884 ; genSend
+                                    885 ; genCall
+      000280 CDr00r00         [ 4]  886 	call	_Record_GetStat
+                                    887 ; genPlus
+      000283 5C               [ 1]  888 	incw	x
+      000284 5C               [ 1]  889 	incw	x
+                                    890 ; genPointerSet
+      000285 16 05            [ 2]  891 	ldw	y, (0x05, sp)
+      000287 EF 02            [ 2]  892 	ldw	(0x2, x), y
+      000289 16 03            [ 2]  893 	ldw	y, (0x03, sp)
+      00028B FF               [ 2]  894 	ldw	(x), y
+                                    895 ;	User/main.c: 142: phase += last_ph;
+                                    896 ; genPlus
+      00028C 7B 13            [ 1]  897 	ld	a, (0x13, sp)
+      00028E CBu00u00         [ 1]  898 	add	a, _main_last_ph_10000_693+0
+                                    899 ;	User/main.c: 143: phase32 = phase;
+                                    900 ; genCast
+                                    901 ; genAssign
+      000291 6B 13            [ 1]  902 	ld	(0x13, sp), a
+                                    903 ; peephole 4 removed redundant load from (0x13, sp) into a.
+                                    904 ; peephole 3 removed dead clrw of x.
+                                    905 ; peephole 3 removed dead clrw of y.
+                                    906 ;	User/main.c: 144: SendMsg(&MsgSystem, MSG_KEY_TIMER, FRESH_DATA, (0x00ffffff & tlen) | (phase32 << 24));
+                                    907 ; genLeftShiftLiteral
+                                    908 ; peephole 3 removed dead clrw of x.
+      000293 0F 10            [ 1]  909 	clr	(0x10, sp)
+                                    910 ; genOr
+      000295 90 95            [ 1]  911 	ld	yh, a
+      000297 1E 09            [ 2]  912 	ldw	x, (0x09, sp)
+      000299 7B 08            [ 1]  913 	ld	a, (0x08, sp)
+      00029B 90 97            [ 1]  914 	ld	yl, a
+                                    915 ; genIPush
+      00029D 89               [ 2]  916 	pushw	x
+      00029E 90 89            [ 2]  917 	pushw	y
+                                    918 ; genIPush
+      0002A0 4B 62            [ 1]  919 	push	#0x62
+      0002A2 5F               [ 1]  920 	clrw	x
+      0002A3 89               [ 2]  921 	pushw	x
+      0002A4 4B 00            [ 1]  922 	push	#0x00
+                                    923 ; genSend
+      0002A6 A6 02            [ 1]  924 	ld	a, #0x02
+                                    925 ; genSend
+      0002A8 AEr00r00         [ 2]  926 	ldw	x, #(_MsgSystem+0)
+                                    927 ; genCall
+      0002AB CDr00r00         [ 4]  928 	call	_SendMsg
+                                    929 ;	User/main.c: 145: Storage_SaveAllStats(); //掉电保护：立即保存统计数据
+                                    930 ; genCall
+      0002AE CDr00r00         [ 4]  931 	call	_Storage_SaveAllStats
+                                    932 ; genGoto
+      0002B1 20 65            [ 2]  933 	jra	00112$
+                                    934 ; peephole j5 changed absolute to relative unconditional jump.
+                                    935 ; genLabel
+      0002B3                        936 00111$:
+                                    937 ;	User/main.c: 149: if (single_trg == 1)
+                                    938 ; genCmpEQorNE
+      0002B3 C6u00u00         [ 1]  939 	ld	a, _single_trg+0
+      0002B6 4A               [ 1]  940 	dec	a
+                                    941 ; peephole j5 changed absolute to relative unconditional jump.
+                                    942 ; peephole j10 removed jra by using inverse jump logic
+                                    943 ; peephole j30 removed unused label 00287$.
+                                    944 ; peephole j5 changed absolute to relative unconditional jump.
+      0002B7 26 5F            [ 1]  945 	jrne	00112$
+                                    946 ; peephole j7 removed jra by using inverse jump logic
+                                    947 ; peephole j30 removed unused label 00288$.
+                                    948 ; skipping generated iCode
+                                    949 ;	User/main.c: 151: Record_GetStat(phase)->tscount += 1; //A相总次数统计
+                                    950 ; genSend
+      0002B9 7B 13            [ 1]  951 	ld	a, (0x13, sp)
+                                    952 ; genCall
+      0002BB CDr00r00         [ 4]  953 	call	_Record_GetStat
+                                    954 ; genCast
+                                    955 ; genAssign
+                                    956 ; genPointerGet
+                                    957 ; peephole 5w replaced exgw-ldw by ldw.
+      0002BE 90 93            [ 1]  958 	ldw	y, x
+      0002C0 FE               [ 2]  959 	ldw	x, (x)
+                                    960 ; genCast
+                                    961 ; genAssign
+                                    962 ; genPlus
+      0002C1 5C               [ 1]  963 	incw	x
+                                    964 ; genCast
+                                    965 ; genAssign
+                                    966 ; genPointerSet
+      0002C2 90 FF            [ 2]  967 	ldw	(y), x
+                                    968 ;	User/main.c: 152: Record_GetStat(phase)->tltotal += tlen; //A相总时长统计
+                                    969 ; genSend
+      0002C4 7B 13            [ 1]  970 	ld	a, (0x13, sp)
+                                    971 ; genCall
+      0002C6 CDr00r00         [ 4]  972 	call	_Record_GetStat
+                                    973 ; genPlus
+      0002C9 1C 00 06         [ 2]  974 	addw	x, #0x0006
+                                    975 ; genPointerGet
+      0002CC 90 93            [ 1]  976 	ldw	y, x
+      0002CE 90 EE 02         [ 2]  977 	ldw	y, (0x2, y)
+      0002D1 E6 01            [ 1]  978 	ld	a, (0x1, x)
+      0002D3 6B 0C            [ 1]  979 	ld	(0x0c, sp), a
+      0002D5 F6               [ 1]  980 	ld	a, (x)
+                                    981 ; genPlus
+      0002D6 72 F9 05         [ 2]  982 	addw	y, (0x05, sp)
+      0002D9 88               [ 1]  983 	push	a
+      0002DA 7B 0D            [ 1]  984 	ld	a, (0x0d, sp)
+      0002DC 19 05            [ 1]  985 	adc	a, (0x05, sp)
+      0002DE 6B 11            [ 1]  986 	ld	(0x11, sp), a
+      0002E0 84               [ 1]  987 	pop	a
+      0002E1 19 03            [ 1]  988 	adc	a, (0x03, sp)
+      0002E3 6B 0F            [ 1]  989 	ld	(0x0f, sp), a
+                                    990 ; genPointerSet
+      0002E5 EF 02            [ 2]  991 	ldw	(0x2, x), y
+      0002E7 16 0F            [ 2]  992 	ldw	y, (0x0f, sp)
+      0002E9 FF               [ 2]  993 	ldw	(x), y
+                                    994 ;	User/main.c: 153: Record_GetStat(phase)->tlmax = tlen;
+                                    995 ; genSend
+      0002EA 7B 13            [ 1]  996 	ld	a, (0x13, sp)
+                                    997 ; genCall
+      0002EC CDr00r00         [ 4]  998 	call	_Record_GetStat
+                                    999 ; genPlus
+      0002EF 5C               [ 1] 1000 	incw	x
+      0002F0 5C               [ 1] 1001 	incw	x
+                                   1002 ; genPointerSet
+      0002F1 16 05            [ 2] 1003 	ldw	y, (0x05, sp)
+      0002F3 EF 02            [ 2] 1004 	ldw	(0x2, x), y
+      0002F5 16 03            [ 2] 1005 	ldw	y, (0x03, sp)
+      0002F7 FF               [ 2] 1006 	ldw	(x), y
+                                   1007 ;	User/main.c: 154: phase32 = phase;
+                                   1008 ; genCast
+                                   1009 ; genAssign
+      0002F8 7B 13            [ 1] 1010 	ld	a, (0x13, sp)
+                                   1011 ; peephole 3 removed dead clrw of x.
+                                   1012 ; peephole 3 removed dead clrw of y.
+                                   1013 ;	User/main.c: 155: SendMsg(&MsgSystem, MSG_KEY_TIMER, FRESH_DATA, (0x00ffffff & tlen) | (phase32 << 24));
+                                   1014 ; genLeftShiftLiteral
+                                   1015 ; peephole 3 removed dead clrw of x.
+      0002FA 0F 10            [ 1] 1016 	clr	(0x10, sp)
+                                   1017 ; genOr
+      0002FC 90 95            [ 1] 1018 	ld	yh, a
+      0002FE 1E 09            [ 2] 1019 	ldw	x, (0x09, sp)
+      000300 7B 08            [ 1] 1020 	ld	a, (0x08, sp)
+      000302 90 97            [ 1] 1021 	ld	yl, a
+                                   1022 ; genIPush
+      000304 89               [ 2] 1023 	pushw	x
+      000305 90 89            [ 2] 1024 	pushw	y
+                                   1025 ; genIPush
+      000307 4B 62            [ 1] 1026 	push	#0x62
+      000309 5F               [ 1] 1027 	clrw	x
+      00030A 89               [ 2] 1028 	pushw	x
+      00030B 4B 00            [ 1] 1029 	push	#0x00
+                                   1030 ; genSend
+      00030D A6 02            [ 1] 1031 	ld	a, #0x02
+                                   1032 ; genSend
+      00030F AEr00r00         [ 2] 1033 	ldw	x, #(_MsgSystem+0)
+                                   1034 ; genCall
+      000312 CDr00r00         [ 4] 1035 	call	_SendMsg
+                                   1036 ;	User/main.c: 156: Storage_SaveAllStats(); //掉电保护：立即保存统计数据
+                                   1037 ; genCall
+      000315 CDr00r00         [ 4] 1038 	call	_Storage_SaveAllStats
+                                   1039 ; genLabel
+      000318                       1040 00112$:
+                                   1041 ;	User/main.c: 159: single_trg = 0;
+                                   1042 ; genAssign
+      000318 72 5Fu00u00      [ 1] 1043 	clr	_single_trg+0
+                                   1044 ;	User/main.c: 161: last_ph = phase;
+                                   1045 ; genAssign
+      00031C 7B 13            [ 1] 1046 	ld	a, (0x13, sp)
+      00031E C7u00u00         [ 1] 1047 	ld	_main_last_ph_10000_693+0, a
+                                   1048 ;	User/main.c: 162: last_t = msg->msgval2; //保存上一次触发时间
+                                   1049 ; genPointerGet
+      000321 1E 01            [ 2] 1050 	ldw	x, (0x01, sp)
+      000323 90 93            [ 1] 1051 	ldw	y, x
+      000325 90 EE 02         [ 2] 1052 	ldw	y, (0x2, y)
+      000328 FE               [ 2] 1053 	ldw	x, (x)
+                                   1054 ; genAssign
+      000329 90 CFu00u03      [ 2] 1055 	ldw	_main_last_t_10000_693+2, y
+      00032D CFu00u01         [ 2] 1056 	ldw	_main_last_t_10000_693+0, x
+                                   1057 ; genGoto
+      000330 CCr01r5F         [ 2] 1058 	jp	00134$
+                                   1059 ; genLabel
+      000333                       1060 00125$:
+                                   1061 ;	User/main.c: 165: else if (msg->msgtype == MSG_ADC) //检测电池电压
+                                   1062 ; genCmpEQorNE
+      000333 7B 13            [ 1] 1063 	ld	a, (0x13, sp)
+      000335 A1 04            [ 1] 1064 	cp	a, #0x04
+                                   1065 ; peephole j5 changed absolute to relative unconditional jump.
+      000337 27 03            [ 1] 1066 	jreq	00291$
+                                   1067 ; peephole j10 removed jra by using inverse jump logic
+                                   1068 ; peephole j30 removed unused label 00290$.
+      000339 CCr01r5F         [ 2] 1069 	jp	00134$
+      00033C                       1070 00291$:
+                                   1071 ; skipping generated iCode
+                                   1072 ;	User/main.c: 167: if (msg->msgval1)
+                                   1073 ; genPointerGet
+      00033C 1E 0D            [ 2] 1074 	ldw	x, (0x0d, sp)
+      00033E 90 93            [ 1] 1075 	ldw	y, x
+      000340 90 EE 02         [ 2] 1076 	ldw	y, (0x2, y)
+      000343 FE               [ 2] 1077 	ldw	x, (x)
+                                   1078 ; genIfx
+      000344 90 5D            [ 2] 1079 	tnzw	y
+      000346 26 06            [ 1] 1080 	jrne	00292$
+      000348 5D               [ 2] 1081 	tnzw	x
+      000349 26 03            [ 1] 1082 	jrne	00292$
+      00034B CCr01r5F         [ 2] 1083 	jp	00134$
+      00034E                       1084 00292$:
+                                   1085 ;	User/main.c: 169: val = msg->msgval1 / 10;
+                                   1086 ; genIPush
+      00034E 4B 0A            [ 1] 1087 	push	#0x0a
+      000350 4B 00            [ 1] 1088 	push	#0x00
+      000352 4B 00            [ 1] 1089 	push	#0x00
+      000354 4B 00            [ 1] 1090 	push	#0x00
+                                   1091 ; genIPush
+      000356 90 89            [ 2] 1092 	pushw	y
+      000358 89               [ 2] 1093 	pushw	x
+                                   1094 ;	User/main.c: 170: uint32_t new_v = (uint32_t)(5017600 / val);
+                                   1095 ; genCall
+      000359 CDr00r00         [ 4] 1096 	call	__divulong
+      00035C 5B 08            [ 2] 1097 	addw	sp, #8
+                                   1098 ; genIPush
+      00035E 89               [ 2] 1099 	pushw	x
+      00035F 90 89            [ 2] 1100 	pushw	y
+                                   1101 ; genIPush
+      000361 4B 00            [ 1] 1102 	push	#0x00
+      000363 4B 90            [ 1] 1103 	push	#0x90
+      000365 4B 4C            [ 1] 1104 	push	#0x4c
+      000367 4B 00            [ 1] 1105 	push	#0x00
+                                   1106 ;	User/main.c: 171: if (Verfin == 0) {
+                                   1107 ; genCall
+      000369 CDr00r00         [ 4] 1108 	call	__divulong
+      00036C 5B 08            [ 2] 1109 	addw	sp, #8
+      00036E 1F 12            [ 2] 1110 	ldw	(0x12, sp), x
+      000370 17 10            [ 2] 1111 	ldw	(0x10, sp), y
+                                   1112 ; genIfx
+      000372 CEu00u02         [ 2] 1113 	ldw	x, _Verfin+2
+      000375 26 12            [ 1] 1114 	jrne	00118$
+                                   1115 ; peephole j22 jumped to 00118$ directly instead of via 00293$.
+      000377 CEu00u00         [ 2] 1116 	ldw	x, _Verfin+0
+                                   1117 ; peephole j30 removed unused label 00293$.
+                                   1118 ; peephole j5 changed absolute to relative unconditional jump.
+      00037A 26 0D            [ 1] 1119 	jrne	00118$
+                                   1120 ; peephole j7 removed jra by using inverse jump logic
+                                   1121 ; peephole j30 removed unused label 00294$.
+                                   1122 ;	User/main.c: 172: Verfin = new_v;
+                                   1123 ; genAssign
+      00037C 1E 12            [ 2] 1124 	ldw	x, (0x12, sp)
+      00037E CFu00u02         [ 2] 1125 	ldw	_Verfin+2, x
+      000381 1E 10            [ 2] 1126 	ldw	x, (0x10, sp)
+      000383 CFu00u00         [ 2] 1127 	ldw	_Verfin+0, x
+                                   1128 ; genGoto
+      000386 CCr01r5F         [ 2] 1129 	jp	00134$
+                                   1130 ; genLabel
+      000389                       1131 00118$:
+                                   1132 ;	User/main.c: 174: Verfin = (Verfin * 7 + new_v) >> 3; // IIR 平滑滤波 (避免图标频繁跳动)
+                                   1133 ; genIPush
+      000389 CEu00u02         [ 2] 1134 	ldw	x, _Verfin+2
+      00038C 89               [ 2] 1135 	pushw	x
+      00038D CEu00u00         [ 2] 1136 	ldw	x, _Verfin+0
+      000390 89               [ 2] 1137 	pushw	x
+                                   1138 ; genIPush
+      000391 4B 07            [ 1] 1139 	push	#0x07
+      000393 5F               [ 1] 1140 	clrw	x
+      000394 89               [ 2] 1141 	pushw	x
+      000395 4B 00            [ 1] 1142 	push	#0x00
+                                   1143 ; genCall
+      000397 CDr00r00         [ 4] 1144 	call	__mullong
+      00039A 5B 08            [ 2] 1145 	addw	sp, #8
+      00039C 51               [ 1] 1146 	exgw	x, y
+                                   1147 ; genPlus
+      00039D 72 F9 12         [ 2] 1148 	addw	y, (0x12, sp)
+      0003A0 9F               [ 1] 1149 	ld	a, xl
+      0003A1 19 11            [ 1] 1150 	adc	a, (0x11, sp)
+      0003A3 02               [ 1] 1151 	rlwa	x
+                                   1152 ; peephole r1 used rlwa.
+      0003A4 19 10            [ 1] 1153 	adc	a, (0x10, sp)
+      0003A6 95               [ 1] 1154 	ld	xh, a
+                                   1155 ; genRightShiftLiteral
+      0003A7 54               [ 2] 1156 	srlw	x
+      0003A8 90 56            [ 2] 1157 	rrcw	y
+      0003AA 54               [ 2] 1158 	srlw	x
+      0003AB 90 56            [ 2] 1159 	rrcw	y
+      0003AD 54               [ 2] 1160 	srlw	x
+      0003AE 90 56            [ 2] 1161 	rrcw	y
+                                   1162 ; genAssign
+      0003B0 90 CFu00u02      [ 2] 1163 	ldw	_Verfin+2, y
+      0003B4 CFu00u00         [ 2] 1164 	ldw	_Verfin+0, x
+                                   1165 ; genGoto
+                                   1166 ; genLabel
+                                   1167 ; peephole j30 removed unused label 00138$.
+                                   1168 ;	User/main.c: 180: }
+                                   1169 ; genEndFunction
+                                   1170 ; peephole 53 removed unreachable addw.
+      0003B7 CCr01r5F         [ 2] 1171 	jp	00134$
+                                   1172 ; peephole 52 removed unreachable ret.
+                                   1173 ;	Total main function size at codegen: 3 bytes.
+                                   1174 	.area CODE
+                                   1175 	.area CONST
+                                   1176 	.area INITIALIZER
+                                   1177 	.area CABS (ABS)

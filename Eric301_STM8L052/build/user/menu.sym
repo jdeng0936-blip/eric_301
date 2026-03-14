@@ -1,0 +1,171 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+    _ADC_Cmd                                                       ****** GX
+    _ADC_DMACmd                                                    ****** GX
+    _ADC_SoftwareStartConv                                         ****** GX
+    _Delay                                                         ****** GX
+  9 _Down_Five                                                     000EAD GR
+  9 _Draw_Page_Num                                                 000379 R
+  9 _Draw_Stat_Columns                                             0002B1 R
+  9 _Draw_Table_Header                                             000306 R
+  9 _DspFive                                                       000E0A GR
+  9 _DspFour                                                       000BE0 GR
+  9 _DspOne                                                        00039E GR
+  9 _DspOne_Plus                                                   000472 GR
+  9 _DspSix                                                        001068 GR
+  9 _DspThree                                                      000722 GR
+  9 _DspTwo                                                        000546 GR
+  9 _DspTwo_Plus                                                   000634 GR
+    _GPIO_Init                                                     ****** GX
+    _GPIO_ResetBits                                                ****** GX
+  9 _Left_Five                                                     000F71 GR
+  9 _Left_Four                                                     000C25 GR
+  7 _MenuTab                                                       000000 GR
+  9 _Menu_Five                                                     000F95 GR
+  9 _Menu_Four                                                     0010D9 GR
+  9 _Menu_Proc                                                     000000 GR
+  1 _Menu_Proc_disp_tag_10000_701                                  000032 R
+  1 _Menu_Proc_i_10000_701                                         000030 R
+  1 _Menu_Proc_key_val_10000_701                                   000033 R
+  1 _Menu_Proc_last_menu_10000_701                                 000031 R
+    _Record_GetLRecd                                               ****** GX
+    _Record_GetStat                                                ****** GX
+    _Record_LoadHistory                                            ****** GX
+    _Record_SaveNew                                                ****** GX
+  9 _Right_Five                                                    000F7E GR
+  9 _Right_Four                                                    000C33 GR
+  9 _Show_Phase_Rec                                                0009CC GR
+    _Storage_ClearHistory                                          ****** GX
+    _Storage_FactoryReset                                          ****** GX
+    _Storage_SaveAllStats                                          ****** GX
+    _Storage_SaveSettings                                          ****** GX
+  9 _Sys_Reset                                                     0010DC GR
+    _System_GetMode                                                ****** GX
+  9 _Up_Five                                                       000E0D GR
+    _Verfin                                                        ****** GX
+  7 ___str_0                                                       000090 R
+  7 ___str_1                                                       000095 R
+  7 ___str_10                                                      0000C3 R
+  7 ___str_11                                                      0000C7 R
+  7 ___str_12                                                      0000CB R
+  7 ___str_13                                                      0000CF R
+  7 ___str_14                                                      0000D3 R
+  7 ___str_15                                                      0000D7 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  7 ___str_16                                                      0000DB R
+  7 ___str_17                                                      0000DD R
+  7 ___str_18                                                      0000E1 R
+  7 ___str_19                                                      0000E5 R
+  7 ___str_2                                                       00009A R
+  7 ___str_20                                                      0000EF R
+  7 ___str_21                                                      0000F2 R
+  7 ___str_22                                                      0000F4 R
+  7 ___str_23                                                      0000F6 R
+  7 ___str_24                                                      0000FC R
+  7 ___str_25                                                      000106 R
+  7 ___str_26                                                      00010A R
+  7 ___str_27                                                      00010E R
+  7 ___str_28                                                      000112 R
+  7 ___str_29                                                      000116 R
+  7 ___str_3                                                       00009C R
+  7 ___str_30                                                      00011F R
+  7 ___str_31                                                      000123 R
+  7 ___str_32                                                      000129 R
+  7 ___str_33                                                      000138 R
+  7 ___str_34                                                      000147 R
+  7 ___str_35                                                      00015B R
+  7 ___str_36                                                      000160 R
+  7 ___str_37                                                      000165 R
+  7 ___str_38                                                      00016C R
+  7 ___str_39                                                      000171 R
+  7 ___str_4                                                       00009E R
+  7 ___str_40                                                      000176 R
+  7 ___str_41                                                      000179 R
+  7 ___str_42                                                      00017E R
+  7 ___str_43                                                      000180 R
+  7 ___str_44                                                      000182 R
+  7 ___str_45                                                      000197 R
+  7 ___str_46                                                      000199 R
+  7 ___str_47                                                      00019B R
+  7 ___str_48                                                      0001A1 R
+  7 ___str_49                                                      0001A4 R
+  7 ___str_5                                                       0000A4 R
+  7 ___str_50                                                      0001AA R
+  7 ___str_51                                                      0001B2 R
+  7 ___str_52                                                      0001B4 R
+  7 ___str_53                                                      0001BD R
+  7 ___str_54                                                      0001C7 R
+  7 ___str_55                                                      0001CB R
+  7 ___str_56                                                      0001CE R
+  7 ___str_6                                                       0000AA R
+  7 ___str_7                                                       0000B1 R
+  7 ___str_8                                                       0000B4 R
+  7 ___str_9                                                       0000B9 R
+    __divulong                                                     ****** GX
+    __modsint                                                      ****** GX
+    __modulong                                                     ****** GX
+    __mulint                                                       ****** GX
+    __mullong                                                      ****** GX
+  8 __xinit__adjustdt                                              000001 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 3
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  8 __xinit__delay_halt                                            000026 R
+  8 __xinit__language                                              000027 R
+  8 __xinit__menu_index                                            000000 R
+  2 _adjustdt                                                      000001 GR
+    _clear_screen                                                  ****** GX
+    _data_index                                                    ****** GX
+  1 _datestr                                                       000000 GR
+  2 _delay_halt                                                    000026 GR
+  2 _language                                                      000027 GR
+    _lcd_init                                                      ****** GX
+    _memset                                                        ****** GX
+  2 _menu_index                                                    000000 GR
+    _mini_sprintf                                                  ****** GX
+    _r485id                                                        ****** GX
+    _rtc_get_datetime                                              ****** GX
+    _rtc_set_datetime                                              ****** GX
+    _selfid                                                        ****** GX
+  9 _show_datetime                                                 000C42 GR
+  1 _show_datetime_flag_10000_755                                  000034 R
+    _show_hz_12x12                                                 ****** GX
+    _show_str_7x8                                                  ****** GX
+    _show_str_8x12                                                 ****** GX
+    _strokeA                                                       ****** GX
+    _strokeB                                                       ****** GX
+    _strokeC                                                       ****** GX
+  1 _tempstr                                                       000020 GR
+  1 _timestr                                                       000010 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 4
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size     35   flags    0
+   2 INITIALIZED                                size     28   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size     10   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size    1D1   flags    0
+   8 INITIALIZER                                size     28   flags    0
+   9 CODE                                       size   10DF   flags    0
+   A CABS                                       size      0   flags    8
+

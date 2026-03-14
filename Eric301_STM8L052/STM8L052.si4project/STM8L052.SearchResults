@@ -1,0 +1,140 @@
+---- adjustdt Matches (229 in 5 files) ----
+STM8L052.SearchResults (D:\projects\Eric301_STM8L052\STM8L052.si4project) line 1 : ---- adjustdt Matches (#count#) ----
+IIC_Init in eric_driver.c (User) : 	adjustdt.dt[11]=I2C_ReadByte(0xa0,80);//语言选择
+IIC_Init in eric_driver.c (User) :     language= adjustdt.dt[11];
+rtc_set_datetime in eric_driver.c (User) :     if(RTC_DateStr.RTC_Year != adjustdt.dt[0])
+rtc_set_datetime in eric_driver.c (User) :     if(RTC_DateStr.RTC_Month != (RTC_Month_TypeDef)adjustdt.dt[1])
+rtc_set_datetime in eric_driver.c (User) :     if(RTC_DateStr.RTC_Date != adjustdt.dt[2])
+rtc_set_datetime in eric_driver.c (User) :     if(RTC_TimeStr.RTC_Hours = adjustdt.dt[3])
+rtc_set_datetime in eric_driver.c (User) :     if(RTC_TimeStr.RTC_Minutes= adjustdt.dt[4])
+rtc_set_datetime in eric_driver.c (User) :         RTC_DateStr.RTC_Year = adjustdt.dt[0];
+rtc_set_datetime in eric_driver.c (User) :         RTC_DateStr.RTC_Month= (RTC_Month_TypeDef)adjustdt.dt[1];
+rtc_set_datetime in eric_driver.c (User) :         RTC_DateStr.RTC_Date = adjustdt.dt[2];
+rtc_set_datetime in eric_driver.c (User) :         RTC_TimeStr.RTC_Hours = adjustdt.dt[3];
+rtc_set_datetime in eric_driver.c (User) :         RTC_TimeStr.RTC_Minutes= adjustdt.dt[4];
+rtc_set_datetime in eric_driver.c (User) :         //RTC_TimeStr.RTC_Seconds = adjustdt.dt[5];//秒不改
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[0]=RTC_DateStr.RTC_Year & 0xff;
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[1]=RTC_DateStr.RTC_Month & 0xff;
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[2]=RTC_DateStr.RTC_Date & 0xff;
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[3]=RTC_TimeStr.RTC_Hours & 0xff;
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[4]=RTC_TimeStr.RTC_Minutes & 0xff;
+rtc_get_datetime in eric_driver.c (User) :     adjustdt.dt[5]=RTC_TimeStr.RTC_Seconds & 0xff;
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[0] = (val2 & 0xff);
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[1] = (val2 & 0xff);
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[2] = (val2 & 0xff);
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[3] = (val2 & 0xff);
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[4] = (val2 & 0xff);
+Rs485_GetCfg in eric_proc.c (User) : 				adjustdt.dt[5] = (val2 & 0xff);
+menu.c (User) line 43 : TAdjust adjustdt=
+Menu_Proc in menu.c (User) :             memcpy((uint8_t *)&recd,(uint8_t *)adjustdt.dt,6);
+DspOne in menu.c (User) :     if(adjustdt.dt[11])
+DspOne_Plus in menu.c (User) :     if(adjustdt.dt[11])
+DspTwo in menu.c (User) :     if(adjustdt.dt[11])
+DspTwo_Plus in menu.c (User) :     if(adjustdt.dt[11])
+DspThree in menu.c (User) :     if(adjustdt.dt[11])
+DspThree in menu.c (User) :     adjustdt.dt[10]=0;
+DspThree in menu.c (User) :     sprintf(datestr, "%04d-%02d-%02d",adjustdt.dt[0]+2000,adjustdt.dt[1],adjustdt.dt[2]);
+DspThree in menu.c (User) :     sprintf(timestr, "%02d:%02d:%02d",adjustdt.dt[3],adjustdt.dt[4],adjustdt.dt[5]);
+DspThree in menu.c (User) :     adjustdt.dt[6]= 0xff&(selfid/1000000);
+DspThree in menu.c (User) :     adjustdt.dt[7]= (selfid/10000)%100;
+DspThree in menu.c (User) :     adjustdt.dt[8]= (selfid/100)%100;
+DspThree in menu.c (User) :     adjustdt.dt[9]= selfid%100;
+DspThree in menu.c (User) :     sprintf(tempstr,"ID: %02d%02d%02d%02d",adjustdt.dt[6],adjustdt.dt[7],adjustdt.dt[8],adjustdt.dt[9]);
+Show_Phase_Rec in menu.c (User) :     if(adjustdt.dt[11])
+Show_Phase_Rec in menu.c (User) :     if(adjustdt.dt[11])
+DspFour in menu.c (User) :     if(adjustdt.dt[11])
+show_datetime in menu.c (User) :     sprintf(datestr, "%04d-%02d-%02d",adjustdt.dt[0]+2000,adjustdt.dt[1],adjustdt.dt[2]);
+show_datetime in menu.c (User) :     sprintf(timestr, "%02d:%02d:%02d",adjustdt.dt[3],adjustdt.dt[4],adjustdt.dt[5]);
+show_datetime in menu.c (User) :     sprintf(tempstr,"ID: %02d%02d%02d%02d",adjustdt.dt[6],adjustdt.dt[7],adjustdt.dt[8],adjustdt.dt[9]);
+show_datetime in menu.c (User) :     if(adjustdt.dt[10])//出厂设置
+show_datetime in menu.c (User) :         show_str_8x12(adjustdt.pos[10].y,adjustdt.pos[10].x,"J");
+show_datetime in menu.c (User) :         show_str_8x12(adjustdt.pos[10].y,adjustdt.pos[10].x,"K");
+show_datetime in menu.c (User) :     if(adjustdt.dt[11])//中文界面下显示 “EN”
+show_datetime in menu.c (User) :         show_str_8x12(adjustdt.pos[11].y,adjustdt.pos[11].x,"WK");
+show_datetime in menu.c (User) :         show_hz_12x12(adjustdt.pos[11].y,adjustdt.pos[11].x,"a");
+show_datetime in menu.c (User) :     show_str_8x12(adjustdt.pos[adjustdt.index].y,adjustdt.pos[adjustdt.index].x,(uint8_t *)tempstr);
+Up_Five in menu.c (User) :     if(adjustdt.index==10)//Y/N 恢复出厂设置
+Up_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index])
+Up_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=0;
+Up_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=1;
+Up_Five in menu.c (User) :     else if(adjustdt.index==11)//中/英 
+Up_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index])
+Up_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=0;
+Up_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=1;
+Up_Five in menu.c (User) :         adjustdt.dt[adjustdt.index]++;
+Up_Five in menu.c (User) :         if(adjustdt.index==1)//月份
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>12)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=1;
+Up_Five in menu.c (User) :         else if(adjustdt.index==2)//日
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>31)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=1;
+Up_Five in menu.c (User) :         else if(adjustdt.index==3)//24小时制
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>23)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=0;
+Up_Five in menu.c (User) :         else if(adjustdt.index==4)//分
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>59)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=0;
+Up_Five in menu.c (User) :         else if(adjustdt.index==5)//秒
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>59)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=0;
+Up_Five in menu.c (User) :         else if(adjustdt.index>5 && adjustdt.index<10 )//ID 6 ~ 9
+Up_Five in menu.c (User) :             if(adjustdt.dt[adjustdt.index]>99)
+Up_Five in menu.c (User) :                 adjustdt.dt[adjustdt.index]=0;
+Down_Five in menu.c (User) :     if(adjustdt.index==0)//年
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :     else if(adjustdt.index==1)//月份
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>=1)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=12;
+Down_Five in menu.c (User) :     else if(adjustdt.index==2)//日
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>=1)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=31;
+Down_Five in menu.c (User) :     else if(adjustdt.index==3)//24小时制
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         else if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=23;
+Down_Five in menu.c (User) :     else if(adjustdt.index==4)//分
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         else if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=59;
+Down_Five in menu.c (User) :     else if(adjustdt.index==5)//秒
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         else if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=59;
+Down_Five in menu.c (User) :     else if(adjustdt.index>5 && adjustdt.index<10 )//ID
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index]>0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]--;
+Down_Five in menu.c (User) :         else if(adjustdt.dt[adjustdt.index]==0)
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=99;
+Down_Five in menu.c (User) :     else if(adjustdt.index==10)//Y/N
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index])
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=0;
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=1;
+Down_Five in menu.c (User) :     else if(adjustdt.index==11)//中/英
+Down_Five in menu.c (User) :         if(adjustdt.dt[adjustdt.index])
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=0;
+Down_Five in menu.c (User) :             adjustdt.dt[adjustdt.index]=1;
+Left_Five in menu.c (User) :     //show_str_7x8(adjustdt.pos[adjustdt.index].y,adjustdt.pos[adjustdt.index].x,"  ");
+Left_Five in menu.c (User) :     if(adjustdt.index)
+Left_Five in menu.c (User) :         adjustdt.index--;
+Left_Five in menu.c (User) :         adjustdt.index=11;
+Left_Five in menu.c (User) :     //show_str_7x8(adjustdt.pos[adjustdt.index].y,adjustdt.pos[adjustdt.index].x,"--");
+Right_Five in menu.c (User) :     //show_str_7x8(adjustdt.pos[adjustdt.index].y,adjustdt.pos[adjustdt.index].x,"  ");
+Right_Five in menu.c (User) :     adjustdt.index=(adjustdt.index+1)%12;
+Right_Five in menu.c (User) :     //show_str_7x8(adjustdt.pos[adjustdt.index].y,adjustdt.pos[adjustdt.index].x,"--");
+Menu_Five in menu.c (User) :     id=(adjustdt.dt[6]*1000000) + (adjustdt.dt[7]*10000) + (adjustdt.dt[8]*100) + adjustdt.dt[9];
+Menu_Five in menu.c (User) :         I2C_WriteByte(0xa0,252,adjustdt.dt[6]);
+Menu_Five in menu.c (User) :         I2C_WriteByte(0xa0,253,adjustdt.dt[7]);
+Menu_Five in menu.c (User) :         I2C_WriteByte(0xa0,254,adjustdt.dt[8]);
+Menu_Five in menu.c (User) :         I2C_WriteByte(0xa0,255,adjustdt.dt[9]);
+Menu_Five in menu.c (User) :     if(language != adjustdt.dt[11])
+Menu_Five in menu.c (User) :         I2C_WriteByte(0xa0,80,adjustdt.dt[11]);
+Menu_Five in menu.c (User) :     if(adjustdt.dt[10])//恢复出厂设置
+menu.h (User) line 39 : extern TAdjust adjustdt;

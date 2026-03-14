@@ -1,0 +1,193 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8l15x_wwdg
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _WWDG_Init
+                                     11 	.globl _WWDG_SetWindowValue
+                                     12 	.globl _WWDG_SetCounter
+                                     13 	.globl _WWDG_Enable
+                                     14 	.globl _WWDG_GetCounter
+                                     15 	.globl _WWDG_SWReset
+                                     16 ;--------------------------------------------------------
+                                     17 ; ram data
+                                     18 ;--------------------------------------------------------
+                                     19 	.area DATA
+                                     20 ;--------------------------------------------------------
+                                     21 ; ram data
+                                     22 ;--------------------------------------------------------
+                                     23 	.area INITIALIZED
+                                     24 ;--------------------------------------------------------
+                                     25 ; absolute external ram data
+                                     26 ;--------------------------------------------------------
+                                     27 	.area DABS (ABS)
+                                     28 
+                                     29 ; default segment ordering for linker
+                                     30 	.area HOME
+                                     31 	.area GSINIT
+                                     32 	.area GSFINAL
+                                     33 	.area CONST
+                                     34 	.area INITIALIZER
+                                     35 	.area CODE
+                                     36 
+                                     37 ;--------------------------------------------------------
+                                     38 ; global & static initialisations
+                                     39 ;--------------------------------------------------------
+                                     40 	.area HOME
+                                     41 	.area GSINIT
+                                     42 	.area GSFINAL
+                                     43 	.area GSINIT
+                                     44 ;--------------------------------------------------------
+                                     45 ; Home
+                                     46 ;--------------------------------------------------------
+                                     47 	.area HOME
+                                     48 	.area HOME
+                                     49 ;--------------------------------------------------------
+                                     50 ; code
+                                     51 ;--------------------------------------------------------
+                                     52 	.area CODE
+                                     53 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 119: void WWDG_Init(uint8_t Counter, uint8_t WindowValue)
+                                     54 ; genLabel
+                                     55 ;	-----------------------------------------
+                                     56 ;	 function WWDG_Init
+                                     57 ;	-----------------------------------------
+                                     58 ;	Register assignment is optimal.
+                                     59 ;	Stack space usage: 0 bytes.
+      00EC94                         60 _WWDG_Init:
+                                     61 ; genReceive
+                                     62 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 124: WWDG->WR = WWDG_WR_RESET_VALUE;
+                                     63 ; genPointerSet
+      00EC94 35 7F 50 D4      [ 1]   64 	mov	0x50d4+0, #0x7f
+                                     65 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 125: WWDG->CR = (uint8_t)(WWDG_CR_WDGA | Counter);
+                                     66 ; genOr
+      00EC98 AA 80            [ 1]   67 	or	a, #0x80
+                                     68 ; genPointerSet
+      00EC9A C7 50 D3         [ 1]   69 	ld	0x50d3, a
+                                     70 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 126: WWDG->WR = (uint8_t)((uint8_t)BIT_MASK & (uint8_t) WindowValue);
+                                     71 ; genAnd
+      00EC9D 7B 03            [ 1]   72 	ld	a, (0x03, sp)
+      00EC9F A4 7F            [ 1]   73 	and	a, #0x7f
+                                     74 ; genPointerSet
+      00ECA1 C7 50 D4         [ 1]   75 	ld	0x50d4, a
+                                     76 ; genLabel
+                                     77 ; peephole j30 removed unused label 00101$.
+                                     78 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 127: }
+                                     79 ; genEndFunction
+      00ECA4 85               [ 2]   80 	popw	x
+      00ECA5 84               [ 1]   81 	pop	a
+      00ECA6 FC               [ 2]   82 	jp	(x)
+                                     83 ;	Total WWDG_Init function size at codegen: 3 bytes.
+                                     84 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 135: void WWDG_SetWindowValue(uint8_t WindowValue)
+                                     85 ; genLabel
+                                     86 ;	-----------------------------------------
+                                     87 ;	 function WWDG_SetWindowValue
+                                     88 ;	-----------------------------------------
+                                     89 ;	Register assignment is optimal.
+                                     90 ;	Stack space usage: 1 bytes.
+      00ECA7                         91 _WWDG_SetWindowValue:
+      00ECA7 88               [ 1]   92 	push	a
+                                     93 ; genReceive
+                                     94 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 137: __IO uint8_t tmpreg = 0;
+                                     95 ; genAssign
+      00ECA8 0F 01            [ 1]   96 	clr	(0x01, sp)
+                                     97 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 143: tmpreg |= (uint8_t) (WindowValue & (uint8_t) BIT_MASK);
+                                     98 ; genAnd
+      00ECAA A4 7F            [ 1]   99 	and	a, #0x7f
+                                    100 ; genOr
+      00ECAC 1A 01            [ 1]  101 	or	a, (0x01, sp)
+      00ECAE 6B 01            [ 1]  102 	ld	(0x01, sp), a
+                                    103 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 146: WWDG->WR = tmpreg;
+                                    104 ; genPointerSet
+      00ECB0 AE 50 D4         [ 2]  105 	ldw	x, #0x50d4
+      00ECB3 7B 01            [ 1]  106 	ld	a, (0x01, sp)
+      00ECB5 F7               [ 1]  107 	ld	(x), a
+                                    108 ; genLabel
+                                    109 ; peephole j30 removed unused label 00101$.
+                                    110 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 147: }
+                                    111 ; genEndFunction
+      00ECB6 84               [ 1]  112 	pop	a
+      00ECB7 81               [ 4]  113 	ret
+                                    114 ;	Total WWDG_SetWindowValue function size at codegen: 2 bytes.
+                                    115 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 156: void WWDG_SetCounter(uint8_t Counter)
+                                    116 ; genLabel
+                                    117 ;	-----------------------------------------
+                                    118 ;	 function WWDG_SetCounter
+                                    119 ;	-----------------------------------------
+                                    120 ;	Register assignment is optimal.
+                                    121 ;	Stack space usage: 0 bytes.
+      00ECB8                        122 _WWDG_SetCounter:
+                                    123 ; genReceive
+                                    124 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 163: WWDG->CR = (uint8_t)(Counter & (uint8_t)BIT_MASK);
+                                    125 ; genAnd
+      00ECB8 A4 7F            [ 1]  126 	and	a, #0x7f
+                                    127 ; genPointerSet
+      00ECBA C7 50 D3         [ 1]  128 	ld	0x50d3, a
+                                    129 ; genLabel
+                                    130 ; peephole j30 removed unused label 00101$.
+                                    131 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 164: }
+                                    132 ; genEndFunction
+      00ECBD 81               [ 4]  133 	ret
+                                    134 ;	Total WWDG_SetCounter function size at codegen: 1 bytes.
+                                    135 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 187: void WWDG_Enable(uint8_t Counter)
+                                    136 ; genLabel
+                                    137 ;	-----------------------------------------
+                                    138 ;	 function WWDG_Enable
+                                    139 ;	-----------------------------------------
+                                    140 ;	Register assignment is optimal.
+                                    141 ;	Stack space usage: 0 bytes.
+      00ECBE                        142 _WWDG_Enable:
+                                    143 ; genReceive
+                                    144 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 191: WWDG->CR = (uint8_t)(WWDG_CR_WDGA | Counter);
+                                    145 ; genOr
+      00ECBE AA 80            [ 1]  146 	or	a, #0x80
+                                    147 ; genPointerSet
+      00ECC0 C7 50 D3         [ 1]  148 	ld	0x50d3, a
+                                    149 ; genLabel
+                                    150 ; peephole j30 removed unused label 00101$.
+                                    151 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 192: }
+                                    152 ; genEndFunction
+      00ECC3 81               [ 4]  153 	ret
+                                    154 ;	Total WWDG_Enable function size at codegen: 1 bytes.
+                                    155 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 216: uint8_t WWDG_GetCounter(void)
+                                    156 ; genLabel
+                                    157 ;	-----------------------------------------
+                                    158 ;	 function WWDG_GetCounter
+                                    159 ;	-----------------------------------------
+                                    160 ;	Register assignment is optimal.
+                                    161 ;	Stack space usage: 0 bytes.
+      00ECC4                        162 _WWDG_GetCounter:
+                                    163 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 218: return(WWDG->CR);
+                                    164 ; genPointerGet
+      00ECC4 C6 50 D3         [ 1]  165 	ld	a, 0x50d3
+                                    166 ; genReturn
+                                    167 ; genLabel
+                                    168 ; peephole j30 removed unused label 00101$.
+                                    169 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 219: }
+                                    170 ; genEndFunction
+      00ECC7 81               [ 4]  171 	ret
+                                    172 ;	Total WWDG_GetCounter function size at codegen: 1 bytes.
+                                    173 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 226: void WWDG_SWReset(void)
+                                    174 ; genLabel
+                                    175 ;	-----------------------------------------
+                                    176 ;	 function WWDG_SWReset
+                                    177 ;	-----------------------------------------
+                                    178 ;	Register assignment is optimal.
+                                    179 ;	Stack space usage: 0 bytes.
+      00ECC8                        180 _WWDG_SWReset:
+                                    181 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 228: WWDG->CR = WWDG_CR_WDGA; /* Activate WWDG, with clearing T6 */
+                                    182 ; genPointerSet
+      00ECC8 35 80 50 D3      [ 1]  183 	mov	0x50d3+0, #0x80
+                                    184 ; genLabel
+                                    185 ; peephole j30 removed unused label 00101$.
+                                    186 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_wwdg.c: 229: }
+                                    187 ; genEndFunction
+      00ECCC 81               [ 4]  188 	ret
+                                    189 ;	Total WWDG_SWReset function size at codegen: 1 bytes.
+                                    190 	.area CODE
+                                    191 	.area CONST
+                                    192 	.area INITIALIZER
+                                    193 	.area CABS (ABS)

@@ -1,0 +1,37 @@
+-muwx
+-i build/firmware.ihx
+-I 0x0800
+-b HOME = 0x8000
+-b DATA = 0x0001
+-bHOME=0x8000
+-bGSINIT=0x8088
+-bSSEG=0x07FF
+-k /usr/local/bin/../share/sdcc/lib/stm8
+-k /usr/local/Cellar/sdcc/4.5.0/share/sdcc/lib/stm8
+-l stm8
+build/user/stm8_ivt.rel
+build/user/atc24c08.rel
+build/user/eric_driver.rel
+build/user/eric_proc.rel
+build/user/main.rel
+build/user/menu.rel
+build/user/st7565r_lcd.rel
+build/user/stm8l15x_it.rel
+build/stdperiph/stm8l15x_adc.rel
+build/stdperiph/stm8l15x_clk.rel
+build/stdperiph/stm8l15x_dma.rel
+build/stdperiph/stm8l15x_exti.rel
+build/stdperiph/stm8l15x_flash.rel
+build/stdperiph/stm8l15x_gpio.rel
+build/stdperiph/stm8l15x_i2c.rel
+build/stdperiph/stm8l15x_itc.rel
+build/stdperiph/stm8l15x_pwr.rel
+build/stdperiph/stm8l15x_rst.rel
+build/stdperiph/stm8l15x_rtc.rel
+build/stdperiph/stm8l15x_syscfg.rel
+build/stdperiph/stm8l15x_tim2.rel
+build/stdperiph/stm8l15x_tim4.rel
+build/stdperiph/stm8l15x_usart.rel
+build/stdperiph/stm8l15x_wwdg.rel
+
+-e

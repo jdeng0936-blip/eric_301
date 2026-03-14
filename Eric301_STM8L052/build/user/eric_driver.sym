@@ -1,0 +1,130 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+    _ADC_ChannelCmd                                                ****** GX
+    _ADC_Cmd                                                       ****** GX
+  9 _ADC_Config                                                    0007DC GR
+    _ADC_DMACmd                                                    ****** GX
+    _ADC_Init                                                      ****** GX
+    _ADC_SamplingTimeConfig                                        ****** GX
+    _ADC_VrefintCmd                                                ****** GX
+  9 _CLK_Config                                                    000010 GR
+    _CLK_GetFlagStatus                                             ****** GX
+    _CLK_GetSYSCLKSource                                           ****** GX
+    _CLK_LSEConfig                                                 ****** GX
+    _CLK_PeripheralClockConfig                                     ****** GX
+    _CLK_RTCClockConfig                                            ****** GX
+    _CLK_SYSCLKDivConfig                                           ****** GX
+    _CLK_SYSCLKSourceConfig                                        ****** GX
+    _CLK_SYSCLKSourceSwitchCmd                                     ****** GX
+  9 _Check_U1buf                                                   000128 GR
+  1 _Check_U1buf_r1_10000_712                                      000106 R
+  1 _Check_U1buf_r2_10000_712                                      000108 R
+    _DMA_Cmd                                                       ****** GX
+  9 _DMA_Config                                                    000813 GR
+    _DMA_GlobalCmd                                                 ****** GX
+    _DMA_ITConfig                                                  ****** GX
+    _DMA_Init                                                      ****** GX
+  9 _Delay                                                         000000 GR
+    _FLASH_Lock                                                    ****** GX
+    _FLASH_ProgramByte                                             ****** GX
+    _FLASH_ReadByte                                                ****** GX
+    _FLASH_Unlock                                                  ****** GX
+    _GPIO_Init                                                     ****** GX
+    _GPIO_ReadInputDataBit                                         ****** GX
+    _I2C_AcknowledgeConfig                                         ****** GX
+    _I2C_CheckEvent                                                ****** GX
+    _I2C_Cmd                                                       ****** GX
+    _I2C_DeInit                                                    ****** GX
+    _I2C_GenerateSTART                                             ****** GX
+    _I2C_GenerateSTOP                                              ****** GX
+    _I2C_GetFlagStatus                                             ****** GX
+    _I2C_Init                                                      ****** GX
+  9 _I2C_ReadByte                                                  0001F5 GR
+    _I2C_ReceiveData                                               ****** GX
+    _I2C_Send7bitAddress                                           ****** GX
+    _I2C_SendData                                                  ****** GX
+  9 _I2C_WriteByte                                                 000144 GR
+  9 _IIC_Init                                                      000347 GR
+  9 _Load_Data                                                     0003D8 GR
+  9 _Load_Stat                                                     00031E GR
+    _MsgSystem                                                     ****** GX
+    _RTC_DateStructInit                                            ****** GX
+    _RTC_GetDate                                                   ****** GX
+    _RTC_GetTime                                                   ****** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    _RTC_Init                                                      ****** GX
+    _RTC_SetDate                                                   ****** GX
+    _RTC_SetTime                                                   ****** GX
+    _RTC_TimeStructInit                                            ****** GX
+    _RTC_WaitForSynchro                                            ****** GX
+  9 _Read_Key                                                      000699 GR
+    _SYSCFG_REMAPDMAChannelConfig                                  ****** GX
+  9 _Save_Data                                                     00037E GR
+  9 _Save_Stat                                                     0002F0 GR
+  9 _Scan_Key                                                      0006F4 GR
+    _SendMsg                                                       ****** GX
+    _TIM2_ARRPreloadConfig                                         ****** GX
+    _TIM2_Cmd                                                      ****** GX
+    _TIM2_ITConfig                                                 ****** GX
+  9 _TIM2_Init                                                     000028 GR
+    _TIM2_TimeBaseInit                                             ****** GX
+    _TIM4_ARRPreloadConfig                                         ****** GX
+    _TIM4_Cmd                                                      ****** GX
+    _TIM4_ITConfig                                                 ****** GX
+  9 _TIM4_Init                                                     00004A GR
+    _TIM4_TimeBaseInit                                             ****** GX
+    _USART_ClearITPendingBit                                       ****** GX
+    _USART_Cmd                                                     ****** GX
+    _USART_DeInit                                                  ****** GX
+    _USART_GetFlagStatus                                           ****** GX
+    _USART_ITConfig                                                ****** GX
+    _USART_Init                                                    ****** GX
+    _USART_SendData8                                               ****** GX
+  9 _Uart1_Init                                                    000069 GR
+  9 _Uart1_Recv                                                    0000EA GR
+  9 _Uart1_Send                                                    0000BC GR
+  2 _Verfin                                                        00001B GR
+    __modsint                                                      ****** GX
+  8 __xinit__Verfin                                                00001B R
+  8 __xinit__data_index                                            000004 R
+  8 __xinit__dmabuf                                                000007 R
+  8 __xinit__key                                                   000000 R
+    _adjustdt                                                      ****** GX
+  2 _data_index                                                    000004 GR
+  7 _dindex                                                        000000 GR
+  2 _dmabuf                                                        000007 GR
+  9 _init_rtc                                                      00053A GR
+  1 _init_rtc_tag_10000_765                                        00010A R
+  2 _key                                                           000000 GR
+  9 _rtc_get_datetime                                              000662 GR
+  9 _rtc_set_datetime                                              0005C9 GR
+  1 _u1buf                                                         000000 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 3
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size    10B   flags    0
+   2 INITIALIZED                                size     1F   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      C   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size     B4   flags    0
+   8 INITIALIZER                                size     1F   flags    0
+   9 CODE                                       size    85B   flags    0
+   A CABS                                       size      0   flags    8
+

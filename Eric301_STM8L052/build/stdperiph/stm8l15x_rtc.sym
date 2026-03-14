@@ -1,0 +1,71 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  9 _Bcd2ToByte                                                    000936 R
+  9 _ByteToBcd2                                                    000923 R
+  9 _RTC_AlarmCmd                                                  0005A3 GR
+  9 _RTC_AlarmStructInit                                           0004D7 GR
+  9 _RTC_AlarmSubSecondConfig                                      0005EB GR
+  9 _RTC_BypassShadowCmd                                           0001AB GR
+  9 _RTC_CalibOutputCmd                                            0007A1 GR
+  9 _RTC_CalibOutputConfig                                         00077D GR
+  9 _RTC_ClearFlag                                                 0008E9 GR
+  9 _RTC_ClearITPendingBit                                         00091A GR
+  9 _RTC_DateStructInit                                            000372 GR
+  9 _RTC_DayLightSavingConfig                                      0006AC GR
+  9 _RTC_DeInit                                                    000000 GR
+  9 _RTC_EnterInitMode                                             000135 GR
+  9 _RTC_ExitInitMode                                              000156 GR
+  9 _RTC_GetAlarm                                                  0004F1 GR
+  9 _RTC_GetDate                                                   000386 GR
+  9 _RTC_GetFlagStatus                                             0008C4 GR
+  9 _RTC_GetITStatus                                               0008F6 GR
+  9 _RTC_GetStoreOperation                                         0006D3 GR
+  9 _RTC_GetSubSecond                                              0002BA GR
+  9 _RTC_GetTime                                                   000268 GR
+  9 _RTC_GetWakeUpCounter                                          000660 GR
+  9 _RTC_ITConfig                                                  00087C GR
+  9 _RTC_Init                                                      0000CB GR
+  9 _RTC_OutputConfig                                              0006D9 GR
+  9 _RTC_RatioCmd                                                  000187 GR
+  9 _RTC_SetAlarm                                                  0003DF GR
+  9 _RTC_SetDate                                                   0002CB GR
+  9 _RTC_SetTime                                                   0001CF GR
+  9 _RTC_SetWakeUpCounter                                          00064B GR
+  9 _RTC_SmoothCalibConfig                                         00073B GR
+  9 _RTC_StructInit                                                000114 GR
+  9 _RTC_SynchroShiftConfig                                        000700 GR
+  9 _RTC_TamperCmd                                                 000852 GR
+  9 _RTC_TamperFilterConfig                                        0007EF GR
+  9 _RTC_TamperLevelConfig                                         0007C5 GR
+  9 _RTC_TamperPinsPrechargeDuration                               000831 GR
+  9 _RTC_TamperSamplingFreqConfig                                  000810 GR
+  9 _RTC_TimeStructInit                                            00025B GR
+  9 _RTC_WaitForSynchro                                            00015B GR
+  9 _RTC_WakeUpClockConfig                                         000626 GR
+  9 _RTC_WakeUpCmd                                                 00066E GR
+  9 _RTC_WriteProtectionCmd                                        000124 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      0   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      0   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    94A   flags    0
+   A CABS                                       size      0   flags    8
+

@@ -1,0 +1,37 @@
+#include "stm8l15x.h"
+
+#define MENU_NUM 5            //菜单长度volatile uint8 KeyFuncIndex=0; 
+
+typedef struct				  //菜单结构体
+{
+    uint8_t index;            //当 前菜单索引号
+    uint8_t keyup;            //上 键时转向的状态索引号
+    uint8_t keydown;          //下 键时转向的状态索引号
+    uint8_t keyleft;          //左
+    uint8_t keyright;         //右
+    uint8_t keymenu;          //菜单键时转向的状态索引号
+
+    void (*OnShow)();         //当前状态应该执行的菜单显示和操作功能
+    void (*OnUp)();
+    void (*OnDown)();
+    void (*OnLeft)();
+    void (*OnRight)();
+    void (*OnMenu)();
+} TMenuStruct;
+
+typedef struct
+{
+    uint8_t y;
+    uint8_t x;
+} TPos;
+
+typedef struct
+{
+	uint8_t p;//当前位置
+    uint8_t d[5];//当前位置的数据
+    TPos[5];//当前位置的坐标
+} TAdjust;
+
+void Menu_Proc(uint8_t Keyvalue);
+
+

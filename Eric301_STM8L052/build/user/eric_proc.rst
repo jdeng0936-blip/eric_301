@@ -1,0 +1,4711 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module eric_proc
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _Rs485_GetCfg
+                                     11 	.globl _Get_Record
+                                     12 	.globl _crc_verify
+                                     13 	.globl _Rev16
+                                     14 	.globl _Load_Stat
+                                     15 	.globl _Save_Stat
+                                     16 	.globl _Load_Data
+                                     17 	.globl _Save_Data
+                                     18 	.globl _rtc_set_datetime
+                                     19 	.globl _I2C_WriteByte
+                                     20 	.globl _I2C_ReadByte
+                                     21 	.globl _Uart1_Send
+                                     22 	.globl _Uart1_Init
+                                     23 	.globl _Delay
+                                     24 	.globl ___memcpy
+                                     25 	.globl _memset
+                                     26 	.globl _WWDG_SWReset
+                                     27 	.globl _USART_DeInit
+                                     28 	.globl _GPIO_ReadInputDataBit
+                                     29 	.globl _GPIO_Init
+                                     30 	.globl _r485rlt
+                                     31 	.globl _r485id
+                                     32 	.globl _selfid
+                                     33 	.globl _ticks
+                                     34 	.globl _strokeC
+                                     35 	.globl _strokeB
+                                     36 	.globl _strokeA
+                                     37 	.globl _pkt1
+                                     38 	.globl _rsUbuf
+                                     39 	.globl _c_ackquery
+                                     40 	.globl _m_query
+                                     41 	.globl _c_ackcfg
+                                     42 	.globl _m_cfg
+                                     43 	.globl _lrecd
+                                     44 	.globl _recd
+                                     45 	.globl _MsgSystem
+                                     46 	.globl _single_trg
+                                     47 	.globl _mini_sprintf
+                                     48 	.globl _System_GetMode
+                                     49 	.globl _System_InitMode
+                                     50 	.globl _Record_GetStat
+                                     51 	.globl _Record_GetRecd
+                                     52 	.globl _Record_GetLRecd
+                                     53 	.globl _Storage_SaveAllStats
+                                     54 	.globl _Record_SaveNew
+                                     55 	.globl _Record_LoadHistory
+                                     56 	.globl _CRC_GetModbus16
+                                     57 	.globl _InitMsg
+                                     58 	.globl _SendMsg
+                                     59 	.globl _RevMsg
+                                     60 	.globl _A_Fxn
+                                     61 	.globl _B_Fxn
+                                     62 	.globl _C_Fxn
+                                     63 	.globl _Pkt_485ackquery
+                                     64 	.globl _Rs485_Proc
+                                     65 	.globl _Chk_State
+                                     66 	.globl _Storage_SaveSettings
+                                     67 	.globl _Storage_ClearHistory
+                                     68 	.globl _Storage_FactoryReset
+                                     69 	.globl _Storage_Init
+                                     70 ;--------------------------------------------------------
+                                     71 ; ram data
+                                     72 ;--------------------------------------------------------
+                                     73 	.area DATA
+      00010C                         74 _single_trg::
+      00010C                         75 	.ds 1
+      00010D                         76 _MsgSystem::
+      00010D                         77 	.ds 290
+      00022F                         78 _recd::
+      00022F                         79 	.ds 10
+      000239                         80 _lrecd::
+      000239                         81 	.ds 10
+      000243                         82 _m_cfg::
+      000243                         83 	.ds 88
+      00029B                         84 _c_ackcfg::
+      00029B                         85 	.ds 8
+      0002A3                         86 _m_query::
+      0002A3                         87 	.ds 8
+      0002AB                         88 _c_ackquery::
+      0002AB                         89 	.ds 128
+      00032B                         90 _rsUbuf::
+      00032B                         91 	.ds 128
+      0003AB                         92 _pkt1::
+      0003AB                         93 	.ds 128
+      00042B                         94 _A_Fxn_psta_10000_740:
+      00042B                         95 	.ds 4
+      00042F                         96 _B_Fxn_pstb_10000_747:
+      00042F                         97 	.ds 4
+      000433                         98 _C_Fxn_pstc_10000_754:
+      000433                         99 	.ds 4
+      000437                        100 _Rs485_Proc_temp1_10000_793:
+      000437                        101 	.ds 1
+      000438                        102 _Rs485_Proc_temp2_10000_793:
+      000438                        103 	.ds 1
+      000439                        104 _Rs485_Proc_stateU_10000_793:
+      000439                        105 	.ds 1
+      00043A                        106 _Rs485_Proc_timeout_10000_793:
+      00043A                        107 	.ds 1
+      00043B                        108 _Chk_State_last_10000_810:
+      00043B                        109 	.ds 1
+                                    110 ;--------------------------------------------------------
+                                    111 ; ram data
+                                    112 ;--------------------------------------------------------
+                                    113 	.area INITIALIZED
+      0004B8                        114 _strokeA::
+      0004B8                        115 	.ds 13
+      0004C5                        116 _strokeB::
+      0004C5                        117 	.ds 13
+      0004D2                        118 _strokeC::
+      0004D2                        119 	.ds 13
+      0004DF                        120 _ticks::
+      0004DF                        121 	.ds 4
+      0004E3                        122 _stt:
+      0004E3                        123 	.ds 70
+      000529                        124 _selfid::
+      000529                        125 	.ds 4
+      00052D                        126 _r485id::
+      00052D                        127 	.ds 1
+      00052E                        128 _r485rlt::
+      00052E                        129 	.ds 14
+      00053C                        130 _sysmode:
+      00053C                        131 	.ds 1
+                                    132 ;--------------------------------------------------------
+                                    133 ; absolute external ram data
+                                    134 ;--------------------------------------------------------
+                                    135 	.area DABS (ABS)
+                                    136 
+                                    137 ; default segment ordering for linker
+                                    138 	.area HOME
+                                    139 	.area GSINIT
+                                    140 	.area GSFINAL
+                                    141 	.area CONST
+                                    142 	.area INITIALIZER
+                                    143 	.area CODE
+                                    144 
+                                    145 ;--------------------------------------------------------
+                                    146 ; global & static initialisations
+                                    147 ;--------------------------------------------------------
+                                    148 	.area HOME
+                                    149 	.area GSINIT
+                                    150 	.area GSFINAL
+                                    151 	.area GSINIT
+                                    152 ;	User/eric_proc.c: 275: static uint8_t  psta[4] = {0};
+                                    153 ; skipping iCode since result will be rematerialized
+                                    154 ; genPointerSet
+      008094 35 00 04 2B      [ 1]  155 	mov	_A_Fxn_psta_10000_740+0, #0x00
+                                    156 ; skipping iCode since result will be rematerialized
+                                    157 ; genPointerSet
+      008098 35 00 04 2C      [ 1]  158 	mov	_A_Fxn_psta_10000_740+1, #0x00
+                                    159 ; skipping iCode since result will be rematerialized
+                                    160 ; genPointerSet
+      00809C 35 00 04 2D      [ 1]  161 	mov	_A_Fxn_psta_10000_740+2, #0x00
+                                    162 ; skipping iCode since result will be rematerialized
+                                    163 ; genPointerSet
+      0080A0 35 00 04 2E      [ 1]  164 	mov	_A_Fxn_psta_10000_740+3, #0x00
+                                    165 ;	User/eric_proc.c: 314: static uint8_t  pstb[4] = {0};
+                                    166 ; skipping iCode since result will be rematerialized
+                                    167 ; genPointerSet
+      0080A4 35 00 04 2F      [ 1]  168 	mov	_B_Fxn_pstb_10000_747+0, #0x00
+                                    169 ; skipping iCode since result will be rematerialized
+                                    170 ; genPointerSet
+      0080A8 35 00 04 30      [ 1]  171 	mov	_B_Fxn_pstb_10000_747+1, #0x00
+                                    172 ; skipping iCode since result will be rematerialized
+                                    173 ; genPointerSet
+      0080AC 35 00 04 31      [ 1]  174 	mov	_B_Fxn_pstb_10000_747+2, #0x00
+                                    175 ; skipping iCode since result will be rematerialized
+                                    176 ; genPointerSet
+      0080B0 35 00 04 32      [ 1]  177 	mov	_B_Fxn_pstb_10000_747+3, #0x00
+                                    178 ;	User/eric_proc.c: 352: static uint8_t  pstc[4] = {0};
+                                    179 ; skipping iCode since result will be rematerialized
+                                    180 ; genPointerSet
+      0080B4 35 00 04 33      [ 1]  181 	mov	_C_Fxn_pstc_10000_754+0, #0x00
+                                    182 ; skipping iCode since result will be rematerialized
+                                    183 ; genPointerSet
+      0080B8 35 00 04 34      [ 1]  184 	mov	_C_Fxn_pstc_10000_754+1, #0x00
+                                    185 ; skipping iCode since result will be rematerialized
+                                    186 ; genPointerSet
+      0080BC 35 00 04 35      [ 1]  187 	mov	_C_Fxn_pstc_10000_754+2, #0x00
+                                    188 ; skipping iCode since result will be rematerialized
+                                    189 ; genPointerSet
+      0080C0 35 00 04 36      [ 1]  190 	mov	_C_Fxn_pstc_10000_754+3, #0x00
+                                    191 ;	User/eric_proc.c: 578: static uint8_t temp1 = 0, temp2 = 0, stateU = 0, timeout = 10;
+                                    192 ; genAssign
+      0080C4 72 5F 04 37      [ 1]  193 	clr	_Rs485_Proc_temp1_10000_793+0
+                                    194 ; genAssign
+      0080C8 72 5F 04 38      [ 1]  195 	clr	_Rs485_Proc_temp2_10000_793+0
+                                    196 ; genAssign
+      0080CC 72 5F 04 39      [ 1]  197 	clr	_Rs485_Proc_stateU_10000_793+0
+                                    198 ; genAssign
+      0080D0 35 0A 04 3A      [ 1]  199 	mov	_Rs485_Proc_timeout_10000_793+0, #0x0a
+                                    200 ;	User/eric_proc.c: 695: static uint8_t last = 0;
+                                    201 ; genAssign
+      0080D4 72 5F 04 3B      [ 1]  202 	clr	_Chk_State_last_10000_810+0
+                                    203 ;--------------------------------------------------------
+                                    204 ; Home
+                                    205 ;--------------------------------------------------------
+                                    206 	.area HOME
+                                    207 	.area HOME
+                                    208 ;--------------------------------------------------------
+                                    209 ; code
+                                    210 ;--------------------------------------------------------
+                                    211 	.area CODE
+                                    212 ;	User/eric_proc.c: 6: static void itoa_pad(char **buf, uint32_t val, int width, char pad, int is_signed) {
+                                    213 ; genLabel
+                                    214 ;	-----------------------------------------
+                                    215 ;	 function itoa_pad
+                                    216 ;	-----------------------------------------
+                                    217 ;	Register assignment might be sub-optimal.
+                                    218 ;	Stack space usage: 22 bytes.
+      009A46                        219 _itoa_pad:
+      009A46 52 16            [ 2]  220 	sub	sp, #22
+                                    221 ; genReceive
+      009A48 1F 13            [ 2]  222 	ldw	(0x13, sp), x
+                                    223 ;	User/eric_proc.c: 11: if (is_signed && (int32_t)val < 0) {
+                                    224 ; genIfx
+      009A4A 1E 20            [ 2]  225 	ldw	x, (0x20, sp)
+                                    226 ; peephole j5 changed absolute to relative unconditional jump.
+      009A4C 27 2E            [ 1]  227 	jreq	00102$
+                                    228 ; peephole j10 removed jra by using inverse jump logic
+                                    229 ; peephole j30 removed unused label 00184$.
+                                    230 ; genCast
+                                    231 ; genAssign
+      009A4E 16 1B            [ 2]  232 	ldw	y, (0x1b, sp)
+      009A50 17 03            [ 2]  233 	ldw	(0x03, sp), y
+      009A52 16 19            [ 2]  234 	ldw	y, (0x19, sp)
+      009A54 17 01            [ 2]  235 	ldw	(0x01, sp), y
+                                    236 ; genCmp
+                                    237 ; genCmpTnz
+      009A56 0D 01            [ 1]  238 	tnz	(0x01, sp)
+                                    239 ; peephole j5 changed absolute to relative unconditional jump.
+      009A58 2A 22            [ 1]  240 	jrpl	00102$
+                                    241 ; peephole j8 removed jra by using inverse jump logic
+                                    242 ; peephole j30 removed unused label 00185$.
+                                    243 ; skipping generated iCode
+                                    244 ;	User/eric_proc.c: 12: *(*buf)++ = '-';
+                                    245 ; genPointerGet
+      009A5A 1E 13            [ 2]  246 	ldw	x, (0x13, sp)
+      009A5C FE               [ 2]  247 	ldw	x, (x)
+                                    248 ; genPlus
+      009A5D 1F 15            [ 2]  249 	ldw	(0x15, sp), x
+                                    250 ; peephole 4w removed redundant load from (0x15, sp) into x.
+      009A5F 5C               [ 1]  251 	incw	x
+                                    252 ; genPointerSet
+      009A60 16 13            [ 2]  253 	ldw	y, (0x13, sp)
+      009A62 90 FF            [ 2]  254 	ldw	(y), x
+                                    255 ; genPointerSet
+      009A64 1E 15            [ 2]  256 	ldw	x, (0x15, sp)
+      009A66 A6 2D            [ 1]  257 	ld	a, #0x2d
+      009A68 F7               [ 1]  258 	ld	(x), a
+                                    259 ;	User/eric_proc.c: 13: val = (uint32_t)(-(int32_t)val);
+                                    260 ; genUminus
+      009A69 16 03            [ 2]  261 	ldw	y, (0x03, sp)
+      009A6B 90 50            [ 2]  262 	negw	y
+      009A6D 1E 01            [ 2]  263 	ldw	x, (0x01, sp)
+      009A6F 24 01            [ 1]  264 	jrnc	00186$
+      009A71 5C               [ 1]  265 	incw	x
+      009A72                        266 00186$:
+      009A72 50               [ 2]  267 	negw	x
+                                    268 ; genCast
+                                    269 ; genAssign
+                                    270 ; genAssign
+      009A73 17 1B            [ 2]  271 	ldw	(0x1b, sp), y
+      009A75 1F 19            [ 2]  272 	ldw	(0x19, sp), x
+                                    273 ;	User/eric_proc.c: 14: width--;
+                                    274 ; genMinus
+      009A77 1E 1D            [ 2]  275 	ldw	x, (0x1d, sp)
+      009A79 5A               [ 2]  276 	decw	x
+                                    277 ; genAssign
+      009A7A 1F 1D            [ 2]  278 	ldw	(0x1d, sp), x
+                                    279 ; genLabel
+      009A7C                        280 00102$:
+                                    281 ;	User/eric_proc.c: 17: if (val == 0) {
+                                    282 ; genIfx
+      009A7C 1E 1B            [ 2]  283 	ldw	x, (0x1b, sp)
+      009A7E 26 0D            [ 1]  284 	jrne	00122$
+                                    285 ; peephole j22 jumped to 00122$ directly instead of via 00187$.
+                                    286 ; peephole j30 removed unused label 00187$.
+                                    287 ; peephole j5 changed absolute to relative unconditional jump.
+                                    288 ; peephole j7 removed jra by using inverse jump logic
+                                    289 ; peephole j30 removed unused label 00188$.
+                                    290 ;	User/eric_proc.c: 18: temp[i++] = '0';
+                                    291 ; skipping iCode since result will be rematerialized
+                                    292 ; genAssign
+      009A80 1E 19            [ 2]  293 	ldw	x, (0x19, sp)
+      009A82 26 09            [ 1]  294 	jrne	00122$
+                                    295 ; peephole 22d removed redundant clrw x.
+      009A84 5C               [ 1]  296 	incw	x
+      009A85 1F 11            [ 2]  297 	ldw	(0x11, sp), x
+                                    298 ; genPointerSet
+      009A87 A6 30            [ 1]  299 	ld	a, #0x30
+      009A89 6B 05            [ 1]  300 	ld	(0x05, sp), a
+                                    301 ; genGoto
+      009A8B 20 4B            [ 2]  302 	jra	00124$
+                                    303 ; peephole j5 changed absolute to relative unconditional jump.
+                                    304 ;	User/eric_proc.c: 20: while (val > 0) {
+                                    305 ; genLabel
+      009A8D                        306 00122$:
+                                    307 ; skipping iCode since result will be rematerialized
+                                    308 ; genAssign
+      009A8D 5F               [ 1]  309 	clrw	x
+      009A8E 1F 15            [ 2]  310 	ldw	(0x15, sp), x
+                                    311 ; genLabel
+      009A90                        312 00104$:
+                                    313 ; genIfx
+      009A90 1E 1B            [ 2]  314 	ldw	x, (0x1b, sp)
+      009A92 26 04            [ 1]  315 	jrne	00189$
+      009A94 1E 19            [ 2]  316 	ldw	x, (0x19, sp)
+                                    317 ; peephole j5 changed absolute to relative unconditional jump.
+      009A96 27 3C            [ 1]  318 	jreq	00127$
+                                    319 ; peephole j10 removed jra by using inverse jump logic
+      009A98                        320 00189$:
+                                    321 ;	User/eric_proc.c: 21: temp[i++] = (val % 10) + '0';
+                                    322 ; genPlus
+      009A98 96               [ 1]  323 	ldw	x, sp
+      009A99 1C 00 05         [ 2]  324 	addw	x, #5
+      009A9C 72 FB 15         [ 2]  325 	addw	x, (0x15, sp)
+      009A9F 1F 11            [ 2]  326 	ldw	(0x11, sp), x
+                                    327 ; genPlus
+      009AA1 1E 15            [ 2]  328 	ldw	x, (0x15, sp)
+      009AA3 5C               [ 1]  329 	incw	x
+      009AA4 1F 15            [ 2]  330 	ldw	(0x15, sp), x
+                                    331 ; peephole j30 removed unused label 00190$.
+                                    332 ; genIPush
+      009AA6 4B 0A            [ 1]  333 	push	#0x0a
+      009AA8 5F               [ 1]  334 	clrw	x
+      009AA9 89               [ 2]  335 	pushw	x
+      009AAA 4B 00            [ 1]  336 	push	#0x00
+                                    337 ; genIPush
+      009AAC 1E 1F            [ 2]  338 	ldw	x, (0x1f, sp)
+      009AAE 89               [ 2]  339 	pushw	x
+      009AAF 1E 1F            [ 2]  340 	ldw	x, (0x1f, sp)
+      009AB1 89               [ 2]  341 	pushw	x
+                                    342 ; genCall
+      009AB2 CD EC EA         [ 4]  343 	call	__modulong
+      009AB5 5B 08            [ 2]  344 	addw	sp, #8
+                                    345 ; genCast
+                                    346 ; genAssign
+      009AB7 9F               [ 1]  347 	ld	a, xl
+                                    348 ; genCast
+                                    349 ; genAssign
+                                    350 ; genPlus
+      009AB8 AB 30            [ 1]  351 	add	a, #0x30
+                                    352 ; genPointerSet
+      009ABA 1E 11            [ 2]  353 	ldw	x, (0x11, sp)
+      009ABC F7               [ 1]  354 	ld	(x), a
+                                    355 ;	User/eric_proc.c: 22: val /= 10;
+                                    356 ; genIPush
+      009ABD 4B 0A            [ 1]  357 	push	#0x0a
+      009ABF 5F               [ 1]  358 	clrw	x
+      009AC0 89               [ 2]  359 	pushw	x
+      009AC1 4B 00            [ 1]  360 	push	#0x00
+                                    361 ; genIPush
+      009AC3 1E 1F            [ 2]  362 	ldw	x, (0x1f, sp)
+      009AC5 89               [ 2]  363 	pushw	x
+      009AC6 1E 1F            [ 2]  364 	ldw	x, (0x1f, sp)
+      009AC8 89               [ 2]  365 	pushw	x
+                                    366 ; genCall
+      009AC9 CD ED 50         [ 4]  367 	call	__divulong
+      009ACC 5B 08            [ 2]  368 	addw	sp, #8
+                                    369 ; genAssign
+      009ACE 1F 1B            [ 2]  370 	ldw	(0x1b, sp), x
+      009AD0 17 19            [ 2]  371 	ldw	(0x19, sp), y
+                                    372 ; genGoto
+      009AD2 20 BC            [ 2]  373 	jra	00104$
+                                    374 ; peephole j5 changed absolute to relative unconditional jump.
+                                    375 ;	User/eric_proc.c: 26: while (width > i) {
+                                    376 ; genLabel
+      009AD4                        377 00127$:
+                                    378 ; genAssign
+      009AD4 16 15            [ 2]  379 	ldw	y, (0x15, sp)
+      009AD6 17 11            [ 2]  380 	ldw	(0x11, sp), y
+                                    381 ; genLabel
+      009AD8                        382 00124$:
+                                    383 ; genAssign
+      009AD8 16 1D            [ 2]  384 	ldw	y, (0x1d, sp)
+      009ADA 17 15            [ 2]  385 	ldw	(0x15, sp), y
+                                    386 ; genLabel
+      009ADC                        387 00110$:
+                                    388 ; genCmp
+                                    389 ; genCmpTnz
+      009ADC 1E 15            [ 2]  390 	ldw	x, (0x15, sp)
+      009ADE 13 11            [ 2]  391 	cpw	x, (0x11, sp)
+                                    392 ; peephole j5 changed absolute to relative unconditional jump.
+      009AE0 2D 16            [ 1]  393 	jrsle	00126$
+                                    394 ; peephole j13 removed jra by using inverse jump logic
+                                    395 ; peephole j30 removed unused label 00191$.
+                                    396 ; skipping generated iCode
+                                    397 ;	User/eric_proc.c: 27: *(*buf)++ = pad;
+                                    398 ; genPointerGet
+      009AE2 1E 13            [ 2]  399 	ldw	x, (0x13, sp)
+      009AE4 FE               [ 2]  400 	ldw	x, (x)
+                                    401 ; genPlus
+      009AE5 1F 03            [ 2]  402 	ldw	(0x03, sp), x
+                                    403 ; peephole 4w removed redundant load from (0x03, sp) into x.
+      009AE7 5C               [ 1]  404 	incw	x
+                                    405 ; genPointerSet
+      009AE8 16 13            [ 2]  406 	ldw	y, (0x13, sp)
+      009AEA 90 FF            [ 2]  407 	ldw	(y), x
+                                    408 ; genPointerSet
+      009AEC 1E 03            [ 2]  409 	ldw	x, (0x03, sp)
+      009AEE 7B 1F            [ 1]  410 	ld	a, (0x1f, sp)
+      009AF0 F7               [ 1]  411 	ld	(x), a
+                                    412 ;	User/eric_proc.c: 28: width--;
+                                    413 ; genMinus
+      009AF1 1E 15            [ 2]  414 	ldw	x, (0x15, sp)
+      009AF3 5A               [ 2]  415 	decw	x
+      009AF4 1F 15            [ 2]  416 	ldw	(0x15, sp), x
+                                    417 ; genGoto
+      009AF6 20 E4            [ 2]  418 	jra	00110$
+                                    419 ; peephole j5 changed absolute to relative unconditional jump.
+                                    420 ;	User/eric_proc.c: 31: while (i > 0) {
+                                    421 ; genLabel
+      009AF8                        422 00126$:
+                                    423 ; skipping iCode since result will be rematerialized
+                                    424 ; genAssign
+      009AF8 16 11            [ 2]  425 	ldw	y, (0x11, sp)
+      009AFA 17 15            [ 2]  426 	ldw	(0x15, sp), y
+                                    427 ; genLabel
+      009AFC                        428 00113$:
+                                    429 ; genCmp
+                                    430 ; genCmpTnz
+      009AFC 1E 15            [ 2]  431 	ldw	x, (0x15, sp)
+      009AFE A3 00 00         [ 2]  432 	cpw	x, #0x0000
+                                    433 ; peephole j5 changed absolute to relative unconditional jump.
+      009B01 2D 1C            [ 1]  434 	jrsle	00116$
+                                    435 ; peephole j13 removed jra by using inverse jump logic
+                                    436 ; peephole j30 removed unused label 00192$.
+                                    437 ; skipping generated iCode
+                                    438 ;	User/eric_proc.c: 32: *(*buf)++ = temp[--i];
+                                    439 ; genPointerGet
+      009B03 1E 13            [ 2]  440 	ldw	x, (0x13, sp)
+      009B05 FE               [ 2]  441 	ldw	x, (x)
+                                    442 ; genPlus
+      009B06 1F 11            [ 2]  443 	ldw	(0x11, sp), x
+                                    444 ; peephole 4w removed redundant load from (0x11, sp) into x.
+      009B08 5C               [ 1]  445 	incw	x
+                                    446 ; genPointerSet
+      009B09 16 13            [ 2]  447 	ldw	y, (0x13, sp)
+      009B0B 90 FF            [ 2]  448 	ldw	(y), x
+                                    449 ; genMinus
+      009B0D 1E 15            [ 2]  450 	ldw	x, (0x15, sp)
+      009B0F 5A               [ 2]  451 	decw	x
+      009B10 1F 15            [ 2]  452 	ldw	(0x15, sp), x
+                                    453 ; genPlus
+      009B12 96               [ 1]  454 	ldw	x, sp
+      009B13 1C 00 05         [ 2]  455 	addw	x, #5
+      009B16 72 FB 15         [ 2]  456 	addw	x, (0x15, sp)
+                                    457 ; genPointerGet
+      009B19 F6               [ 1]  458 	ld	a, (x)
+                                    459 ; genPointerSet
+      009B1A 1E 11            [ 2]  460 	ldw	x, (0x11, sp)
+      009B1C F7               [ 1]  461 	ld	(x), a
+                                    462 ; genGoto
+      009B1D 20 DD            [ 2]  463 	jra	00113$
+                                    464 ; peephole j5 changed absolute to relative unconditional jump.
+                                    465 ; genLabel
+      009B1F                        466 00116$:
+                                    467 ;	User/eric_proc.c: 34: }
+                                    468 ; genEndFunction
+      009B1F 1E 17            [ 2]  469 	ldw	x, (23, sp)
+      009B21 5B 21            [ 2]  470 	addw	sp, #33
+      009B23 FC               [ 2]  471 	jp	(x)
+                                    472 ;	Total itoa_pad function size at codegen: 5 bytes.
+                                    473 ;	User/eric_proc.c: 37: void mini_sprintf(char *buffer, const char *format, ...) {
+                                    474 ; genLabel
+                                    475 ;	-----------------------------------------
+                                    476 ;	 function mini_sprintf
+                                    477 ;	-----------------------------------------
+                                    478 ;	Register assignment might be sub-optimal.
+                                    479 ;	Stack space usage: 12 bytes.
+      009B24                        480 _mini_sprintf:
+      009B24 52 0C            [ 2]  481 	sub	sp, #12
+                                    482 ;	User/eric_proc.c: 39: va_start(args, format);
+                                    483 ; skipping iCode since result will be rematerialized
+                                    484 ; skipping iCode since result will be rematerialized
+                                    485 ; genPlus
+      009B26 96               [ 1]  486 	ldw	x, sp
+      009B27 1C 00 13         [ 2]  487 	addw	x, #19
+      009B2A 1F 01            [ 2]  488 	ldw	(0x01, sp), x
+                                    489 ;	User/eric_proc.c: 46: while (*format) {
+                                    490 ; genLabel
+      009B2C                        491 00124$:
+                                    492 ; genAssign
+      009B2C 16 11            [ 2]  493 	ldw	y, (0x11, sp)
+                                    494 ; genPointerGet
+      009B2E 17 0B            [ 2]  495 	ldw	(0x0b, sp), y
+      009B30 93               [ 1]  496 	ldw	x, y
+                                    497 ; peephole 15 replaced load from (0x0b, sp) into x by load from y into x.
+      009B31 F6               [ 1]  498 	ld	a, (x)
+                                    499 ;	User/eric_proc.c: 82: *buffer++ = *format;
+                                    500 ; genAssign
+      009B32 16 0F            [ 2]  501 	ldw	y, (0x0f, sp)
+      009B34 17 03            [ 2]  502 	ldw	(0x03, sp), y
+                                    503 ;	User/eric_proc.c: 46: while (*format) {
+                                    504 ; genIfx
+      009B36 4D               [ 1]  505 	tnz	a
+      009B37 26 03            [ 1]  506 	jrne	00222$
+      009B39 CC 9C 42         [ 2]  507 	jp	00126$
+      009B3C                        508 00222$:
+                                    509 ;	User/eric_proc.c: 47: if (*format == '%') {
+                                    510 ; genCmpEQorNE
+      009B3C A1 25            [ 1]  511 	cp	a, #0x25
+                                    512 ; peephole j5 changed absolute to relative unconditional jump.
+      009B3E 27 03            [ 1]  513 	jreq	00225$
+                                    514 ; peephole j10 removed jra by using inverse jump logic
+                                    515 ; peephole j30 removed unused label 00224$.
+      009B40 CC 9C 2E         [ 2]  516 	jp	00122$
+      009B43                        517 00225$:
+                                    518 ; skipping generated iCode
+                                    519 ;	User/eric_proc.c: 48: format++;
+                                    520 ; genPlus
+      009B43 1E 0B            [ 2]  521 	ldw	x, (0x0b, sp)
+      009B45 5C               [ 1]  522 	incw	x
+                                    523 ; genAssign
+      009B46 1F 11            [ 2]  524 	ldw	(0x11, sp), x
+                                    525 ;	User/eric_proc.c: 49: is_long = 0;
+                                    526 ; genAssign
+      009B48 0F 05            [ 1]  527 	clr	(0x05, sp)
+                                    528 ;	User/eric_proc.c: 50: width = 0;
+                                    529 ; genAssign
+      009B4A 5F               [ 1]  530 	clrw	x
+      009B4B 1F 06            [ 2]  531 	ldw	(0x06, sp), x
+                                    532 ;	User/eric_proc.c: 51: pad = ' ';
+                                    533 ; genAssign
+      009B4D A6 20            [ 1]  534 	ld	a, #0x20
+      009B4F 6B 08            [ 1]  535 	ld	(0x08, sp), a
+                                    536 ;	User/eric_proc.c: 53: if (*format == '0') {
+                                    537 ; genAssign
+      009B51 16 11            [ 2]  538 	ldw	y, (0x11, sp)
+                                    539 ; genPointerGet
+      009B53 17 09            [ 2]  540 	ldw	(0x09, sp), y
+      009B55 93               [ 1]  541 	ldw	x, y
+                                    542 ; peephole 15 replaced load from (0x09, sp) into x by load from y into x.
+      009B56 F6               [ 1]  543 	ld	a, (x)
+                                    544 ; genCmpEQorNE
+      009B57 A1 30            [ 1]  545 	cp	a, #0x30
+                                    546 ; peephole j5 changed absolute to relative unconditional jump.
+                                    547 ; peephole j10 removed jra by using inverse jump logic
+                                    548 ; peephole j30 removed unused label 00227$.
+                                    549 ; peephole j5 changed absolute to relative unconditional jump.
+      009B59 26 0B            [ 1]  550 	jrne	00134$
+                                    551 ; peephole j7 removed jra by using inverse jump logic
+                                    552 ; peephole j30 removed unused label 00228$.
+                                    553 ; skipping generated iCode
+                                    554 ;	User/eric_proc.c: 54: pad = '0';
+                                    555 ; genAssign
+      009B5B A6 30            [ 1]  556 	ld	a, #0x30
+      009B5D 6B 08            [ 1]  557 	ld	(0x08, sp), a
+                                    558 ;	User/eric_proc.c: 55: format++;
+                                    559 ; genPlus
+      009B5F 1E 09            [ 2]  560 	ldw	x, (0x09, sp)
+      009B61 5C               [ 1]  561 	incw	x
+                                    562 ; genAssign
+      009B62 1F 0B            [ 2]  563 	ldw	(0x0b, sp), x
+                                    564 ; peephole 14 replaced load from (0x0b, sp) into y by load from x into y.
+      009B64 1F 11            [ 2]  565 	ldw	(0x11, sp), x
+                                    566 ; peephole 14a loaded (0x11, sp) directly from x instead of going through y.
+                                    567 ;	User/eric_proc.c: 58: while (*format >= '0' && *format <= '9') {
+                                    568 ; genLabel
+      009B66                        569 00134$:
+                                    570 ; genAssign
+      009B66 16 11            [ 2]  571 	ldw	y, (0x11, sp)
+      009B68 17 0B            [ 2]  572 	ldw	(0x0b, sp), y
+                                    573 ; genLabel
+      009B6A                        574 00104$:
+                                    575 ; genPointerGet
+      009B6A 1E 0B            [ 2]  576 	ldw	x, (0x0b, sp)
+      009B6C F6               [ 1]  577 	ld	a, (x)
+                                    578 ;	User/eric_proc.c: 60: format++;
+                                    579 ; genPlus
+      009B6D 16 0B            [ 2]  580 	ldw	y, (0x0b, sp)
+      009B6F 90 5C            [ 1]  581 	incw	y
+                                    582 ;	User/eric_proc.c: 58: while (*format >= '0' && *format <= '9') {
+                                    583 ; genCmp
+                                    584 ; genCmpTnz
+      009B71 A1 30            [ 1]  585 	cp	a, #0x30
+                                    586 ; peephole j5 changed absolute to relative unconditional jump.
+      009B73 25 1E            [ 1]  587 	jrc	00142$
+                                    588 ; peephole j9 removed jra by using inverse jump logic
+                                    589 ; peephole j30 removed unused label 00229$.
+                                    590 ; skipping generated iCode
+                                    591 ; genCmp
+                                    592 ; genCmpTnz
+      009B75 A1 39            [ 1]  593 	cp	a, #0x39
+                                    594 ; peephole j5 changed absolute to relative unconditional jump.
+      009B77 22 1A            [ 1]  595 	jrugt	00142$
+                                    596 ; peephole j17 removed jp by using inverse jump logic
+                                    597 ; peephole j30 removed unused label 00230$.
+                                    598 ; skipping generated iCode
+                                    599 ;	User/eric_proc.c: 59: width = width * 10 + (*format - '0');
+                                    600 ; genMult
+                                    601 ; genMultLit
+      009B79 1E 06            [ 2]  602 	ldw	x, (0x06, sp)
+      009B7B 58               [ 2]  603 	sllw	x
+      009B7C 58               [ 2]  604 	sllw	x
+      009B7D 72 FB 06         [ 2]  605 	addw	x, (0x06, sp)
+      009B80 58               [ 2]  606 	sllw	x
+      009B81 1F 0B            [ 2]  607 	ldw	(0x0b, sp), x
+                                    608 ; genCast
+                                    609 ; genAssign
+      009B83 5F               [ 1]  610 	clrw	x
+      009B84 97               [ 1]  611 	ld	xl, a
+                                    612 ; genMinus
+      009B85 1D 00 30         [ 2]  613 	subw	x, #0x0030
+                                    614 ; genPlus
+      009B88 72 FB 0B         [ 2]  615 	addw	x, (0x0b, sp)
+      009B8B 1F 06            [ 2]  616 	ldw	(0x06, sp), x
+                                    617 ;	User/eric_proc.c: 60: format++;
+                                    618 ; genAssign
+      009B8D 17 0B            [ 2]  619 	ldw	(0x0b, sp), y
+                                    620 ; genAssign
+      009B8F 17 11            [ 2]  621 	ldw	(0x11, sp), y
+                                    622 ; genGoto
+      009B91 20 D7            [ 2]  623 	jra	00104$
+                                    624 ; peephole j5 changed absolute to relative unconditional jump.
+                                    625 ; genLabel
+      009B93                        626 00142$:
+                                    627 ; genAssign
+      009B93 1E 0B            [ 2]  628 	ldw	x, (0x0b, sp)
+      009B95 1F 11            [ 2]  629 	ldw	(0x11, sp), x
+                                    630 ;	User/eric_proc.c: 63: if (*format == 'l') {
+                                    631 ; genPointerGet
+      009B97 1E 0B            [ 2]  632 	ldw	x, (0x0b, sp)
+      009B99 F6               [ 1]  633 	ld	a, (x)
+                                    634 ; genCmpEQorNE
+                                    635 ; peephole j5 changed absolute to relative unconditional jump.
+                                    636 ; peephole j10 removed jra by using inverse jump logic
+                                    637 ; peephole j30 removed unused label 00232$.
+                                    638 ; peephole j5 changed absolute to relative unconditional jump.
+                                    639 ; peephole j7 removed jra by using inverse jump logic
+                                    640 ; peephole j30 removed unused label 00233$.
+                                    641 ; skipping generated iCode
+                                    642 ;	User/eric_proc.c: 64: is_long = 1;
+                                    643 ; genAssign
+      009B9A A0 6C            [ 1]  644 	sub	a, #0x6c
+      009B9C 26 05            [ 1]  645 	jrne	00108$
+      009B9E 4C               [ 1]  646 	inc	a
+                                    647 ; peephole 51 used inc to get #1 into a.
+      009B9F 6B 05            [ 1]  648 	ld	(0x05, sp), a
+                                    649 ;	User/eric_proc.c: 65: format++;
+                                    650 ; genAssign
+      009BA1 17 11            [ 2]  651 	ldw	(0x11, sp), y
+                                    652 ; genLabel
+      009BA3                        653 00108$:
+                                    654 ;	User/eric_proc.c: 68: if (*format == 'd') {
+                                    655 ; genAssign
+      009BA3 1E 11            [ 2]  656 	ldw	x, (0x11, sp)
+                                    657 ; genPointerGet
+      009BA5 F6               [ 1]  658 	ld	a, (x)
+                                    659 ;	User/eric_proc.c: 73: int ival = va_arg(args, int);
+                                    660 ; genPlus
+      009BA6 16 01            [ 2]  661 	ldw	y, (0x01, sp)
+      009BA8 72 A9 00 02      [ 2]  662 	addw	y, #0x0002
+                                    663 ; genMinus
+      009BAC 93               [ 1]  664 	ldw	x, y
+      009BAD 5A               [ 2]  665 	decw	x
+      009BAE 5A               [ 2]  666 	decw	x
+                                    667 ;	User/eric_proc.c: 68: if (*format == 'd') {
+                                    668 ; genCmpEQorNE
+      009BAF A1 64            [ 1]  669 	cp	a, #0x64
+                                    670 ; peephole j5 changed absolute to relative unconditional jump.
+                                    671 ; peephole j10 removed jra by using inverse jump logic
+                                    672 ; peephole j30 removed unused label 00235$.
+                                    673 ; peephole j5 changed absolute to relative unconditional jump.
+      009BB1 26 5C            [ 1]  674 	jrne	00119$
+                                    675 ; peephole j7 removed jra by using inverse jump logic
+                                    676 ; peephole j30 removed unused label 00236$.
+                                    677 ; skipping generated iCode
+                                    678 ;	User/eric_proc.c: 69: if (is_long) {
+                                    679 ; genIfx
+      009BB3 0D 05            [ 1]  680 	tnz	(0x05, sp)
+                                    681 ; peephole j5 changed absolute to relative unconditional jump.
+      009BB5 27 2E            [ 1]  682 	jreq	00110$
+                                    683 ; peephole j10 removed jra by using inverse jump logic
+                                    684 ; peephole j30 removed unused label 00237$.
+                                    685 ;	User/eric_proc.c: 70: val = va_arg(args, uint32_t);
+                                    686 ; genPlus
+      009BB7 1E 01            [ 2]  687 	ldw	x, (0x01, sp)
+      009BB9 1C 00 04         [ 2]  688 	addw	x, #0x0004
+                                    689 ; genAssign
+      009BBC 1F 01            [ 2]  690 	ldw	(0x01, sp), x
+                                    691 ; genMinus
+      009BBE 1D 00 04         [ 2]  692 	subw	x, #0x0004
+                                    693 ; genPointerGet
+      009BC1 90 93            [ 1]  694 	ldw	y, x
+      009BC3 90 EE 02         [ 2]  695 	ldw	y, (0x2, y)
+      009BC6 FE               [ 2]  696 	ldw	x, (x)
+      009BC7 1F 09            [ 2]  697 	ldw	(0x09, sp), x
+                                    698 ;	User/eric_proc.c: 71: itoa_pad(&buffer, val, width, pad, 1);
+                                    699 ; skipping iCode since result will be rematerialized
+                                    700 ; genCast
+                                    701 ; genAssign
+      009BC9 96               [ 1]  702 	ldw	x, sp
+      009BCA 1C 00 0F         [ 2]  703 	addw	x, #15
+                                    704 ; genIPush
+      009BCD 4B 01            [ 1]  705 	push	#0x01
+      009BCF 4B 00            [ 1]  706 	push	#0x00
+                                    707 ; genIPush
+      009BD1 7B 0A            [ 1]  708 	ld	a, (0x0a, sp)
+      009BD3 88               [ 1]  709 	push	a
+                                    710 ; genIPush
+      009BD4 7B 0A            [ 1]  711 	ld	a, (0x0a, sp)
+      009BD6 88               [ 1]  712 	push	a
+      009BD7 7B 0A            [ 1]  713 	ld	a, (0x0a, sp)
+      009BD9 88               [ 1]  714 	push	a
+                                    715 ; genIPush
+      009BDA 90 89            [ 2]  716 	pushw	y
+      009BDC 16 10            [ 2]  717 	ldw	y, (0x10, sp)
+      009BDE 90 89            [ 2]  718 	pushw	y
+                                    719 ; genSend
+                                    720 ; genCall
+      009BE0 CD 9A 46         [ 4]  721 	call	_itoa_pad
+                                    722 ; genGoto
+      009BE3 20 55            [ 2]  723 	jra	00123$
+                                    724 ; peephole j5 changed absolute to relative unconditional jump.
+                                    725 ; genLabel
+      009BE5                        726 00110$:
+                                    727 ;	User/eric_proc.c: 73: int ival = va_arg(args, int);
+                                    728 ; genAssign
+      009BE5 17 01            [ 2]  729 	ldw	(0x01, sp), y
+                                    730 ; genPointerGet
+      009BE7 FE               [ 2]  731 	ldw	x, (x)
+                                    732 ;	User/eric_proc.c: 74: itoa_pad(&buffer, (uint32_t)(ival), width, pad, 1);
+                                    733 ; genCast
+      009BE8 51               [ 1]  734 	exgw	x, y
+      009BE9 90 9E            [ 1]  735 	ld	a, yh
+      009BEB 49               [ 1]  736 	rlc	a
+      009BEC 4F               [ 1]  737 	clr	a
+      009BED A2 00            [ 1]  738 	sbc	a, #0x00
+      009BEF 6B 0A            [ 1]  739 	ld	(0x0a, sp), a
+      009BF1 6B 09            [ 1]  740 	ld	(0x09, sp), a
+                                    741 ; genAddrOf
+      009BF3 96               [ 1]  742 	ldw	x, sp
+      009BF4 1C 00 0F         [ 2]  743 	addw	x, #15
+                                    744 ; genCast
+                                    745 ; genAssign
+                                    746 ; genIPush
+      009BF7 4B 01            [ 1]  747 	push	#0x01
+      009BF9 4B 00            [ 1]  748 	push	#0x00
+                                    749 ; genIPush
+      009BFB 7B 0A            [ 1]  750 	ld	a, (0x0a, sp)
+      009BFD 88               [ 1]  751 	push	a
+                                    752 ; genIPush
+      009BFE 7B 0A            [ 1]  753 	ld	a, (0x0a, sp)
+      009C00 88               [ 1]  754 	push	a
+      009C01 7B 0A            [ 1]  755 	ld	a, (0x0a, sp)
+      009C03 88               [ 1]  756 	push	a
+                                    757 ; genIPush
+      009C04 90 89            [ 2]  758 	pushw	y
+      009C06 16 10            [ 2]  759 	ldw	y, (0x10, sp)
+      009C08 90 89            [ 2]  760 	pushw	y
+                                    761 ; genSend
+                                    762 ; genCall
+      009C0A CD 9A 46         [ 4]  763 	call	_itoa_pad
+                                    764 ; genGoto
+      009C0D 20 2B            [ 2]  765 	jra	00123$
+                                    766 ; peephole j5 changed absolute to relative unconditional jump.
+                                    767 ; genLabel
+      009C0F                        768 00119$:
+                                    769 ;	User/eric_proc.c: 76: } else if (*format == 's') {
+                                    770 ; genCmpEQorNE
+      009C0F A1 73            [ 1]  771 	cp	a, #0x73
+                                    772 ; peephole j5 changed absolute to relative unconditional jump.
+                                    773 ; peephole j10 removed jra by using inverse jump logic
+                                    774 ; peephole j30 removed unused label 00239$.
+                                    775 ; peephole j5 changed absolute to relative unconditional jump.
+      009C11 26 11            [ 1]  776 	jrne	00116$
+                                    777 ; peephole j7 removed jra by using inverse jump logic
+                                    778 ; peephole j30 removed unused label 00240$.
+                                    779 ; skipping generated iCode
+                                    780 ;	User/eric_proc.c: 77: s = va_arg(args, char*);
+                                    781 ; genAssign
+      009C13 17 01            [ 2]  782 	ldw	(0x01, sp), y
+                                    783 ; genPointerGet
+      009C15 FE               [ 2]  784 	ldw	x, (x)
+                                    785 ;	User/eric_proc.c: 78: while (*s) {
+                                    786 ; genAssign
+      009C16 16 03            [ 2]  787 	ldw	y, (0x03, sp)
+                                    788 ; genLabel
+      009C18                        789 00112$:
+                                    790 ; genPointerGet
+                                    791 ; genIfx
+      009C18 F6               [ 1]  792 	ld	a, (x)
+                                    793 ; peephole 30 removed redundant tnz.
+                                    794 ; peephole j5 changed absolute to relative unconditional jump.
+      009C19 27 1D            [ 1]  795 	jreq	00143$
+                                    796 ; peephole j10 removed jra by using inverse jump logic
+                                    797 ; peephole j30 removed unused label 00241$.
+                                    798 ;	User/eric_proc.c: 79: *buffer++ = *s++;
+                                    799 ; genAssign
+                                    800 ; genPlus
+      009C1B 5C               [ 1]  801 	incw	x
+                                    802 ; genPointerSet
+      009C1C 90 F7            [ 1]  803 	ld	(y), a
+                                    804 ; genPlus
+      009C1E 90 5C            [ 1]  805 	incw	y
+                                    806 ; genAssign
+      009C20 17 0F            [ 2]  807 	ldw	(0x0f, sp), y
+                                    808 ; genGoto
+      009C22 20 F4            [ 2]  809 	jra	00112$
+                                    810 ; peephole j5 changed absolute to relative unconditional jump.
+                                    811 ; genLabel
+      009C24                        812 00116$:
+                                    813 ;	User/eric_proc.c: 82: *buffer++ = *format;
+                                    814 ; genPointerSet
+      009C24 1E 03            [ 2]  815 	ldw	x, (0x03, sp)
+      009C26 F7               [ 1]  816 	ld	(x), a
+                                    817 ; genPlus
+      009C27 1E 0F            [ 2]  818 	ldw	x, (0x0f, sp)
+      009C29 5C               [ 1]  819 	incw	x
+                                    820 ; genAssign
+      009C2A 1F 0F            [ 2]  821 	ldw	(0x0f, sp), x
+                                    822 ; genGoto
+      009C2C 20 0C            [ 2]  823 	jra	00123$
+                                    824 ; peephole j5 changed absolute to relative unconditional jump.
+                                    825 ; genLabel
+      009C2E                        826 00122$:
+                                    827 ;	User/eric_proc.c: 85: *buffer++ = *format;
+                                    828 ; genPointerSet
+      009C2E 1E 03            [ 2]  829 	ldw	x, (0x03, sp)
+      009C30 F7               [ 1]  830 	ld	(x), a
+                                    831 ; genPlus
+      009C31 1E 0F            [ 2]  832 	ldw	x, (0x0f, sp)
+      009C33 5C               [ 1]  833 	incw	x
+                                    834 ; genAssign
+      009C34 1F 0F            [ 2]  835 	ldw	(0x0f, sp), x
+                                    836 ;	User/eric_proc.c: 89: *buffer = '
+                                    837 ; genGoto
+      009C36 20 02            [ 2]  838 	jra	00123$
+                                    839 ; peephole j5 changed absolute to relative unconditional jump.
+                                    840 ;	User/eric_proc.c: 85: *buffer++ = *format;
+                                    841 ; genLabel
+      009C38                        842 00143$:
+                                    843 ; genAssign
+      009C38 17 0F            [ 2]  844 	ldw	(0x0f, sp), y
+                                    845 ; genLabel
+      009C3A                        846 00123$:
+                                    847 ;	User/eric_proc.c: 87: format++;
+                                    848 ; genPlus
+      009C3A 1E 11            [ 2]  849 	ldw	x, (0x11, sp)
+      009C3C 5C               [ 1]  850 	incw	x
+                                    851 ; genAssign
+      009C3D 1F 11            [ 2]  852 	ldw	(0x11, sp), x
+                                    853 ; genGoto
+      009C3F CC 9B 2C         [ 2]  854 	jp	00124$
+                                    855 ; genLabel
+      009C42                        856 00126$:
+                                    857 ;	User/eric_proc.c: 89: *buffer = '
+                                    858 ; genPointerSet
+      009C42 1E 03            [ 2]  859 	ldw	x, (0x03, sp)
+      009C44 7F               [ 1]  860 	clr	(x)
+                                    861 ;	User/eric_proc.c: 90: va_end(args);
+                                    862 ; genLabel
+                                    863 ; peephole j30 removed unused label 00127$.
+                                    864 ;	User/eric_proc.c: 91: }
+                                    865 ; genEndFunction
+      009C45 5B 0C            [ 2]  866 	addw	sp, #12
+      009C47 81               [ 4]  867 	ret
+                                    868 ;	Total mini_sprintf function size at codegen: 3 bytes.
+                                    869 ;	User/eric_proc.c: 144: uint8_t System_GetMode(void)
+                                    870 ; genLabel
+                                    871 ;	-----------------------------------------
+                                    872 ;	 function System_GetMode
+                                    873 ;	-----------------------------------------
+                                    874 ;	Register assignment is optimal.
+                                    875 ;	Stack space usage: 0 bytes.
+      009C48                        876 _System_GetMode:
+                                    877 ;	User/eric_proc.c: 146: return sysmode;
+                                    878 ; genReturn
+      009C48 C6 05 3C         [ 1]  879 	ld	a, _sysmode+0
+                                    880 ; genLabel
+                                    881 ; peephole j30 removed unused label 00101$.
+                                    882 ;	User/eric_proc.c: 147: }
+                                    883 ; genEndFunction
+      009C4B 81               [ 4]  884 	ret
+                                    885 ;	Total System_GetMode function size at codegen: 1 bytes.
+                                    886 ;	User/eric_proc.c: 150: void System_InitMode(void)
+                                    887 ; genLabel
+                                    888 ;	-----------------------------------------
+                                    889 ;	 function System_InitMode
+                                    890 ;	-----------------------------------------
+                                    891 ;	Register assignment is optimal.
+                                    892 ;	Stack space usage: 0 bytes.
+      009C4C                        893 _System_InitMode:
+                                    894 ;	User/eric_proc.c: 152: sysmode = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
+                                    895 ; genSend
+      009C4C A6 10            [ 1]  896 	ld	a, #0x10
+                                    897 ; genSend
+      009C4E AE 50 0A         [ 2]  898 	ldw	x, #0x500a
+                                    899 ; genCall
+      009C51 CD CE B9         [ 4]  900 	call	_GPIO_ReadInputDataBit
+                                    901 ; genCast
+                                    902 ; genAssign
+      009C54 C7 05 3C         [ 1]  903 	ld	_sysmode+0, a
+                                    904 ; genLabel
+                                    905 ; peephole j30 removed unused label 00101$.
+                                    906 ;	User/eric_proc.c: 153: }
+                                    907 ; genEndFunction
+      009C57 81               [ 4]  908 	ret
+                                    909 ;	Total System_InitMode function size at codegen: 1 bytes.
+                                    910 ;	User/eric_proc.c: 156: Tstat* Record_GetStat(uint8_t phase)
+                                    911 ; genLabel
+                                    912 ;	-----------------------------------------
+                                    913 ;	 function Record_GetStat
+                                    914 ;	-----------------------------------------
+                                    915 ;	Register assignment might be sub-optimal.
+                                    916 ;	Stack space usage: 0 bytes.
+      009C58                        917 _Record_GetStat:
+                                    918 ; genReceive
+                                    919 ;	User/eric_proc.c: 158: if (phase > 6) phase = 0;
+                                    920 ; genCmp
+                                    921 ; genCmpTnz
+      009C58 A1 06            [ 1]  922 	cp	a, #0x06
+                                    923 ; peephole j5 changed absolute to relative unconditional jump.
+      009C5A 23 01            [ 2]  924 	jrule	00102$
+                                    925 ; peephole j16 removed jra by using inverse jump logic
+                                    926 ; peephole j30 removed unused label 00112$.
+                                    927 ; skipping generated iCode
+                                    928 ; genAssign
+      009C5C 4F               [ 1]  929 	clr	a
+                                    930 ; genLabel
+      009C5D                        931 00102$:
+                                    932 ;	User/eric_proc.c: 159: return &stt[phase];
+                                    933 ; skipping iCode since result will be rematerialized
+                                    934 ; genMult
+      009C5D 41               [ 1]  935 	exg	a, xl
+      009C5E A6 0A            [ 1]  936 	ld	a, #0x0a
+      009C60 41               [ 1]  937 	exg	a, xl
+      009C61 42               [ 4]  938 	mul	x, a
+                                    939 ; genPlus
+      009C62 1C 04 E3         [ 2]  940 	addw	x, #(_stt+0)
+                                    941 ; genCast
+                                    942 ; genAssign
+                                    943 ; genReturn
+                                    944 ; genLabel
+                                    945 ; peephole j30 removed unused label 00103$.
+                                    946 ;	User/eric_proc.c: 160: }
+                                    947 ; genEndFunction
+      009C65 81               [ 4]  948 	ret
+                                    949 ;	Total Record_GetStat function size at codegen: 1 bytes.
+                                    950 ;	User/eric_proc.c: 162: Trecord* Record_GetRecd(void)
+                                    951 ; genLabel
+                                    952 ;	-----------------------------------------
+                                    953 ;	 function Record_GetRecd
+                                    954 ;	-----------------------------------------
+                                    955 ;	Register assignment is optimal.
+                                    956 ;	Stack space usage: 0 bytes.
+      009C66                        957 _Record_GetRecd:
+                                    958 ;	User/eric_proc.c: 164: return &recd;
+                                    959 ; skipping iCode since result will be rematerialized
+                                    960 ; skipping iCode since result will be rematerialized
+                                    961 ; genReturn
+      009C66 AE 02 2F         [ 2]  962 	ldw	x, #(_recd+0)
+                                    963 ; genLabel
+                                    964 ; peephole j30 removed unused label 00101$.
+                                    965 ;	User/eric_proc.c: 165: }
+                                    966 ; genEndFunction
+      009C69 81               [ 4]  967 	ret
+                                    968 ;	Total Record_GetRecd function size at codegen: 1 bytes.
+                                    969 ;	User/eric_proc.c: 168: Trecord* Record_GetLRecd(void)
+                                    970 ; genLabel
+                                    971 ;	-----------------------------------------
+                                    972 ;	 function Record_GetLRecd
+                                    973 ;	-----------------------------------------
+                                    974 ;	Register assignment is optimal.
+                                    975 ;	Stack space usage: 0 bytes.
+      009C6A                        976 _Record_GetLRecd:
+                                    977 ;	User/eric_proc.c: 170: return &lrecd;
+                                    978 ; skipping iCode since result will be rematerialized
+                                    979 ; skipping iCode since result will be rematerialized
+                                    980 ; genReturn
+      009C6A AE 02 39         [ 2]  981 	ldw	x, #(_lrecd+0)
+                                    982 ; genLabel
+                                    983 ; peephole j30 removed unused label 00101$.
+                                    984 ;	User/eric_proc.c: 171: }
+                                    985 ; genEndFunction
+      009C6D 81               [ 4]  986 	ret
+                                    987 ;	Total Record_GetLRecd function size at codegen: 1 bytes.
+                                    988 ;	User/eric_proc.c: 174: void Storage_SaveAllStats(void)
+                                    989 ; genLabel
+                                    990 ;	-----------------------------------------
+                                    991 ;	 function Storage_SaveAllStats
+                                    992 ;	-----------------------------------------
+                                    993 ;	Register assignment is optimal.
+                                    994 ;	Stack space usage: 0 bytes.
+      009C6E                        995 _Storage_SaveAllStats:
+                                    996 ;	User/eric_proc.c: 176: Save_Stat((uint8_t *)&stt);
+                                    997 ; skipping iCode since result will be rematerialized
+                                    998 ; skipping iCode since result will be rematerialized
+                                    999 ; genSend
+      009C6E AE 04 E3         [ 2] 1000 	ldw	x, #(_stt+0)
+                                   1001 ; genCall
+                                   1002 ; genLabel
+                                   1003 ; peephole j30 removed unused label 00101$.
+                                   1004 ;	User/eric_proc.c: 177: }
+                                   1005 ; genEndFunction
+      009C71 CC 94 DB         [ 2] 1006 	jp	_Save_Stat
+                                   1007 ; peephole 52 removed unreachable ret.
+                                   1008 ;	Total Storage_SaveAllStats function size at codegen: 1 bytes.
+                                   1009 ;	User/eric_proc.c: 180: void Record_SaveNew(uint8_t* timeData, uint32_t phalen)
+                                   1010 ; genLabel
+                                   1011 ;	-----------------------------------------
+                                   1012 ;	 function Record_SaveNew
+                                   1013 ;	-----------------------------------------
+                                   1014 ;	Register assignment might be sub-optimal.
+                                   1015 ;	Stack space usage: 0 bytes.
+      009C74                       1016 _Record_SaveNew:
+                                   1017 ; genReceive
+                                   1018 ;	User/eric_proc.c: 182: memcpy((uint8_t *)&recd, timeData, 6);
+                                   1019 ; genCast
+                                   1020 ; genAssign
+                                   1021 ; skipping iCode since result will be rematerialized
+                                   1022 ; skipping iCode since result will be rematerialized
+                                   1023 ; genIPush
+      009C74 4B 06            [ 1] 1024 	push	#0x06
+      009C76 4B 00            [ 1] 1025 	push	#0x00
+                                   1026 ; genIPush
+      009C78 89               [ 2] 1027 	pushw	x
+                                   1028 ; genSend
+      009C79 AE 02 2F         [ 2] 1029 	ldw	x, #(_recd+0)
+                                   1030 ; genCall
+      009C7C CD ED AB         [ 4] 1031 	call	___memcpy
+                                   1032 ;	User/eric_proc.c: 183: recd.pl = phalen;
+                                   1033 ; skipping iCode since result will be rematerialized
+                                   1034 ; genPointerSet
+      009C7F AE 02 35         [ 2] 1035 	ldw	x, #(_recd+6)
+      009C82 16 05            [ 2] 1036 	ldw	y, (0x05, sp)
+      009C84 EF 02            [ 2] 1037 	ldw	(0x2, x), y
+      009C86 16 03            [ 2] 1038 	ldw	y, (0x03, sp)
+      009C88 FF               [ 2] 1039 	ldw	(x), y
+                                   1040 ;	User/eric_proc.c: 184: Save_Data((uint8_t *)&recd);
+                                   1041 ; skipping iCode since result will be rematerialized
+                                   1042 ; skipping iCode since result will be rematerialized
+                                   1043 ; genSend
+      009C89 AE 02 2F         [ 2] 1044 	ldw	x, #(_recd+0)
+                                   1045 ; genCall
+      009C8C CD 95 69         [ 4] 1046 	call	_Save_Data
+                                   1047 ; genLabel
+                                   1048 ; peephole j30 removed unused label 00101$.
+                                   1049 ;	User/eric_proc.c: 185: }
+                                   1050 ; genEndFunction
+      009C8F 1E 01            [ 2] 1051 	ldw	x, (1, sp)
+      009C91 5B 06            [ 2] 1052 	addw	sp, #6
+      009C93 FC               [ 2] 1053 	jp	(x)
+                                   1054 ;	Total Record_SaveNew function size at codegen: 5 bytes.
+                                   1055 ;	User/eric_proc.c: 188: uint8_t Record_LoadHistory(uint8_t mode)
+                                   1056 ; genLabel
+                                   1057 ;	-----------------------------------------
+                                   1058 ;	 function Record_LoadHistory
+                                   1059 ;	-----------------------------------------
+                                   1060 ;	Register assignment is optimal.
+                                   1061 ;	Stack space usage: 0 bytes.
+      009C94                       1062 _Record_LoadHistory:
+                                   1063 ; genReceive
+                                   1064 ;	User/eric_proc.c: 190: return Load_Data(mode, (uint8_t *)&lrecd);
+                                   1065 ; skipping iCode since result will be rematerialized
+                                   1066 ; skipping iCode since result will be rematerialized
+                                   1067 ; genSend
+      009C94 AE 02 39         [ 2] 1068 	ldw	x, #(_lrecd+0)
+                                   1069 ; genSend
+                                   1070 ; genCall
+                                   1071 ; genReturn
+                                   1072 ; genLabel
+                                   1073 ; peephole j30 removed unused label 00101$.
+                                   1074 ;	User/eric_proc.c: 191: }
+                                   1075 ; genEndFunction
+      009C97 CC 95 C3         [ 2] 1076 	jp	_Load_Data
+                                   1077 ; peephole 52 removed unreachable ret.
+                                   1078 ;	Total Record_LoadHistory function size at codegen: 1 bytes.
+                                   1079 ;	User/eric_proc.c: 203: uint16_t CRC_GetModbus16(uint8_t *pdata, int len)
+                                   1080 ; genLabel
+                                   1081 ;	-----------------------------------------
+                                   1082 ;	 function CRC_GetModbus16
+                                   1083 ;	-----------------------------------------
+                                   1084 ;	Register assignment might be sub-optimal.
+                                   1085 ;	Stack space usage: 7 bytes.
+      009C9A                       1086 _CRC_GetModbus16:
+      009C9A 52 07            [ 2] 1087 	sub	sp, #7
+                                   1088 ; genReceive
+      009C9C 51               [ 1] 1089 	exgw	x, y
+                                   1090 ;	User/eric_proc.c: 205: uint16_t crc = 0xFFFF;
+                                   1091 ; genAssign
+      009C9D 5F               [ 1] 1092 	clrw	x
+      009C9E 5A               [ 2] 1093 	decw	x
+      009C9F 1F 03            [ 2] 1094 	ldw	(0x03, sp), x
+                                   1095 ;	User/eric_proc.c: 208: while (len--)
+                                   1096 ; genAssign
+      009CA1 17 05            [ 2] 1097 	ldw	(0x05, sp), y
+                                   1098 ; genAssign
+                                   1099 ; genLabel
+      009CA3                       1100 00105$:
+                                   1101 ; genAssign
+      009CA3 16 0A            [ 2] 1102 	ldw	y, (0x0a, sp)
+      009CA5 17 01            [ 2] 1103 	ldw	(0x01, sp), y
+                                   1104 ; genMinus
+      009CA7 1E 0A            [ 2] 1105 	ldw	x, (0x0a, sp)
+      009CA9 5A               [ 2] 1106 	decw	x
+      009CAA 1F 0A            [ 2] 1107 	ldw	(0x0a, sp), x
+                                   1108 ; genIfx
+      009CAC 1E 01            [ 2] 1109 	ldw	x, (0x01, sp)
+                                   1110 ; peephole j5 changed absolute to relative unconditional jump.
+      009CAE 27 38            [ 1] 1111 	jreq	00107$
+                                   1112 ; peephole j10 removed jra by using inverse jump logic
+                                   1113 ; peephole j30 removed unused label 00149$.
+                                   1114 ;	User/eric_proc.c: 210: crc ^= *pdata++;
+                                   1115 ; genPointerGet
+      009CB0 1E 05            [ 2] 1116 	ldw	x, (0x05, sp)
+      009CB2 F6               [ 1] 1117 	ld	a, (x)
+                                   1118 ; genPlus
+      009CB3 1E 05            [ 2] 1119 	ldw	x, (0x05, sp)
+      009CB5 5C               [ 1] 1120 	incw	x
+      009CB6 1F 05            [ 2] 1121 	ldw	(0x05, sp), x
+                                   1122 ; peephole j30 removed unused label 00150$.
+                                   1123 ; genCast
+                                   1124 ; genAssign
+                                   1125 ; peephole 3 removed dead clrw of x.
+                                   1126 ; genXor
+      009CB8 18 04            [ 1] 1127 	xor	a, (0x04, sp)
+      009CBA 6B 04            [ 1] 1128 	ld	(0x04, sp), a
+      009CBC 4F               [ 1] 1129 	clr	a
+      009CBD 18 03            [ 1] 1130 	xor	a, (0x03, sp)
+      009CBF 6B 03            [ 1] 1131 	ld	(0x03, sp), a
+                                   1132 ;	User/eric_proc.c: 211: for (i = 0; i < 8; i++)
+                                   1133 ; genAssign
+      009CC1 0F 07            [ 1] 1134 	clr	(0x07, sp)
+                                   1135 ; genLabel
+      009CC3                       1136 00108$:
+                                   1137 ;	User/eric_proc.c: 214: crc = (crc >> 1) ^ 0xA001;
+                                   1138 ; genRightShiftLiteral
+      009CC3 1E 03            [ 2] 1139 	ldw	x, (0x03, sp)
+      009CC5 54               [ 2] 1140 	srlw	x
+      009CC6 1F 01            [ 2] 1141 	ldw	(0x01, sp), x
+                                   1142 ;	User/eric_proc.c: 213: if (crc & 1)
+                                   1143 ; genAnd
+      009CC8 7B 04            [ 1] 1144 	ld	a, (0x04, sp)
+      009CCA 44               [ 1] 1145 	srl	a
+                                   1146 ; peephole j5 changed absolute to relative unconditional jump.
+      009CCB 24 0D            [ 1] 1147 	jrnc	00102$
+                                   1148 ; peephole j6 removed jra by using inverse jump logic
+                                   1149 ; peephole j30 removed unused label 00151$.
+                                   1150 ; skipping generated iCode
+                                   1151 ;	User/eric_proc.c: 214: crc = (crc >> 1) ^ 0xA001;
+                                   1152 ; genCast
+                                   1153 ; genAssign
+      009CCD 1E 01            [ 2] 1154 	ldw	x, (0x01, sp)
+                                   1155 ; genXor
+      009CCF 9F               [ 1] 1156 	ld	a, xl
+      009CD0 A8 01            [ 1] 1157 	xor	a, #0x01
+      009CD2 02               [ 1] 1158 	rlwa	x
+                                   1159 ; peephole r1 used rlwa.
+      009CD3 A8 A0            [ 1] 1160 	xor	a, #0xa0
+      009CD5 95               [ 1] 1161 	ld	xh, a
+                                   1162 ; genCast
+                                   1163 ; genAssign
+      009CD6 1F 03            [ 2] 1164 	ldw	(0x03, sp), x
+                                   1165 ; genGoto
+      009CD8 20 04            [ 2] 1166 	jra	00109$
+                                   1167 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1168 ; genLabel
+      009CDA                       1169 00102$:
+                                   1170 ;	User/eric_proc.c: 216: crc = crc >> 1;
+                                   1171 ; genAssign
+      009CDA 16 01            [ 2] 1172 	ldw	y, (0x01, sp)
+      009CDC 17 03            [ 2] 1173 	ldw	(0x03, sp), y
+                                   1174 ; genLabel
+      009CDE                       1175 00109$:
+                                   1176 ;	User/eric_proc.c: 211: for (i = 0; i < 8; i++)
+                                   1177 ; genPlus
+      009CDE 0C 07            [ 1] 1178 	inc	(0x07, sp)
+                                   1179 ; genCmp
+                                   1180 ; genCmpTnz
+      009CE0 7B 07            [ 1] 1181 	ld	a, (0x07, sp)
+      009CE2 A1 08            [ 1] 1182 	cp	a, #0x08
+                                   1183 ; peephole j5 changed absolute to relative unconditional jump.
+      009CE4 25 DD            [ 1] 1184 	jrc	00108$
+                                   1185 ; peephole j9 removed jra by using inverse jump logic
+                                   1186 ; peephole j30 removed unused label 00152$.
+                                   1187 ; skipping generated iCode
+                                   1188 ; genGoto
+      009CE6 20 BB            [ 2] 1189 	jra	00105$
+                                   1190 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1191 ; genLabel
+      009CE8                       1192 00107$:
+                                   1193 ;	User/eric_proc.c: 219: return crc;
+                                   1194 ; genReturn
+      009CE8 1E 03            [ 2] 1195 	ldw	x, (0x03, sp)
+                                   1196 ; genLabel
+                                   1197 ; peephole j30 removed unused label 00110$.
+                                   1198 ;	User/eric_proc.c: 220: }
+                                   1199 ; genEndFunction
+      009CEA 5B 07            [ 2] 1200 	addw	sp, #7
+      009CEC 90 85            [ 2] 1201 	popw	y
+      009CEE 5B 02            [ 2] 1202 	addw	sp, #2
+      009CF0 90 FC            [ 2] 1203 	jp	(y)
+                                   1204 ;	Total CRC_GetModbus16 function size at codegen: 8 bytes.
+                                   1205 ;	User/eric_proc.c: 222: void InitMsg(MsgQue *msgq)
+                                   1206 ; genLabel
+                                   1207 ;	-----------------------------------------
+                                   1208 ;	 function InitMsg
+                                   1209 ;	-----------------------------------------
+                                   1210 ;	Register assignment might be sub-optimal.
+                                   1211 ;	Stack space usage: 2 bytes.
+      009CF2                       1212 _InitMsg:
+      009CF2 89               [ 2] 1213 	pushw	x
+                                   1214 ; genReceive
+                                   1215 ;	User/eric_proc.c: 226: if (msgq == 0)
+                                   1216 ; genIfx
+      009CF3 5D               [ 2] 1217 	tnzw	x
+                                   1218 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1219 ; peephole j7 removed jra by using inverse jump logic
+                                   1220 ; peephole j30 removed unused label 00123$.
+                                   1221 ;	User/eric_proc.c: 228: return;
+                                   1222 ; genReturn
+                                   1223 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1224 ; genLabel
+      009CF4 27 30            [ 1] 1225 	jreq	00106$
+                                   1226 ; peephole j10 removed jra by using inverse jump logic
+                                   1227 ; peephole j30 removed unused label 00102$.
+                                   1228 ;	User/eric_proc.c: 230: msgq->r = 0;
+                                   1229 ; genPlus
+      009CF6 90 93            [ 1] 1230 	ldw	y, x
+      009CF8 90 5C            [ 1] 1231 	incw	y
+                                   1232 ; genPointerSet
+      009CFA 90 7F            [ 1] 1233 	clr	(y)
+                                   1234 ;	User/eric_proc.c: 231: msgq->w = 0;
+                                   1235 ; genPointerSet
+      009CFC 7F               [ 1] 1236 	clr	(x)
+                                   1237 ;	User/eric_proc.c: 232: for (i = 0; i < MSG_LEN; i++)
+                                   1238 ; genPlus
+      009CFD 5C               [ 1] 1239 	incw	x
+      009CFE 5C               [ 1] 1240 	incw	x
+      009CFF 1F 01            [ 2] 1241 	ldw	(0x01, sp), x
+                                   1242 ; genAssign
+      009D01 4F               [ 1] 1243 	clr	a
+                                   1244 ; genLabel
+      009D02                       1245 00104$:
+                                   1246 ;	User/eric_proc.c: 234: msgq->msg[i].msgtype = 0;
+                                   1247 ; genMult
+      009D02 88               [ 1] 1248 	push	a
+      009D03 61               [ 1] 1249 	exg	a, yl
+      009D04 A6 09            [ 1] 1250 	ld	a, #0x09
+      009D06 61               [ 1] 1251 	exg	a, yl
+      009D07 90 42            [ 4] 1252 	mul	y, a
+      009D09 84               [ 1] 1253 	pop	a
+                                   1254 ; genPlus
+      009D0A 72 F9 01         [ 2] 1255 	addw	y, (0x01, sp)
+                                   1256 ; genPointerSet
+      009D0D 90 7F            [ 1] 1257 	clr	(y)
+                                   1258 ;	User/eric_proc.c: 235: msgq->msg[i].msgval1 = 0;
+                                   1259 ; genPlus
+      009D0F 93               [ 1] 1260 	ldw	x, y
+      009D10 5C               [ 1] 1261 	incw	x
+                                   1262 ; genPointerSet
+      009D11 6F 03            [ 1] 1263 	clr	(0x3, x)
+      009D13 6F 02            [ 1] 1264 	clr	(0x2, x)
+      009D15 6F 01            [ 1] 1265 	clr	(0x1, x)
+      009D17 7F               [ 1] 1266 	clr	(x)
+                                   1267 ;	User/eric_proc.c: 236: msgq->msg[i].msgval2 = 0;
+                                   1268 ; genPlus
+      009D18 93               [ 1] 1269 	ldw	x, y
+      009D19 1C 00 05         [ 2] 1270 	addw	x, #0x0005
+                                   1271 ; genPointerSet
+      009D1C 90 5F            [ 1] 1272 	clrw	y
+      009D1E EF 02            [ 2] 1273 	ldw	(0x2, x), y
+      009D20 FF               [ 2] 1274 	ldw	(x), y
+                                   1275 ;	User/eric_proc.c: 232: for (i = 0; i < MSG_LEN; i++)
+                                   1276 ; genPlus
+      009D21 4C               [ 1] 1277 	inc	a
+                                   1278 ; genCmp
+                                   1279 ; genCmpTnz
+      009D22 A1 20            [ 1] 1280 	cp	a, #0x20
+                                   1281 ; peephole j5 changed absolute to relative unconditional jump.
+      009D24 25 DC            [ 1] 1282 	jrc	00104$
+                                   1283 ; peephole j9 removed jra by using inverse jump logic
+                                   1284 ; peephole j30 removed unused label 00124$.
+                                   1285 ; skipping generated iCode
+                                   1286 ; genLabel
+      009D26                       1287 00106$:
+                                   1288 ;	User/eric_proc.c: 238: }
+                                   1289 ; genEndFunction
+      009D26 85               [ 2] 1290 	popw	x
+      009D27 81               [ 4] 1291 	ret
+                                   1292 ;	Total InitMsg function size at codegen: 2 bytes.
+                                   1293 ;	User/eric_proc.c: 241: void SendMsg(MsgQue *msgq, uint8_t type, uint32_t val1, uint32_t val2)
+                                   1294 ; genLabel
+                                   1295 ;	-----------------------------------------
+                                   1296 ;	 function SendMsg
+                                   1297 ;	-----------------------------------------
+                                   1298 ;	Register assignment might be sub-optimal.
+                                   1299 ;	Stack space usage: 4 bytes.
+      009D28                       1300 _SendMsg:
+      009D28 52 04            [ 2] 1301 	sub	sp, #4
+                                   1302 ; genReceive
+      009D2A 51               [ 1] 1303 	exgw	x, y
+                                   1304 ; genReceive
+                                   1305 ;	User/eric_proc.c: 243: if (msgq == 0)
+                                   1306 ; genIfx
+      009D2B 90 5D            [ 2] 1307 	tnzw	y
+                                   1308 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1309 ; peephole j7 removed jra by using inverse jump logic
+                                   1310 ; peephole j30 removed unused label 00112$.
+                                   1311 ;	User/eric_proc.c: 245: return;
+                                   1312 ; genReturn
+                                   1313 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1314 ; genLabel
+      009D2D 27 4A            [ 1] 1315 	jreq	00103$
+                                   1316 ; peephole j10 removed jra by using inverse jump logic
+                                   1317 ; peephole j30 removed unused label 00102$.
+                                   1318 ;	User/eric_proc.c: 247: msgq->msg[msgq->w].msgtype = type;
+                                   1319 ; genPlus
+      009D2F 93               [ 1] 1320 	ldw	x, y
+      009D30 5C               [ 1] 1321 	incw	x
+      009D31 5C               [ 1] 1322 	incw	x
+      009D32 1F 01            [ 2] 1323 	ldw	(0x01, sp), x
+                                   1324 ; genCast
+                                   1325 ; genAssign
+                                   1326 ; genPointerGet
+      009D34 17 03            [ 2] 1327 	ldw	(0x03, sp), y
+      009D36 93               [ 1] 1328 	ldw	x, y
+                                   1329 ; peephole 15 replaced load from (0x03, sp) into x by load from y into x.
+      009D37 88               [ 1] 1330 	push	a
+      009D38 F6               [ 1] 1331 	ld	a, (x)
+      009D39 97               [ 1] 1332 	ld	xl, a
+                                   1333 ; genMult
+                                   1334 ; peephole 6 removed dead pop / push pair.
+      009D3A A6 09            [ 1] 1335 	ld	a, #0x09
+      009D3C 42               [ 4] 1336 	mul	x, a
+      009D3D 84               [ 1] 1337 	pop	a
+                                   1338 ; genPlus
+      009D3E 72 FB 01         [ 2] 1339 	addw	x, (0x01, sp)
+                                   1340 ; genPointerSet
+      009D41 F7               [ 1] 1341 	ld	(x), a
+                                   1342 ;	User/eric_proc.c: 248: msgq->msg[msgq->w].msgval1 = val1;
+                                   1343 ; genPointerGet
+      009D42 1E 03            [ 2] 1344 	ldw	x, (0x03, sp)
+      009D44 F6               [ 1] 1345 	ld	a, (x)
+      009D45 97               [ 1] 1346 	ld	xl, a
+                                   1347 ; genMult
+      009D46 A6 09            [ 1] 1348 	ld	a, #0x09
+      009D48 42               [ 4] 1349 	mul	x, a
+                                   1350 ; genPlus
+      009D49 72 FB 01         [ 2] 1351 	addw	x, (0x01, sp)
+                                   1352 ; genPlus
+      009D4C 5C               [ 1] 1353 	incw	x
+                                   1354 ; genPointerSet
+      009D4D 16 09            [ 2] 1355 	ldw	y, (0x09, sp)
+      009D4F EF 02            [ 2] 1356 	ldw	(0x2, x), y
+      009D51 16 07            [ 2] 1357 	ldw	y, (0x07, sp)
+      009D53 FF               [ 2] 1358 	ldw	(x), y
+                                   1359 ;	User/eric_proc.c: 249: msgq->msg[msgq->w].msgval2 = val2;
+                                   1360 ; genPointerGet
+      009D54 1E 03            [ 2] 1361 	ldw	x, (0x03, sp)
+      009D56 F6               [ 1] 1362 	ld	a, (x)
+      009D57 97               [ 1] 1363 	ld	xl, a
+                                   1364 ; genMult
+      009D58 A6 09            [ 1] 1365 	ld	a, #0x09
+      009D5A 42               [ 4] 1366 	mul	x, a
+                                   1367 ; genPlus
+      009D5B 72 FB 01         [ 2] 1368 	addw	x, (0x01, sp)
+                                   1369 ; genPlus
+      009D5E 1C 00 05         [ 2] 1370 	addw	x, #0x0005
+                                   1371 ; genPointerSet
+      009D61 16 0D            [ 2] 1372 	ldw	y, (0x0d, sp)
+      009D63 EF 02            [ 2] 1373 	ldw	(0x2, x), y
+      009D65 16 0B            [ 2] 1374 	ldw	y, (0x0b, sp)
+      009D67 FF               [ 2] 1375 	ldw	(x), y
+                                   1376 ;	User/eric_proc.c: 250: msgq->w = (msgq->w + 1) % MSG_LEN;
+                                   1377 ; genPointerGet
+      009D68 1E 03            [ 2] 1378 	ldw	x, (0x03, sp)
+      009D6A F6               [ 1] 1379 	ld	a, (x)
+                                   1380 ; genCast
+                                   1381 ; genAssign
+      009D6B 5F               [ 1] 1382 	clrw	x
+                                   1383 ; genPlus
+      009D6C 97               [ 1] 1384 	ld	xl, a
+      009D6D 5C               [ 1] 1385 	incw	x
+                                   1386 ; genIPush
+      009D6E 4B 20            [ 1] 1387 	push	#0x20
+      009D70 4B 00            [ 1] 1388 	push	#0x00
+                                   1389 ; genSend
+                                   1390 ; genCall
+      009D72 CD EE 9C         [ 4] 1391 	call	__modsint
+      009D75 9F               [ 1] 1392 	ld	a, xl
+                                   1393 ; genCast
+                                   1394 ; genAssign
+                                   1395 ; genPointerSet
+      009D76 1E 03            [ 2] 1396 	ldw	x, (0x03, sp)
+      009D78 F7               [ 1] 1397 	ld	(x), a
+                                   1398 ; genLabel
+      009D79                       1399 00103$:
+                                   1400 ;	User/eric_proc.c: 251: }
+                                   1401 ; genEndFunction
+      009D79 1E 05            [ 2] 1402 	ldw	x, (5, sp)
+      009D7B 5B 0E            [ 2] 1403 	addw	sp, #14
+      009D7D FC               [ 2] 1404 	jp	(x)
+                                   1405 ;	Total SendMsg function size at codegen: 5 bytes.
+                                   1406 ;	User/eric_proc.c: 253: TMSG *RevMsg(MsgQue *msgq)
+                                   1407 ; genLabel
+                                   1408 ;	-----------------------------------------
+                                   1409 ;	 function RevMsg
+                                   1410 ;	-----------------------------------------
+                                   1411 ;	Register assignment might be sub-optimal.
+                                   1412 ;	Stack space usage: 7 bytes.
+      009D7E                       1413 _RevMsg:
+      009D7E 52 07            [ 2] 1414 	sub	sp, #7
+                                   1415 ; genReceive
+                                   1416 ;	User/eric_proc.c: 257: if (msgq == 0)
+                                   1417 ; genIfx
+                                   1418 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1419 ; peephole j7 removed jra by using inverse jump logic
+                                   1420 ; peephole j30 removed unused label 00121$.
+                                   1421 ;	User/eric_proc.c: 259: return 0;
+                                   1422 ; genReturn
+      009D80 5D               [ 2] 1423 	tnzw	x
+                                   1424 ; peephole 22c removed redundant clrw x.
+                                   1425 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1426 ; genLabel
+      009D81 27 38            [ 1] 1427 	jreq	00105$
+                                   1428 ; peephole j10 removed jra by using inverse jump logic
+                                   1429 ; peephole j30 removed unused label 00102$.
+                                   1430 ;	User/eric_proc.c: 262: if (msgq->r != msgq->w)
+                                   1431 ; genPlus
+      009D83 9F               [ 1] 1432 	ld	a, xl
+      009D84 AB 01            [ 1] 1433 	add	a, #0x01
+      009D86 6B 02            [ 1] 1434 	ld	(0x02, sp), a
+      009D88 9E               [ 1] 1435 	ld	a, xh
+      009D89 A9 00            [ 1] 1436 	adc	a, #0x00
+      009D8B 6B 01            [ 1] 1437 	ld	(0x01, sp), a
+                                   1438 ; genPointerGet
+      009D8D 16 01            [ 2] 1439 	ldw	y, (0x01, sp)
+      009D8F 90 F6            [ 1] 1440 	ld	a, (y)
+      009D91 6B 03            [ 1] 1441 	ld	(0x03, sp), a
+                                   1442 ; genPointerGet
+      009D93 F6               [ 1] 1443 	ld	a, (x)
+                                   1444 ; genCmpEQorNE
+      009D94 11 03            [ 1] 1445 	cp	a, (0x03, sp)
+                                   1446 ; peephole j5 changed absolute to relative unconditional jump.
+      009D96 27 22            [ 1] 1447 	jreq	00104$
+                                   1448 ; peephole j10 removed jra by using inverse jump logic
+                                   1449 ; peephole j30 removed unused label 00123$.
+                                   1450 ; skipping generated iCode
+                                   1451 ;	User/eric_proc.c: 264: p = &msgq->msg[msgq->r];
+                                   1452 ; genPlus
+      009D98 5C               [ 1] 1453 	incw	x
+      009D99 5C               [ 1] 1454 	incw	x
+      009D9A 1F 04            [ 2] 1455 	ldw	(0x04, sp), x
+                                   1456 ; genMult
+      009D9C 7B 03            [ 1] 1457 	ld	a, (0x03, sp)
+      009D9E 97               [ 1] 1458 	ld	xl, a
+      009D9F A6 09            [ 1] 1459 	ld	a, #0x09
+      009DA1 42               [ 4] 1460 	mul	x, a
+                                   1461 ; genPlus
+      009DA2 72 FB 04         [ 2] 1462 	addw	x, (0x04, sp)
+      009DA5 1F 06            [ 2] 1463 	ldw	(0x06, sp), x
+                                   1464 ;	User/eric_proc.c: 265: msgq->r = (msgq->r + 1) % MSG_LEN;
+                                   1465 ; genCast
+                                   1466 ; genAssign
+      009DA7 7B 03            [ 1] 1467 	ld	a, (0x03, sp)
+      009DA9 5F               [ 1] 1468 	clrw	x
+                                   1469 ; genPlus
+      009DAA 97               [ 1] 1470 	ld	xl, a
+      009DAB 5C               [ 1] 1471 	incw	x
+                                   1472 ; genIPush
+      009DAC 4B 20            [ 1] 1473 	push	#0x20
+      009DAE 4B 00            [ 1] 1474 	push	#0x00
+                                   1475 ; genSend
+                                   1476 ; genCall
+      009DB0 CD EE 9C         [ 4] 1477 	call	__modsint
+      009DB3 9F               [ 1] 1478 	ld	a, xl
+                                   1479 ; genCast
+                                   1480 ; genAssign
+                                   1481 ; genPointerSet
+      009DB4 1E 01            [ 2] 1482 	ldw	x, (0x01, sp)
+      009DB6 F7               [ 1] 1483 	ld	(x), a
+                                   1484 ;	User/eric_proc.c: 266: return p;
+                                   1485 ; genReturn
+      009DB7 1E 06            [ 2] 1486 	ldw	x, (0x06, sp)
+                                   1487 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1488 ; genLabel
+                                   1489 ;	User/eric_proc.c: 269: return 0;
+                                   1490 ; genReturn
+                                   1491 ; genLabel
+      009DB9 21                    1492 	.byte 0x21
+                                   1493 ; peephole jrf2 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      009DBA                       1494 00104$:
+      009DBA 5F               [ 1] 1495 	clrw	x
+      009DBB                       1496 00105$:
+                                   1497 ;	User/eric_proc.c: 270: }
+                                   1498 ; genEndFunction
+      009DBB 5B 07            [ 2] 1499 	addw	sp, #7
+      009DBD 81               [ 4] 1500 	ret
+                                   1501 ;	Total RevMsg function size at codegen: 3 bytes.
+                                   1502 ;	User/eric_proc.c: 273: void A_Fxn(void)
+                                   1503 ; genLabel
+                                   1504 ;	-----------------------------------------
+                                   1505 ;	 function A_Fxn
+                                   1506 ;	-----------------------------------------
+                                   1507 ;	Register assignment might be sub-optimal.
+                                   1508 ;	Stack space usage: 14 bytes.
+      009DBE                       1509 _A_Fxn:
+      009DBE 52 0E            [ 2] 1510 	sub	sp, #14
+                                   1511 ;	User/eric_proc.c: 279: if (strokeA.tim_trg > 0)
+                                   1512 ; skipping iCode since result will be rematerialized
+                                   1513 ; genCast
+                                   1514 ; genAssign
+      009DC0 AE 04 B8         [ 2] 1515 	ldw	x, #(_strokeA+0)
+                                   1516 ; genPointerGet
+      009DC3 1F 01            [ 2] 1517 	ldw	(0x01, sp), x
+                                   1518 ; peephole 4w removed redundant load from (0x01, sp) into x.
+      009DC5 F6               [ 1] 1519 	ld	a, (x)
+                                   1520 ; genIfx
+      009DC6 6B 0E            [ 1] 1521 	ld	(0x0e, sp), a
+                                   1522 ; peephole 31a removed redundant tnz.
+                                   1523 ; peephole j5 changed absolute to relative unconditional jump.
+      009DC8 27 03            [ 1] 1524 	jreq	00102$
+                                   1525 ; peephole j10 removed jra by using inverse jump logic
+                                   1526 ; peephole j30 removed unused label 00149$.
+                                   1527 ;	User/eric_proc.c: 281: return;
+                                   1528 ; genReturn
+      009DCA CC 9E CF         [ 2] 1529 	jp	00110$
+                                   1530 ; genLabel
+      009DCD                       1531 00102$:
+                                   1532 ;	User/eric_proc.c: 284: psta[0] = psta[1];
+                                   1533 ; skipping iCode since result will be rematerialized
+                                   1534 ; skipping iCode since result will be rematerialized
+                                   1535 ; genPointerGet
+                                   1536 ; genPointerSet
+      009DCD 55 04 2C 04 2B   [ 1] 1537 	mov	_A_Fxn_psta_10000_740+0, _A_Fxn_psta_10000_740+1
+                                   1538 ; peephole 4d replaced pair of mem-to-mem load with mov.
+                                   1539 ;	User/eric_proc.c: 285: psta[1] = psta[2];
+                                   1540 ; genPlus
+      009DD2 AE 04 2D         [ 2] 1541 	ldw	x, #(_A_Fxn_psta_10000_740+0)+2
+                                   1542 ; genPointerGet
+      009DD5 F6               [ 1] 1543 	ld	a, (x)
+                                   1544 ; genPointerSet
+      009DD6 C7 04 2C         [ 1] 1545 	ld	_A_Fxn_psta_10000_740+1, a
+                                   1546 ;	User/eric_proc.c: 286: psta[2] = psta[3];
+                                   1547 ; skipping iCode since result will be rematerialized
+                                   1548 ; genPointerGet
+      009DD9 C6 04 2E         [ 1] 1549 	ld	a, _A_Fxn_psta_10000_740+3
+                                   1550 ; genPointerSet
+      009DDC F7               [ 1] 1551 	ld	(x), a
+                                   1552 ;	User/eric_proc.c: 287: psta[3] = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_5); //每200ms读pin状态,超过1000ms都是高电平，表示一次冲击停止
+                                   1553 ; genSend
+      009DDD A6 20            [ 1] 1554 	ld	a, #0x20
+                                   1555 ; genSend
+      009DDF AE 50 0F         [ 2] 1556 	ldw	x, #0x500f
+                                   1557 ; genCall
+      009DE2 CD CE B9         [ 4] 1558 	call	_GPIO_ReadInputDataBit
+                                   1559 ; genCast
+                                   1560 ; genAssign
+                                   1561 ; genPointerSet
+      009DE5 C7 04 2E         [ 1] 1562 	ld	_A_Fxn_psta_10000_740+3, a
+                                   1563 ;	User/eric_proc.c: 289: for (i = 0; i < 4; i++)
+                                   1564 ; genAssign
+      009DE8 4F               [ 1] 1565 	clr	a
+                                   1566 ; genLabel
+      009DE9                       1567 00108$:
+                                   1568 ;	User/eric_proc.c: 291: if (0 == (psta[i] & 0x20))
+                                   1569 ; genPlus
+      009DE9 5F               [ 1] 1570 	clrw	x
+      009DEA 97               [ 1] 1571 	ld	xl, a
+      009DEB 1C 04 2B         [ 2] 1572 	addw	x, #(_A_Fxn_psta_10000_740+0)
+                                   1573 ; genPointerGet
+      009DEE 88               [ 1] 1574 	push	a
+      009DEF F6               [ 1] 1575 	ld	a, (x)
+                                   1576 ; genAnd
+                                   1577 ; peephole 6 removed dead pop / push pair.
+                                   1578 ; peephole 0 removed dead load into xl from a.
+                                   1579 ; peephole 4 removed redundant load from xl into a.
+      009DF0 A5 20            [ 1] 1580 	bcp	a, #0x20
+      009DF2 84               [ 1] 1581 	pop	a
+                                   1582 ; peephole j5 changed absolute to relative unconditional jump.
+      009DF3 26 05            [ 1] 1583 	jrne	00109$
+                                   1584 ; peephole j7 removed jra by using inverse jump logic
+                                   1585 ; peephole j30 removed unused label 00150$.
+                                   1586 ; skipping generated iCode
+                                   1587 ;	User/eric_proc.c: 293: i = 0xff;
+                                   1588 ; genAssign
+      009DF5 A6 FF            [ 1] 1589 	ld	a, #0xff
+      009DF7 97               [ 1] 1590 	ld	xl, a
+                                   1591 ;	User/eric_proc.c: 294: break;
+                                   1592 ; genGoto
+      009DF8 20 06            [ 2] 1593 	jra	00105$
+                                   1594 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1595 ; genLabel
+      009DFA                       1596 00109$:
+                                   1597 ;	User/eric_proc.c: 289: for (i = 0; i < 4; i++)
+                                   1598 ; genPlus
+      009DFA 4C               [ 1] 1599 	inc	a
+                                   1600 ; genAssign
+      009DFB 97               [ 1] 1601 	ld	xl, a
+                                   1602 ; genCmp
+                                   1603 ; genCmpTnz
+      009DFC A1 04            [ 1] 1604 	cp	a, #0x04
+                                   1605 ; peephole j5 changed absolute to relative unconditional jump.
+      009DFE 25 E9            [ 1] 1606 	jrc	00108$
+                                   1607 ; peephole j9 removed jra by using inverse jump logic
+                                   1608 ; peephole j30 removed unused label 00151$.
+                                   1609 ; skipping generated iCode
+                                   1610 ; genLabel
+      009E00                       1611 00105$:
+                                   1612 ;	User/eric_proc.c: 297: if (i != 0xff)
+                                   1613 ; genCmpEQorNE
+      009E00 9F               [ 1] 1614 	ld	a, xl
+      009E01 4C               [ 1] 1615 	inc	a
+      009E02 26 03            [ 1] 1616 	jrne	00153$
+      009E04 CC 9E CF         [ 2] 1617 	jp	00110$
+      009E07                       1618 00153$:
+                                   1619 ; skipping generated iCode
+                                   1620 ;	User/eric_proc.c: 299: memset(psta, 0, 4);
+                                   1621 ; skipping iCode since result will be rematerialized
+                                   1622 ; genIPush
+      009E07 4B 04            [ 1] 1623 	push	#0x04
+      009E09 4B 00            [ 1] 1624 	push	#0x00
+                                   1625 ; genIPush
+      009E0B 5F               [ 1] 1626 	clrw	x
+      009E0C 89               [ 2] 1627 	pushw	x
+                                   1628 ; genSend
+      009E0D AE 04 2B         [ 2] 1629 	ldw	x, #(_A_Fxn_psta_10000_740+0)
+                                   1630 ; genCall
+      009E10 CD ED FE         [ 4] 1631 	call	_memset
+                                   1632 ;	User/eric_proc.c: 300: raw = (strokeA.tim_e >= strokeA.tim_s) ? (strokeA.tim_e - strokeA.tim_s) : 0;
+                                   1633 ; skipping iCode since result will be rematerialized
+                                   1634 ; genPointerGet
+      009E13 AE 04 B8         [ 2] 1635 	ldw	x, #(_strokeA+0)
+      009E16 90 93            [ 1] 1636 	ldw	y, x
+      009E18 90 EE 07         [ 2] 1637 	ldw	y, (0x7, y)
+      009E1B 17 05            [ 2] 1638 	ldw	(0x05, sp), y
+      009E1D EE 05            [ 2] 1639 	ldw	x, (0x5, x)
+      009E1F 1F 03            [ 2] 1640 	ldw	(0x03, sp), x
+                                   1641 ; skipping iCode since result will be rematerialized
+                                   1642 ; genPointerGet
+      009E21 AE 04 B9         [ 2] 1643 	ldw	x, #(_strokeA+1)
+      009E24 90 93            [ 1] 1644 	ldw	y, x
+      009E26 90 EE 02         [ 2] 1645 	ldw	y, (0x2, y)
+      009E29 17 09            [ 2] 1646 	ldw	(0x09, sp), y
+      009E2B FE               [ 2] 1647 	ldw	x, (x)
+      009E2C 1F 07            [ 2] 1648 	ldw	(0x07, sp), x
+                                   1649 ; genCmp
+                                   1650 ; genCmpTnz
+      009E2E 1E 05            [ 2] 1651 	ldw	x, (0x05, sp)
+      009E30 13 09            [ 2] 1652 	cpw	x, (0x09, sp)
+      009E32 7B 04            [ 1] 1653 	ld	a, (0x04, sp)
+      009E34 12 08            [ 1] 1654 	sbc	a, (0x08, sp)
+      009E36 7B 03            [ 1] 1655 	ld	a, (0x03, sp)
+      009E38 12 07            [ 1] 1656 	sbc	a, (0x07, sp)
+                                   1657 ; peephole j5 changed absolute to relative unconditional jump.
+      009E3A 25 12            [ 1] 1658 	jrc	00112$
+                                   1659 ; peephole j9 removed jra by using inverse jump logic
+                                   1660 ; peephole j30 removed unused label 00155$.
+                                   1661 ; skipping generated iCode
+                                   1662 ; genMinus
+      009E3C 1E 05            [ 2] 1663 	ldw	x, (0x05, sp)
+      009E3E 72 F0 09         [ 2] 1664 	subw	x, (0x09, sp)
+      009E41 1F 0D            [ 2] 1665 	ldw	(0x0d, sp), x
+      009E43 7B 04            [ 1] 1666 	ld	a, (0x04, sp)
+      009E45 12 08            [ 1] 1667 	sbc	a, (0x08, sp)
+      009E47 97               [ 1] 1668 	ld	xl, a
+      009E48 7B 03            [ 1] 1669 	ld	a, (0x03, sp)
+      009E4A 12 07            [ 1] 1670 	sbc	a, (0x07, sp)
+                                   1671 ; genGoto
+      009E4C 20 05            [ 2] 1672 	jra	00113$
+                                   1673 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1674 ; genLabel
+      009E4E                       1675 00112$:
+                                   1676 ; genAssign
+      009E4E 5F               [ 1] 1677 	clrw	x
+      009E4F 1F 0D            [ 2] 1678 	ldw	(0x0d, sp), x
+      009E51 5F               [ 1] 1679 	clrw	x
+      009E52 4F               [ 1] 1680 	clr	a
+                                   1681 ; genLabel
+      009E53                       1682 00113$:
+                                   1683 ; genAssign
+      009E53 95               [ 1] 1684 	ld	xh, a
+      009E54 16 0D            [ 2] 1685 	ldw	y, (0x0d, sp)
+                                   1686 ;	User/eric_proc.c: 301: strokeA.tim_len = (uint32_t)((701UL * raw + 3500UL) / 7000UL);
+                                   1687 ; skipping iCode since result will be rematerialized
+                                   1688 ; genIPush
+      009E56 90 89            [ 2] 1689 	pushw	y
+      009E58 89               [ 2] 1690 	pushw	x
+                                   1691 ; genIPush
+      009E59 4B BD            [ 1] 1692 	push	#0xbd
+      009E5B 4B 02            [ 1] 1693 	push	#0x02
+      009E5D 5F               [ 1] 1694 	clrw	x
+      009E5E 89               [ 2] 1695 	pushw	x
+                                   1696 ; genCall
+      009E5F CD EE 20         [ 4] 1697 	call	__mullong
+      009E62 5B 08            [ 2] 1698 	addw	sp, #8
+      009E64 17 0B            [ 2] 1699 	ldw	(0x0b, sp), y
+                                   1700 ; genPlus
+      009E66 1C 0D AC         [ 2] 1701 	addw	x, #0x0dac
+      009E69 16 0B            [ 2] 1702 	ldw	y, (0x0b, sp)
+      009E6B 24 02            [ 1] 1703 	jrnc	00156$
+      009E6D 90 5C            [ 1] 1704 	incw	y
+      009E6F                       1705 00156$:
+                                   1706 ; genIPush
+      009E6F 4B 58            [ 1] 1707 	push	#0x58
+      009E71 4B 1B            [ 1] 1708 	push	#0x1b
+      009E73 4B 00            [ 1] 1709 	push	#0x00
+      009E75 4B 00            [ 1] 1710 	push	#0x00
+                                   1711 ; genIPush
+      009E77 89               [ 2] 1712 	pushw	x
+      009E78 90 89            [ 2] 1713 	pushw	y
+                                   1714 ; genCall
+      009E7A CD ED 50         [ 4] 1715 	call	__divulong
+      009E7D 5B 08            [ 2] 1716 	addw	sp, #8
+      009E7F 17 0B            [ 2] 1717 	ldw	(0x0b, sp), y
+                                   1718 ; genPointerSet
+      009E81 90 AE 04 C1      [ 2] 1719 	ldw	y, #(_strokeA+9)
+      009E85 90 EF 02         [ 2] 1720 	ldw	(0x2, y), x
+      009E88 1E 0B            [ 2] 1721 	ldw	x, (0x0b, sp)
+      009E8A 90 FF            [ 2] 1722 	ldw	(y), x
+                                   1723 ;	User/eric_proc.c: 302: strokeA.tim_trg = 1;
+                                   1724 ; genPointerSet
+      009E8C 1E 01            [ 2] 1725 	ldw	x, (0x01, sp)
+      009E8E A6 01            [ 1] 1726 	ld	a, #0x01
+      009E90 F7               [ 1] 1727 	ld	(x), a
+                                   1728 ;	User/eric_proc.c: 303: single_trg += 1;
+                                   1729 ; genCast
+                                   1730 ; genAssign
+                                   1731 ; genPlus
+      009E91 72 5C 01 0C      [ 1] 1732 	inc	_single_trg+0
+                                   1733 ; peephole 16 applied inc on _single_trg+0 instead of a.
+                                   1734 ;	User/eric_proc.c: 304: strokeA.tim_len = (strokeA.tim_len & 0x00ffffff) | (0x01000000); //A相+时长
+                                   1735 ; genPointerGet
+      009E95 AE 04 C1         [ 2] 1736 	ldw	x, #(_strokeA+9)
+      009E98 90 93            [ 1] 1737 	ldw	y, x
+      009E9A 90 EE 02         [ 2] 1738 	ldw	y, (0x2, y)
+      009E9D FE               [ 2] 1739 	ldw	x, (x)
+                                   1740 ; genAnd
+      009E9E 9F               [ 1] 1741 	ld	a, xl
+      009E9F 88               [ 1] 1742 	push	a
+      009EA0 0F 08            [ 1] 1743 	clr	(0x08, sp)
+      009EA2 84               [ 1] 1744 	pop	a
+                                   1745 ; genOr
+      009EA3 6B 0C            [ 1] 1746 	ld	(0x0c, sp), a
+      009EA5 17 0D            [ 2] 1747 	ldw	(0x0d, sp), y
+      009EA7 A6 01            [ 1] 1748 	ld	a, #0x01
+      009EA9 6B 0B            [ 1] 1749 	ld	(0x0b, sp), a
+                                   1750 ; genPointerSet
+      009EAB AE 04 C1         [ 2] 1751 	ldw	x, #(_strokeA+9)
+      009EAE 16 0D            [ 2] 1752 	ldw	y, (0x0d, sp)
+      009EB0 EF 02            [ 2] 1753 	ldw	(0x2, x), y
+      009EB2 16 0B            [ 2] 1754 	ldw	y, (0x0b, sp)
+      009EB4 FF               [ 2] 1755 	ldw	(x), y
+                                   1756 ;	User/eric_proc.c: 305: SendMsg(&MsgSystem, MSG_COUNT, strokeA.tim_len, strokeA.tim_s); //发送相别+时长+起始时间(用于判断是否是相邻两项同时被雷击)
+                                   1757 ; genPointerGet
+      009EB5 AE 04 B9         [ 2] 1758 	ldw	x, #(_strokeA+1)
+      009EB8 90 93            [ 1] 1759 	ldw	y, x
+      009EBA 90 EE 02         [ 2] 1760 	ldw	y, (0x2, y)
+      009EBD FE               [ 2] 1761 	ldw	x, (x)
+                                   1762 ; skipping iCode since result will be rematerialized
+                                   1763 ; skipping iCode since result will be rematerialized
+                                   1764 ; genIPush
+      009EBE 90 89            [ 2] 1765 	pushw	y
+      009EC0 89               [ 2] 1766 	pushw	x
+                                   1767 ; genIPush
+      009EC1 1E 11            [ 2] 1768 	ldw	x, (0x11, sp)
+      009EC3 89               [ 2] 1769 	pushw	x
+      009EC4 1E 11            [ 2] 1770 	ldw	x, (0x11, sp)
+      009EC6 89               [ 2] 1771 	pushw	x
+                                   1772 ; genSend
+      009EC7 A6 03            [ 1] 1773 	ld	a, #0x03
+                                   1774 ; genSend
+      009EC9 AE 01 0D         [ 2] 1775 	ldw	x, #(_MsgSystem+0)
+                                   1776 ; genCall
+      009ECC CD 9D 28         [ 4] 1777 	call	_SendMsg
+                                   1778 ; genLabel
+      009ECF                       1779 00110$:
+                                   1780 ;	User/eric_proc.c: 309: }
+                                   1781 ; genEndFunction
+      009ECF 5B 0E            [ 2] 1782 	addw	sp, #14
+      009ED1 81               [ 4] 1783 	ret
+                                   1784 ;	Total A_Fxn function size at codegen: 3 bytes.
+                                   1785 ;	User/eric_proc.c: 312: void B_Fxn(void)
+                                   1786 ; genLabel
+                                   1787 ;	-----------------------------------------
+                                   1788 ;	 function B_Fxn
+                                   1789 ;	-----------------------------------------
+                                   1790 ;	Register assignment might be sub-optimal.
+                                   1791 ;	Stack space usage: 14 bytes.
+      009ED2                       1792 _B_Fxn:
+      009ED2 52 0E            [ 2] 1793 	sub	sp, #14
+                                   1794 ;	User/eric_proc.c: 318: if (strokeB.tim_trg > 0)
+                                   1795 ; skipping iCode since result will be rematerialized
+                                   1796 ; genCast
+                                   1797 ; genAssign
+      009ED4 AE 04 C5         [ 2] 1798 	ldw	x, #(_strokeB+0)
+                                   1799 ; genPointerGet
+      009ED7 1F 01            [ 2] 1800 	ldw	(0x01, sp), x
+                                   1801 ; peephole 4w removed redundant load from (0x01, sp) into x.
+      009ED9 F6               [ 1] 1802 	ld	a, (x)
+                                   1803 ; genIfx
+      009EDA 6B 0E            [ 1] 1804 	ld	(0x0e, sp), a
+                                   1805 ; peephole 31a removed redundant tnz.
+                                   1806 ; peephole j5 changed absolute to relative unconditional jump.
+      009EDC 27 03            [ 1] 1807 	jreq	00102$
+                                   1808 ; peephole j10 removed jra by using inverse jump logic
+                                   1809 ; peephole j30 removed unused label 00149$.
+                                   1810 ;	User/eric_proc.c: 320: return;
+                                   1811 ; genReturn
+      009EDE CC 9F E3         [ 2] 1812 	jp	00110$
+                                   1813 ; genLabel
+      009EE1                       1814 00102$:
+                                   1815 ;	User/eric_proc.c: 323: pstb[0] = pstb[1];
+                                   1816 ; skipping iCode since result will be rematerialized
+                                   1817 ; skipping iCode since result will be rematerialized
+                                   1818 ; genPointerGet
+                                   1819 ; genPointerSet
+      009EE1 55 04 30 04 2F   [ 1] 1820 	mov	_B_Fxn_pstb_10000_747+0, _B_Fxn_pstb_10000_747+1
+                                   1821 ; peephole 4d replaced pair of mem-to-mem load with mov.
+                                   1822 ;	User/eric_proc.c: 324: pstb[1] = pstb[2];
+                                   1823 ; genPlus
+      009EE6 AE 04 31         [ 2] 1824 	ldw	x, #(_B_Fxn_pstb_10000_747+0)+2
+                                   1825 ; genPointerGet
+      009EE9 F6               [ 1] 1826 	ld	a, (x)
+                                   1827 ; genPointerSet
+      009EEA C7 04 30         [ 1] 1828 	ld	_B_Fxn_pstb_10000_747+1, a
+                                   1829 ;	User/eric_proc.c: 325: pstb[2] = pstb[3];
+                                   1830 ; skipping iCode since result will be rematerialized
+                                   1831 ; genPointerGet
+      009EED C6 04 32         [ 1] 1832 	ld	a, _B_Fxn_pstb_10000_747+3
+                                   1833 ; genPointerSet
+      009EF0 F7               [ 1] 1834 	ld	(x), a
+                                   1835 ;	User/eric_proc.c: 326: pstb[3] = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6); //每200ms读pin状态,超过1000ms都是高电平，表示一次冲击停止
+                                   1836 ; genSend
+      009EF1 A6 40            [ 1] 1837 	ld	a, #0x40
+                                   1838 ; genSend
+      009EF3 AE 50 0F         [ 2] 1839 	ldw	x, #0x500f
+                                   1840 ; genCall
+      009EF6 CD CE B9         [ 4] 1841 	call	_GPIO_ReadInputDataBit
+                                   1842 ; genCast
+                                   1843 ; genAssign
+                                   1844 ; genPointerSet
+      009EF9 C7 04 32         [ 1] 1845 	ld	_B_Fxn_pstb_10000_747+3, a
+                                   1846 ;	User/eric_proc.c: 328: for (i = 0; i < 4; i++)
+                                   1847 ; genAssign
+      009EFC 4F               [ 1] 1848 	clr	a
+                                   1849 ; genLabel
+      009EFD                       1850 00108$:
+                                   1851 ;	User/eric_proc.c: 330: if (0 == (pstb[i] & 0x40))
+                                   1852 ; genPlus
+      009EFD 5F               [ 1] 1853 	clrw	x
+      009EFE 97               [ 1] 1854 	ld	xl, a
+      009EFF 1C 04 2F         [ 2] 1855 	addw	x, #(_B_Fxn_pstb_10000_747+0)
+                                   1856 ; genPointerGet
+      009F02 88               [ 1] 1857 	push	a
+      009F03 F6               [ 1] 1858 	ld	a, (x)
+                                   1859 ; genAnd
+                                   1860 ; peephole 6 removed dead pop / push pair.
+                                   1861 ; peephole 0 removed dead load into xl from a.
+                                   1862 ; peephole 4 removed redundant load from xl into a.
+      009F04 A5 40            [ 1] 1863 	bcp	a, #0x40
+      009F06 84               [ 1] 1864 	pop	a
+                                   1865 ; peephole j5 changed absolute to relative unconditional jump.
+      009F07 26 05            [ 1] 1866 	jrne	00109$
+                                   1867 ; peephole j7 removed jra by using inverse jump logic
+                                   1868 ; peephole j30 removed unused label 00150$.
+                                   1869 ; skipping generated iCode
+                                   1870 ;	User/eric_proc.c: 332: i = 0xff;
+                                   1871 ; genAssign
+      009F09 A6 FF            [ 1] 1872 	ld	a, #0xff
+      009F0B 97               [ 1] 1873 	ld	xl, a
+                                   1874 ;	User/eric_proc.c: 333: break;
+                                   1875 ; genGoto
+      009F0C 20 06            [ 2] 1876 	jra	00105$
+                                   1877 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1878 ; genLabel
+      009F0E                       1879 00109$:
+                                   1880 ;	User/eric_proc.c: 328: for (i = 0; i < 4; i++)
+                                   1881 ; genPlus
+      009F0E 4C               [ 1] 1882 	inc	a
+                                   1883 ; genAssign
+      009F0F 97               [ 1] 1884 	ld	xl, a
+                                   1885 ; genCmp
+                                   1886 ; genCmpTnz
+      009F10 A1 04            [ 1] 1887 	cp	a, #0x04
+                                   1888 ; peephole j5 changed absolute to relative unconditional jump.
+      009F12 25 E9            [ 1] 1889 	jrc	00108$
+                                   1890 ; peephole j9 removed jra by using inverse jump logic
+                                   1891 ; peephole j30 removed unused label 00151$.
+                                   1892 ; skipping generated iCode
+                                   1893 ; genLabel
+      009F14                       1894 00105$:
+                                   1895 ;	User/eric_proc.c: 336: if (i != 0xff)
+                                   1896 ; genCmpEQorNE
+      009F14 9F               [ 1] 1897 	ld	a, xl
+      009F15 4C               [ 1] 1898 	inc	a
+      009F16 26 03            [ 1] 1899 	jrne	00153$
+      009F18 CC 9F E3         [ 2] 1900 	jp	00110$
+      009F1B                       1901 00153$:
+                                   1902 ; skipping generated iCode
+                                   1903 ;	User/eric_proc.c: 338: memset(pstb, 0, 4);
+                                   1904 ; skipping iCode since result will be rematerialized
+                                   1905 ; genIPush
+      009F1B 4B 04            [ 1] 1906 	push	#0x04
+      009F1D 4B 00            [ 1] 1907 	push	#0x00
+                                   1908 ; genIPush
+      009F1F 5F               [ 1] 1909 	clrw	x
+      009F20 89               [ 2] 1910 	pushw	x
+                                   1911 ; genSend
+      009F21 AE 04 2F         [ 2] 1912 	ldw	x, #(_B_Fxn_pstb_10000_747+0)
+                                   1913 ; genCall
+      009F24 CD ED FE         [ 4] 1914 	call	_memset
+                                   1915 ;	User/eric_proc.c: 339: raw = (strokeB.tim_e >= strokeB.tim_s) ? (strokeB.tim_e - strokeB.tim_s) : 0;
+                                   1916 ; skipping iCode since result will be rematerialized
+                                   1917 ; genPointerGet
+      009F27 AE 04 C5         [ 2] 1918 	ldw	x, #(_strokeB+0)
+      009F2A 90 93            [ 1] 1919 	ldw	y, x
+      009F2C 90 EE 07         [ 2] 1920 	ldw	y, (0x7, y)
+      009F2F 17 05            [ 2] 1921 	ldw	(0x05, sp), y
+      009F31 EE 05            [ 2] 1922 	ldw	x, (0x5, x)
+      009F33 1F 03            [ 2] 1923 	ldw	(0x03, sp), x
+                                   1924 ; skipping iCode since result will be rematerialized
+                                   1925 ; genPointerGet
+      009F35 AE 04 C6         [ 2] 1926 	ldw	x, #(_strokeB+1)
+      009F38 90 93            [ 1] 1927 	ldw	y, x
+      009F3A 90 EE 02         [ 2] 1928 	ldw	y, (0x2, y)
+      009F3D 17 09            [ 2] 1929 	ldw	(0x09, sp), y
+      009F3F FE               [ 2] 1930 	ldw	x, (x)
+      009F40 1F 07            [ 2] 1931 	ldw	(0x07, sp), x
+                                   1932 ; genCmp
+                                   1933 ; genCmpTnz
+      009F42 1E 05            [ 2] 1934 	ldw	x, (0x05, sp)
+      009F44 13 09            [ 2] 1935 	cpw	x, (0x09, sp)
+      009F46 7B 04            [ 1] 1936 	ld	a, (0x04, sp)
+      009F48 12 08            [ 1] 1937 	sbc	a, (0x08, sp)
+      009F4A 7B 03            [ 1] 1938 	ld	a, (0x03, sp)
+      009F4C 12 07            [ 1] 1939 	sbc	a, (0x07, sp)
+                                   1940 ; peephole j5 changed absolute to relative unconditional jump.
+      009F4E 25 12            [ 1] 1941 	jrc	00112$
+                                   1942 ; peephole j9 removed jra by using inverse jump logic
+                                   1943 ; peephole j30 removed unused label 00155$.
+                                   1944 ; skipping generated iCode
+                                   1945 ; genMinus
+      009F50 1E 05            [ 2] 1946 	ldw	x, (0x05, sp)
+      009F52 72 F0 09         [ 2] 1947 	subw	x, (0x09, sp)
+      009F55 1F 0D            [ 2] 1948 	ldw	(0x0d, sp), x
+      009F57 7B 04            [ 1] 1949 	ld	a, (0x04, sp)
+      009F59 12 08            [ 1] 1950 	sbc	a, (0x08, sp)
+      009F5B 97               [ 1] 1951 	ld	xl, a
+      009F5C 7B 03            [ 1] 1952 	ld	a, (0x03, sp)
+      009F5E 12 07            [ 1] 1953 	sbc	a, (0x07, sp)
+                                   1954 ; genGoto
+      009F60 20 05            [ 2] 1955 	jra	00113$
+                                   1956 ; peephole j5 changed absolute to relative unconditional jump.
+                                   1957 ; genLabel
+      009F62                       1958 00112$:
+                                   1959 ; genAssign
+      009F62 5F               [ 1] 1960 	clrw	x
+      009F63 1F 0D            [ 2] 1961 	ldw	(0x0d, sp), x
+      009F65 5F               [ 1] 1962 	clrw	x
+      009F66 4F               [ 1] 1963 	clr	a
+                                   1964 ; genLabel
+      009F67                       1965 00113$:
+                                   1966 ; genAssign
+      009F67 95               [ 1] 1967 	ld	xh, a
+      009F68 16 0D            [ 2] 1968 	ldw	y, (0x0d, sp)
+                                   1969 ;	User/eric_proc.c: 340: strokeB.tim_len = (uint32_t)((701UL * raw + 3500UL) / 7000UL);
+                                   1970 ; skipping iCode since result will be rematerialized
+                                   1971 ; genIPush
+      009F6A 90 89            [ 2] 1972 	pushw	y
+      009F6C 89               [ 2] 1973 	pushw	x
+                                   1974 ; genIPush
+      009F6D 4B BD            [ 1] 1975 	push	#0xbd
+      009F6F 4B 02            [ 1] 1976 	push	#0x02
+      009F71 5F               [ 1] 1977 	clrw	x
+      009F72 89               [ 2] 1978 	pushw	x
+                                   1979 ; genCall
+      009F73 CD EE 20         [ 4] 1980 	call	__mullong
+      009F76 5B 08            [ 2] 1981 	addw	sp, #8
+      009F78 17 0B            [ 2] 1982 	ldw	(0x0b, sp), y
+                                   1983 ; genPlus
+      009F7A 1C 0D AC         [ 2] 1984 	addw	x, #0x0dac
+      009F7D 16 0B            [ 2] 1985 	ldw	y, (0x0b, sp)
+      009F7F 24 02            [ 1] 1986 	jrnc	00156$
+      009F81 90 5C            [ 1] 1987 	incw	y
+      009F83                       1988 00156$:
+                                   1989 ; genIPush
+      009F83 4B 58            [ 1] 1990 	push	#0x58
+      009F85 4B 1B            [ 1] 1991 	push	#0x1b
+      009F87 4B 00            [ 1] 1992 	push	#0x00
+      009F89 4B 00            [ 1] 1993 	push	#0x00
+                                   1994 ; genIPush
+      009F8B 89               [ 2] 1995 	pushw	x
+      009F8C 90 89            [ 2] 1996 	pushw	y
+                                   1997 ; genCall
+      009F8E CD ED 50         [ 4] 1998 	call	__divulong
+      009F91 5B 08            [ 2] 1999 	addw	sp, #8
+      009F93 17 0B            [ 2] 2000 	ldw	(0x0b, sp), y
+                                   2001 ; genPointerSet
+      009F95 90 AE 04 CE      [ 2] 2002 	ldw	y, #(_strokeB+9)
+      009F99 90 EF 02         [ 2] 2003 	ldw	(0x2, y), x
+      009F9C 1E 0B            [ 2] 2004 	ldw	x, (0x0b, sp)
+      009F9E 90 FF            [ 2] 2005 	ldw	(y), x
+                                   2006 ;	User/eric_proc.c: 341: strokeB.tim_trg = 1;
+                                   2007 ; genPointerSet
+      009FA0 1E 01            [ 2] 2008 	ldw	x, (0x01, sp)
+      009FA2 A6 01            [ 1] 2009 	ld	a, #0x01
+      009FA4 F7               [ 1] 2010 	ld	(x), a
+                                   2011 ;	User/eric_proc.c: 342: single_trg += 1;
+                                   2012 ; genCast
+                                   2013 ; genAssign
+                                   2014 ; genPlus
+      009FA5 72 5C 01 0C      [ 1] 2015 	inc	_single_trg+0
+                                   2016 ; peephole 16 applied inc on _single_trg+0 instead of a.
+                                   2017 ;	User/eric_proc.c: 343: strokeB.tim_len = (strokeB.tim_len & 0x00ffffff) | (0x02000000);
+                                   2018 ; genPointerGet
+      009FA9 AE 04 CE         [ 2] 2019 	ldw	x, #(_strokeB+9)
+      009FAC 90 93            [ 1] 2020 	ldw	y, x
+      009FAE 90 EE 02         [ 2] 2021 	ldw	y, (0x2, y)
+      009FB1 FE               [ 2] 2022 	ldw	x, (x)
+                                   2023 ; genAnd
+      009FB2 9F               [ 1] 2024 	ld	a, xl
+      009FB3 88               [ 1] 2025 	push	a
+      009FB4 0F 08            [ 1] 2026 	clr	(0x08, sp)
+      009FB6 84               [ 1] 2027 	pop	a
+                                   2028 ; genOr
+      009FB7 6B 0C            [ 1] 2029 	ld	(0x0c, sp), a
+      009FB9 17 0D            [ 2] 2030 	ldw	(0x0d, sp), y
+      009FBB A6 02            [ 1] 2031 	ld	a, #0x02
+      009FBD 6B 0B            [ 1] 2032 	ld	(0x0b, sp), a
+                                   2033 ; genPointerSet
+      009FBF AE 04 CE         [ 2] 2034 	ldw	x, #(_strokeB+9)
+      009FC2 16 0D            [ 2] 2035 	ldw	y, (0x0d, sp)
+      009FC4 EF 02            [ 2] 2036 	ldw	(0x2, x), y
+      009FC6 16 0B            [ 2] 2037 	ldw	y, (0x0b, sp)
+      009FC8 FF               [ 2] 2038 	ldw	(x), y
+                                   2039 ;	User/eric_proc.c: 344: SendMsg(&MsgSystem, MSG_COUNT, strokeB.tim_len, strokeB.tim_s);
+                                   2040 ; genPointerGet
+      009FC9 AE 04 C6         [ 2] 2041 	ldw	x, #(_strokeB+1)
+      009FCC 90 93            [ 1] 2042 	ldw	y, x
+      009FCE 90 EE 02         [ 2] 2043 	ldw	y, (0x2, y)
+      009FD1 FE               [ 2] 2044 	ldw	x, (x)
+                                   2045 ; skipping iCode since result will be rematerialized
+                                   2046 ; skipping iCode since result will be rematerialized
+                                   2047 ; genIPush
+      009FD2 90 89            [ 2] 2048 	pushw	y
+      009FD4 89               [ 2] 2049 	pushw	x
+                                   2050 ; genIPush
+      009FD5 1E 11            [ 2] 2051 	ldw	x, (0x11, sp)
+      009FD7 89               [ 2] 2052 	pushw	x
+      009FD8 1E 11            [ 2] 2053 	ldw	x, (0x11, sp)
+      009FDA 89               [ 2] 2054 	pushw	x
+                                   2055 ; genSend
+      009FDB A6 03            [ 1] 2056 	ld	a, #0x03
+                                   2057 ; genSend
+      009FDD AE 01 0D         [ 2] 2058 	ldw	x, #(_MsgSystem+0)
+                                   2059 ; genCall
+      009FE0 CD 9D 28         [ 4] 2060 	call	_SendMsg
+                                   2061 ; genLabel
+      009FE3                       2062 00110$:
+                                   2063 ;	User/eric_proc.c: 347: }
+                                   2064 ; genEndFunction
+      009FE3 5B 0E            [ 2] 2065 	addw	sp, #14
+      009FE5 81               [ 4] 2066 	ret
+                                   2067 ;	Total B_Fxn function size at codegen: 3 bytes.
+                                   2068 ;	User/eric_proc.c: 350: void C_Fxn(void)
+                                   2069 ; genLabel
+                                   2070 ;	-----------------------------------------
+                                   2071 ;	 function C_Fxn
+                                   2072 ;	-----------------------------------------
+                                   2073 ;	Register assignment might be sub-optimal.
+                                   2074 ;	Stack space usage: 14 bytes.
+      009FE6                       2075 _C_Fxn:
+      009FE6 52 0E            [ 2] 2076 	sub	sp, #14
+                                   2077 ;	User/eric_proc.c: 356: if (strokeC.tim_trg > 0)
+                                   2078 ; skipping iCode since result will be rematerialized
+                                   2079 ; genCast
+                                   2080 ; genAssign
+      009FE8 AE 04 D2         [ 2] 2081 	ldw	x, #(_strokeC+0)
+                                   2082 ; genPointerGet
+      009FEB 1F 01            [ 2] 2083 	ldw	(0x01, sp), x
+                                   2084 ; peephole 4w removed redundant load from (0x01, sp) into x.
+      009FED F6               [ 1] 2085 	ld	a, (x)
+                                   2086 ; genIfx
+      009FEE 6B 0E            [ 1] 2087 	ld	(0x0e, sp), a
+                                   2088 ; peephole 31a removed redundant tnz.
+                                   2089 ; peephole j5 changed absolute to relative unconditional jump.
+      009FF0 27 03            [ 1] 2090 	jreq	00102$
+                                   2091 ; peephole j10 removed jra by using inverse jump logic
+                                   2092 ; peephole j30 removed unused label 00149$.
+                                   2093 ;	User/eric_proc.c: 358: return;
+                                   2094 ; genReturn
+      009FF2 CC A0 F9         [ 2] 2095 	jp	00110$
+                                   2096 ; genLabel
+      009FF5                       2097 00102$:
+                                   2098 ;	User/eric_proc.c: 361: pstc[0] = pstc[1];
+                                   2099 ; skipping iCode since result will be rematerialized
+                                   2100 ; skipping iCode since result will be rematerialized
+                                   2101 ; genPointerGet
+                                   2102 ; genPointerSet
+      009FF5 55 04 34 04 33   [ 1] 2103 	mov	_C_Fxn_pstc_10000_754+0, _C_Fxn_pstc_10000_754+1
+                                   2104 ; peephole 4d replaced pair of mem-to-mem load with mov.
+                                   2105 ;	User/eric_proc.c: 362: pstc[1] = pstc[2];
+                                   2106 ; genPlus
+      009FFA AE 04 35         [ 2] 2107 	ldw	x, #(_C_Fxn_pstc_10000_754+0)+2
+                                   2108 ; genPointerGet
+      009FFD F6               [ 1] 2109 	ld	a, (x)
+                                   2110 ; genPointerSet
+      009FFE C7 04 34         [ 1] 2111 	ld	_C_Fxn_pstc_10000_754+1, a
+                                   2112 ;	User/eric_proc.c: 363: pstc[2] = pstc[3];
+                                   2113 ; skipping iCode since result will be rematerialized
+                                   2114 ; genPointerGet
+      00A001 C6 04 36         [ 1] 2115 	ld	a, _C_Fxn_pstc_10000_754+3
+                                   2116 ; genPointerSet
+      00A004 F7               [ 1] 2117 	ld	(x), a
+                                   2118 ;	User/eric_proc.c: 364: pstc[3] = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_7); //每200ms读pin状态,超过1000ms都是高电平，表示一次冲击停止
+                                   2119 ; genSend
+      00A005 A6 80            [ 1] 2120 	ld	a, #0x80
+                                   2121 ; genSend
+      00A007 AE 50 0F         [ 2] 2122 	ldw	x, #0x500f
+                                   2123 ; genCall
+      00A00A CD CE B9         [ 4] 2124 	call	_GPIO_ReadInputDataBit
+                                   2125 ; genCast
+                                   2126 ; genAssign
+                                   2127 ; genPointerSet
+      00A00D C7 04 36         [ 1] 2128 	ld	_C_Fxn_pstc_10000_754+3, a
+                                   2129 ;	User/eric_proc.c: 366: for (i = 0; i < 4; i++)
+                                   2130 ; genAssign
+      00A010 4F               [ 1] 2131 	clr	a
+                                   2132 ; genLabel
+      00A011                       2133 00108$:
+                                   2134 ;	User/eric_proc.c: 368: if (0 == (pstc[i] & 0x80))
+                                   2135 ; genPlus
+      00A011 5F               [ 1] 2136 	clrw	x
+      00A012 97               [ 1] 2137 	ld	xl, a
+      00A013 1C 04 33         [ 2] 2138 	addw	x, #(_C_Fxn_pstc_10000_754+0)
+                                   2139 ; genPointerGet
+      00A016 88               [ 1] 2140 	push	a
+      00A017 F6               [ 1] 2141 	ld	a, (x)
+      00A018 6B 0F            [ 1] 2142 	ld	(0x0f, sp), a
+      00A01A 84               [ 1] 2143 	pop	a
+                                   2144 ; genAnd
+      00A01B 0D 0E            [ 1] 2145 	tnz	(0x0e, sp)
+                                   2146 ; peephole j5 changed absolute to relative unconditional jump.
+      00A01D 2B 05            [ 1] 2147 	jrmi	00109$
+                                   2148 ; peephole j11 removed jra by using inverse jump logic
+                                   2149 ; peephole j30 removed unused label 00150$.
+                                   2150 ; skipping generated iCode
+                                   2151 ;	User/eric_proc.c: 370: i = 0xff;
+                                   2152 ; genAssign
+      00A01F A6 FF            [ 1] 2153 	ld	a, #0xff
+      00A021 97               [ 1] 2154 	ld	xl, a
+                                   2155 ;	User/eric_proc.c: 371: break;
+                                   2156 ; genGoto
+      00A022 20 06            [ 2] 2157 	jra	00105$
+                                   2158 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2159 ; genLabel
+      00A024                       2160 00109$:
+                                   2161 ;	User/eric_proc.c: 366: for (i = 0; i < 4; i++)
+                                   2162 ; genPlus
+      00A024 4C               [ 1] 2163 	inc	a
+                                   2164 ; genAssign
+      00A025 97               [ 1] 2165 	ld	xl, a
+                                   2166 ; genCmp
+                                   2167 ; genCmpTnz
+      00A026 A1 04            [ 1] 2168 	cp	a, #0x04
+                                   2169 ; peephole j5 changed absolute to relative unconditional jump.
+      00A028 25 E7            [ 1] 2170 	jrc	00108$
+                                   2171 ; peephole j9 removed jra by using inverse jump logic
+                                   2172 ; peephole j30 removed unused label 00151$.
+                                   2173 ; skipping generated iCode
+                                   2174 ; genLabel
+      00A02A                       2175 00105$:
+                                   2176 ;	User/eric_proc.c: 375: if (i != 0xff)
+                                   2177 ; genCmpEQorNE
+      00A02A 9F               [ 1] 2178 	ld	a, xl
+      00A02B 4C               [ 1] 2179 	inc	a
+      00A02C 26 03            [ 1] 2180 	jrne	00153$
+      00A02E CC A0 F9         [ 2] 2181 	jp	00110$
+      00A031                       2182 00153$:
+                                   2183 ; skipping generated iCode
+                                   2184 ;	User/eric_proc.c: 377: memset(pstc, 0, 4);
+                                   2185 ; skipping iCode since result will be rematerialized
+                                   2186 ; genIPush
+      00A031 4B 04            [ 1] 2187 	push	#0x04
+      00A033 4B 00            [ 1] 2188 	push	#0x00
+                                   2189 ; genIPush
+      00A035 5F               [ 1] 2190 	clrw	x
+      00A036 89               [ 2] 2191 	pushw	x
+                                   2192 ; genSend
+      00A037 AE 04 33         [ 2] 2193 	ldw	x, #(_C_Fxn_pstc_10000_754+0)
+                                   2194 ; genCall
+      00A03A CD ED FE         [ 4] 2195 	call	_memset
+                                   2196 ;	User/eric_proc.c: 378: raw = (strokeC.tim_e >= strokeC.tim_s) ? (strokeC.tim_e - strokeC.tim_s) : 0;
+                                   2197 ; skipping iCode since result will be rematerialized
+                                   2198 ; genPointerGet
+      00A03D AE 04 D2         [ 2] 2199 	ldw	x, #(_strokeC+0)
+      00A040 90 93            [ 1] 2200 	ldw	y, x
+      00A042 90 EE 07         [ 2] 2201 	ldw	y, (0x7, y)
+      00A045 17 05            [ 2] 2202 	ldw	(0x05, sp), y
+      00A047 EE 05            [ 2] 2203 	ldw	x, (0x5, x)
+      00A049 1F 03            [ 2] 2204 	ldw	(0x03, sp), x
+                                   2205 ; skipping iCode since result will be rematerialized
+                                   2206 ; genPointerGet
+      00A04B AE 04 D3         [ 2] 2207 	ldw	x, #(_strokeC+1)
+      00A04E 90 93            [ 1] 2208 	ldw	y, x
+      00A050 90 EE 02         [ 2] 2209 	ldw	y, (0x2, y)
+      00A053 17 09            [ 2] 2210 	ldw	(0x09, sp), y
+      00A055 FE               [ 2] 2211 	ldw	x, (x)
+      00A056 1F 07            [ 2] 2212 	ldw	(0x07, sp), x
+                                   2213 ; genCmp
+                                   2214 ; genCmpTnz
+      00A058 1E 05            [ 2] 2215 	ldw	x, (0x05, sp)
+      00A05A 13 09            [ 2] 2216 	cpw	x, (0x09, sp)
+      00A05C 7B 04            [ 1] 2217 	ld	a, (0x04, sp)
+      00A05E 12 08            [ 1] 2218 	sbc	a, (0x08, sp)
+      00A060 7B 03            [ 1] 2219 	ld	a, (0x03, sp)
+      00A062 12 07            [ 1] 2220 	sbc	a, (0x07, sp)
+                                   2221 ; peephole j5 changed absolute to relative unconditional jump.
+      00A064 25 12            [ 1] 2222 	jrc	00112$
+                                   2223 ; peephole j9 removed jra by using inverse jump logic
+                                   2224 ; peephole j30 removed unused label 00155$.
+                                   2225 ; skipping generated iCode
+                                   2226 ; genMinus
+      00A066 1E 05            [ 2] 2227 	ldw	x, (0x05, sp)
+      00A068 72 F0 09         [ 2] 2228 	subw	x, (0x09, sp)
+      00A06B 1F 0D            [ 2] 2229 	ldw	(0x0d, sp), x
+      00A06D 7B 04            [ 1] 2230 	ld	a, (0x04, sp)
+      00A06F 12 08            [ 1] 2231 	sbc	a, (0x08, sp)
+      00A071 97               [ 1] 2232 	ld	xl, a
+      00A072 7B 03            [ 1] 2233 	ld	a, (0x03, sp)
+      00A074 12 07            [ 1] 2234 	sbc	a, (0x07, sp)
+                                   2235 ; genGoto
+      00A076 20 05            [ 2] 2236 	jra	00113$
+                                   2237 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2238 ; genLabel
+      00A078                       2239 00112$:
+                                   2240 ; genAssign
+      00A078 5F               [ 1] 2241 	clrw	x
+      00A079 1F 0D            [ 2] 2242 	ldw	(0x0d, sp), x
+      00A07B 5F               [ 1] 2243 	clrw	x
+      00A07C 4F               [ 1] 2244 	clr	a
+                                   2245 ; genLabel
+      00A07D                       2246 00113$:
+                                   2247 ; genAssign
+      00A07D 95               [ 1] 2248 	ld	xh, a
+      00A07E 16 0D            [ 2] 2249 	ldw	y, (0x0d, sp)
+                                   2250 ;	User/eric_proc.c: 379: strokeC.tim_len = (uint32_t)((701UL * raw + 3500UL) / 7000UL);
+                                   2251 ; skipping iCode since result will be rematerialized
+                                   2252 ; genIPush
+      00A080 90 89            [ 2] 2253 	pushw	y
+      00A082 89               [ 2] 2254 	pushw	x
+                                   2255 ; genIPush
+      00A083 4B BD            [ 1] 2256 	push	#0xbd
+      00A085 4B 02            [ 1] 2257 	push	#0x02
+      00A087 5F               [ 1] 2258 	clrw	x
+      00A088 89               [ 2] 2259 	pushw	x
+                                   2260 ; genCall
+      00A089 CD EE 20         [ 4] 2261 	call	__mullong
+      00A08C 5B 08            [ 2] 2262 	addw	sp, #8
+      00A08E 17 0B            [ 2] 2263 	ldw	(0x0b, sp), y
+                                   2264 ; genPlus
+      00A090 1C 0D AC         [ 2] 2265 	addw	x, #0x0dac
+      00A093 16 0B            [ 2] 2266 	ldw	y, (0x0b, sp)
+      00A095 24 02            [ 1] 2267 	jrnc	00156$
+      00A097 90 5C            [ 1] 2268 	incw	y
+      00A099                       2269 00156$:
+                                   2270 ; genIPush
+      00A099 4B 58            [ 1] 2271 	push	#0x58
+      00A09B 4B 1B            [ 1] 2272 	push	#0x1b
+      00A09D 4B 00            [ 1] 2273 	push	#0x00
+      00A09F 4B 00            [ 1] 2274 	push	#0x00
+                                   2275 ; genIPush
+      00A0A1 89               [ 2] 2276 	pushw	x
+      00A0A2 90 89            [ 2] 2277 	pushw	y
+                                   2278 ; genCall
+      00A0A4 CD ED 50         [ 4] 2279 	call	__divulong
+      00A0A7 5B 08            [ 2] 2280 	addw	sp, #8
+      00A0A9 17 0B            [ 2] 2281 	ldw	(0x0b, sp), y
+                                   2282 ; genPointerSet
+      00A0AB 90 AE 04 DB      [ 2] 2283 	ldw	y, #(_strokeC+9)
+      00A0AF 90 EF 02         [ 2] 2284 	ldw	(0x2, y), x
+      00A0B2 1E 0B            [ 2] 2285 	ldw	x, (0x0b, sp)
+      00A0B4 90 FF            [ 2] 2286 	ldw	(y), x
+                                   2287 ;	User/eric_proc.c: 380: strokeC.tim_trg = 1;
+                                   2288 ; genPointerSet
+      00A0B6 1E 01            [ 2] 2289 	ldw	x, (0x01, sp)
+      00A0B8 A6 01            [ 1] 2290 	ld	a, #0x01
+      00A0BA F7               [ 1] 2291 	ld	(x), a
+                                   2292 ;	User/eric_proc.c: 381: single_trg += 1;
+                                   2293 ; genCast
+                                   2294 ; genAssign
+                                   2295 ; genPlus
+      00A0BB 72 5C 01 0C      [ 1] 2296 	inc	_single_trg+0
+                                   2297 ; peephole 16 applied inc on _single_trg+0 instead of a.
+                                   2298 ;	User/eric_proc.c: 382: strokeC.tim_len = (strokeC.tim_len & 0x00ffffff) | (0x04000000);
+                                   2299 ; genPointerGet
+      00A0BF AE 04 DB         [ 2] 2300 	ldw	x, #(_strokeC+9)
+      00A0C2 90 93            [ 1] 2301 	ldw	y, x
+      00A0C4 90 EE 02         [ 2] 2302 	ldw	y, (0x2, y)
+      00A0C7 FE               [ 2] 2303 	ldw	x, (x)
+                                   2304 ; genAnd
+      00A0C8 9F               [ 1] 2305 	ld	a, xl
+      00A0C9 88               [ 1] 2306 	push	a
+      00A0CA 0F 08            [ 1] 2307 	clr	(0x08, sp)
+      00A0CC 84               [ 1] 2308 	pop	a
+                                   2309 ; genOr
+      00A0CD 6B 0C            [ 1] 2310 	ld	(0x0c, sp), a
+      00A0CF 17 0D            [ 2] 2311 	ldw	(0x0d, sp), y
+      00A0D1 A6 04            [ 1] 2312 	ld	a, #0x04
+      00A0D3 6B 0B            [ 1] 2313 	ld	(0x0b, sp), a
+                                   2314 ; genPointerSet
+      00A0D5 AE 04 DB         [ 2] 2315 	ldw	x, #(_strokeC+9)
+      00A0D8 16 0D            [ 2] 2316 	ldw	y, (0x0d, sp)
+      00A0DA EF 02            [ 2] 2317 	ldw	(0x2, x), y
+      00A0DC 16 0B            [ 2] 2318 	ldw	y, (0x0b, sp)
+      00A0DE FF               [ 2] 2319 	ldw	(x), y
+                                   2320 ;	User/eric_proc.c: 383: SendMsg(&MsgSystem, MSG_COUNT, strokeC.tim_len, strokeC.tim_s);
+                                   2321 ; genPointerGet
+      00A0DF AE 04 D3         [ 2] 2322 	ldw	x, #(_strokeC+1)
+      00A0E2 90 93            [ 1] 2323 	ldw	y, x
+      00A0E4 90 EE 02         [ 2] 2324 	ldw	y, (0x2, y)
+      00A0E7 FE               [ 2] 2325 	ldw	x, (x)
+                                   2326 ; skipping iCode since result will be rematerialized
+                                   2327 ; skipping iCode since result will be rematerialized
+                                   2328 ; genIPush
+      00A0E8 90 89            [ 2] 2329 	pushw	y
+      00A0EA 89               [ 2] 2330 	pushw	x
+                                   2331 ; genIPush
+      00A0EB 1E 11            [ 2] 2332 	ldw	x, (0x11, sp)
+      00A0ED 89               [ 2] 2333 	pushw	x
+      00A0EE 1E 11            [ 2] 2334 	ldw	x, (0x11, sp)
+      00A0F0 89               [ 2] 2335 	pushw	x
+                                   2336 ; genSend
+      00A0F1 A6 03            [ 1] 2337 	ld	a, #0x03
+                                   2338 ; genSend
+      00A0F3 AE 01 0D         [ 2] 2339 	ldw	x, #(_MsgSystem+0)
+                                   2340 ; genCall
+      00A0F6 CD 9D 28         [ 4] 2341 	call	_SendMsg
+                                   2342 ; genLabel
+      00A0F9                       2343 00110$:
+                                   2344 ;	User/eric_proc.c: 387: }
+                                   2345 ; genEndFunction
+      00A0F9 5B 0E            [ 2] 2346 	addw	sp, #14
+      00A0FB 81               [ 4] 2347 	ret
+                                   2348 ;	Total C_Fxn function size at codegen: 3 bytes.
+                                   2349 ;	User/eric_proc.c: 390: uint16_t Rev16(uint16_t val)
+                                   2350 ; genLabel
+                                   2351 ;	-----------------------------------------
+                                   2352 ;	 function Rev16
+                                   2353 ;	-----------------------------------------
+                                   2354 ;	Register assignment might be sub-optimal.
+                                   2355 ;	Stack space usage: 2 bytes.
+      00A0FC                       2356 _Rev16:
+      00A0FC 89               [ 2] 2357 	pushw	x
+                                   2358 ; genReceive
+                                   2359 ;	User/eric_proc.c: 395: a = (val >> 8) & 0xff;
+                                   2360 ; genGetByte
+      00A0FD 90 93            [ 1] 2361 	ldw	y, x
+                                   2362 ;	User/eric_proc.c: 396: b = val & 0xff;
+                                   2363 ; genCast
+                                   2364 ; genAssign
+                                   2365 ;	User/eric_proc.c: 397: c = (b << 8) | a;
+                                   2366 ; genCast
+                                   2367 ; genAssign
+                                   2368 ; peephole 1 removed dead clear of a.
+                                   2369 ; genLeftShiftLiteral
+      00A0FF 4F               [ 1] 2370 	clr	a
+      00A100 02               [ 1] 2371 	rlwa	x
+                                   2372 ; genCast
+                                   2373 ; genAssign
+      00A101 0F 01            [ 1] 2374 	clr	(0x01, sp)
+                                   2375 ; genOr
+      00A103 90 9E            [ 1] 2376 	ld	a, yh
+                                   2377 ; genCast
+                                   2378 ; genAssign
+                                   2379 ;	User/eric_proc.c: 398: return c;
+                                   2380 ; genReturn
+      00A105 97               [ 1] 2381 	ld	xl, a
+                                   2382 ; genLabel
+                                   2383 ; peephole j30 removed unused label 00101$.
+                                   2384 ;	User/eric_proc.c: 399: }
+                                   2385 ; genEndFunction
+      00A106 5B 02            [ 2] 2386 	addw	sp, #2
+      00A108 81               [ 4] 2387 	ret
+                                   2388 ;	Total Rev16 function size at codegen: 3 bytes.
+                                   2389 ;	User/eric_proc.c: 401: uint8_t crc_verify(uint8_t *p, uint16_t len) //stm8是大端模式
+                                   2390 ; genLabel
+                                   2391 ;	-----------------------------------------
+                                   2392 ;	 function crc_verify
+                                   2393 ;	-----------------------------------------
+                                   2394 ;	Register assignment might be sub-optimal.
+                                   2395 ;	Stack space usage: 4 bytes.
+      00A109                       2396 _crc_verify:
+      00A109 52 04            [ 2] 2397 	sub	sp, #4
+                                   2398 ; genReceive
+      00A10B 1F 03            [ 2] 2399 	ldw	(0x03, sp), x
+                                   2400 ;	User/eric_proc.c: 403: uint16_t crc1 = 0, crc2 = 0;
+                                   2401 ; genAssign
+      00A10D 5F               [ 1] 2402 	clrw	x
+      00A10E 1F 01            [ 2] 2403 	ldw	(0x01, sp), x
+                                   2404 ;	User/eric_proc.c: 405: memcpy((uint8_t *)&crc1, p + len - 2, 2);
+                                   2405 ; genPlus
+      00A110 1E 03            [ 2] 2406 	ldw	x, (0x03, sp)
+      00A112 72 FB 07         [ 2] 2407 	addw	x, (0x07, sp)
+                                   2408 ; genMinus
+      00A115 5A               [ 2] 2409 	decw	x
+      00A116 5A               [ 2] 2410 	decw	x
+                                   2411 ; genCast
+                                   2412 ; genAssign
+                                   2413 ; skipping iCode since result will be rematerialized
+                                   2414 ; skipping iCode since result will be rematerialized
+                                   2415 ; genIPush
+      00A117 4B 02            [ 1] 2416 	push	#0x02
+      00A119 4B 00            [ 1] 2417 	push	#0x00
+                                   2418 ; genIPush
+      00A11B 89               [ 2] 2419 	pushw	x
+                                   2420 ; genSend
+      00A11C 96               [ 1] 2421 	ldw	x, sp
+      00A11D 1C 00 05         [ 2] 2422 	addw	x, #5
+                                   2423 ; genCall
+      00A120 CD ED AB         [ 4] 2424 	call	___memcpy
+                                   2425 ;	User/eric_proc.c: 406: crc1 = Rev16(crc1);
+                                   2426 ; genSend
+      00A123 1E 01            [ 2] 2427 	ldw	x, (0x01, sp)
+                                   2428 ; genCall
+      00A125 CD A0 FC         [ 4] 2429 	call	_Rev16
+                                   2430 ; genAssign
+      00A128 1F 01            [ 2] 2431 	ldw	(0x01, sp), x
+                                   2432 ;	User/eric_proc.c: 407: crc2 = CRC_GetModbus16(p, len - 2);
+                                   2433 ; genCast
+                                   2434 ; genAssign
+      00A12A 1E 07            [ 2] 2435 	ldw	x, (0x07, sp)
+                                   2436 ; genMinus
+      00A12C 5A               [ 2] 2437 	decw	x
+      00A12D 5A               [ 2] 2438 	decw	x
+                                   2439 ; genIPush
+      00A12E 89               [ 2] 2440 	pushw	x
+                                   2441 ; genSend
+      00A12F 1E 05            [ 2] 2442 	ldw	x, (0x05, sp)
+                                   2443 ; genCall
+      00A131 CD 9C 9A         [ 4] 2444 	call	_CRC_GetModbus16
+                                   2445 ;	User/eric_proc.c: 408: if (crc1 == crc2)
+                                   2446 ; genCmpEQorNE
+      00A134 13 01            [ 2] 2447 	cpw	x, (0x01, sp)
+                                   2448 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2449 ; peephole j10 removed jra by using inverse jump logic
+                                   2450 ; peephole j30 removed unused label 00114$.
+                                   2451 ; peephole j5 changed absolute to relative unconditional jump.
+      00A136 26 03            [ 1] 2452 	jrne	00102$
+                                   2453 ; peephole j7 removed jra by using inverse jump logic
+                                   2454 ; peephole j30 removed unused label 00115$.
+                                   2455 ; skipping generated iCode
+                                   2456 ;	User/eric_proc.c: 410: return 1;
+                                   2457 ; genReturn
+      00A138 A6 01            [ 1] 2458 	ld	a, #0x01
+                                   2459 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2460 ; genLabel
+                                   2461 ;	User/eric_proc.c: 414: return 0;
+                                   2462 ; genReturn
+                                   2463 ; genLabel
+      00A13A 21                    2464 	.byte 0x21
+                                   2465 ; peephole jrf1 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      00A13B                       2466 00102$:
+      00A13B 4F               [ 1] 2467 	clr	a
+      00A13C                       2468 00104$:
+                                   2469 ;	User/eric_proc.c: 416: }
+                                   2470 ; genEndFunction
+      00A13C 1E 05            [ 2] 2471 	ldw	x, (5, sp)
+      00A13E 5B 08            [ 2] 2472 	addw	sp, #8
+      00A140 FC               [ 2] 2473 	jp	(x)
+                                   2474 ;	Total crc_verify function size at codegen: 5 bytes.
+                                   2475 ;	User/eric_proc.c: 419: uint16_t Pkt_485ackquery(uint8_t addrID, uint8_t funID, uint16_t saddr, uint16_t offset, Rs485u16Rlt *rlt, uint8_t *packet)
+                                   2476 ; genLabel
+                                   2477 ;	-----------------------------------------
+                                   2478 ;	 function Pkt_485ackquery
+                                   2479 ;	-----------------------------------------
+                                   2480 ;	Register assignment might be sub-optimal.
+                                   2481 ;	Stack space usage: 25 bytes.
+      00A141                       2482 _Pkt_485ackquery:
+      00A141 52 19            [ 2] 2483 	sub	sp, #25
+                                   2484 ; genReceive
+      00A143 6B 19            [ 1] 2485 	ld	(0x19, sp), a
+                                   2486 ;	User/eric_proc.c: 422: uint16_t crc16 = 0;
+                                   2487 ; genAssign
+      00A145 5F               [ 1] 2488 	clrw	x
+      00A146 1F 01            [ 2] 2489 	ldw	(0x01, sp), x
+                                   2490 ;	User/eric_proc.c: 425: if (rlt == NULL)
+                                   2491 ; genIfx
+                                   2492 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2493 ; peephole j7 removed jra by using inverse jump logic
+                                   2494 ; peephole j30 removed unused label 00149$.
+                                   2495 ;	User/eric_proc.c: 427: return 0;
+                                   2496 ; genReturn
+      00A148 1E 21            [ 2] 2497 	ldw	x, (0x21, sp)
+      00A14A 26 03            [ 1] 2498 	jrne	00102$
+                                   2499 ; peephole 22d removed redundant clrw x.
+      00A14C CC A2 22         [ 2] 2500 	jp	00112$
+                                   2501 ; genLabel
+      00A14F                       2502 00102$:
+                                   2503 ;	User/eric_proc.c: 429: if (packet == NULL)
+                                   2504 ; genIfx
+                                   2505 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2506 ; peephole j7 removed jra by using inverse jump logic
+                                   2507 ; peephole j30 removed unused label 00150$.
+                                   2508 ;	User/eric_proc.c: 431: return 0;
+                                   2509 ; genReturn
+      00A14F 1E 23            [ 2] 2510 	ldw	x, (0x23, sp)
+      00A151 26 03            [ 1] 2511 	jrne	00104$
+                                   2512 ; peephole 22d removed redundant clrw x.
+      00A153 CC A2 22         [ 2] 2513 	jp	00112$
+                                   2514 ; genLabel
+      00A156                       2515 00104$:
+                                   2516 ;	User/eric_proc.c: 433: if (saddr > 7)
+                                   2517 ; genCast
+                                   2518 ; genAssign
+      00A156 1E 1D            [ 2] 2519 	ldw	x, (0x1d, sp)
+                                   2520 ; genCmp
+                                   2521 ; genCmpTnz
+      00A158 A3 00 07         [ 2] 2522 	cpw	x, #0x0007
+                                   2523 ; peephole j5 changed absolute to relative unconditional jump.
+      00A15B 23 04            [ 2] 2524 	jrule	00106$
+                                   2525 ; peephole j16 removed jra by using inverse jump logic
+                                   2526 ; peephole j30 removed unused label 00151$.
+                                   2527 ; skipping generated iCode
+                                   2528 ;	User/eric_proc.c: 435: return 0;
+                                   2529 ; genReturn
+      00A15D 5F               [ 1] 2530 	clrw	x
+      00A15E CC A2 22         [ 2] 2531 	jp	00112$
+                                   2532 ; genLabel
+      00A161                       2533 00106$:
+                                   2534 ;	User/eric_proc.c: 437: if ((offset == 0) || (offset > 7))
+                                   2535 ; genIfx
+                                   2536 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2537 ; peephole j10 removed jra by using inverse jump logic
+                                   2538 ; peephole j30 removed unused label 00152$.
+                                   2539 ; genCast
+                                   2540 ; genAssign
+      00A161 1E 1F            [ 2] 2541 	ldw	x, (0x1f, sp)
+      00A163 27 05            [ 1] 2542 	jreq	00107$
+                                   2543 ; peephole 50eq removed redundant load of x from (0x1f, sp).
+                                   2544 ; genCmp
+                                   2545 ; genCmpTnz
+      00A165 A3 00 07         [ 2] 2546 	cpw	x, #0x0007
+                                   2547 ; peephole j5 changed absolute to relative unconditional jump.
+      00A168 23 04            [ 2] 2548 	jrule	00108$
+                                   2549 ; peephole j16 removed jra by using inverse jump logic
+                                   2550 ; peephole j30 removed unused label 00153$.
+                                   2551 ; skipping generated iCode
+                                   2552 ; genLabel
+      00A16A                       2553 00107$:
+                                   2554 ;	User/eric_proc.c: 439: return 0;
+                                   2555 ; genReturn
+      00A16A 5F               [ 1] 2556 	clrw	x
+      00A16B CC A2 22         [ 2] 2557 	jp	00112$
+                                   2558 ; genLabel
+      00A16E                       2559 00108$:
+                                   2560 ;	User/eric_proc.c: 443: if ((saddr + offset) > 7) //如果地址加偏移错误，自动修正
+                                   2561 ; genPlus
+      00A16E 1E 1D            [ 2] 2562 	ldw	x, (0x1d, sp)
+      00A170 72 FB 1F         [ 2] 2563 	addw	x, (0x1f, sp)
+                                   2564 ; genCast
+                                   2565 ; genAssign
+                                   2566 ; genCmp
+                                   2567 ; genCmpTnz
+      00A173 A3 00 07         [ 2] 2568 	cpw	x, #0x0007
+                                   2569 ; peephole j5 changed absolute to relative unconditional jump.
+      00A176 23 08            [ 2] 2570 	jrule	00111$
+                                   2571 ; peephole j16 removed jra by using inverse jump logic
+                                   2572 ; peephole j30 removed unused label 00154$.
+                                   2573 ; skipping generated iCode
+                                   2574 ;	User/eric_proc.c: 445: offset = 7 - saddr;
+                                   2575 ; genMinus
+      00A178 AE 00 07         [ 2] 2576 	ldw	x, #0x0007
+      00A17B 72 F0 1D         [ 2] 2577 	subw	x, (0x1d, sp)
+                                   2578 ; genAssign
+      00A17E 1F 1F            [ 2] 2579 	ldw	(0x1f, sp), x
+                                   2580 ; genLabel
+      00A180                       2581 00111$:
+                                   2582 ;	User/eric_proc.c: 448: memset(packet, 0, 128);
+                                   2583 ; genCast
+                                   2584 ; genAssign
+      00A180 16 23            [ 2] 2585 	ldw	y, (0x23, sp)
+      00A182 17 13            [ 2] 2586 	ldw	(0x13, sp), y
+                                   2587 ; genIPush
+      00A184 4B 80            [ 1] 2588 	push	#0x80
+      00A186 4B 00            [ 1] 2589 	push	#0x00
+                                   2590 ; genIPush
+      00A188 5F               [ 1] 2591 	clrw	x
+      00A189 89               [ 2] 2592 	pushw	x
+                                   2593 ; genSend
+      00A18A 1E 17            [ 2] 2594 	ldw	x, (0x17, sp)
+                                   2595 ; genCall
+      00A18C CD ED FE         [ 4] 2596 	call	_memset
+                                   2597 ;	User/eric_proc.c: 449: memset((uint8_t *)&c_ackquery, 0, 128);
+                                   2598 ; skipping iCode since result will be rematerialized
+                                   2599 ; skipping iCode since result will be rematerialized
+                                   2600 ; genIPush
+      00A18F 4B 80            [ 1] 2601 	push	#0x80
+      00A191 4B 00            [ 1] 2602 	push	#0x00
+                                   2603 ; genIPush
+      00A193 5F               [ 1] 2604 	clrw	x
+      00A194 89               [ 2] 2605 	pushw	x
+                                   2606 ; genSend
+      00A195 AE 02 AB         [ 2] 2607 	ldw	x, #(_c_ackquery+0)
+                                   2608 ; genCall
+      00A198 CD ED FE         [ 4] 2609 	call	_memset
+                                   2610 ;	User/eric_proc.c: 450: c_ackquery.addrID = addrID;
+                                   2611 ; skipping iCode since result will be rematerialized
+                                   2612 ; genPointerSet
+      00A19B AE 02 AB         [ 2] 2613 	ldw	x, #(_c_ackquery+0)
+      00A19E 7B 19            [ 1] 2614 	ld	a, (0x19, sp)
+      00A1A0 F7               [ 1] 2615 	ld	(x), a
+                                   2616 ;	User/eric_proc.c: 451: c_ackquery.funID = funID;
+                                   2617 ; skipping iCode since result will be rematerialized
+                                   2618 ; genPointerSet
+      00A1A1 AE 02 AC         [ 2] 2619 	ldw	x, #(_c_ackquery+1)
+      00A1A4 7B 1C            [ 1] 2620 	ld	a, (0x1c, sp)
+      00A1A6 F7               [ 1] 2621 	ld	(x), a
+                                   2622 ;	User/eric_proc.c: 453: rlt16[0] = rlt->index;
+                                   2623 ; skipping iCode since result will be rematerialized
+                                   2624 ; genAssign
+      00A1A7 16 21            [ 2] 2625 	ldw	y, (0x21, sp)
+                                   2626 ; genPointerGet
+      00A1A9 93               [ 1] 2627 	ldw	x, y
+      00A1AA FE               [ 2] 2628 	ldw	x, (x)
+                                   2629 ; genPointerSet
+      00A1AB 1F 03            [ 2] 2630 	ldw	(0x03, sp), x
+                                   2631 ;	User/eric_proc.c: 454: rlt16[1] = rlt->phase;
+                                   2632 ; skipping iCode since result will be rematerialized
+                                   2633 ; genAssign
+      00A1AD 93               [ 1] 2634 	ldw	x, y
+                                   2635 ; genPointerGet
+      00A1AE EE 02            [ 2] 2636 	ldw	x, (0x2, x)
+                                   2637 ; genPointerSet
+      00A1B0 1F 05            [ 2] 2638 	ldw	(0x05, sp), x
+                                   2639 ;	User/eric_proc.c: 455: rlt16[2] = rlt->tlen;
+                                   2640 ; skipping iCode since result will be rematerialized
+                                   2641 ; genAssign
+      00A1B2 93               [ 1] 2642 	ldw	x, y
+                                   2643 ; genPointerGet
+      00A1B3 EE 04            [ 2] 2644 	ldw	x, (0x4, x)
+                                   2645 ; genPointerSet
+      00A1B5 1F 07            [ 2] 2646 	ldw	(0x07, sp), x
+                                   2647 ;	User/eric_proc.c: 456: rlt16[3] = rlt->ym;
+                                   2648 ; skipping iCode since result will be rematerialized
+                                   2649 ; genAssign
+      00A1B7 93               [ 1] 2650 	ldw	x, y
+                                   2651 ; genPointerGet
+      00A1B8 EE 06            [ 2] 2652 	ldw	x, (0x6, x)
+                                   2653 ; genPointerSet
+      00A1BA 1F 09            [ 2] 2654 	ldw	(0x09, sp), x
+                                   2655 ;	User/eric_proc.c: 457: rlt16[4] = rlt->dh;
+                                   2656 ; skipping iCode since result will be rematerialized
+                                   2657 ; genAssign
+      00A1BC 93               [ 1] 2658 	ldw	x, y
+                                   2659 ; genPointerGet
+      00A1BD EE 08            [ 2] 2660 	ldw	x, (0x8, x)
+                                   2661 ; genPointerSet
+      00A1BF 1F 0B            [ 2] 2662 	ldw	(0x0b, sp), x
+                                   2663 ;	User/eric_proc.c: 458: rlt16[5] = rlt->ms;
+                                   2664 ; skipping iCode since result will be rematerialized
+                                   2665 ; genAssign
+      00A1C1 93               [ 1] 2666 	ldw	x, y
+                                   2667 ; genPointerGet
+      00A1C2 EE 0A            [ 2] 2668 	ldw	x, (0xa, x)
+                                   2669 ; genPointerSet
+      00A1C4 1F 0D            [ 2] 2670 	ldw	(0x0d, sp), x
+                                   2671 ;	User/eric_proc.c: 459: rlt16[6] = rlt->batt;
+                                   2672 ; skipping iCode since result will be rematerialized
+                                   2673 ; genAssign
+                                   2674 ; genPointerGet
+      00A1C6 90 EE 0C         [ 2] 2675 	ldw	y, (0xc, y)
+                                   2676 ; genPointerSet
+      00A1C9 17 0F            [ 2] 2677 	ldw	(0x0f, sp), y
+                                   2678 ;	User/eric_proc.c: 461: c_ackquery.length = offset * 2; //偏移量从1开始计算
+                                   2679 ; skipping iCode since result will be rematerialized
+                                   2680 ; genCast
+                                   2681 ; genAssign
+      00A1CB 7B 20            [ 1] 2682 	ld	a, (0x20, sp)
+                                   2683 ; genLeftShiftLiteral
+      00A1CD 48               [ 1] 2684 	sll	a
+                                   2685 ; genPointerSet
+                                   2686 ;	User/eric_proc.c: 463: memcpy(c_ackquery.buf, (uint8_t *)&rlt16[saddr], c_ackquery.length);
+                                   2687 ; genPointerGet
+      00A1CE C7 02 AD         [ 1] 2688 	ld	_c_ackquery+2, a
+                                   2689 ; peephole 4 removed redundant load from _c_ackquery+2 into a.
+                                   2690 ; genCast
+                                   2691 ; genAssign
+      00A1D1 0F 15            [ 1] 2692 	clr	(0x15, sp)
+                                   2693 ; genLeftShiftLiteral
+      00A1D3 1E 1D            [ 2] 2694 	ldw	x, (0x1d, sp)
+      00A1D5 58               [ 2] 2695 	sllw	x
+      00A1D6 1F 17            [ 2] 2696 	ldw	(0x17, sp), x
+                                   2697 ; genPlus
+      00A1D8 96               [ 1] 2698 	ldw	x, sp
+      00A1D9 1C 00 03         [ 2] 2699 	addw	x, #3
+      00A1DC 72 FB 17         [ 2] 2700 	addw	x, (0x17, sp)
+                                   2701 ; genCast
+                                   2702 ; genAssign
+                                   2703 ; skipping iCode since result will be rematerialized
+                                   2704 ; skipping iCode since result will be rematerialized
+                                   2705 ; genIPush
+      00A1DF 88               [ 1] 2706 	push	a
+      00A1E0 4F               [ 1] 2707 	clr	a
+      00A1E1 88               [ 1] 2708 	push	a
+                                   2709 ; genIPush
+      00A1E2 89               [ 2] 2710 	pushw	x
+                                   2711 ; genSend
+      00A1E3 AE 02 AE         [ 2] 2712 	ldw	x, #(_c_ackquery+3)
+                                   2713 ; genCall
+      00A1E6 CD ED AB         [ 4] 2714 	call	___memcpy
+                                   2715 ;	User/eric_proc.c: 464: len = 3 + c_ackquery.length;
+                                   2716 ; genPointerGet
+      00A1E9 C6 02 AD         [ 1] 2717 	ld	a, _c_ackquery+2
+                                   2718 ; genCast
+                                   2719 ; genAssign
+      00A1EC 5F               [ 1] 2720 	clrw	x
+                                   2721 ; genPlus
+      00A1ED 97               [ 1] 2722 	ld	xl, a
+      00A1EE 1C 00 03         [ 2] 2723 	addw	x, #0x0003
+                                   2724 ; genCast
+                                   2725 ; genAssign
+                                   2726 ;	User/eric_proc.c: 465: memcpy(packet, (uint8_t *)&c_ackquery, len);
+                                   2727 ; genCast
+                                   2728 ; genAssign
+      00A1F1 1F 15            [ 2] 2729 	ldw	(0x15, sp), x
+                                   2730 ; peephole 14 replaced load from (0x15, sp) into y by load from x into y.
+                                   2731 ; peephole 14a loaded (0x17, sp) directly from x instead of going through y.
+                                   2732 ; skipping iCode since result will be rematerialized
+                                   2733 ; skipping iCode since result will be rematerialized
+                                   2734 ; genIPush
+      00A1F3 1F 17            [ 2] 2735 	ldw	(0x17, sp), x
+                                   2736 ; peephole 4w removed redundant load from (0x17, sp) into x.
+      00A1F5 89               [ 2] 2737 	pushw	x
+                                   2738 ; genIPush
+      00A1F6 4B AB            [ 1] 2739 	push	#<(_c_ackquery+0)
+      00A1F8 4B 02            [ 1] 2740 	push	#((_c_ackquery+0) >> 8)
+                                   2741 ; genSend
+      00A1FA 1E 17            [ 2] 2742 	ldw	x, (0x17, sp)
+                                   2743 ; genCall
+      00A1FC CD ED AB         [ 4] 2744 	call	___memcpy
+                                   2745 ;	User/eric_proc.c: 466: crc16 = CRC_GetModbus16(packet, len);
+                                   2746 ; genCast
+                                   2747 ; genAssign
+      00A1FF 1E 15            [ 2] 2748 	ldw	x, (0x15, sp)
+                                   2749 ; genIPush
+      00A201 89               [ 2] 2750 	pushw	x
+                                   2751 ; genSend
+      00A202 1E 25            [ 2] 2752 	ldw	x, (0x25, sp)
+                                   2753 ; genCall
+      00A204 CD 9C 9A         [ 4] 2754 	call	_CRC_GetModbus16
+                                   2755 ; genAssign
+      00A207 1F 01            [ 2] 2756 	ldw	(0x01, sp), x
+                                   2757 ;	User/eric_proc.c: 467: crc16 = Rev16(crc16);
+                                   2758 ; genSend
+                                   2759 ; genCall
+      00A209 CD A0 FC         [ 4] 2760 	call	_Rev16
+                                   2761 ; genAssign
+      00A20C 1F 01            [ 2] 2762 	ldw	(0x01, sp), x
+                                   2763 ;	User/eric_proc.c: 468: memcpy((packet + len), (uint8_t *)&crc16, 2); //拷贝CRC
+                                   2764 ; genAddrOf
+      00A20E 96               [ 1] 2765 	ldw	x, sp
+      00A20F 5C               [ 1] 2766 	incw	x
+                                   2767 ; genCast
+                                   2768 ; genAssign
+                                   2769 ; genPlus
+      00A210 16 23            [ 2] 2770 	ldw	y, (0x23, sp)
+      00A212 72 F9 15         [ 2] 2771 	addw	y, (0x15, sp)
+                                   2772 ; genIPush
+      00A215 4B 02            [ 1] 2773 	push	#0x02
+      00A217 4B 00            [ 1] 2774 	push	#0x00
+                                   2775 ; genIPush
+      00A219 89               [ 2] 2776 	pushw	x
+                                   2777 ; genSend
+      00A21A 93               [ 1] 2778 	ldw	x, y
+                                   2779 ; genCall
+      00A21B CD ED AB         [ 4] 2780 	call	___memcpy
+                                   2781 ;	User/eric_proc.c: 469: return (len + 2);
+                                   2782 ; genPlus
+      00A21E 1E 17            [ 2] 2783 	ldw	x, (0x17, sp)
+      00A220 5C               [ 1] 2784 	incw	x
+      00A221 5C               [ 1] 2785 	incw	x
+                                   2786 ; genCast
+                                   2787 ; genAssign
+                                   2788 ; genReturn
+                                   2789 ; genLabel
+      00A222                       2790 00112$:
+                                   2791 ;	User/eric_proc.c: 471: }
+                                   2792 ; genEndFunction
+      00A222 16 1A            [ 2] 2793 	ldw	y, (26, sp)
+      00A224 5B 24            [ 2] 2794 	addw	sp, #36
+      00A226 90 FC            [ 2] 2795 	jp	(y)
+                                   2796 ;	Total Pkt_485ackquery function size at codegen: 6 bytes.
+                                   2797 ;	User/eric_proc.c: 473: void Get_Record(uint8_t tag)
+                                   2798 ; genLabel
+                                   2799 ;	-----------------------------------------
+                                   2800 ;	 function Get_Record
+                                   2801 ;	-----------------------------------------
+                                   2802 ;	Register assignment might be sub-optimal.
+                                   2803 ;	Stack space usage: 4 bytes.
+      00A228                       2804 _Get_Record:
+      00A228 52 04            [ 2] 2805 	sub	sp, #4
+                                   2806 ; genReceive
+                                   2807 ;	User/eric_proc.c: 477: if (tag == 0) //如果超时从当前最新的记录开始读取，否则读取下一条记录
+                                   2808 ; genIfx
+      00A22A 4D               [ 1] 2809 	tnz	a
+                                   2810 ; peephole j5 changed absolute to relative unconditional jump.
+      00A22B 26 24            [ 1] 2811 	jrne	00108$
+                                   2812 ; peephole j7 removed jra by using inverse jump logic
+                                   2813 ; peephole j30 removed unused label 00142$.
+                                   2814 ;	User/eric_proc.c: 479: if (data_index.used) //有效数据
+                                   2815 ; skipping iCode since result will be rematerialized
+                                   2816 ; skipping iCode since result will be rematerialized
+                                   2817 ; genPointerGet
+      00A22D C6 04 9F         [ 1] 2818 	ld	a, _data_index+2
+                                   2819 ;	User/eric_proc.c: 483: data_index.r = data_index.w - 1;
+                                   2820 ; genCast
+                                   2821 ; genAssign
+      00A230 AE 04 9D         [ 2] 2822 	ldw	x, #(_data_index+0)
+                                   2823 ;	User/eric_proc.c: 479: if (data_index.used) //有效数据
+                                   2824 ; genIfx
+      00A233 4D               [ 1] 2825 	tnz	a
+                                   2826 ; peephole j5 changed absolute to relative unconditional jump.
+      00A234 27 0E            [ 1] 2827 	jreq	00105$
+                                   2828 ; peephole j10 removed jra by using inverse jump logic
+                                   2829 ; peephole j30 removed unused label 00143$.
+                                   2830 ;	User/eric_proc.c: 481: if (data_index.w > 0)
+                                   2831 ; skipping iCode since result will be rematerialized
+                                   2832 ; genPointerGet
+                                   2833 ; genIfx
+      00A236 C6 04 9E         [ 1] 2834 	ld	a, _data_index+1
+                                   2835 ; peephole 30 removed redundant tnz.
+                                   2836 ; peephole j5 changed absolute to relative unconditional jump.
+      00A239 27 04            [ 1] 2837 	jreq	00102$
+                                   2838 ; peephole j10 removed jra by using inverse jump logic
+                                   2839 ; peephole j30 removed unused label 00144$.
+                                   2840 ;	User/eric_proc.c: 483: data_index.r = data_index.w - 1;
+                                   2841 ; genCast
+                                   2842 ; genAssign
+                                   2843 ; genMinus
+      00A23B 4A               [ 1] 2844 	dec	a
+                                   2845 ; genPointerSet
+      00A23C F7               [ 1] 2846 	ld	(x), a
+                                   2847 ; genGoto
+      00A23D 20 06            [ 2] 2848 	jra	00106$
+                                   2849 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2850 ; genLabel
+      00A23F                       2851 00102$:
+                                   2852 ;	User/eric_proc.c: 487: data_index.r = 89;
+                                   2853 ; genPointerSet
+      00A23F A6 59            [ 1] 2854 	ld	a, #0x59
+      00A241 F7               [ 1] 2855 	ld	(x), a
+                                   2856 ; genGoto
+      00A242 20 01            [ 2] 2857 	jra	00106$
+                                   2858 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2859 ; genLabel
+      00A244                       2860 00105$:
+                                   2861 ;	User/eric_proc.c: 492: data_index.r = 0;
+                                   2862 ; genPointerSet
+      00A244 7F               [ 1] 2863 	clr	(x)
+                                   2864 ; genLabel
+      00A245                       2865 00106$:
+                                   2866 ;	User/eric_proc.c: 494: result = Load_Data(2, (uint8_t *)&lrecd);
+                                   2867 ; skipping iCode since result will be rematerialized
+                                   2868 ; skipping iCode since result will be rematerialized
+                                   2869 ; genSend
+      00A245 AE 02 39         [ 2] 2870 	ldw	x, #(_lrecd+0)
+                                   2871 ; genSend
+      00A248 A6 02            [ 1] 2872 	ld	a, #0x02
+                                   2873 ; genCall
+      00A24A CD 95 C3         [ 4] 2874 	call	_Load_Data
+      00A24D 6B 04            [ 1] 2875 	ld	(0x04, sp), a
+                                   2876 ; genGoto
+      00A24F 20 09            [ 2] 2877 	jra	00109$
+                                   2878 ; peephole j5 changed absolute to relative unconditional jump.
+                                   2879 ; genLabel
+      00A251                       2880 00108$:
+                                   2881 ;	User/eric_proc.c: 498: result = Load_Data(0, (uint8_t *)&lrecd);
+                                   2882 ; skipping iCode since result will be rematerialized
+                                   2883 ; skipping iCode since result will be rematerialized
+                                   2884 ; genSend
+      00A251 AE 02 39         [ 2] 2885 	ldw	x, #(_lrecd+0)
+                                   2886 ; genSend
+      00A254 4F               [ 1] 2887 	clr	a
+                                   2888 ; genCall
+      00A255 CD 95 C3         [ 4] 2889 	call	_Load_Data
+      00A258 6B 04            [ 1] 2890 	ld	(0x04, sp), a
+                                   2891 ; genLabel
+      00A25A                       2892 00109$:
+                                   2893 ;	User/eric_proc.c: 501: if (result)
+                                   2894 ; genIfx
+      00A25A 0D 04            [ 1] 2895 	tnz	(0x04, sp)
+                                   2896 ; peephole j5 changed absolute to relative unconditional jump.
+      00A25C 27 5F            [ 1] 2897 	jreq	00112$
+                                   2898 ; peephole j10 removed jra by using inverse jump logic
+                                   2899 ; peephole j30 removed unused label 00145$.
+                                   2900 ;	User/eric_proc.c: 503: r485rlt.index = data_index.r + 1;
+                                   2901 ; skipping iCode since result will be rematerialized
+                                   2902 ; genCast
+                                   2903 ; genAssign
+      00A25E 90 AE 05 2E      [ 2] 2904 	ldw	y, #(_r485rlt+0)
+                                   2905 ; skipping iCode since result will be rematerialized
+                                   2906 ; genPointerGet
+      00A262 C6 04 9D         [ 1] 2907 	ld	a, _data_index+0
+                                   2908 ; genCast
+                                   2909 ; genAssign
+      00A265 5F               [ 1] 2910 	clrw	x
+                                   2911 ; genPlus
+      00A266 97               [ 1] 2912 	ld	xl, a
+      00A267 5C               [ 1] 2913 	incw	x
+                                   2914 ; genCast
+                                   2915 ; genAssign
+                                   2916 ; genPointerSet
+      00A268 90 FF            [ 2] 2917 	ldw	(y), x
+                                   2918 ;	User/eric_proc.c: 504: r485rlt.phase = (lrecd.pl >> 24) & 0xff;
+                                   2919 ; skipping iCode since result will be rematerialized
+                                   2920 ; skipping iCode since result will be rematerialized
+                                   2921 ; skipping iCode since result will be rematerialized
+                                   2922 ; genPointerGet
+      00A26A AE 02 3F         [ 2] 2923 	ldw	x, #(_lrecd+6)
+                                   2924 ; peephole 0w removed dead load into y from x.
+                                   2925 ; peephole 0w removed dead load into y from (0x2, y).
+      00A26D FE               [ 2] 2926 	ldw	x, (x)
+                                   2927 ; genGetByte
+      00A26E 9E               [ 1] 2928 	ld	a, xh
+                                   2929 ; genCast
+                                   2930 ; genAssign
+      00A26F 5F               [ 1] 2931 	clrw	x
+      00A270 97               [ 1] 2932 	ld	xl, a
+                                   2933 ; genPointerSet
+      00A271 CF 05 30         [ 2] 2934 	ldw	_r485rlt+2, x
+                                   2935 ;	User/eric_proc.c: 505: r485rlt.tlen = (lrecd.pl & 0x0000ffff);
+                                   2936 ; skipping iCode since result will be rematerialized
+                                   2937 ; genPointerGet
+      00A274 CE 02 41         [ 2] 2938 	ldw	x, _lrecd+8
+                                   2939 ; genAssign
+                                   2940 ; genPointerSet
+      00A277 CF 05 32         [ 2] 2941 	ldw	_r485rlt+4, x
+                                   2942 ;	User/eric_proc.c: 506: r485rlt.ym = (lrecd.year << 8) | lrecd.mon;
+                                   2943 ; skipping iCode since result will be rematerialized
+                                   2944 ; genPointerGet
+      00A27A C6 02 39         [ 1] 2945 	ld	a, _lrecd+0
+                                   2946 ; genCast
+                                   2947 ; genAssign
+                                   2948 ; peephole 3 removed dead clrw of x.
+                                   2949 ; genLeftShiftLiteral
+      00A27D 95               [ 1] 2950 	ld	xh, a
+      00A27E 0F 02            [ 1] 2951 	clr	(0x02, sp)
+                                   2952 ; skipping iCode since result will be rematerialized
+                                   2953 ; genPointerGet
+      00A280 C6 02 3A         [ 1] 2954 	ld	a, _lrecd+1
+                                   2955 ; genCast
+                                   2956 ; genAssign
+      00A283 0F 03            [ 1] 2957 	clr	(0x03, sp)
+                                   2958 ; genOr
+      00A285 97               [ 1] 2959 	ld	xl, a
+                                   2960 ; genCast
+                                   2961 ; genAssign
+                                   2962 ; genPointerSet
+      00A286 CF 05 34         [ 2] 2963 	ldw	_r485rlt+6, x
+                                   2964 ;	User/eric_proc.c: 507: r485rlt.dh = (lrecd.day << 8) | lrecd.hour;
+                                   2965 ; skipping iCode since result will be rematerialized
+                                   2966 ; skipping iCode since result will be rematerialized
+                                   2967 ; genPointerGet
+      00A289 C6 02 3B         [ 1] 2968 	ld	a, _lrecd+2
+                                   2969 ; genCast
+                                   2970 ; genAssign
+                                   2971 ; peephole 3 removed dead clrw of x.
+                                   2972 ; genLeftShiftLiteral
+      00A28C 95               [ 1] 2973 	ld	xh, a
+      00A28D 0F 02            [ 1] 2974 	clr	(0x02, sp)
+                                   2975 ; skipping iCode since result will be rematerialized
+                                   2976 ; genPointerGet
+      00A28F C6 02 3C         [ 1] 2977 	ld	a, _lrecd+3
+                                   2978 ; genCast
+                                   2979 ; genAssign
+      00A292 0F 03            [ 1] 2980 	clr	(0x03, sp)
+                                   2981 ; genOr
+      00A294 97               [ 1] 2982 	ld	xl, a
+                                   2983 ; genCast
+                                   2984 ; genAssign
+                                   2985 ; genPointerSet
+      00A295 CF 05 36         [ 2] 2986 	ldw	_r485rlt+8, x
+                                   2987 ;	User/eric_proc.c: 508: r485rlt.ms = (lrecd.min << 8) | lrecd.sec;
+                                   2988 ; skipping iCode since result will be rematerialized
+                                   2989 ; skipping iCode since result will be rematerialized
+                                   2990 ; genPointerGet
+      00A298 C6 02 3D         [ 1] 2991 	ld	a, _lrecd+4
+                                   2992 ; genCast
+                                   2993 ; genAssign
+                                   2994 ; peephole 3 removed dead clrw of x.
+                                   2995 ; genLeftShiftLiteral
+      00A29B 95               [ 1] 2996 	ld	xh, a
+      00A29C 0F 02            [ 1] 2997 	clr	(0x02, sp)
+                                   2998 ; skipping iCode since result will be rematerialized
+                                   2999 ; genPointerGet
+      00A29E C6 02 3E         [ 1] 3000 	ld	a, _lrecd+5
+                                   3001 ; genCast
+                                   3002 ; genAssign
+      00A2A1 0F 03            [ 1] 3003 	clr	(0x03, sp)
+                                   3004 ; genOr
+      00A2A3 97               [ 1] 3005 	ld	xl, a
+                                   3006 ; genCast
+                                   3007 ; genAssign
+                                   3008 ; genPointerSet
+      00A2A4 CF 05 38         [ 2] 3009 	ldw	_r485rlt+10, x
+                                   3010 ;	User/eric_proc.c: 509: r485rlt.batt = (uint16_t)(Verfin / 100);
+                                   3011 ; skipping iCode since result will be rematerialized
+                                   3012 ; genIPush
+      00A2A7 4B 64            [ 1] 3013 	push	#0x64
+      00A2A9 5F               [ 1] 3014 	clrw	x
+      00A2AA 89               [ 2] 3015 	pushw	x
+      00A2AB 4B 00            [ 1] 3016 	push	#0x00
+                                   3017 ; genIPush
+      00A2AD CE 04 B6         [ 2] 3018 	ldw	x, _Verfin+2
+      00A2B0 89               [ 2] 3019 	pushw	x
+      00A2B1 CE 04 B4         [ 2] 3020 	ldw	x, _Verfin+0
+      00A2B4 89               [ 2] 3021 	pushw	x
+                                   3022 ; genCall
+      00A2B5 CD ED 50         [ 4] 3023 	call	__divulong
+      00A2B8 5B 08            [ 2] 3024 	addw	sp, #8
+                                   3025 ; genCast
+                                   3026 ; genAssign
+                                   3027 ; genPointerSet
+      00A2BA CF 05 3A         [ 2] 3028 	ldw	_r485rlt+12, x
+                                   3029 ; genLabel
+      00A2BD                       3030 00112$:
+                                   3031 ;	User/eric_proc.c: 511: }
+                                   3032 ; genEndFunction
+      00A2BD 5B 04            [ 2] 3033 	addw	sp, #4
+      00A2BF 81               [ 4] 3034 	ret
+                                   3035 ;	Total Get_Record function size at codegen: 3 bytes.
+                                   3036 ;	User/eric_proc.c: 514: uint8_t Rs485_GetCfg(uint16_t staddr, uint16_t offset, uint8_t *pbuf)
+                                   3037 ; genLabel
+                                   3038 ;	-----------------------------------------
+                                   3039 ;	 function Rs485_GetCfg
+                                   3040 ;	-----------------------------------------
+                                   3041 ;	Register assignment might be sub-optimal.
+                                   3042 ;	Stack space usage: 10 bytes.
+      00A2C0                       3043 _Rs485_GetCfg:
+      00A2C0 52 0A            [ 2] 3044 	sub	sp, #10
+                                   3045 ; genReceive
+      00A2C2 1F 05            [ 2] 3046 	ldw	(0x05, sp), x
+                                   3047 ;	User/eric_proc.c: 516: uint16_t addr = 0, val1 = 0, val2 = 0;
+                                   3048 ; genAssign
+      00A2C4 5F               [ 1] 3049 	clrw	x
+      00A2C5 1F 01            [ 2] 3050 	ldw	(0x01, sp), x
+                                   3051 ;	User/eric_proc.c: 518: if (pbuf == NULL)
+                                   3052 ; genIfx
+      00A2C7 1E 0F            [ 2] 3053 	ldw	x, (0x0f, sp)
+                                   3054 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2C9 26 04            [ 1] 3055 	jrne	00102$
+                                   3056 ; peephole j7 removed jra by using inverse jump logic
+                                   3057 ; peephole j30 removed unused label 00183$.
+                                   3058 ;	User/eric_proc.c: 520: return 0;
+                                   3059 ; genReturn
+      00A2CB 4F               [ 1] 3060 	clr	a
+      00A2CC CC A3 72         [ 2] 3061 	jp	00124$
+                                   3062 ; genLabel
+      00A2CF                       3063 00102$:
+                                   3064 ;	User/eric_proc.c: 522: if (staddr < 0x8000)
+                                   3065 ; genCast
+                                   3066 ; genAssign
+      00A2CF 1E 05            [ 2] 3067 	ldw	x, (0x05, sp)
+                                   3068 ; genCmp
+                                   3069 ; genCmpTnz
+      00A2D1 A3 80 00         [ 2] 3070 	cpw	x, #0x8000
+                                   3071 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2D4 24 04            [ 1] 3072 	jrnc	00104$
+                                   3073 ; peephole j6 removed jra by using inverse jump logic
+                                   3074 ; peephole j30 removed unused label 00184$.
+                                   3075 ; skipping generated iCode
+                                   3076 ;	User/eric_proc.c: 524: return 0;
+                                   3077 ; genReturn
+      00A2D6 4F               [ 1] 3078 	clr	a
+      00A2D7 CC A3 72         [ 2] 3079 	jp	00124$
+                                   3080 ; genLabel
+      00A2DA                       3081 00104$:
+                                   3082 ;	User/eric_proc.c: 526: if (staddr > 0x8005)
+                                   3083 ; genCmp
+                                   3084 ; genCmpTnz
+      00A2DA A3 80 05         [ 2] 3085 	cpw	x, #0x8005
+                                   3086 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2DD 23 04            [ 2] 3087 	jrule	00106$
+                                   3088 ; peephole j16 removed jra by using inverse jump logic
+                                   3089 ; peephole j30 removed unused label 00185$.
+                                   3090 ; skipping generated iCode
+                                   3091 ;	User/eric_proc.c: 528: return 0;
+                                   3092 ; genReturn
+      00A2DF 4F               [ 1] 3093 	clr	a
+      00A2E0 CC A3 72         [ 2] 3094 	jp	00124$
+                                   3095 ; genLabel
+      00A2E3                       3096 00106$:
+                                   3097 ;	User/eric_proc.c: 530: if ((offset == 0) || (offset > 6))
+                                   3098 ; genIfx
+      00A2E3 16 0D            [ 2] 3099 	ldw	y, (0x0d, sp)
+                                   3100 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2E5 27 08            [ 1] 3101 	jreq	00107$
+                                   3102 ; peephole j10 removed jra by using inverse jump logic
+                                   3103 ; peephole j30 removed unused label 00186$.
+                                   3104 ; genCast
+                                   3105 ; genAssign
+      00A2E7 16 0D            [ 2] 3106 	ldw	y, (0x0d, sp)
+                                   3107 ; genCmp
+                                   3108 ; genCmpTnz
+      00A2E9 90 A3 00 06      [ 2] 3109 	cpw	y, #0x0006
+                                   3110 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2ED 23 04            [ 2] 3111 	jrule	00108$
+                                   3112 ; peephole j16 removed jra by using inverse jump logic
+                                   3113 ; peephole j30 removed unused label 00187$.
+                                   3114 ; skipping generated iCode
+                                   3115 ; genLabel
+      00A2EF                       3116 00107$:
+                                   3117 ;	User/eric_proc.c: 532: return 0;
+                                   3118 ; genReturn
+      00A2EF 4F               [ 1] 3119 	clr	a
+      00A2F0 CC A3 72         [ 2] 3120 	jp	00124$
+                                   3121 ; genLabel
+      00A2F3                       3122 00108$:
+                                   3123 ;	User/eric_proc.c: 535: if ((staddr + offset) > 0x8006) //如果地址加偏移错误，自动修正
+                                   3124 ; genPlus
+      00A2F3 16 05            [ 2] 3125 	ldw	y, (0x05, sp)
+      00A2F5 72 F9 0D         [ 2] 3126 	addw	y, (0x0d, sp)
+                                   3127 ; genCast
+                                   3128 ; genAssign
+                                   3129 ; genCmp
+                                   3130 ; genCmpTnz
+      00A2F8 90 A3 80 06      [ 2] 3131 	cpw	y, #0x8006
+                                   3132 ; peephole j5 changed absolute to relative unconditional jump.
+      00A2FC 23 09            [ 2] 3133 	jrule	00111$
+                                   3134 ; peephole j16 removed jra by using inverse jump logic
+                                   3135 ; peephole j30 removed unused label 00188$.
+                                   3136 ; skipping generated iCode
+                                   3137 ;	User/eric_proc.c: 537: offset = 0x8006 - staddr;
+                                   3138 ; genMinus
+      00A2FE 90 AE 80 06      [ 2] 3139 	ldw	y, #0x8006
+      00A302 72 F2 05         [ 2] 3140 	subw	y, (0x05, sp)
+                                   3141 ; genAssign
+      00A305 17 0D            [ 2] 3142 	ldw	(0x0d, sp), y
+                                   3143 ; genLabel
+      00A307                       3144 00111$:
+                                   3145 ;	User/eric_proc.c: 540: for (addr = staddr - 0x8000; addr <= offset ; addr++)
+                                   3146 ; genMinus
+      00A307 1D 80 00         [ 2] 3147 	subw	x, #0x8000
+                                   3148 ; genCast
+                                   3149 ; genAssign
+                                   3150 ; skipping iCode since result will be rematerialized
+                                   3151 ; skipping iCode since result will be rematerialized
+                                   3152 ; skipping iCode since result will be rematerialized
+                                   3153 ; skipping iCode since result will be rematerialized
+                                   3154 ; skipping iCode since result will be rematerialized
+                                   3155 ; genAssign
+      00A30A 16 0F            [ 2] 3156 	ldw	y, (0x0f, sp)
+      00A30C 17 07            [ 2] 3157 	ldw	(0x07, sp), y
+                                   3158 ; genAssign
+      00A30E 1F 09            [ 2] 3159 	ldw	(0x09, sp), x
+                                   3160 ; genLabel
+      00A310                       3161 00122$:
+                                   3162 ; genCmp
+                                   3163 ; genCmpTnz
+      00A310 1E 09            [ 2] 3164 	ldw	x, (0x09, sp)
+      00A312 13 0D            [ 2] 3165 	cpw	x, (0x0d, sp)
+                                   3166 ; peephole j5 changed absolute to relative unconditional jump.
+      00A314 22 5A            [ 1] 3167 	jrugt	00120$
+                                   3168 ; peephole j17 removed jp by using inverse jump logic
+                                   3169 ; peephole j30 removed unused label 00189$.
+                                   3170 ; skipping generated iCode
+                                   3171 ;	User/eric_proc.c: 542: memcpy((uint8_t *)&val1, pbuf, 2);
+                                   3172 ; genCast
+                                   3173 ; genAssign
+      00A316 1E 07            [ 2] 3174 	ldw	x, (0x07, sp)
+                                   3175 ; skipping iCode since result will be rematerialized
+                                   3176 ; skipping iCode since result will be rematerialized
+                                   3177 ; genIPush
+      00A318 4B 02            [ 1] 3178 	push	#0x02
+      00A31A 4B 00            [ 1] 3179 	push	#0x00
+                                   3180 ; genIPush
+      00A31C 89               [ 2] 3181 	pushw	x
+                                   3182 ; genSend
+      00A31D 96               [ 1] 3183 	ldw	x, sp
+      00A31E 1C 00 05         [ 2] 3184 	addw	x, #5
+                                   3185 ; genCall
+      00A321 CD ED AB         [ 4] 3186 	call	___memcpy
+                                   3187 ;	User/eric_proc.c: 543: val2 = Rev16(val1);
+                                   3188 ; genSend
+      00A324 1E 01            [ 2] 3189 	ldw	x, (0x01, sp)
+                                   3190 ; genCall
+      00A326 CD A0 FC         [ 4] 3191 	call	_Rev16
+      00A329 1F 03            [ 2] 3192 	ldw	(0x03, sp), x
+                                   3193 ;	User/eric_proc.c: 545: switch (addr)
+                                   3194 ; genCmp
+                                   3195 ; genCmpTnz
+      00A32B 1E 09            [ 2] 3196 	ldw	x, (0x09, sp)
+      00A32D A3 00 05         [ 2] 3197 	cpw	x, #0x0005
+                                   3198 ; peephole j5 changed absolute to relative unconditional jump.
+      00A330 22 31            [ 1] 3199 	jrugt	00119$
+                                   3200 ; peephole j17 removed jp by using inverse jump logic
+                                   3201 ; peephole j30 removed unused label 00190$.
+                                   3202 ; skipping generated iCode
+                                   3203 ;	User/eric_proc.c: 548: adjustdt.dt[0] = (val2 & 0xff);
+                                   3204 ; genCast
+                                   3205 ; genAssign
+      00A332 7B 04            [ 1] 3206 	ld	a, (0x04, sp)
+                                   3207 ;	User/eric_proc.c: 545: switch (addr)
+                                   3208 ; genJumpTab
+      00A334 1E 09            [ 2] 3209 	ldw	x, (0x09, sp)
+      00A336 58               [ 2] 3210 	sllw	x
+      00A337 DE A3 3B         [ 2] 3211 	ldw	x, (#00191$, x)
+      00A33A FC               [ 2] 3212 	jp	(x)
+      00A33B                       3213 00191$:
+      00A33B A3 47                 3214 	.dw	#00112$
+      00A33D A3 4C                 3215 	.dw	#00113$
+      00A33F A3 51                 3216 	.dw	#00114$
+      00A341 A3 56                 3217 	.dw	#00115$
+      00A343 A3 5B                 3218 	.dw	#00116$
+      00A345 A3 60                 3219 	.dw	#00117$
+                                   3220 ;	User/eric_proc.c: 547: case 0x00:
+                                   3221 ; genLabel
+      00A347                       3222 00112$:
+                                   3223 ;	User/eric_proc.c: 548: adjustdt.dt[0] = (val2 & 0xff);
+                                   3224 ; skipping iCode since result will be rematerialized
+                                   3225 ; genPointerSet
+      00A347 C7 05 3F         [ 1] 3226 	ld	_adjustdt+1, a
+                                   3227 ;	User/eric_proc.c: 549: break;
+                                   3228 ; genGoto
+      00A34A 20 17            [ 2] 3229 	jra	00119$
+                                   3230 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3231 ;	User/eric_proc.c: 550: case 0x01:
+                                   3232 ; genLabel
+      00A34C                       3233 00113$:
+                                   3234 ;	User/eric_proc.c: 551: adjustdt.dt[1] = (val2 & 0xff);
+                                   3235 ; skipping iCode since result will be rematerialized
+                                   3236 ; genPointerSet
+      00A34C C7 05 40         [ 1] 3237 	ld	_adjustdt+2, a
+                                   3238 ;	User/eric_proc.c: 552: break;
+                                   3239 ; genGoto
+      00A34F 20 12            [ 2] 3240 	jra	00119$
+                                   3241 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3242 ;	User/eric_proc.c: 553: case 0x02:
+                                   3243 ; genLabel
+      00A351                       3244 00114$:
+                                   3245 ;	User/eric_proc.c: 554: adjustdt.dt[2] = (val2 & 0xff);
+                                   3246 ; skipping iCode since result will be rematerialized
+                                   3247 ; genPointerSet
+      00A351 C7 05 41         [ 1] 3248 	ld	_adjustdt+3, a
+                                   3249 ;	User/eric_proc.c: 555: break;
+                                   3250 ; genGoto
+      00A354 20 0D            [ 2] 3251 	jra	00119$
+                                   3252 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3253 ;	User/eric_proc.c: 556: case 0x03:
+                                   3254 ; genLabel
+      00A356                       3255 00115$:
+                                   3256 ;	User/eric_proc.c: 557: adjustdt.dt[3] = (val2 & 0xff);
+                                   3257 ; skipping iCode since result will be rematerialized
+                                   3258 ; genPointerSet
+      00A356 C7 05 42         [ 1] 3259 	ld	_adjustdt+4, a
+                                   3260 ;	User/eric_proc.c: 558: break;
+                                   3261 ; genGoto
+      00A359 20 08            [ 2] 3262 	jra	00119$
+                                   3263 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3264 ;	User/eric_proc.c: 559: case 0x04:
+                                   3265 ; genLabel
+      00A35B                       3266 00116$:
+                                   3267 ;	User/eric_proc.c: 560: adjustdt.dt[4] = (val2 & 0xff);
+                                   3268 ; skipping iCode since result will be rematerialized
+                                   3269 ; genPointerSet
+      00A35B C7 05 43         [ 1] 3270 	ld	_adjustdt+5, a
+                                   3271 ;	User/eric_proc.c: 561: break;
+                                   3272 ; genGoto
+      00A35E 20 03            [ 2] 3273 	jra	00119$
+                                   3274 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3275 ;	User/eric_proc.c: 562: case 0x05:
+                                   3276 ; genLabel
+      00A360                       3277 00117$:
+                                   3278 ;	User/eric_proc.c: 563: adjustdt.dt[5] = (val2 & 0xff);
+                                   3279 ; skipping iCode since result will be rematerialized
+                                   3280 ; genPointerSet
+      00A360 C7 05 44         [ 1] 3281 	ld	_adjustdt+6, a
+                                   3282 ;	User/eric_proc.c: 568: }
+                                   3283 ; genLabel
+      00A363                       3284 00119$:
+                                   3285 ;	User/eric_proc.c: 569: pbuf += 2;
+                                   3286 ; genPlus
+      00A363 1E 07            [ 2] 3287 	ldw	x, (0x07, sp)
+      00A365 5C               [ 1] 3288 	incw	x
+      00A366 5C               [ 1] 3289 	incw	x
+      00A367 1F 07            [ 2] 3290 	ldw	(0x07, sp), x
+                                   3291 ;	User/eric_proc.c: 540: for (addr = staddr - 0x8000; addr <= offset ; addr++)
+                                   3292 ; genPlus
+      00A369 1E 09            [ 2] 3293 	ldw	x, (0x09, sp)
+      00A36B 5C               [ 1] 3294 	incw	x
+      00A36C 1F 09            [ 2] 3295 	ldw	(0x09, sp), x
+                                   3296 ; peephole j30 removed unused label 00192$.
+                                   3297 ; genGoto
+      00A36E 20 A0            [ 2] 3298 	jra	00122$
+                                   3299 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3300 ; genLabel
+      00A370                       3301 00120$:
+                                   3302 ;	User/eric_proc.c: 571: return 1;
+                                   3303 ; genReturn
+      00A370 A6 01            [ 1] 3304 	ld	a, #0x01
+                                   3305 ; genLabel
+      00A372                       3306 00124$:
+                                   3307 ;	User/eric_proc.c: 572: }
+                                   3308 ; genEndFunction
+      00A372 1E 0B            [ 2] 3309 	ldw	x, (11, sp)
+      00A374 5B 10            [ 2] 3310 	addw	sp, #16
+      00A376 FC               [ 2] 3311 	jp	(x)
+                                   3312 ;	Total Rs485_GetCfg function size at codegen: 5 bytes.
+                                   3313 ;	User/eric_proc.c: 576: void Rs485_Proc(void)
+                                   3314 ; genLabel
+                                   3315 ;	-----------------------------------------
+                                   3316 ;	 function Rs485_Proc
+                                   3317 ;	-----------------------------------------
+                                   3318 ;	Register assignment might be sub-optimal.
+                                   3319 ;	Stack space usage: 8 bytes.
+      00A377                       3320 _Rs485_Proc:
+      00A377 52 08            [ 2] 3321 	sub	sp, #8
+                                   3322 ;	User/eric_proc.c: 579: uint16_t pktlen = 0, recbyte = 0, len1 = 0, sta1 = 0, off1 = 0;
+                                   3323 ; genAssign
+      00A379 5F               [ 1] 3324 	clrw	x
+      00A37A 1F 01            [ 2] 3325 	ldw	(0x01, sp), x
+                                   3326 ; genAssign
+      00A37C 5F               [ 1] 3327 	clrw	x
+      00A37D 1F 03            [ 2] 3328 	ldw	(0x03, sp), x
+                                   3329 ;	User/eric_proc.c: 581: if (timeout) //2s超时计数
+                                   3330 ; genIfx
+      00A37F C6 04 3A         [ 1] 3331 	ld	a, _Rs485_Proc_timeout_10000_793+0
+                                   3332 ; peephole 625a changed tnz by ld
+                                   3333 ; peephole j5 changed absolute to relative unconditional jump.
+      00A382 27 04            [ 1] 3334 	jreq	00147$
+                                   3335 ; peephole j10 removed jra by using inverse jump logic
+                                   3336 ; peephole j30 removed unused label 00288$.
+                                   3337 ;	User/eric_proc.c: 583: timeout--;
+                                   3338 ; genMinus
+      00A384 72 5A 04 3A      [ 1] 3339 	dec	_Rs485_Proc_timeout_10000_793+0
+                                   3340 ;	User/eric_proc.c: 586: while (u1buf.r != u1buf.w)
+                                   3341 ; genLabel
+      00A388                       3342 00147$:
+                                   3343 ; skipping iCode since result will be rematerialized
+                                   3344 ; skipping iCode since result will be rematerialized
+                                   3345 ; skipping iCode since result will be rematerialized
+                                   3346 ; skipping iCode since result will be rematerialized
+                                   3347 ; skipping iCode since result will be rematerialized
+                                   3348 ; skipping iCode since result will be rematerialized
+                                   3349 ; skipping iCode since result will be rematerialized
+                                   3350 ; skipping iCode since result will be rematerialized
+                                   3351 ; skipping iCode since result will be rematerialized
+                                   3352 ; skipping iCode since result will be rematerialized
+                                   3353 ; skipping iCode since result will be rematerialized
+                                   3354 ; skipping iCode since result will be rematerialized
+                                   3355 ; skipping iCode since result will be rematerialized
+                                   3356 ; skipping iCode since result will be rematerialized
+                                   3357 ; skipping iCode since result will be rematerialized
+                                   3358 ; skipping iCode since result will be rematerialized
+                                   3359 ; skipping iCode since result will be rematerialized
+                                   3360 ; genLabel
+      00A388                       3361 00136$:
+                                   3362 ; genCast
+                                   3363 ; genAssign
+      00A388 AE 00 01         [ 2] 3364 	ldw	x, #(_u1buf+0)
+                                   3365 ; genPointerGet
+      00A38B 1F 05            [ 2] 3366 	ldw	(0x05, sp), x
+                                   3367 ; peephole 4w removed redundant load from (0x05, sp) into x.
+      00A38D FE               [ 2] 3368 	ldw	x, (x)
+      00A38E 1F 07            [ 2] 3369 	ldw	(0x07, sp), x
+                                   3370 ; genPointerGet
+      00A390 CE 00 03         [ 2] 3371 	ldw	x, _u1buf+2
+                                   3372 ; genCmpEQorNE
+      00A393 13 07            [ 2] 3373 	cpw	x, (0x07, sp)
+      00A395 26 03            [ 1] 3374 	jrne	00290$
+      00A397 CC A5 A9         [ 2] 3375 	jp	00139$
+      00A39A                       3376 00290$:
+                                   3377 ; skipping generated iCode
+                                   3378 ;	User/eric_proc.c: 588: temp2 = temp1;
+                                   3379 ; genAssign
+      00A39A 55 04 37 04 38   [ 1] 3380 	mov	_Rs485_Proc_temp2_10000_793+0, _Rs485_Proc_temp1_10000_793+0
+                                   3381 ;	User/eric_proc.c: 589: temp1 = u1buf.recbuf[u1buf.r];
+                                   3382 ; skipping iCode since result will be rematerialized
+                                   3383 ; genPointerGet
+      00A39F 1E 05            [ 2] 3384 	ldw	x, (0x05, sp)
+      00A3A1 FE               [ 2] 3385 	ldw	x, (x)
+                                   3386 ; genPlus
+                                   3387 ; genPointerGet
+                                   3388 ; peephole 10b moved addition of offset into storage instruction
+      00A3A2 D6 00 07         [ 1] 3389 	ld	a, (_u1buf+6, x)
+      00A3A5 C7 04 37         [ 1] 3390 	ld	_Rs485_Proc_temp1_10000_793+0, a
+                                   3391 ;	User/eric_proc.c: 590: u1buf.r = (u1buf.r + 1) % UBUFLEN;
+                                   3392 ; genPointerGet
+      00A3A8 1E 05            [ 2] 3393 	ldw	x, (0x05, sp)
+      00A3AA FE               [ 2] 3394 	ldw	x, (x)
+                                   3395 ; genCast
+                                   3396 ; genAssign
+                                   3397 ; genPlus
+      00A3AB 5C               [ 1] 3398 	incw	x
+                                   3399 ; peephole 0 removed dead load into a from xh.
+                                   3400 ; genAnd
+      00A3AC 4F               [ 1] 3401 	clr	a
+                                   3402 ; genCast
+                                   3403 ; genAssign
+      00A3AD 95               [ 1] 3404 	ld	xh, a
+                                   3405 ; genPointerSet
+      00A3AE 16 05            [ 2] 3406 	ldw	y, (0x05, sp)
+      00A3B0 90 FF            [ 2] 3407 	ldw	(y), x
+                                   3408 ;	User/eric_proc.c: 613: memcpy((uint8_t *)&m_cfg, rsUbuf, pktlen);
+                                   3409 ; skipping iCode since result will be rematerialized
+                                   3410 ;	User/eric_proc.c: 592: switch (stateU)
+                                   3411 ; genCmpEQorNE
+      00A3B2 C6 04 39         [ 1] 3412 	ld	a, _Rs485_Proc_stateU_10000_793+0
+                                   3413 ; peephole 600a removed unneeded cp a, #0x00
+      00A3B5 26 03            [ 1] 3414 	jrne	00293$
+      00A3B7 CC A5 2E         [ 2] 3415 	jp	00126$
+      00A3BA                       3416 00293$:
+                                   3417 ; skipping generated iCode
+                                   3418 ;	User/eric_proc.c: 595: if (recbyte >= 128) { // 严格防止缓冲区溢出
+                                   3419 ; genCast
+                                   3420 ; genAssign
+      00A3BA 1E 03            [ 2] 3421 	ldw	x, (0x03, sp)
+                                   3422 ;	User/eric_proc.c: 599: rsUbuf[recbyte++] = temp1;
+                                   3423 ; genPlus
+      00A3BC 16 03            [ 2] 3424 	ldw	y, (0x03, sp)
+      00A3BE 90 5C            [ 1] 3425 	incw	y
+      00A3C0 17 07            [ 2] 3426 	ldw	(0x07, sp), y
+                                   3427 ;	User/eric_proc.c: 595: if (recbyte >= 128) { // 严格防止缓冲区溢出
+                                   3428 ; genCmp
+                                   3429 ; genCmpTnz
+      00A3C2 A3 00 80         [ 2] 3430 	cpw	x, #0x0080
+      00A3C5 4F               [ 1] 3431 	clr	a
+      00A3C6 49               [ 1] 3432 	rlc	a
+      00A3C7 97               [ 1] 3433 	ld	xl, a
+                                   3434 ;	User/eric_proc.c: 592: switch (stateU)
+                                   3435 ; genCmpEQorNE
+      00A3C8 C6 04 39         [ 1] 3436 	ld	a, _Rs485_Proc_stateU_10000_793+0
+      00A3CB 4A               [ 1] 3437 	dec	a
+      00A3CC 26 03            [ 1] 3438 	jrne	00296$
+      00A3CE CC A4 AC         [ 2] 3439 	jp	00117$
+      00A3D1                       3440 00296$:
+                                   3441 ; skipping generated iCode
+                                   3442 ; genCmpEQorNE
+      00A3D1 C6 04 39         [ 1] 3443 	ld	a, _Rs485_Proc_stateU_10000_793+0
+      00A3D4 A1 02            [ 1] 3444 	cp	a, #0x02
+                                   3445 ; peephole j5 changed absolute to relative unconditional jump.
+      00A3D6 27 03            [ 1] 3446 	jreq	00300$
+                                   3447 ; peephole j10 removed jra by using inverse jump logic
+                                   3448 ; peephole j30 removed unused label 00299$.
+      00A3D8 CC A5 A2         [ 2] 3449 	jp	00134$
+      00A3DB                       3450 00300$:
+                                   3451 ; skipping generated iCode
+                                   3452 ;	User/eric_proc.c: 595: if (recbyte >= 128) { // 严格防止缓冲区溢出
+                                   3453 ; genIfx
+      00A3DB 9F               [ 1] 3454 	ld	a, xl
+      00A3DC 4D               [ 1] 3455 	tnz	a
+                                   3456 ; peephole j5 changed absolute to relative unconditional jump.
+      00A3DD 26 06            [ 1] 3457 	jrne	00105$
+                                   3458 ; peephole j7 removed jra by using inverse jump logic
+                                   3459 ; peephole j30 removed unused label 00301$.
+                                   3460 ;	User/eric_proc.c: 596: stateU = 0;
+                                   3461 ; genAssign
+      00A3DF 72 5F 04 39      [ 1] 3462 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3463 ;	User/eric_proc.c: 597: break;
+                                   3464 ; genGoto
+      00A3E3 20 A3            [ 2] 3465 	jra	00136$
+                                   3466 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3467 ; genLabel
+      00A3E5                       3468 00105$:
+                                   3469 ;	User/eric_proc.c: 599: rsUbuf[recbyte++] = temp1;
+                                   3470 ; genAssign
+      00A3E5 1E 03            [ 2] 3471 	ldw	x, (0x03, sp)
+                                   3472 ; genAssign
+      00A3E7 16 07            [ 2] 3473 	ldw	y, (0x07, sp)
+      00A3E9 17 03            [ 2] 3474 	ldw	(0x03, sp), y
+                                   3475 ; genPlus
+                                   3476 ; genPointerSet
+                                   3477 ; peephole 9 moved addition of offset into storage instruction
+      00A3EB C6 04 37         [ 1] 3478 	ld	a, _Rs485_Proc_temp1_10000_793+0
+      00A3EE D7 03 2B         [ 1] 3479 	ld	((_rsUbuf+0), x), a
+                                   3480 ;	User/eric_proc.c: 601: if (recbyte == 7) //数据长度
+                                   3481 ; genCast
+                                   3482 ; genAssign
+      00A3F1 1E 03            [ 2] 3483 	ldw	x, (0x03, sp)
+                                   3484 ; genCmpEQorNE
+      00A3F3 A3 00 07         [ 2] 3485 	cpw	x, #0x0007
+                                   3486 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3487 ; peephole j10 removed jra by using inverse jump logic
+                                   3488 ; peephole j30 removed unused label 00303$.
+                                   3489 ; peephole j5 changed absolute to relative unconditional jump.
+      00A3F6 26 13            [ 1] 3490 	jrne	00109$
+                                   3491 ; peephole j7 removed jra by using inverse jump logic
+                                   3492 ; peephole j30 removed unused label 00304$.
+                                   3493 ; skipping generated iCode
+                                   3494 ;	User/eric_proc.c: 603: pktlen = temp1 + 9; //总数据长度
+                                   3495 ; genCast
+                                   3496 ; genAssign
+      00A3F8 C6 04 37         [ 1] 3497 	ld	a, _Rs485_Proc_temp1_10000_793+0
+      00A3FB 5F               [ 1] 3498 	clrw	x
+                                   3499 ; genPlus
+      00A3FC 97               [ 1] 3500 	ld	xl, a
+      00A3FD 1C 00 09         [ 2] 3501 	addw	x, #0x0009
+                                   3502 ; genCast
+                                   3503 ; genAssign
+                                   3504 ;	User/eric_proc.c: 604: if (pktlen > 128) //错误长度
+                                   3505 ; genCast
+                                   3506 ; genAssign
+      00A400 1F 01            [ 2] 3507 	ldw	(0x01, sp), x
+                                   3508 ; peephole 4w removed redundant load from (0x01, sp) into x.
+                                   3509 ; genCmp
+                                   3510 ; genCmpTnz
+      00A402 A3 00 80         [ 2] 3511 	cpw	x, #0x0080
+                                   3512 ; peephole j5 changed absolute to relative unconditional jump.
+      00A405 23 04            [ 2] 3513 	jrule	00109$
+                                   3514 ; peephole j16 removed jra by using inverse jump logic
+                                   3515 ; peephole j30 removed unused label 00305$.
+                                   3516 ; skipping generated iCode
+                                   3517 ;	User/eric_proc.c: 606: stateU = 0;
+                                   3518 ; genAssign
+      00A407 72 5F 04 39      [ 1] 3519 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3520 ; genLabel
+      00A40B                       3521 00109$:
+                                   3522 ;	User/eric_proc.c: 610: if ((pktlen > 0) && (recbyte >= pktlen)) //接收到足够包长
+                                   3523 ; genIfx
+      00A40B 1E 01            [ 2] 3524 	ldw	x, (0x01, sp)
+      00A40D 26 03            [ 1] 3525 	jrne	00306$
+      00A40F CC A3 88         [ 2] 3526 	jp	00136$
+      00A412                       3527 00306$:
+                                   3528 ; genCmp
+                                   3529 ; genCmpTnz
+      00A412 1E 03            [ 2] 3530 	ldw	x, (0x03, sp)
+      00A414 13 01            [ 2] 3531 	cpw	x, (0x01, sp)
+      00A416 24 03            [ 1] 3532 	jrnc	00307$
+      00A418 CC A3 88         [ 2] 3533 	jp	00136$
+      00A41B                       3534 00307$:
+                                   3535 ; skipping generated iCode
+                                   3536 ;	User/eric_proc.c: 612: memset((uint8_t *)&m_cfg, 0, 88);
+                                   3537 ; skipping iCode since result will be rematerialized
+                                   3538 ; genIPush
+      00A41B 4B 58            [ 1] 3539 	push	#0x58
+      00A41D 4B 00            [ 1] 3540 	push	#0x00
+                                   3541 ; genIPush
+      00A41F 5F               [ 1] 3542 	clrw	x
+      00A420 89               [ 2] 3543 	pushw	x
+                                   3544 ; genSend
+      00A421 AE 02 43         [ 2] 3545 	ldw	x, #(_m_cfg+0)
+                                   3546 ; genCall
+      00A424 CD ED FE         [ 4] 3547 	call	_memset
+                                   3548 ;	User/eric_proc.c: 613: memcpy((uint8_t *)&m_cfg, rsUbuf, pktlen);
+                                   3549 ; genCast
+                                   3550 ; genAssign
+      00A427 1E 01            [ 2] 3551 	ldw	x, (0x01, sp)
+                                   3552 ; genIPush
+      00A429 89               [ 2] 3553 	pushw	x
+                                   3554 ; genIPush
+      00A42A 4B 2B            [ 1] 3555 	push	#<(_rsUbuf+0)
+      00A42C 4B 03            [ 1] 3556 	push	#((_rsUbuf+0) >> 8)
+                                   3557 ; genSend
+      00A42E AE 02 43         [ 2] 3558 	ldw	x, #(_m_cfg+0)
+                                   3559 ; genCall
+      00A431 CD ED AB         [ 4] 3560 	call	___memcpy
+                                   3561 ;	User/eric_proc.c: 614: if (crc_verify((uint8_t *)&m_cfg, pktlen)) //主机数据校验ok
+                                   3562 ; skipping iCode since result will be rematerialized
+                                   3563 ; genIPush
+      00A434 1E 01            [ 2] 3564 	ldw	x, (0x01, sp)
+      00A436 89               [ 2] 3565 	pushw	x
+                                   3566 ; genSend
+      00A437 AE 02 43         [ 2] 3567 	ldw	x, #(_m_cfg+0)
+                                   3568 ; genCall
+      00A43A CD A1 09         [ 4] 3569 	call	_crc_verify
+                                   3570 ; genIfx
+      00A43D 4D               [ 1] 3571 	tnz	a
+                                   3572 ; peephole j5 changed absolute to relative unconditional jump.
+      00A43E 27 65            [ 1] 3573 	jreq	00113$
+                                   3574 ; peephole j10 removed jra by using inverse jump logic
+                                   3575 ; peephole j30 removed unused label 00308$.
+                                   3576 ;	User/eric_proc.c: 616: c_ackcfg.addrID = r485id;
+                                   3577 ; genPointerSet
+      00A440 55 05 2D 02 9B   [ 1] 3578 	mov	_c_ackcfg+0, _r485id+0
+                                   3579 ;	User/eric_proc.c: 617: c_ackcfg.funID = 0x10;
+                                   3580 ; skipping iCode since result will be rematerialized
+                                   3581 ; genPointerSet
+      00A445 35 10 02 9C      [ 1] 3582 	mov	_c_ackcfg+1, #0x10
+                                   3583 ;	User/eric_proc.c: 618: c_ackcfg.staddr = m_cfg.staddr; //获取用于应答的数据包地址
+                                   3584 ; skipping iCode since result will be rematerialized
+                                   3585 ; skipping iCode since result will be rematerialized
+                                   3586 ; genPointerGet
+      00A449 CE 02 45         [ 2] 3587 	ldw	x, _m_cfg+2
+                                   3588 ; genPointerSet
+      00A44C CF 02 9D         [ 2] 3589 	ldw	_c_ackcfg+2, x
+                                   3590 ;	User/eric_proc.c: 619: c_ackcfg.offset = m_cfg.offset; //获取用于应答的数据偏移量						
+                                   3591 ; skipping iCode since result will be rematerialized
+                                   3592 ; skipping iCode since result will be rematerialized
+                                   3593 ; genPointerGet
+      00A44F CE 02 47         [ 2] 3594 	ldw	x, _m_cfg+4
+                                   3595 ; genPointerSet
+      00A452 CF 02 9F         [ 2] 3596 	ldw	_c_ackcfg+4, x
+                                   3597 ;	User/eric_proc.c: 621: sta1 = Rev16(m_cfg.staddr); //大小端转换
+                                   3598 ; genPointerGet
+      00A455 CE 02 45         [ 2] 3599 	ldw	x, _m_cfg+2
+                                   3600 ; genSend
+                                   3601 ; genCall
+      00A458 CD A0 FC         [ 4] 3602 	call	_Rev16
+                                   3603 ;	User/eric_proc.c: 622: m_cfg.staddr = sta1;
+                                   3604 ; genPointerSet
+      00A45B CF 02 45         [ 2] 3605 	ldw	_m_cfg+2, x
+                                   3606 ;	User/eric_proc.c: 623: off1 = Rev16(m_cfg.offset);
+                                   3607 ; genPointerGet
+      00A45E CE 02 47         [ 2] 3608 	ldw	x, _m_cfg+4
+                                   3609 ; genSend
+                                   3610 ; genCall
+      00A461 CD A0 FC         [ 4] 3611 	call	_Rev16
+                                   3612 ;	User/eric_proc.c: 624: m_cfg.offset = off1;
+                                   3613 ; genPointerSet
+      00A464 CF 02 47         [ 2] 3614 	ldw	_m_cfg+4, x
+                                   3615 ;	User/eric_proc.c: 626: if (Rs485_GetCfg(m_cfg.staddr, m_cfg.offset, m_cfg.buf) > 0)//配置时间
+                                   3616 ; skipping iCode since result will be rematerialized
+                                   3617 ; genPointerGet
+      00A467 90 CE 02 45      [ 2] 3618 	ldw	y, _m_cfg+2
+                                   3619 ; genIPush
+      00A46B 4B 4A            [ 1] 3620 	push	#<(_m_cfg+7)
+      00A46D 4B 02            [ 1] 3621 	push	#((_m_cfg+7) >> 8)
+                                   3622 ; genIPush
+      00A46F 89               [ 2] 3623 	pushw	x
+                                   3624 ; genSend
+      00A470 93               [ 1] 3625 	ldw	x, y
+                                   3626 ; genCall
+      00A471 CD A2 C0         [ 4] 3627 	call	_Rs485_GetCfg
+                                   3628 ; genIfx
+      00A474 4D               [ 1] 3629 	tnz	a
+                                   3630 ; peephole j5 changed absolute to relative unconditional jump.
+      00A475 27 2E            [ 1] 3631 	jreq	00113$
+                                   3632 ; peephole j10 removed jra by using inverse jump logic
+                                   3633 ; peephole j30 removed unused label 00309$.
+                                   3634 ;	User/eric_proc.c: 628: rtc_set_datetime();
+                                   3635 ; genCall
+      00A477 CD 97 B4         [ 4] 3636 	call	_rtc_set_datetime
+                                   3637 ;	User/eric_proc.c: 629: c_ackcfg.crc = CRC_GetModbus16((uint8_t *)&c_ackcfg, 6);
+                                   3638 ; skipping iCode since result will be rematerialized
+                                   3639 ; skipping iCode since result will be rematerialized
+                                   3640 ; genIPush
+      00A47A 4B 06            [ 1] 3641 	push	#0x06
+      00A47C 4B 00            [ 1] 3642 	push	#0x00
+                                   3643 ; genSend
+      00A47E AE 02 9B         [ 2] 3644 	ldw	x, #(_c_ackcfg+0)
+                                   3645 ; genCall
+      00A481 CD 9C 9A         [ 4] 3646 	call	_CRC_GetModbus16
+                                   3647 ; genPointerSet
+                                   3648 ;	User/eric_proc.c: 630: c_ackcfg.crc = Rev16(c_ackcfg.crc);//stm8是大端模式
+                                   3649 ; skipping iCode since result will be rematerialized
+                                   3650 ; genPointerGet
+      00A484 CF 02 A1         [ 2] 3651 	ldw	_c_ackcfg+6, x
+                                   3652 ; peephole 4w removed redundant load from _c_ackcfg+6 into x.
+                                   3653 ; genSend
+                                   3654 ; genCall
+      00A487 CD A0 FC         [ 4] 3655 	call	_Rev16
+                                   3656 ; genPointerSet
+      00A48A CF 02 A1         [ 2] 3657 	ldw	_c_ackcfg+6, x
+                                   3658 ;	User/eric_proc.c: 631: memcpy(pkt1, (uint8_t *)&c_ackcfg, 8);
+                                   3659 ; skipping iCode since result will be rematerialized
+                                   3660 ; skipping iCode since result will be rematerialized
+                                   3661 ; genIPush
+      00A48D 4B 08            [ 1] 3662 	push	#0x08
+      00A48F 4B 00            [ 1] 3663 	push	#0x00
+                                   3664 ; genIPush
+      00A491 4B 9B            [ 1] 3665 	push	#<(_c_ackcfg+0)
+      00A493 4B 02            [ 1] 3666 	push	#((_c_ackcfg+0) >> 8)
+                                   3667 ; genSend
+      00A495 AE 03 AB         [ 2] 3668 	ldw	x, #(_pkt1+0)
+                                   3669 ; genCall
+      00A498 CD ED AB         [ 4] 3670 	call	___memcpy
+                                   3671 ;	User/eric_proc.c: 632: Uart1_Send(pkt1, 10);
+                                   3672 ; skipping iCode since result will be rematerialized
+                                   3673 ; genIPush
+      00A49B 4B 0A            [ 1] 3674 	push	#0x0a
+      00A49D 4B 00            [ 1] 3675 	push	#0x00
+                                   3676 ; genSend
+      00A49F AE 03 AB         [ 2] 3677 	ldw	x, #(_pkt1+0)
+                                   3678 ; genCall
+      00A4A2 CD 92 A7         [ 4] 3679 	call	_Uart1_Send
+                                   3680 ; genLabel
+      00A4A5                       3681 00113$:
+                                   3682 ;	User/eric_proc.c: 635: stateU = 0;
+                                   3683 ; genAssign
+      00A4A5 72 5F 04 39      [ 1] 3684 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3685 ;	User/eric_proc.c: 637: break;
+                                   3686 ; genGoto
+      00A4A9 CC A3 88         [ 2] 3687 	jp	00136$
+                                   3688 ;	User/eric_proc.c: 640: case 1://下取数据,0x03
+                                   3689 ; genLabel
+      00A4AC                       3690 00117$:
+                                   3691 ;	User/eric_proc.c: 641: if (recbyte >= 128) { // 严格防止缓冲区溢出
+                                   3692 ; genIfx
+      00A4AC 9F               [ 1] 3693 	ld	a, xl
+      00A4AD 4D               [ 1] 3694 	tnz	a
+                                   3695 ; peephole j5 changed absolute to relative unconditional jump.
+      00A4AE 26 07            [ 1] 3696 	jrne	00119$
+                                   3697 ; peephole j7 removed jra by using inverse jump logic
+                                   3698 ; peephole j30 removed unused label 00310$.
+                                   3699 ;	User/eric_proc.c: 642: stateU = 0;
+                                   3700 ; genAssign
+      00A4B0 72 5F 04 39      [ 1] 3701 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3702 ;	User/eric_proc.c: 643: break;
+                                   3703 ; genGoto
+      00A4B4 CC A3 88         [ 2] 3704 	jp	00136$
+                                   3705 ; genLabel
+      00A4B7                       3706 00119$:
+                                   3707 ;	User/eric_proc.c: 645: rsUbuf[recbyte++] = temp1;
+                                   3708 ; genAssign
+      00A4B7 1E 03            [ 2] 3709 	ldw	x, (0x03, sp)
+                                   3710 ; genAssign
+      00A4B9 16 07            [ 2] 3711 	ldw	y, (0x07, sp)
+      00A4BB 17 03            [ 2] 3712 	ldw	(0x03, sp), y
+                                   3713 ; genPlus
+                                   3714 ; genPointerSet
+                                   3715 ; peephole 9 moved addition of offset into storage instruction
+      00A4BD C6 04 37         [ 1] 3716 	ld	a, _Rs485_Proc_temp1_10000_793+0
+      00A4C0 D7 03 2B         [ 1] 3717 	ld	((_rsUbuf+0), x), a
+                                   3718 ;	User/eric_proc.c: 646: if (recbyte >= RS485_AQ_PktLen)//一个包长 8bytes
+                                   3719 ; genCast
+                                   3720 ; genAssign
+      00A4C3 1E 03            [ 2] 3721 	ldw	x, (0x03, sp)
+                                   3722 ; genCmp
+                                   3723 ; genCmpTnz
+      00A4C5 A3 00 08         [ 2] 3724 	cpw	x, #0x0008
+      00A4C8 24 03            [ 1] 3725 	jrnc	00311$
+      00A4CA CC A3 88         [ 2] 3726 	jp	00136$
+      00A4CD                       3727 00311$:
+                                   3728 ; skipping generated iCode
+                                   3729 ;	User/eric_proc.c: 648: memset((uint8_t *)&m_query, 0, RS485_AQ_PktLen);
+                                   3730 ; skipping iCode since result will be rematerialized
+                                   3731 ; genIPush
+      00A4CD 4B 08            [ 1] 3732 	push	#0x08
+      00A4CF 4B 00            [ 1] 3733 	push	#0x00
+                                   3734 ; genIPush
+      00A4D1 5F               [ 1] 3735 	clrw	x
+      00A4D2 89               [ 2] 3736 	pushw	x
+                                   3737 ; genSend
+      00A4D3 AE 02 A3         [ 2] 3738 	ldw	x, #(_m_query+0)
+                                   3739 ; genCall
+      00A4D6 CD ED FE         [ 4] 3740 	call	_memset
+                                   3741 ;	User/eric_proc.c: 649: memcpy((uint8_t *)&m_query, rsUbuf, RS485_AQ_PktLen);
+                                   3742 ; skipping iCode since result will be rematerialized
+                                   3743 ; genIPush
+      00A4D9 4B 08            [ 1] 3744 	push	#0x08
+      00A4DB 4B 00            [ 1] 3745 	push	#0x00
+                                   3746 ; genIPush
+      00A4DD 4B 2B            [ 1] 3747 	push	#<(_rsUbuf+0)
+      00A4DF 4B 03            [ 1] 3748 	push	#((_rsUbuf+0) >> 8)
+                                   3749 ; genSend
+      00A4E1 AE 02 A3         [ 2] 3750 	ldw	x, #(_m_query+0)
+                                   3751 ; genCall
+      00A4E4 CD ED AB         [ 4] 3752 	call	___memcpy
+                                   3753 ;	User/eric_proc.c: 651: if (crc_verify((uint8_t *)&m_query, RS485_AQ_PktLen)) //主机数据校验ok
+                                   3754 ; skipping iCode since result will be rematerialized
+                                   3755 ; genIPush
+      00A4E7 4B 08            [ 1] 3756 	push	#0x08
+      00A4E9 4B 00            [ 1] 3757 	push	#0x00
+                                   3758 ; genSend
+      00A4EB AE 02 A3         [ 2] 3759 	ldw	x, #(_m_query+0)
+                                   3760 ; genCall
+      00A4EE CD A1 09         [ 4] 3761 	call	_crc_verify
+                                   3762 ; genIfx
+      00A4F1 4D               [ 1] 3763 	tnz	a
+                                   3764 ; peephole j5 changed absolute to relative unconditional jump.
+      00A4F2 27 33            [ 1] 3765 	jreq	00123$
+                                   3766 ; peephole j10 removed jra by using inverse jump logic
+                                   3767 ; peephole j30 removed unused label 00312$.
+                                   3768 ;	User/eric_proc.c: 653: Get_Record(timeout);
+                                   3769 ; genSend
+      00A4F4 C6 04 3A         [ 1] 3770 	ld	a, _Rs485_Proc_timeout_10000_793+0
+                                   3771 ; genCall
+      00A4F7 CD A2 28         [ 4] 3772 	call	_Get_Record
+                                   3773 ;	User/eric_proc.c: 654: timeout = 10;
+                                   3774 ; genAssign
+      00A4FA 35 0A 04 3A      [ 1] 3775 	mov	_Rs485_Proc_timeout_10000_793+0, #0x0a
+                                   3776 ;	User/eric_proc.c: 655: len1 = Pkt_485ackquery(r485id, 0x03, m_query.staddr, m_query.offset, &r485rlt, pkt1);
+                                   3777 ; skipping iCode since result will be rematerialized
+                                   3778 ; skipping iCode since result will be rematerialized
+                                   3779 ; genPointerGet
+      00A4FE 90 CE 02 A7      [ 2] 3780 	ldw	y, _m_query+4
+                                   3781 ; genPointerGet
+      00A502 CE 02 A5         [ 2] 3782 	ldw	x, _m_query+2
+                                   3783 ; genIPush
+      00A505 4B AB            [ 1] 3784 	push	#<(_pkt1+0)
+      00A507 4B 03            [ 1] 3785 	push	#((_pkt1+0) >> 8)
+                                   3786 ; genIPush
+      00A509 4B 2E            [ 1] 3787 	push	#<(_r485rlt+0)
+      00A50B 4B 05            [ 1] 3788 	push	#((_r485rlt+0) >> 8)
+                                   3789 ; genIPush
+      00A50D 90 89            [ 2] 3790 	pushw	y
+                                   3791 ; genIPush
+      00A50F 89               [ 2] 3792 	pushw	x
+                                   3793 ; genIPush
+      00A510 4B 03            [ 1] 3794 	push	#0x03
+                                   3795 ; genSend
+      00A512 C6 05 2D         [ 1] 3796 	ld	a, _r485id+0
+                                   3797 ; genCall
+      00A515 CD A1 41         [ 4] 3798 	call	_Pkt_485ackquery
+                                   3799 ;	User/eric_proc.c: 656: if (len1 > 5)
+                                   3800 ; genCast
+                                   3801 ; genAssign
+      00A518 90 93            [ 1] 3802 	ldw	y, x
+                                   3803 ; genCmp
+                                   3804 ; genCmpTnz
+      00A51A 90 A3 00 05      [ 2] 3805 	cpw	y, #0x0005
+                                   3806 ; peephole j5 changed absolute to relative unconditional jump.
+      00A51E 23 07            [ 2] 3807 	jrule	00123$
+                                   3808 ; peephole j16 removed jra by using inverse jump logic
+                                   3809 ; peephole j30 removed unused label 00313$.
+                                   3810 ; skipping generated iCode
+                                   3811 ;	User/eric_proc.c: 658: Uart1_Send(pkt1, len1);
+                                   3812 ; genIPush
+      00A520 89               [ 2] 3813 	pushw	x
+                                   3814 ; genSend
+      00A521 AE 03 AB         [ 2] 3815 	ldw	x, #(_pkt1+0)
+                                   3816 ; genCall
+      00A524 CD 92 A7         [ 4] 3817 	call	_Uart1_Send
+                                   3818 ; genLabel
+      00A527                       3819 00123$:
+                                   3820 ;	User/eric_proc.c: 661: stateU = 0;
+                                   3821 ; genAssign
+      00A527 72 5F 04 39      [ 1] 3822 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3823 ;	User/eric_proc.c: 663: break;
+                                   3824 ; genGoto
+      00A52B CC A3 88         [ 2] 3825 	jp	00136$
+                                   3826 ;	User/eric_proc.c: 665: case 0:
+                                   3827 ; genLabel
+      00A52E                       3828 00126$:
+                                   3829 ;	User/eric_proc.c: 666: if ((r485id == temp2) && (0x03 == temp1)) //下取数据
+                                   3830 ; genCmpEQorNE
+      00A52E C6 04 38         [ 1] 3831 	ld	a, _Rs485_Proc_temp2_10000_793+0
+      00A531 C0 05 2D         [ 1] 3832 	sub	a, _r485id+0
+      00A534 26 04            [ 1] 3833 	jrne	00315$
+      00A536 4C               [ 1] 3834 	inc	a
+                                   3835 ; peephole 51 used inc to get #1 into a.
+      00A537 6B 08            [ 1] 3836 	ld	(0x08, sp), a
+                                   3837 ; peephole j5 changed absolute to relative unconditional jump.
+      00A539 C5                    3838 	.byte 0xc5
+                                   3839 ; peephole jrf7 used bcp opcode to jump over 2-byte instruction.
+      00A53A                       3840 00315$:
+      00A53A 0F 08            [ 1] 3841 	clr	(0x08, sp)
+      00A53C                       3842 00316$:
+                                   3843 ;	User/eric_proc.c: 672: rsUbuf[recbyte++] = temp1;
+                                   3844 ; skipping iCode since result will be rematerialized
+                                   3845 ;	User/eric_proc.c: 666: if ((r485id == temp2) && (0x03 == temp1)) //下取数据
+                                   3846 ; genIfx
+      00A53C 0D 08            [ 1] 3847 	tnz	(0x08, sp)
+                                   3848 ; peephole j5 changed absolute to relative unconditional jump.
+      00A53E 27 2C            [ 1] 3849 	jreq	00131$
+                                   3850 ; peephole j10 removed jra by using inverse jump logic
+                                   3851 ; peephole j30 removed unused label 00317$.
+                                   3852 ; genCmpEQorNE
+      00A540 C6 04 37         [ 1] 3853 	ld	a, _Rs485_Proc_temp1_10000_793+0
+      00A543 A1 03            [ 1] 3854 	cp	a, #0x03
+                                   3855 ; peephole j5 changed absolute to relative unconditional jump.
+                                   3856 ; peephole j10 removed jra by using inverse jump logic
+                                   3857 ; peephole j30 removed unused label 00319$.
+                                   3858 ; peephole j5 changed absolute to relative unconditional jump.
+      00A545 26 25            [ 1] 3859 	jrne	00131$
+                                   3860 ; peephole j7 removed jra by using inverse jump logic
+                                   3861 ; peephole j30 removed unused label 00320$.
+                                   3862 ; skipping generated iCode
+                                   3863 ;	User/eric_proc.c: 668: memset(rsUbuf, 0, 128);
+                                   3864 ; genIPush
+      00A547 4B 80            [ 1] 3865 	push	#0x80
+      00A549 4B 00            [ 1] 3866 	push	#0x00
+                                   3867 ; genIPush
+      00A54B 5F               [ 1] 3868 	clrw	x
+      00A54C 89               [ 2] 3869 	pushw	x
+                                   3870 ; genSend
+      00A54D AE 03 2B         [ 2] 3871 	ldw	x, #(_rsUbuf+0)
+                                   3872 ; genCall
+      00A550 CD ED FE         [ 4] 3873 	call	_memset
+                                   3874 ;	User/eric_proc.c: 670: pktlen = 0;
+                                   3875 ; genAssign
+      00A553 5F               [ 1] 3876 	clrw	x
+      00A554 1F 01            [ 2] 3877 	ldw	(0x01, sp), x
+                                   3878 ;	User/eric_proc.c: 671: rsUbuf[recbyte++] = temp2;
+                                   3879 ; genPointerSet
+      00A556 55 04 38 03 2B   [ 1] 3880 	mov	_rsUbuf+0, _Rs485_Proc_temp2_10000_793+0
+                                   3881 ;	User/eric_proc.c: 672: rsUbuf[recbyte++] = temp1;
+                                   3882 ; genAssign
+      00A55B AE 00 02         [ 2] 3883 	ldw	x, #0x0002
+      00A55E 1F 03            [ 2] 3884 	ldw	(0x03, sp), x
+                                   3885 ; genPointerSet
+      00A560 55 04 37 03 2C   [ 1] 3886 	mov	_rsUbuf+1, _Rs485_Proc_temp1_10000_793+0
+                                   3887 ;	User/eric_proc.c: 673: stateU = 1;
+                                   3888 ; genAssign
+      00A565 35 01 04 39      [ 1] 3889 	mov	_Rs485_Proc_stateU_10000_793+0, #0x01
+                                   3890 ; genGoto
+      00A569 CC A3 88         [ 2] 3891 	jp	00136$
+                                   3892 ; genLabel
+      00A56C                       3893 00131$:
+                                   3894 ;	User/eric_proc.c: 675: else if ((r485id == temp2) && (0x10 == temp1)) //下发数据
+                                   3895 ; genIfx
+      00A56C 0D 08            [ 1] 3896 	tnz	(0x08, sp)
+      00A56E 26 03            [ 1] 3897 	jrne	00321$
+      00A570 CC A3 88         [ 2] 3898 	jp	00136$
+      00A573                       3899 00321$:
+                                   3900 ; genCmpEQorNE
+      00A573 C6 04 37         [ 1] 3901 	ld	a, _Rs485_Proc_temp1_10000_793+0
+      00A576 A1 10            [ 1] 3902 	cp	a, #0x10
+                                   3903 ; peephole j5 changed absolute to relative unconditional jump.
+      00A578 27 03            [ 1] 3904 	jreq	00324$
+                                   3905 ; peephole j10 removed jra by using inverse jump logic
+                                   3906 ; peephole j30 removed unused label 00323$.
+      00A57A CC A3 88         [ 2] 3907 	jp	00136$
+      00A57D                       3908 00324$:
+                                   3909 ; skipping generated iCode
+                                   3910 ;	User/eric_proc.c: 677: memset(rsUbuf, 0, 128);
+                                   3911 ; genIPush
+      00A57D 4B 80            [ 1] 3912 	push	#0x80
+      00A57F 4B 00            [ 1] 3913 	push	#0x00
+                                   3914 ; genIPush
+      00A581 5F               [ 1] 3915 	clrw	x
+      00A582 89               [ 2] 3916 	pushw	x
+                                   3917 ; genSend
+      00A583 AE 03 2B         [ 2] 3918 	ldw	x, #(_rsUbuf+0)
+                                   3919 ; genCall
+      00A586 CD ED FE         [ 4] 3920 	call	_memset
+                                   3921 ;	User/eric_proc.c: 679: pktlen = 0;
+                                   3922 ; genAssign
+      00A589 5F               [ 1] 3923 	clrw	x
+      00A58A 1F 01            [ 2] 3924 	ldw	(0x01, sp), x
+                                   3925 ;	User/eric_proc.c: 680: rsUbuf[recbyte++] = temp2;
+                                   3926 ; genPointerSet
+      00A58C 55 04 38 03 2B   [ 1] 3927 	mov	_rsUbuf+0, _Rs485_Proc_temp2_10000_793+0
+                                   3928 ;	User/eric_proc.c: 681: rsUbuf[recbyte++] = temp1;
+                                   3929 ; genAssign
+      00A591 AE 00 02         [ 2] 3930 	ldw	x, #0x0002
+      00A594 1F 03            [ 2] 3931 	ldw	(0x03, sp), x
+                                   3932 ; genPointerSet
+      00A596 55 04 37 03 2C   [ 1] 3933 	mov	_rsUbuf+1, _Rs485_Proc_temp1_10000_793+0
+                                   3934 ;	User/eric_proc.c: 682: stateU = 2;
+                                   3935 ; genAssign
+      00A59B 35 02 04 39      [ 1] 3936 	mov	_Rs485_Proc_stateU_10000_793+0, #0x02
+                                   3937 ;	User/eric_proc.c: 684: break;
+                                   3938 ; genGoto
+      00A59F CC A3 88         [ 2] 3939 	jp	00136$
+                                   3940 ;	User/eric_proc.c: 686: default:
+                                   3941 ; genLabel
+      00A5A2                       3942 00134$:
+                                   3943 ;	User/eric_proc.c: 687: stateU = 0;
+                                   3944 ; genAssign
+      00A5A2 72 5F 04 39      [ 1] 3945 	clr	_Rs485_Proc_stateU_10000_793+0
+                                   3946 ;	User/eric_proc.c: 689: }
+                                   3947 ; genGoto
+      00A5A6 CC A3 88         [ 2] 3948 	jp	00136$
+                                   3949 ; genLabel
+      00A5A9                       3950 00139$:
+                                   3951 ;	User/eric_proc.c: 691: }//用于检测485接口是否接收到有效数据，100ms
+                                   3952 ; genEndFunction
+      00A5A9 5B 08            [ 2] 3953 	addw	sp, #8
+      00A5AB 81               [ 4] 3954 	ret
+                                   3955 ;	Total Rs485_Proc function size at codegen: 3 bytes.
+                                   3956 ;	User/eric_proc.c: 693: void Chk_State(void)
+                                   3957 ; genLabel
+                                   3958 ;	-----------------------------------------
+                                   3959 ;	 function Chk_State
+                                   3960 ;	-----------------------------------------
+                                   3961 ;	Register assignment is optimal.
+                                   3962 ;	Stack space usage: 0 bytes.
+      00A5AC                       3963 _Chk_State:
+                                   3964 ;	User/eric_proc.c: 697: last = sysmode;
+                                   3965 ; genAssign
+      00A5AC 55 05 3C 04 3B   [ 1] 3966 	mov	_Chk_State_last_10000_810+0, _sysmode+0
+                                   3967 ;	User/eric_proc.c: 698: sysmode = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
+                                   3968 ; genSend
+      00A5B1 A6 10            [ 1] 3969 	ld	a, #0x10
+                                   3970 ; genSend
+      00A5B3 AE 50 0A         [ 2] 3971 	ldw	x, #0x500a
+                                   3972 ; genCall
+      00A5B6 CD CE B9         [ 4] 3973 	call	_GPIO_ReadInputDataBit
+                                   3974 ; genCast
+                                   3975 ; genAssign
+      00A5B9 C7 05 3C         [ 1] 3976 	ld	_sysmode+0, a
+                                   3977 ;	User/eric_proc.c: 699: if (last != sysmode)
+                                   3978 ; genCmpEQorNE
+      00A5BC C6 05 3C         [ 1] 3979 	ld	a, _sysmode+0
+      00A5BF C1 04 3B         [ 1] 3980 	cp	a, _Chk_State_last_10000_810+0
+      00A5C2 26 01            [ 1] 3981 	jrne	00123$
+      00A5C4 81               [ 4] 3982 	ret
+                                   3983 ; peephole j2e replaced jump by return.
+      00A5C5                       3984 00123$:
+                                   3985 ; skipping generated iCode
+                                   3986 ;	User/eric_proc.c: 701: if (sysmode) //电池
+                                   3987 ; genIfx
+      00A5C5 C6 05 3C         [ 1] 3988 	ld	a, _sysmode+0
+                                   3989 ; peephole 625a changed tnz by ld
+                                   3990 ; peephole j5 changed absolute to relative unconditional jump.
+      00A5C8 27 12            [ 1] 3991 	jreq	00102$
+                                   3992 ; peephole j10 removed jra by using inverse jump logic
+                                   3993 ; peephole j30 removed unused label 00125$.
+                                   3994 ;	User/eric_proc.c: 703: USART_DeInit(USART1);       //复位UART1
+                                   3995 ; genSend
+      00A5CA AE 52 30         [ 2] 3996 	ldw	x, #0x5230
+                                   3997 ; genCall
+      00A5CD CD E9 3F         [ 4] 3998 	call	_USART_DeInit
+                                   3999 ;	User/eric_proc.c: 704: GPIO_Init(GPIOC, 0xEC, GPIO_Mode_Out_PP_Low_Slow);//除PC0，PC1(I2C1)，PC4
+                                   4000 ; genIPush
+      00A5D0 4B C0            [ 1] 4001 	push	#0xc0
+                                   4002 ; genSend
+      00A5D2 A6 EC            [ 1] 4003 	ld	a, #0xec
+                                   4004 ; genSend
+      00A5D4 AE 50 0A         [ 2] 4005 	ldw	x, #0x500a
+                                   4006 ; genCall
+      00A5D7 CD CD E4         [ 4] 4007 	call	_GPIO_Init
+                                   4008 ; genGoto
+      00A5DA 20 03            [ 2] 4009 	jra	00103$
+                                   4010 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4011 ; genLabel
+      00A5DC                       4012 00102$:
+                                   4013 ;	User/eric_proc.c: 708: Uart1_Init();
+                                   4014 ; genCall
+      00A5DC CD 92 54         [ 4] 4015 	call	_Uart1_Init
+                                   4016 ; genLabel
+      00A5DF                       4017 00103$:
+                                   4018 ;	User/eric_proc.c: 710: delay_halt = HALT_TIMEOUT;
+                                   4019 ; genAssign
+      00A5DF 35 FF 05 63      [ 1] 4020 	mov	_delay_halt+0, #0xff
+                                   4021 ; genLabel
+                                   4022 ; peephole j30 removed unused label 00106$.
+                                   4023 ;	User/eric_proc.c: 712: }
+                                   4024 ; genEndFunction
+      00A5E3 81               [ 4] 4025 	ret
+                                   4026 ;	Total Chk_State function size at codegen: 1 bytes.
+                                   4027 ;	User/eric_proc.c: 721: void Storage_SaveSettings(uint8_t lang, uint8_t id_b3, uint8_t id_b2, uint8_t id_b1, uint8_t id_b0)
+                                   4028 ; genLabel
+                                   4029 ;	-----------------------------------------
+                                   4030 ;	 function Storage_SaveSettings
+                                   4031 ;	-----------------------------------------
+                                   4032 ;	Register assignment is optimal.
+                                   4033 ;	Stack space usage: 1 bytes.
+      00A5E4                       4034 _Storage_SaveSettings:
+      00A5E4 88               [ 1] 4035 	push	a
+                                   4036 ; genReceive
+      00A5E5 6B 01            [ 1] 4037 	ld	(0x01, sp), a
+                                   4038 ;	User/eric_proc.c: 723: I2C_WriteByte(0xa0,252,id_b3);
+                                   4039 ; genIPush
+      00A5E7 7B 04            [ 1] 4040 	ld	a, (0x04, sp)
+      00A5E9 88               [ 1] 4041 	push	a
+                                   4042 ; genIPush
+      00A5EA 4B FC            [ 1] 4043 	push	#0xfc
+                                   4044 ; genSend
+      00A5EC A6 A0            [ 1] 4045 	ld	a, #0xa0
+                                   4046 ; genCall
+      00A5EE CD 93 2F         [ 4] 4047 	call	_I2C_WriteByte
+                                   4048 ;	User/eric_proc.c: 724: Delay(IIC_TIMEOUT);
+                                   4049 ; genSend
+      00A5F1 AE 07 D0         [ 2] 4050 	ldw	x, #0x07d0
+                                   4051 ; genCall
+      00A5F4 CD 91 EB         [ 4] 4052 	call	_Delay
+                                   4053 ;	User/eric_proc.c: 725: I2C_WriteByte(0xa0,253,id_b2);
+                                   4054 ; genIPush
+      00A5F7 7B 05            [ 1] 4055 	ld	a, (0x05, sp)
+      00A5F9 88               [ 1] 4056 	push	a
+                                   4057 ; genIPush
+      00A5FA 4B FD            [ 1] 4058 	push	#0xfd
+                                   4059 ; genSend
+      00A5FC A6 A0            [ 1] 4060 	ld	a, #0xa0
+                                   4061 ; genCall
+      00A5FE CD 93 2F         [ 4] 4062 	call	_I2C_WriteByte
+                                   4063 ;	User/eric_proc.c: 726: Delay(IIC_TIMEOUT);
+                                   4064 ; genSend
+      00A601 AE 07 D0         [ 2] 4065 	ldw	x, #0x07d0
+                                   4066 ; genCall
+      00A604 CD 91 EB         [ 4] 4067 	call	_Delay
+                                   4068 ;	User/eric_proc.c: 727: I2C_WriteByte(0xa0,254,id_b1);
+                                   4069 ; genIPush
+      00A607 7B 06            [ 1] 4070 	ld	a, (0x06, sp)
+      00A609 88               [ 1] 4071 	push	a
+                                   4072 ; genIPush
+      00A60A 4B FE            [ 1] 4073 	push	#0xfe
+                                   4074 ; genSend
+      00A60C A6 A0            [ 1] 4075 	ld	a, #0xa0
+                                   4076 ; genCall
+      00A60E CD 93 2F         [ 4] 4077 	call	_I2C_WriteByte
+                                   4078 ;	User/eric_proc.c: 728: Delay(IIC_TIMEOUT);
+                                   4079 ; genSend
+      00A611 AE 07 D0         [ 2] 4080 	ldw	x, #0x07d0
+                                   4081 ; genCall
+      00A614 CD 91 EB         [ 4] 4082 	call	_Delay
+                                   4083 ;	User/eric_proc.c: 729: I2C_WriteByte(0xa0,255,id_b0);
+                                   4084 ; genIPush
+      00A617 7B 07            [ 1] 4085 	ld	a, (0x07, sp)
+      00A619 88               [ 1] 4086 	push	a
+                                   4087 ; genIPush
+      00A61A 4B FF            [ 1] 4088 	push	#0xff
+                                   4089 ; genSend
+      00A61C A6 A0            [ 1] 4090 	ld	a, #0xa0
+                                   4091 ; genCall
+      00A61E CD 93 2F         [ 4] 4092 	call	_I2C_WriteByte
+                                   4093 ;	User/eric_proc.c: 730: Delay(IIC_TIMEOUT);
+                                   4094 ; genSend
+      00A621 AE 07 D0         [ 2] 4095 	ldw	x, #0x07d0
+                                   4096 ; genCall
+      00A624 CD 91 EB         [ 4] 4097 	call	_Delay
+                                   4098 ;	User/eric_proc.c: 732: I2C_WriteByte(0xa0,80,lang);
+                                   4099 ; genIPush
+      00A627 7B 01            [ 1] 4100 	ld	a, (0x01, sp)
+      00A629 88               [ 1] 4101 	push	a
+                                   4102 ; genIPush
+      00A62A 4B 50            [ 1] 4103 	push	#0x50
+                                   4104 ; genSend
+      00A62C A6 A0            [ 1] 4105 	ld	a, #0xa0
+                                   4106 ; genCall
+      00A62E CD 93 2F         [ 4] 4107 	call	_I2C_WriteByte
+                                   4108 ;	User/eric_proc.c: 733: Delay(IIC_TIMEOUT);
+                                   4109 ; genSend
+      00A631 AE 07 D0         [ 2] 4110 	ldw	x, #0x07d0
+                                   4111 ; genCall
+      00A634 CD 91 EB         [ 4] 4112 	call	_Delay
+                                   4113 ; genLabel
+                                   4114 ; peephole j30 removed unused label 00101$.
+                                   4115 ;	User/eric_proc.c: 734: }
+                                   4116 ; genEndFunction
+      00A637 1E 02            [ 2] 4117 	ldw	x, (2, sp)
+      00A639 5B 07            [ 2] 4118 	addw	sp, #7
+      00A63B FC               [ 2] 4119 	jp	(x)
+                                   4120 ;	Total Storage_SaveSettings function size at codegen: 5 bytes.
+                                   4121 ;	User/eric_proc.c: 737: void Storage_ClearHistory(void)
+                                   4122 ; genLabel
+                                   4123 ;	-----------------------------------------
+                                   4124 ;	 function Storage_ClearHistory
+                                   4125 ;	-----------------------------------------
+                                   4126 ;	Register assignment might be sub-optimal.
+                                   4127 ;	Stack space usage: 0 bytes.
+      00A63C                       4128 _Storage_ClearHistory:
+                                   4129 ;	User/eric_proc.c: 739: I2C_WriteByte(0xa0,250,data_index.w);
+                                   4130 ; skipping iCode since result will be rematerialized
+                                   4131 ; skipping iCode since result will be rematerialized
+                                   4132 ; genPointerGet
+      00A63C C6 04 9E         [ 1] 4133 	ld	a, _data_index+1
+                                   4134 ; genIPush
+      00A63F 88               [ 1] 4135 	push	a
+                                   4136 ; genIPush
+      00A640 4B FA            [ 1] 4137 	push	#0xfa
+                                   4138 ; genSend
+      00A642 A6 A0            [ 1] 4139 	ld	a, #0xa0
+                                   4140 ; genCall
+      00A644 CD 93 2F         [ 4] 4141 	call	_I2C_WriteByte
+                                   4142 ;	User/eric_proc.c: 740: Delay(IIC_TIMEOUT);
+                                   4143 ; genSend
+      00A647 AE 07 D0         [ 2] 4144 	ldw	x, #0x07d0
+                                   4145 ; genCall
+      00A64A CD 91 EB         [ 4] 4146 	call	_Delay
+                                   4147 ;	User/eric_proc.c: 741: I2C_WriteByte(0xa0,251,data_index.used);
+                                   4148 ; skipping iCode since result will be rematerialized
+                                   4149 ; genPointerGet
+      00A64D C6 04 9F         [ 1] 4150 	ld	a, _data_index+2
+                                   4151 ; genIPush
+      00A650 88               [ 1] 4152 	push	a
+                                   4153 ; genIPush
+      00A651 4B FB            [ 1] 4154 	push	#0xfb
+                                   4155 ; genSend
+      00A653 A6 A0            [ 1] 4156 	ld	a, #0xa0
+                                   4157 ; genCall
+      00A655 CD 93 2F         [ 4] 4158 	call	_I2C_WriteByte
+                                   4159 ;	User/eric_proc.c: 742: Delay(IIC_TIMEOUT);
+                                   4160 ; genSend
+      00A658 AE 07 D0         [ 2] 4161 	ldw	x, #0x07d0
+                                   4162 ; genCall
+                                   4163 ; genLabel
+                                   4164 ; peephole j30 removed unused label 00101$.
+                                   4165 ;	User/eric_proc.c: 743: }
+                                   4166 ; genEndFunction
+      00A65B CC 91 EB         [ 2] 4167 	jp	_Delay
+                                   4168 ; peephole 52 removed unreachable ret.
+                                   4169 ;	Total Storage_ClearHistory function size at codegen: 1 bytes.
+                                   4170 ;	User/eric_proc.c: 747: void Storage_FactoryReset(void)
+                                   4171 ; genLabel
+                                   4172 ;	-----------------------------------------
+                                   4173 ;	 function Storage_FactoryReset
+                                   4174 ;	-----------------------------------------
+                                   4175 ;	Register assignment might be sub-optimal.
+                                   4176 ;	Stack space usage: 0 bytes.
+      00A65E                       4177 _Storage_FactoryReset:
+                                   4178 ;	User/eric_proc.c: 749: I2C_WriteByte(0xa0,250,0);
+                                   4179 ; genIPush
+      00A65E 4B 00            [ 1] 4180 	push	#0x00
+                                   4181 ; genIPush
+      00A660 4B FA            [ 1] 4182 	push	#0xfa
+                                   4183 ; genSend
+      00A662 A6 A0            [ 1] 4184 	ld	a, #0xa0
+                                   4185 ; genCall
+      00A664 CD 93 2F         [ 4] 4186 	call	_I2C_WriteByte
+                                   4187 ;	User/eric_proc.c: 750: Delay(IIC_TIMEOUT);
+                                   4188 ; genSend
+      00A667 AE 07 D0         [ 2] 4189 	ldw	x, #0x07d0
+                                   4190 ; genCall
+      00A66A CD 91 EB         [ 4] 4191 	call	_Delay
+                                   4192 ;	User/eric_proc.c: 751: I2C_WriteByte(0xa0,251,0);
+                                   4193 ; genIPush
+      00A66D 4B 00            [ 1] 4194 	push	#0x00
+                                   4195 ; genIPush
+      00A66F 4B FB            [ 1] 4196 	push	#0xfb
+                                   4197 ; genSend
+      00A671 A6 A0            [ 1] 4198 	ld	a, #0xa0
+                                   4199 ; genCall
+      00A673 CD 93 2F         [ 4] 4200 	call	_I2C_WriteByte
+                                   4201 ;	User/eric_proc.c: 752: Delay(IIC_TIMEOUT);
+                                   4202 ; genSend
+      00A676 AE 07 D0         [ 2] 4203 	ldw	x, #0x07d0
+                                   4204 ; genCall
+      00A679 CD 91 EB         [ 4] 4205 	call	_Delay
+                                   4206 ;	User/eric_proc.c: 753: data_index.w=0;
+                                   4207 ; skipping iCode since result will be rematerialized
+                                   4208 ; skipping iCode since result will be rematerialized
+                                   4209 ; genPointerSet
+      00A67C 35 00 04 9E      [ 1] 4210 	mov	_data_index+1, #0x00
+                                   4211 ;	User/eric_proc.c: 754: data_index.used=0;
+                                   4212 ; skipping iCode since result will be rematerialized
+                                   4213 ; genPointerSet
+      00A680 35 00 04 9F      [ 1] 4214 	mov	_data_index+2, #0x00
+                                   4215 ;	User/eric_proc.c: 756: I2C_WriteByte(0xa0,252,0);
+                                   4216 ; genIPush
+      00A684 4B 00            [ 1] 4217 	push	#0x00
+                                   4218 ; genIPush
+      00A686 4B FC            [ 1] 4219 	push	#0xfc
+                                   4220 ; genSend
+      00A688 A6 A0            [ 1] 4221 	ld	a, #0xa0
+                                   4222 ; genCall
+      00A68A CD 93 2F         [ 4] 4223 	call	_I2C_WriteByte
+                                   4224 ;	User/eric_proc.c: 757: Delay(IIC_TIMEOUT);
+                                   4225 ; genSend
+      00A68D AE 07 D0         [ 2] 4226 	ldw	x, #0x07d0
+                                   4227 ; genCall
+      00A690 CD 91 EB         [ 4] 4228 	call	_Delay
+                                   4229 ;	User/eric_proc.c: 758: I2C_WriteByte(0xa0,253,0);
+                                   4230 ; genIPush
+      00A693 4B 00            [ 1] 4231 	push	#0x00
+                                   4232 ; genIPush
+      00A695 4B FD            [ 1] 4233 	push	#0xfd
+                                   4234 ; genSend
+      00A697 A6 A0            [ 1] 4235 	ld	a, #0xa0
+                                   4236 ; genCall
+      00A699 CD 93 2F         [ 4] 4237 	call	_I2C_WriteByte
+                                   4238 ;	User/eric_proc.c: 759: Delay(IIC_TIMEOUT);
+                                   4239 ; genSend
+      00A69C AE 07 D0         [ 2] 4240 	ldw	x, #0x07d0
+                                   4241 ; genCall
+      00A69F CD 91 EB         [ 4] 4242 	call	_Delay
+                                   4243 ;	User/eric_proc.c: 760: I2C_WriteByte(0xa0,254,0);
+                                   4244 ; genIPush
+      00A6A2 4B 00            [ 1] 4245 	push	#0x00
+                                   4246 ; genIPush
+      00A6A4 4B FE            [ 1] 4247 	push	#0xfe
+                                   4248 ; genSend
+      00A6A6 A6 A0            [ 1] 4249 	ld	a, #0xa0
+                                   4250 ; genCall
+      00A6A8 CD 93 2F         [ 4] 4251 	call	_I2C_WriteByte
+                                   4252 ;	User/eric_proc.c: 761: Delay(IIC_TIMEOUT);
+                                   4253 ; genSend
+      00A6AB AE 07 D0         [ 2] 4254 	ldw	x, #0x07d0
+                                   4255 ; genCall
+      00A6AE CD 91 EB         [ 4] 4256 	call	_Delay
+                                   4257 ;	User/eric_proc.c: 762: I2C_WriteByte(0xa0,255,1);
+                                   4258 ; genIPush
+      00A6B1 4B 01            [ 1] 4259 	push	#0x01
+                                   4260 ; genIPush
+      00A6B3 4B FF            [ 1] 4261 	push	#0xff
+                                   4262 ; genSend
+      00A6B5 A6 A0            [ 1] 4263 	ld	a, #0xa0
+                                   4264 ; genCall
+      00A6B7 CD 93 2F         [ 4] 4265 	call	_I2C_WriteByte
+                                   4266 ;	User/eric_proc.c: 763: Delay(IIC_TIMEOUT);
+                                   4267 ; genSend
+      00A6BA AE 07 D0         [ 2] 4268 	ldw	x, #0x07d0
+                                   4269 ; genCall
+      00A6BD CD 91 EB         [ 4] 4270 	call	_Delay
+                                   4271 ;	User/eric_proc.c: 765: memset((uint8_t *)&stt,0,70);
+                                   4272 ; skipping iCode since result will be rematerialized
+                                   4273 ; skipping iCode since result will be rematerialized
+                                   4274 ; genIPush
+      00A6C0 4B 46            [ 1] 4275 	push	#0x46
+      00A6C2 4B 00            [ 1] 4276 	push	#0x00
+                                   4277 ; genIPush
+      00A6C4 5F               [ 1] 4278 	clrw	x
+      00A6C5 89               [ 2] 4279 	pushw	x
+                                   4280 ; genSend
+      00A6C6 AE 04 E3         [ 2] 4281 	ldw	x, #(_stt+0)
+                                   4282 ; genCall
+      00A6C9 CD ED FE         [ 4] 4283 	call	_memset
+                                   4284 ;	User/eric_proc.c: 766: Save_Stat((uint8_t *)&stt);
+                                   4285 ; skipping iCode since result will be rematerialized
+                                   4286 ; genSend
+      00A6CC AE 04 E3         [ 2] 4287 	ldw	x, #(_stt+0)
+                                   4288 ; genCall
+      00A6CF CD 94 DB         [ 4] 4289 	call	_Save_Stat
+                                   4290 ;	User/eric_proc.c: 768: Delay(IIC_TIMEOUT);
+                                   4291 ; genSend
+      00A6D2 AE 07 D0         [ 2] 4292 	ldw	x, #0x07d0
+                                   4293 ; genCall
+      00A6D5 CD 91 EB         [ 4] 4294 	call	_Delay
+                                   4295 ;	User/eric_proc.c: 769: WWDG_SWReset();
+                                   4296 ; genCall
+                                   4297 ; genLabel
+                                   4298 ; peephole j30 removed unused label 00101$.
+                                   4299 ;	User/eric_proc.c: 770: }
+                                   4300 ; genEndFunction
+      00A6D8 CC EC C8         [ 2] 4301 	jp	_WWDG_SWReset
+                                   4302 ; peephole 52 removed unreachable ret.
+                                   4303 ;	Total Storage_FactoryReset function size at codegen: 1 bytes.
+                                   4304 ;	User/eric_proc.c: 773: void Storage_Init(void)
+                                   4305 ; genLabel
+                                   4306 ;	-----------------------------------------
+                                   4307 ;	 function Storage_Init
+                                   4308 ;	-----------------------------------------
+                                   4309 ;	Register assignment might be sub-optimal.
+                                   4310 ;	Stack space usage: 13 bytes.
+      00A6DB                       4311 _Storage_Init:
+      00A6DB 52 0D            [ 2] 4312 	sub	sp, #13
+                                   4313 ;	User/eric_proc.c: 777: Load_Stat((uint8_t *)&stt);//读取统计数据
+                                   4314 ; skipping iCode since result will be rematerialized
+                                   4315 ; skipping iCode since result will be rematerialized
+                                   4316 ; genSend
+      00A6DD AE 04 E3         [ 2] 4317 	ldw	x, #(_stt+0)
+                                   4318 ; genCall
+      00A6E0 CD 95 09         [ 4] 4319 	call	_Load_Stat
+                                   4320 ;	User/eric_proc.c: 778: if ((stt[A].tscount == 0xffff) && (stt[B].tscount == 0xffff) && (stt[C].tscount == 0xffff)) //如果是首次读取，先初始化
+                                   4321 ; skipping iCode since result will be rematerialized
+                                   4322 ; skipping iCode since result will be rematerialized
+                                   4323 ; genPointerGet
+      00A6E3 CE 04 ED         [ 2] 4324 	ldw	x, _stt+10
+                                   4325 ; genCast
+                                   4326 ; genAssign
+                                   4327 ; genCmpEQorNE
+      00A6E6 5C               [ 1] 4328 	incw	x
+                                   4329 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4330 ; peephole j10 removed jra by using inverse jump logic
+                                   4331 ; peephole j30 removed unused label 00156$.
+                                   4332 ; peephole j5 changed absolute to relative unconditional jump.
+      00A6E7 26 18            [ 1] 4333 	jrne	00102$
+                                   4334 ; peephole j7 removed jra by using inverse jump logic
+                                   4335 ; peephole j30 removed unused label 00157$.
+                                   4336 ; skipping generated iCode
+                                   4337 ; skipping iCode since result will be rematerialized
+                                   4338 ; genPointerGet
+      00A6E9 CE 04 F7         [ 2] 4339 	ldw	x, _stt+20
+                                   4340 ; genCast
+                                   4341 ; genAssign
+                                   4342 ; genCmpEQorNE
+      00A6EC 5C               [ 1] 4343 	incw	x
+                                   4344 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4345 ; peephole j10 removed jra by using inverse jump logic
+                                   4346 ; peephole j30 removed unused label 00159$.
+                                   4347 ; peephole j5 changed absolute to relative unconditional jump.
+      00A6ED 26 12            [ 1] 4348 	jrne	00102$
+                                   4349 ; peephole j7 removed jra by using inverse jump logic
+                                   4350 ; peephole j30 removed unused label 00160$.
+                                   4351 ; skipping generated iCode
+                                   4352 ; skipping iCode since result will be rematerialized
+                                   4353 ; genPointerGet
+      00A6EF CE 05 0B         [ 2] 4354 	ldw	x, _stt+40
+                                   4355 ; genCast
+                                   4356 ; genAssign
+                                   4357 ; genCmpEQorNE
+      00A6F2 5C               [ 1] 4358 	incw	x
+                                   4359 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4360 ; peephole j10 removed jra by using inverse jump logic
+                                   4361 ; peephole j30 removed unused label 00162$.
+                                   4362 ; peephole j5 changed absolute to relative unconditional jump.
+      00A6F3 26 0C            [ 1] 4363 	jrne	00102$
+                                   4364 ; peephole j7 removed jra by using inverse jump logic
+                                   4365 ; peephole j30 removed unused label 00163$.
+                                   4366 ; skipping generated iCode
+                                   4367 ;	User/eric_proc.c: 779: memset((uint8_t *)&stt, 0, 70);
+                                   4368 ; skipping iCode since result will be rematerialized
+                                   4369 ; skipping iCode since result will be rematerialized
+                                   4370 ; genIPush
+      00A6F5 4B 46            [ 1] 4371 	push	#0x46
+      00A6F7 4B 00            [ 1] 4372 	push	#0x00
+                                   4373 ; genIPush
+      00A6F9 5F               [ 1] 4374 	clrw	x
+      00A6FA 89               [ 2] 4375 	pushw	x
+                                   4376 ; genSend
+      00A6FB AE 04 E3         [ 2] 4377 	ldw	x, #(_stt+0)
+                                   4378 ; genCall
+      00A6FE CD ED FE         [ 4] 4379 	call	_memset
+                                   4380 ; genLabel
+      00A701                       4381 00102$:
+                                   4382 ;	User/eric_proc.c: 781: Delay(IIC_TIMEOUT);
+                                   4383 ; genSend
+      00A701 AE 07 D0         [ 2] 4384 	ldw	x, #0x07d0
+                                   4385 ; genCall
+      00A704 CD 91 EB         [ 4] 4386 	call	_Delay
+                                   4387 ;	User/eric_proc.c: 782: adjustdt.dt[11] = I2C_ReadByte(0xa0, 80); //语言选择
+                                   4388 ; skipping iCode since result will be rematerialized
+                                   4389 ; genIPush
+      00A707 4B 50            [ 1] 4390 	push	#0x50
+                                   4391 ; genSend
+      00A709 A6 A0            [ 1] 4392 	ld	a, #0xa0
+                                   4393 ; genCall
+      00A70B CD 93 E0         [ 4] 4394 	call	_I2C_ReadByte
+                                   4395 ; genPointerSet
+      00A70E C7 05 4A         [ 1] 4396 	ld	_adjustdt+12, a
+                                   4397 ;	User/eric_proc.c: 783: language = adjustdt.dt[11];
+                                   4398 ; genAssign
+      00A711 C7 05 64         [ 1] 4399 	ld	_language+0, a
+                                   4400 ;	User/eric_proc.c: 785: Delay(IIC_TIMEOUT);
+                                   4401 ; genSend
+      00A714 AE 07 D0         [ 2] 4402 	ldw	x, #0x07d0
+                                   4403 ; genCall
+      00A717 CD 91 EB         [ 4] 4404 	call	_Delay
+                                   4405 ;	User/eric_proc.c: 786: data_index.w = I2C_ReadByte(0xa0, 250); //读取保存了的数据索引
+                                   4406 ; skipping iCode since result will be rematerialized
+                                   4407 ; skipping iCode since result will be rematerialized
+                                   4408 ; genIPush
+      00A71A 4B FA            [ 1] 4409 	push	#0xfa
+                                   4410 ; genSend
+      00A71C A6 A0            [ 1] 4411 	ld	a, #0xa0
+                                   4412 ; genCall
+      00A71E CD 93 E0         [ 4] 4413 	call	_I2C_ReadByte
+                                   4414 ; genPointerSet
+      00A721 C7 04 9E         [ 1] 4415 	ld	_data_index+1, a
+                                   4416 ;	User/eric_proc.c: 787: if (data_index.w == 0xff)
+                                   4417 ; genCmpEQorNE
+      00A724 4C               [ 1] 4418 	inc	a
+                                   4419 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4420 ; peephole j10 removed jra by using inverse jump logic
+                                   4421 ; peephole j30 removed unused label 00165$.
+                                   4422 ; peephole j5 changed absolute to relative unconditional jump.
+      00A725 26 04            [ 1] 4423 	jrne	00106$
+                                   4424 ; peephole j7 removed jra by using inverse jump logic
+                                   4425 ; peephole j30 removed unused label 00166$.
+                                   4426 ; skipping generated iCode
+                                   4427 ;	User/eric_proc.c: 788: data_index.w = 0;
+                                   4428 ; genPointerSet
+      00A727 35 00 04 9E      [ 1] 4429 	mov	_data_index+1, #0x00
+                                   4430 ; genLabel
+      00A72B                       4431 00106$:
+                                   4432 ;	User/eric_proc.c: 789: Delay(IIC_TIMEOUT);
+                                   4433 ; genSend
+      00A72B AE 07 D0         [ 2] 4434 	ldw	x, #0x07d0
+                                   4435 ; genCall
+      00A72E CD 91 EB         [ 4] 4436 	call	_Delay
+                                   4437 ;	User/eric_proc.c: 790: data_index.used = I2C_ReadByte(0xa0, 251);
+                                   4438 ; skipping iCode since result will be rematerialized
+                                   4439 ; genIPush
+      00A731 4B FB            [ 1] 4440 	push	#0xfb
+                                   4441 ; genSend
+      00A733 A6 A0            [ 1] 4442 	ld	a, #0xa0
+                                   4443 ; genCall
+      00A735 CD 93 E0         [ 4] 4444 	call	_I2C_ReadByte
+                                   4445 ; genPointerSet
+      00A738 C7 04 9F         [ 1] 4446 	ld	_data_index+2, a
+                                   4447 ;	User/eric_proc.c: 791: if (data_index.used == 0xff)
+                                   4448 ; genCmpEQorNE
+      00A73B 4C               [ 1] 4449 	inc	a
+                                   4450 ; peephole j5 changed absolute to relative unconditional jump.
+                                   4451 ; peephole j10 removed jra by using inverse jump logic
+                                   4452 ; peephole j30 removed unused label 00168$.
+                                   4453 ; peephole j5 changed absolute to relative unconditional jump.
+      00A73C 26 04            [ 1] 4454 	jrne	00108$
+                                   4455 ; peephole j7 removed jra by using inverse jump logic
+                                   4456 ; peephole j30 removed unused label 00169$.
+                                   4457 ; skipping generated iCode
+                                   4458 ;	User/eric_proc.c: 792: data_index.used = 0;
+                                   4459 ; genPointerSet
+      00A73E 35 00 04 9F      [ 1] 4460 	mov	_data_index+2, #0x00
+                                   4461 ; genLabel
+      00A742                       4462 00108$:
+                                   4463 ;	User/eric_proc.c: 794: id[0] = I2C_ReadByte(0xa0, 252);
+                                   4464 ; skipping iCode since result will be rematerialized
+                                   4465 ; genIPush
+      00A742 4B FC            [ 1] 4466 	push	#0xfc
+                                   4467 ; genSend
+      00A744 A6 A0            [ 1] 4468 	ld	a, #0xa0
+                                   4469 ; genCall
+      00A746 CD 93 E0         [ 4] 4470 	call	_I2C_ReadByte
+                                   4471 ; genPointerSet
+      00A749 6B 01            [ 1] 4472 	ld	(0x01, sp), a
+                                   4473 ;	User/eric_proc.c: 795: Delay(IIC_TIMEOUT);
+                                   4474 ; genSend
+      00A74B AE 07 D0         [ 2] 4475 	ldw	x, #0x07d0
+                                   4476 ; genCall
+      00A74E CD 91 EB         [ 4] 4477 	call	_Delay
+                                   4478 ;	User/eric_proc.c: 796: id[1] = I2C_ReadByte(0xa0, 253);
+                                   4479 ; skipping iCode since result will be rematerialized
+                                   4480 ; genIPush
+      00A751 4B FD            [ 1] 4481 	push	#0xfd
+                                   4482 ; genSend
+      00A753 A6 A0            [ 1] 4483 	ld	a, #0xa0
+                                   4484 ; genCall
+      00A755 CD 93 E0         [ 4] 4485 	call	_I2C_ReadByte
+                                   4486 ; genPointerSet
+      00A758 6B 02            [ 1] 4487 	ld	(0x02, sp), a
+                                   4488 ;	User/eric_proc.c: 797: Delay(IIC_TIMEOUT);
+                                   4489 ; genSend
+      00A75A AE 07 D0         [ 2] 4490 	ldw	x, #0x07d0
+                                   4491 ; genCall
+      00A75D CD 91 EB         [ 4] 4492 	call	_Delay
+                                   4493 ;	User/eric_proc.c: 798: id[2] = I2C_ReadByte(0xa0, 254);
+                                   4494 ; skipping iCode since result will be rematerialized
+                                   4495 ; genIPush
+      00A760 4B FE            [ 1] 4496 	push	#0xfe
+                                   4497 ; genSend
+      00A762 A6 A0            [ 1] 4498 	ld	a, #0xa0
+                                   4499 ; genCall
+      00A764 CD 93 E0         [ 4] 4500 	call	_I2C_ReadByte
+                                   4501 ; genPointerSet
+      00A767 6B 03            [ 1] 4502 	ld	(0x03, sp), a
+                                   4503 ;	User/eric_proc.c: 799: Delay(IIC_TIMEOUT);
+                                   4504 ; genSend
+      00A769 AE 07 D0         [ 2] 4505 	ldw	x, #0x07d0
+                                   4506 ; genCall
+      00A76C CD 91 EB         [ 4] 4507 	call	_Delay
+                                   4508 ;	User/eric_proc.c: 800: id[3] = I2C_ReadByte(0xa0, 255);
+                                   4509 ; skipping iCode since result will be rematerialized
+                                   4510 ; genIPush
+      00A76F 4B FF            [ 1] 4511 	push	#0xff
+                                   4512 ; genSend
+      00A771 A6 A0            [ 1] 4513 	ld	a, #0xa0
+                                   4514 ; genCall
+      00A773 CD 93 E0         [ 4] 4515 	call	_I2C_ReadByte
+                                   4516 ; genPointerSet
+      00A776 6B 05            [ 1] 4517 	ld	(0x05, sp), a
+                                   4518 ; peephole 4 removed redundant load from (0x05, sp) into a.
+      00A778 6B 04            [ 1] 4519 	ld	(0x04, sp), a
+                                   4520 ;	User/eric_proc.c: 802: selfid = id[0] * 1000000 + id[1] * 10000 + id[2] * 100 + id[3];
+                                   4521 ; genPointerGet
+      00A77A 7B 01            [ 1] 4522 	ld	a, (0x01, sp)
+                                   4523 ; genCast
+                                   4524 ; genAssign
+      00A77C 5F               [ 1] 4525 	clrw	x
+      00A77D 0F 0A            [ 1] 4526 	clr	(0x0a, sp)
+                                   4527 ; genIPush
+      00A77F 88               [ 1] 4528 	push	a
+      00A780 89               [ 2] 4529 	pushw	x
+      00A781 4F               [ 1] 4530 	clr	a
+      00A782 88               [ 1] 4531 	push	a
+                                   4532 ; genIPush
+      00A783 4B 40            [ 1] 4533 	push	#0x40
+      00A785 4B 42            [ 1] 4534 	push	#0x42
+      00A787 4B 0F            [ 1] 4535 	push	#0x0f
+      00A789 4B 00            [ 1] 4536 	push	#0x00
+                                   4537 ; genCall
+      00A78B CD EE 20         [ 4] 4538 	call	__mullong
+      00A78E 5B 08            [ 2] 4539 	addw	sp, #8
+      00A790 1F 0C            [ 2] 4540 	ldw	(0x0c, sp), x
+      00A792 17 0A            [ 2] 4541 	ldw	(0x0a, sp), y
+                                   4542 ; genPointerGet
+      00A794 7B 02            [ 1] 4543 	ld	a, (0x02, sp)
+                                   4544 ; genCast
+                                   4545 ; genAssign
+      00A796 5F               [ 1] 4546 	clrw	x
+      00A797 97               [ 1] 4547 	ld	xl, a
+                                   4548 ; genIPush
+      00A798 89               [ 2] 4549 	pushw	x
+                                   4550 ; genSend
+      00A799 AE 27 10         [ 2] 4551 	ldw	x, #0x2710
+                                   4552 ; genCall
+      00A79C CD EC CD         [ 4] 4553 	call	__mulint
+                                   4554 ; genCast
+      00A79F 51               [ 1] 4555 	exgw	x, y
+      00A7A0 5F               [ 1] 4556 	clrw	x
+      00A7A1 90 5D            [ 2] 4557 	tnzw	y
+      00A7A3 2A 01            [ 1] 4558 	jrpl	00170$
+      00A7A5 5A               [ 2] 4559 	decw	x
+      00A7A6                       4560 00170$:
+                                   4561 ; genPlus
+      00A7A6 72 F9 0C         [ 2] 4562 	addw	y, (0x0c, sp)
+      00A7A9 17 08            [ 2] 4563 	ldw	(0x08, sp), y
+      00A7AB 9F               [ 1] 4564 	ld	a, xl
+      00A7AC 19 0B            [ 1] 4565 	adc	a, (0x0b, sp)
+      00A7AE 6B 07            [ 1] 4566 	ld	(0x07, sp), a
+      00A7B0 9E               [ 1] 4567 	ld	a, xh
+      00A7B1 19 0A            [ 1] 4568 	adc	a, (0x0a, sp)
+      00A7B3 6B 06            [ 1] 4569 	ld	(0x06, sp), a
+                                   4570 ; genPointerGet
+      00A7B5 7B 03            [ 1] 4571 	ld	a, (0x03, sp)
+                                   4572 ; genCast
+                                   4573 ; genAssign
+      00A7B7 5F               [ 1] 4574 	clrw	x
+      00A7B8 97               [ 1] 4575 	ld	xl, a
+                                   4576 ; genIPush
+      00A7B9 89               [ 2] 4577 	pushw	x
+                                   4578 ; genSend
+      00A7BA AE 00 64         [ 2] 4579 	ldw	x, #0x0064
+                                   4580 ; genCall
+      00A7BD CD EC CD         [ 4] 4581 	call	__mulint
+                                   4582 ; genCast
+      00A7C0 51               [ 1] 4583 	exgw	x, y
+      00A7C1 5F               [ 1] 4584 	clrw	x
+      00A7C2 90 5D            [ 2] 4585 	tnzw	y
+      00A7C4 2A 01            [ 1] 4586 	jrpl	00171$
+      00A7C6 5A               [ 2] 4587 	decw	x
+      00A7C7                       4588 00171$:
+                                   4589 ; genPlus
+      00A7C7 72 F9 08         [ 2] 4590 	addw	y, (0x08, sp)
+      00A7CA 9F               [ 1] 4591 	ld	a, xl
+      00A7CB 19 07            [ 1] 4592 	adc	a, (0x07, sp)
+      00A7CD 6B 0B            [ 1] 4593 	ld	(0x0b, sp), a
+      00A7CF 9E               [ 1] 4594 	ld	a, xh
+      00A7D0 19 06            [ 1] 4595 	adc	a, (0x06, sp)
+      00A7D2 6B 0A            [ 1] 4596 	ld	(0x0a, sp), a
+                                   4597 ; genCast
+                                   4598 ; genAssign
+      00A7D4 7B 05            [ 1] 4599 	ld	a, (0x05, sp)
+                                   4600 ; genCast
+                                   4601 ; genAssign
+      00A7D6 0F 08            [ 1] 4602 	clr	(0x08, sp)
+      00A7D8 5F               [ 1] 4603 	clrw	x
+                                   4604 ; genPlus
+      00A7D9 90 89            [ 2] 4605 	pushw	y
+      00A7DB 1B 02            [ 1] 4606 	add	a, (2, sp)
+      00A7DD 90 85            [ 2] 4607 	popw	y
+      00A7DF 90 02            [ 1] 4608 	rlwa	y
+                                   4609 ; peephole r2 used rlwa.
+      00A7E1 19 08            [ 1] 4610 	adc	a, (0x08, sp)
+      00A7E3 90 95            [ 1] 4611 	ld	yh, a
+      00A7E5 9F               [ 1] 4612 	ld	a, xl
+      00A7E6 19 0B            [ 1] 4613 	adc	a, (0x0b, sp)
+      00A7E8 02               [ 1] 4614 	rlwa	x
+                                   4615 ; peephole r1 used rlwa.
+      00A7E9 19 0A            [ 1] 4616 	adc	a, (0x0a, sp)
+      00A7EB 95               [ 1] 4617 	ld	xh, a
+                                   4618 ; genAssign
+      00A7EC 90 CF 05 2B      [ 2] 4619 	ldw	_selfid+2, y
+      00A7F0 CF 05 29         [ 2] 4620 	ldw	_selfid+0, x
+                                   4621 ;	User/eric_proc.c: 803: if (selfid > 99999999)
+                                   4622 ; genCmp
+                                   4623 ; genCmpTnz
+      00A7F3 AE E0 FF         [ 2] 4624 	ldw	x, #0xe0ff
+      00A7F6 C3 05 2B         [ 2] 4625 	cpw	x, _selfid+2
+      00A7F9 A6 F5            [ 1] 4626 	ld	a, #0xf5
+      00A7FB C2 05 2A         [ 1] 4627 	sbc	a, _selfid+1
+      00A7FE A6 05            [ 1] 4628 	ld	a, #0x05
+      00A800 C2 05 29         [ 1] 4629 	sbc	a, _selfid+0
+                                   4630 ; peephole j5 changed absolute to relative unconditional jump.
+      00A803 24 09            [ 1] 4631 	jrnc	00110$
+                                   4632 ; peephole j6 removed jra by using inverse jump logic
+                                   4633 ; peephole j30 removed unused label 00172$.
+                                   4634 ; skipping generated iCode
+                                   4635 ;	User/eric_proc.c: 804: selfid = 1;
+                                   4636 ; genAssign
+      00A805 5F               [ 1] 4637 	clrw	x
+      00A806 5C               [ 1] 4638 	incw	x
+      00A807 CF 05 2B         [ 2] 4639 	ldw	_selfid+2, x
+      00A80A 5F               [ 1] 4640 	clrw	x
+      00A80B CF 05 29         [ 2] 4641 	ldw	_selfid+0, x
+                                   4642 ; genLabel
+      00A80E                       4643 00110$:
+                                   4644 ;	User/eric_proc.c: 805: r485id = (selfid & 0xff);
+                                   4645 ; genCast
+                                   4646 ; genAssign
+      00A80E 55 05 2C 05 2D   [ 1] 4647 	mov	_r485id+0, _selfid+3
+                                   4648 ; genLabel
+                                   4649 ; peephole j30 removed unused label 00111$.
+                                   4650 ;	User/eric_proc.c: 806: }
+                                   4651 ; genEndFunction
+      00A813 5B 0D            [ 2] 4652 	addw	sp, #13
+      00A815 81               [ 4] 4653 	ret
+                                   4654 ;	Total Storage_Init function size at codegen: 3 bytes.
+                                   4655 	.area CODE
+                                   4656 	.area CONST
+                                   4657 	.area INITIALIZER
+      00903E                       4658 __xinit__strokeA:
+      00903E 01                    4659 	.db #0x01	; 1
+      00903F 00 00 00 00           4660 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009043 00 00 00 00           4661 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009047 00 00 00 00           4662 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00904B                       4663 __xinit__strokeB:
+      00904B 01                    4664 	.db #0x01	; 1
+      00904C 00 00 00 00           4665 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009050 00 00 00 00           4666 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009054 00 00 00 00           4667 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009058                       4668 __xinit__strokeC:
+      009058 01                    4669 	.db #0x01	; 1
+      009059 00 00 00 00           4670 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00905D 00 00 00 00           4671 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009061 00 00 00 00           4672 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009065                       4673 __xinit__ticks:
+      009065 00 00 00 00           4674 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009069                       4675 __xinit__stt:
+      009069 00 00                 4676 	.dw #0x0000
+      00906B 00 00 00 00           4677 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00906F 00 00 00 00           4678 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009073 00 00                 4679 	.dw #0x0000
+      009075 00 00 00 00           4680 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009079 00 00 00 00           4681 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00907D 00 00                 4682 	.dw #0x0000
+      00907F 00 00 00 00           4683 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009083 00 00 00 00           4684 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009087 00 00                 4685 	.dw #0x0000
+      009089 00 00 00 00           4686 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00908D 00 00 00 00           4687 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009091 00 00                 4688 	.dw #0x0000
+      009093 00 00 00 00           4689 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      009097 00 00 00 00           4690 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      00909B 00 00                 4691 	.dw #0x0000
+      00909D 00 00 00 00           4692 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      0090A1 00 00 00 00           4693 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      0090A5 00 00                 4694 	.dw #0x0000
+      0090A7 00 00 00 00           4695 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      0090AB 00 00 00 00           4696 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      0090AF                       4697 __xinit__selfid:
+      0090AF 00 00 00 00           4698 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      0090B3                       4699 __xinit__r485id:
+      0090B3 00                    4700 	.db #0x00	; 0
+      0090B4                       4701 __xinit__r485rlt:
+      0090B4 00 00                 4702 	.dw #0x0000
+      0090B6 00 00                 4703 	.dw #0x0000
+      0090B8 00 00                 4704 	.dw #0x0000
+      0090BA 00 00                 4705 	.dw #0x0000
+      0090BC 00 00                 4706 	.dw #0x0000
+      0090BE 00 00                 4707 	.dw #0x0000
+      0090C0 00 00                 4708 	.dw #0x0000
+      0090C2                       4709 __xinit__sysmode:
+      0090C2 01                    4710 	.db #0x01	; 1
+                                   4711 	.area CABS (ABS)

@@ -1,0 +1,85 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  9 _ADC1_COMP_IRQHandler                                          00012B GR
+    _ADC_Cmd                                                       ****** GX
+    _ADC_DMACmd                                                    ****** GX
+  9 _DMA1_CHANNEL0_1_IRQHandler                                    000003 GR
+  9 _DMA1_CHANNEL2_3_IRQHandler                                    000052 GR
+    _DMA_ClearITPendingBit                                         ****** GX
+  9 _EXTI0_IRQHandler                                              000057 GR
+  9 _EXTI1_IRQHandler                                              00005E GR
+  9 _EXTI2_IRQHandler                                              000066 GR
+  9 _EXTI3_IRQHandler                                              00006E GR
+  9 _EXTI4_IRQHandler                                              000076 GR
+  9 _EXTI5_IRQHandler                                              00007E GR
+  9 _EXTI6_IRQHandler                                              0000B7 GR
+  9 _EXTI7_IRQHandler                                              0000F0 GR
+  9 _EXTIB_G_IRQHandler                                            000055 GR
+  9 _EXTID_H_IRQHandler                                            000056 GR
+  9 _EXTIE_F_PVD_IRQHandler                                        000054 GR
+    _EXTI_ClearITPendingBit                                        ****** GX
+  9 _FLASH_IRQHandler                                              000002 GR
+  9 _I2C1_SPI2_IRQHandler                                          000214 GR
+  9 _LCD_AES_IRQHandler                                            000129 GR
+    _MsgSystem                                                     ****** GX
+  9 _NonHandledInterrupt                                           000000 GR
+  9 _RTC_CSSLSE_IRQHandler                                         000053 GR
+  9 _SPI1_IRQHandler                                               0001BB GR
+  9 _SWITCH_CSS_BREAK_DAC_IRQHandler                               00012A GR
+    _Scan_Key                                                      ****** GX
+    _SendMsg                                                       ****** GX
+  9 _TIM1_CC_IRQHandler                                            000173 GR
+  9 _TIM1_UPD_OVF_TRG_COM_IRQHandler                               000172 GR
+  9 _TIM2_CC_USART2_RX_IRQHandler                                  00016F GR
+    _TIM2_ClearITPendingBit                                        ****** GX
+  9 _TIM2_UPD_OVF_TRG_BRK_USART2_TX_IRQHandler                     00012C GR
+  1 _TIM2_UPD_OVF_TRG_BRK_USART2_TX_IRQHandler_i_10000_704         000000 R
+  9 _TIM3_CC_USART3_RX_IRQHandler                                  000171 GR
+  9 _TIM3_UPD_OVF_TRG_BRK_USART3_TX_IRQHandler                     000170 GR
+    _TIM4_ClearITPendingBit                                        ****** GX
+  9 _TIM4_UPD_OVF_TRG_IRQHandler                                   000174 GR
+  1 _TIM4_UPD_OVF_TRG_IRQHandler_t1000_10000_722                   000002 R
+  1 _TIM4_UPD_OVF_TRG_IRQHandler_t200_10000_722                    000001 R
+  9 _TRAP_IRQHandler                                               000001 GR
+  9 _USART1_RX_TIM5_CC_IRQHandler                                  0001BD GR
+  9 _USART1_TX_TIM5_UPD_OVF_TRG_BRK_IRQHandler                     0001BC GR
+    _USART_GetITStatus                                             ****** GX
+    _USART_ReceiveData8                                            ****** GX
+    _WWDG_SetCounter                                               ****** GX
+    __modulong                                                     ****** GX
+    _dmabuf                                                        ****** GX
+    _strokeA                                                       ****** GX
+    _strokeB                                                       ****** GX
+    _strokeC                                                       ****** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    _ticks                                                         ****** GX
+    _u1buf                                                         ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 3
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      3   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      C   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      0   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    215   flags    0
+   A CABS                                       size      0   flags    8
+

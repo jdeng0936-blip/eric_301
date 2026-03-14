@@ -1,0 +1,903 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8l15x_tim4
+                                      6 	
+                                      7 ;--------------------------------------------------------
+                                      8 ; Public variables in this module
+                                      9 ;--------------------------------------------------------
+                                     10 	.globl _TIM4_DeInit
+                                     11 	.globl _TIM4_TimeBaseInit
+                                     12 	.globl _TIM4_PrescalerConfig
+                                     13 	.globl _TIM4_SetCounter
+                                     14 	.globl _TIM4_SetAutoreload
+                                     15 	.globl _TIM4_GetCounter
+                                     16 	.globl _TIM4_GetPrescaler
+                                     17 	.globl _TIM4_UpdateDisableConfig
+                                     18 	.globl _TIM4_UpdateRequestConfig
+                                     19 	.globl _TIM4_ARRPreloadConfig
+                                     20 	.globl _TIM4_SelectOnePulseMode
+                                     21 	.globl _TIM4_Cmd
+                                     22 	.globl _TIM4_ITConfig
+                                     23 	.globl _TIM4_GenerateEvent
+                                     24 	.globl _TIM4_GetFlagStatus
+                                     25 	.globl _TIM4_ClearFlag
+                                     26 	.globl _TIM4_GetITStatus
+                                     27 	.globl _TIM4_ClearITPendingBit
+                                     28 	.globl _TIM4_DMACmd
+                                     29 	.globl _TIM4_InternalClockConfig
+                                     30 	.globl _TIM4_SelectInputTrigger
+                                     31 	.globl _TIM4_SelectOutputTrigger
+                                     32 	.globl _TIM4_SelectSlaveMode
+                                     33 	.globl _TIM4_SelectMasterSlaveMode
+                                     34 ;--------------------------------------------------------
+                                     35 ; ram data
+                                     36 ;--------------------------------------------------------
+                                     37 	.area DATA
+                                     38 ;--------------------------------------------------------
+                                     39 ; ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area INITIALIZED
+                                     42 ;--------------------------------------------------------
+                                     43 ; absolute external ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area DABS (ABS)
+                                     46 
+                                     47 ; default segment ordering for linker
+                                     48 	.area HOME
+                                     49 	.area GSINIT
+                                     50 	.area GSFINAL
+                                     51 	.area CONST
+                                     52 	.area INITIALIZER
+                                     53 	.area CODE
+                                     54 
+                                     55 ;--------------------------------------------------------
+                                     56 ; global & static initialisations
+                                     57 ;--------------------------------------------------------
+                                     58 	.area HOME
+                                     59 	.area GSINIT
+                                     60 	.area GSFINAL
+                                     61 	.area GSINIT
+                                     62 ;--------------------------------------------------------
+                                     63 ; Home
+                                     64 ;--------------------------------------------------------
+                                     65 	.area HOME
+                                     66 	.area HOME
+                                     67 ;--------------------------------------------------------
+                                     68 ; code
+                                     69 ;--------------------------------------------------------
+                                     70 	.area CODE
+                                     71 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 130: void TIM4_DeInit(void)
+                                     72 ; genLabel
+                                     73 ;	-----------------------------------------
+                                     74 ;	 function TIM4_DeInit
+                                     75 ;	-----------------------------------------
+                                     76 ;	Register assignment is optimal.
+                                     77 ;	Stack space usage: 0 bytes.
+      00E79D                         78 _TIM4_DeInit:
+                                     79 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 132: TIM4->CR1   = TIM4_CR1_RESET_VALUE;
+                                     80 ; genPointerSet
+      00E79D 35 00 52 E0      [ 1]   81 	mov	0x52e0+0, #0x00
+                                     82 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 133: TIM4->CR2   = TIM4_CR2_RESET_VALUE;
+                                     83 ; genPointerSet
+      00E7A1 35 00 52 E1      [ 1]   84 	mov	0x52e1+0, #0x00
+                                     85 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 134: TIM4->SMCR   = TIM4_SMCR_RESET_VALUE;
+                                     86 ; genPointerSet
+      00E7A5 35 00 52 E2      [ 1]   87 	mov	0x52e2+0, #0x00
+                                     88 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 135: TIM4->IER   = TIM4_IER_RESET_VALUE;
+                                     89 ; genPointerSet
+      00E7A9 35 00 52 E4      [ 1]   90 	mov	0x52e4+0, #0x00
+                                     91 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 136: TIM4->CNTR   = TIM4_CNTR_RESET_VALUE;
+                                     92 ; genPointerSet
+      00E7AD 35 00 52 E7      [ 1]   93 	mov	0x52e7+0, #0x00
+                                     94 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 137: TIM4->PSCR  = TIM4_PSCR_RESET_VALUE;
+                                     95 ; genPointerSet
+      00E7B1 35 00 52 E8      [ 1]   96 	mov	0x52e8+0, #0x00
+                                     97 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 138: TIM4->ARR   = TIM4_ARR_RESET_VALUE;
+                                     98 ; genPointerSet
+      00E7B5 35 FF 52 E9      [ 1]   99 	mov	0x52e9+0, #0xff
+                                    100 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 139: TIM4->SR1   = TIM4_SR1_RESET_VALUE;
+                                    101 ; genPointerSet
+      00E7B9 35 00 52 E5      [ 1]  102 	mov	0x52e5+0, #0x00
+                                    103 ; genLabel
+                                    104 ; peephole j30 removed unused label 00101$.
+                                    105 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 140: }
+                                    106 ; genEndFunction
+      00E7BD 81               [ 4]  107 	ret
+                                    108 ;	Total TIM4_DeInit function size at codegen: 1 bytes.
+                                    109 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 165: void TIM4_TimeBaseInit(TIM4_Prescaler_TypeDef TIM4_Prescaler,
+                                    110 ; genLabel
+                                    111 ;	-----------------------------------------
+                                    112 ;	 function TIM4_TimeBaseInit
+                                    113 ;	-----------------------------------------
+                                    114 ;	Register assignment is optimal.
+                                    115 ;	Stack space usage: 0 bytes.
+      00E7BE                        116 _TIM4_TimeBaseInit:
+                                    117 ; genReceive
+                                    118 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 171: TIM4->ARR = (uint8_t)(TIM4_Period);
+                                    119 ; genPointerSet
+      00E7BE AE 52 E9         [ 2]  120 	ldw	x, #0x52e9
+      00E7C1 88               [ 1]  121 	push	a
+      00E7C2 7B 04            [ 1]  122 	ld	a, (0x04, sp)
+      00E7C4 F7               [ 1]  123 	ld	(x), a
+      00E7C5 84               [ 1]  124 	pop	a
+                                    125 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 173: TIM4->PSCR = (uint8_t)(TIM4_Prescaler);
+                                    126 ; genPointerSet
+      00E7C6 C7 52 E8         [ 1]  127 	ld	0x52e8, a
+                                    128 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 176: TIM4->EGR = TIM4_EventSource_Update;
+                                    129 ; genPointerSet
+      00E7C9 35 01 52 E6      [ 1]  130 	mov	0x52e6+0, #0x01
+                                    131 ; genLabel
+                                    132 ; peephole j30 removed unused label 00101$.
+                                    133 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 177: }
+                                    134 ; genEndFunction
+      00E7CD 85               [ 2]  135 	popw	x
+      00E7CE 84               [ 1]  136 	pop	a
+      00E7CF FC               [ 2]  137 	jp	(x)
+                                    138 ;	Total TIM4_TimeBaseInit function size at codegen: 3 bytes.
+                                    139 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 205: void TIM4_PrescalerConfig(TIM4_Prescaler_TypeDef Prescaler,
+                                    140 ; genLabel
+                                    141 ;	-----------------------------------------
+                                    142 ;	 function TIM4_PrescalerConfig
+                                    143 ;	-----------------------------------------
+                                    144 ;	Register assignment is optimal.
+                                    145 ;	Stack space usage: 0 bytes.
+      00E7D0                        146 _TIM4_PrescalerConfig:
+                                    147 ; genReceive
+                                    148 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 213: TIM4->PSCR = (uint8_t) Prescaler;
+                                    149 ; genPointerSet
+      00E7D0 C7 52 E8         [ 1]  150 	ld	0x52e8, a
+                                    151 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 218: TIM4->EGR |= TIM4_EGR_UG ;
+                                    152 ; genPointerGet
+      00E7D3 C6 52 E6         [ 1]  153 	ld	a, 0x52e6
+                                    154 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 216: if (TIM4_PSCReloadMode == TIM4_PSCReloadMode_Immediate)
+                                    155 ; genIfx
+      00E7D6 0D 03            [ 1]  156 	tnz	(0x03, sp)
+                                    157 ; peephole j5 changed absolute to relative unconditional jump.
+      00E7D8 27 07            [ 1]  158 	jreq	00102$
+                                    159 ; peephole j10 removed jra by using inverse jump logic
+                                    160 ; peephole j30 removed unused label 00113$.
+                                    161 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 218: TIM4->EGR |= TIM4_EGR_UG ;
+                                    162 ; genOr
+      00E7DA AA 01            [ 1]  163 	or	a, #0x01
+                                    164 ; genPointerSet
+      00E7DC C7 52 E6         [ 1]  165 	ld	0x52e6, a
+                                    166 ; genGoto
+      00E7DF 20 05            [ 2]  167 	jra	00104$
+                                    168 ; peephole j5 changed absolute to relative unconditional jump.
+                                    169 ; genLabel
+      00E7E1                        170 00102$:
+                                    171 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 222: TIM4->EGR &= (uint8_t)(~TIM4_EGR_UG) ;
+                                    172 ; genAnd
+      00E7E1 A4 FE            [ 1]  173 	and	a, #0xfe
+                                    174 ; genPointerSet
+      00E7E3 C7 52 E6         [ 1]  175 	ld	0x52e6, a
+                                    176 ; genLabel
+      00E7E6                        177 00104$:
+                                    178 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 224: }
+                                    179 ; genEndFunction
+      00E7E6 85               [ 2]  180 	popw	x
+      00E7E7 84               [ 1]  181 	pop	a
+      00E7E8 FC               [ 2]  182 	jp	(x)
+                                    183 ;	Total TIM4_PrescalerConfig function size at codegen: 3 bytes.
+                                    184 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 232: void TIM4_SetCounter(uint8_t Counter)
+                                    185 ; genLabel
+                                    186 ;	-----------------------------------------
+                                    187 ;	 function TIM4_SetCounter
+                                    188 ;	-----------------------------------------
+                                    189 ;	Register assignment is optimal.
+                                    190 ;	Stack space usage: 0 bytes.
+      00E7E9                        191 _TIM4_SetCounter:
+                                    192 ; genReceive
+                                    193 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 235: TIM4->CNTR = (uint8_t)(Counter);
+                                    194 ; genPointerSet
+      00E7E9 C7 52 E7         [ 1]  195 	ld	0x52e7, a
+                                    196 ; genLabel
+                                    197 ; peephole j30 removed unused label 00101$.
+                                    198 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 236: }
+                                    199 ; genEndFunction
+      00E7EC 81               [ 4]  200 	ret
+                                    201 ;	Total TIM4_SetCounter function size at codegen: 1 bytes.
+                                    202 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 244: void TIM4_SetAutoreload(uint8_t Autoreload)
+                                    203 ; genLabel
+                                    204 ;	-----------------------------------------
+                                    205 ;	 function TIM4_SetAutoreload
+                                    206 ;	-----------------------------------------
+                                    207 ;	Register assignment is optimal.
+                                    208 ;	Stack space usage: 0 bytes.
+      00E7ED                        209 _TIM4_SetAutoreload:
+                                    210 ; genReceive
+                                    211 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 247: TIM4->ARR = (uint8_t)(Autoreload);
+                                    212 ; genPointerSet
+      00E7ED C7 52 E9         [ 1]  213 	ld	0x52e9, a
+                                    214 ; genLabel
+                                    215 ; peephole j30 removed unused label 00101$.
+                                    216 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 248: }
+                                    217 ; genEndFunction
+      00E7F0 81               [ 4]  218 	ret
+                                    219 ;	Total TIM4_SetAutoreload function size at codegen: 1 bytes.
+                                    220 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 255: uint8_t TIM4_GetCounter(void)
+                                    221 ; genLabel
+                                    222 ;	-----------------------------------------
+                                    223 ;	 function TIM4_GetCounter
+                                    224 ;	-----------------------------------------
+                                    225 ;	Register assignment is optimal.
+                                    226 ;	Stack space usage: 0 bytes.
+      00E7F1                        227 _TIM4_GetCounter:
+                                    228 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 258: tmpcntr = TIM4->CNTR;
+                                    229 ; genPointerGet
+      00E7F1 C6 52 E7         [ 1]  230 	ld	a, 0x52e7
+                                    231 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 260: return ((uint8_t)tmpcntr);
+                                    232 ; genReturn
+                                    233 ; genLabel
+                                    234 ; peephole j30 removed unused label 00101$.
+                                    235 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 261: }
+                                    236 ; genEndFunction
+      00E7F4 81               [ 4]  237 	ret
+                                    238 ;	Total TIM4_GetCounter function size at codegen: 1 bytes.
+                                    239 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 284: TIM4_Prescaler_TypeDef TIM4_GetPrescaler(void)
+                                    240 ; genLabel
+                                    241 ;	-----------------------------------------
+                                    242 ;	 function TIM4_GetPrescaler
+                                    243 ;	-----------------------------------------
+                                    244 ;	Register assignment is optimal.
+                                    245 ;	Stack space usage: 0 bytes.
+      00E7F5                        246 _TIM4_GetPrescaler:
+                                    247 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 287: return ((TIM4_Prescaler_TypeDef)TIM4->PSCR);
+                                    248 ; genPointerGet
+      00E7F5 C6 52 E8         [ 1]  249 	ld	a, 0x52e8
+                                    250 ; genReturn
+                                    251 ; genLabel
+                                    252 ; peephole j30 removed unused label 00101$.
+                                    253 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 288: }
+                                    254 ; genEndFunction
+      00E7F8 81               [ 4]  255 	ret
+                                    256 ;	Total TIM4_GetPrescaler function size at codegen: 1 bytes.
+                                    257 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 296: void TIM4_UpdateDisableConfig(FunctionalState NewState)
+                                    258 ; genLabel
+                                    259 ;	-----------------------------------------
+                                    260 ;	 function TIM4_UpdateDisableConfig
+                                    261 ;	-----------------------------------------
+                                    262 ;	Register assignment is optimal.
+                                    263 ;	Stack space usage: 1 bytes.
+      00E7F9                        264 _TIM4_UpdateDisableConfig:
+      00E7F9 88               [ 1]  265 	push	a
+                                    266 ; genReceive
+      00E7FA 6B 01            [ 1]  267 	ld	(0x01, sp), a
+                                    268 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 304: TIM4->CR1 |= TIM4_CR1_UDIS ;
+                                    269 ; genPointerGet
+      00E7FC C6 52 E0         [ 1]  270 	ld	a, 0x52e0
+                                    271 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 302: if (NewState != DISABLE)
+                                    272 ; genIfx
+      00E7FF 0D 01            [ 1]  273 	tnz	(0x01, sp)
+                                    274 ; peephole j5 changed absolute to relative unconditional jump.
+      00E801 27 07            [ 1]  275 	jreq	00102$
+                                    276 ; peephole j10 removed jra by using inverse jump logic
+                                    277 ; peephole j30 removed unused label 00113$.
+                                    278 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 304: TIM4->CR1 |= TIM4_CR1_UDIS ;
+                                    279 ; genOr
+      00E803 AA 02            [ 1]  280 	or	a, #0x02
+                                    281 ; genPointerSet
+      00E805 C7 52 E0         [ 1]  282 	ld	0x52e0, a
+                                    283 ; genGoto
+      00E808 20 05            [ 2]  284 	jra	00104$
+                                    285 ; peephole j5 changed absolute to relative unconditional jump.
+                                    286 ; genLabel
+      00E80A                        287 00102$:
+                                    288 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 308: TIM4->CR1 &= (uint8_t)(~TIM4_CR1_UDIS) ;
+                                    289 ; genAnd
+      00E80A A4 FD            [ 1]  290 	and	a, #0xfd
+                                    291 ; genPointerSet
+      00E80C C7 52 E0         [ 1]  292 	ld	0x52e0, a
+                                    293 ; genLabel
+      00E80F                        294 00104$:
+                                    295 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 310: }
+                                    296 ; genEndFunction
+      00E80F 84               [ 1]  297 	pop	a
+      00E810 81               [ 4]  298 	ret
+                                    299 ;	Total TIM4_UpdateDisableConfig function size at codegen: 2 bytes.
+                                    300 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 320: void TIM4_UpdateRequestConfig(TIM4_UpdateSource_TypeDef TIM4_UpdateSource)
+                                    301 ; genLabel
+                                    302 ;	-----------------------------------------
+                                    303 ;	 function TIM4_UpdateRequestConfig
+                                    304 ;	-----------------------------------------
+                                    305 ;	Register assignment is optimal.
+                                    306 ;	Stack space usage: 1 bytes.
+      00E811                        307 _TIM4_UpdateRequestConfig:
+      00E811 88               [ 1]  308 	push	a
+                                    309 ; genReceive
+      00E812 6B 01            [ 1]  310 	ld	(0x01, sp), a
+                                    311 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 328: TIM4->CR1 |= TIM4_CR1_URS ;
+                                    312 ; genPointerGet
+      00E814 C6 52 E0         [ 1]  313 	ld	a, 0x52e0
+                                    314 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 326: if (TIM4_UpdateSource == TIM4_UpdateSource_Regular)
+                                    315 ; genIfx
+      00E817 0D 01            [ 1]  316 	tnz	(0x01, sp)
+                                    317 ; peephole j5 changed absolute to relative unconditional jump.
+      00E819 27 07            [ 1]  318 	jreq	00102$
+                                    319 ; peephole j10 removed jra by using inverse jump logic
+                                    320 ; peephole j30 removed unused label 00113$.
+                                    321 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 328: TIM4->CR1 |= TIM4_CR1_URS ;
+                                    322 ; genOr
+      00E81B AA 04            [ 1]  323 	or	a, #0x04
+                                    324 ; genPointerSet
+      00E81D C7 52 E0         [ 1]  325 	ld	0x52e0, a
+                                    326 ; genGoto
+      00E820 20 05            [ 2]  327 	jra	00104$
+                                    328 ; peephole j5 changed absolute to relative unconditional jump.
+                                    329 ; genLabel
+      00E822                        330 00102$:
+                                    331 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 332: TIM4->CR1 &= (uint8_t)(~TIM4_CR1_URS) ;
+                                    332 ; genAnd
+      00E822 A4 FB            [ 1]  333 	and	a, #0xfb
+                                    334 ; genPointerSet
+      00E824 C7 52 E0         [ 1]  335 	ld	0x52e0, a
+                                    336 ; genLabel
+      00E827                        337 00104$:
+                                    338 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 334: }
+                                    339 ; genEndFunction
+      00E827 84               [ 1]  340 	pop	a
+      00E828 81               [ 4]  341 	ret
+                                    342 ;	Total TIM4_UpdateRequestConfig function size at codegen: 2 bytes.
+                                    343 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 342: void TIM4_ARRPreloadConfig(FunctionalState NewState)
+                                    344 ; genLabel
+                                    345 ;	-----------------------------------------
+                                    346 ;	 function TIM4_ARRPreloadConfig
+                                    347 ;	-----------------------------------------
+                                    348 ;	Register assignment is optimal.
+                                    349 ;	Stack space usage: 1 bytes.
+      00E829                        350 _TIM4_ARRPreloadConfig:
+      00E829 88               [ 1]  351 	push	a
+                                    352 ; genReceive
+      00E82A 6B 01            [ 1]  353 	ld	(0x01, sp), a
+                                    354 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 350: TIM4->CR1 |= TIM4_CR1_ARPE ;
+                                    355 ; genPointerGet
+      00E82C C6 52 E0         [ 1]  356 	ld	a, 0x52e0
+                                    357 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 348: if (NewState != DISABLE)
+                                    358 ; genIfx
+      00E82F 0D 01            [ 1]  359 	tnz	(0x01, sp)
+                                    360 ; peephole j5 changed absolute to relative unconditional jump.
+      00E831 27 07            [ 1]  361 	jreq	00102$
+                                    362 ; peephole j10 removed jra by using inverse jump logic
+                                    363 ; peephole j30 removed unused label 00113$.
+                                    364 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 350: TIM4->CR1 |= TIM4_CR1_ARPE ;
+                                    365 ; genOr
+      00E833 AA 80            [ 1]  366 	or	a, #0x80
+                                    367 ; genPointerSet
+      00E835 C7 52 E0         [ 1]  368 	ld	0x52e0, a
+                                    369 ; genGoto
+      00E838 20 05            [ 2]  370 	jra	00104$
+                                    371 ; peephole j5 changed absolute to relative unconditional jump.
+                                    372 ; genLabel
+      00E83A                        373 00102$:
+                                    374 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 354: TIM4->CR1 &= (uint8_t)(~TIM4_CR1_ARPE) ;
+                                    375 ; genAnd
+      00E83A A4 7F            [ 1]  376 	and	a, #0x7f
+                                    377 ; genPointerSet
+      00E83C C7 52 E0         [ 1]  378 	ld	0x52e0, a
+                                    379 ; genLabel
+      00E83F                        380 00104$:
+                                    381 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 356: }
+                                    382 ; genEndFunction
+      00E83F 84               [ 1]  383 	pop	a
+      00E840 81               [ 4]  384 	ret
+                                    385 ;	Total TIM4_ARRPreloadConfig function size at codegen: 2 bytes.
+                                    386 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 366: void TIM4_SelectOnePulseMode(TIM4_OPMode_TypeDef TIM4_OPMode)
+                                    387 ; genLabel
+                                    388 ;	-----------------------------------------
+                                    389 ;	 function TIM4_SelectOnePulseMode
+                                    390 ;	-----------------------------------------
+                                    391 ;	Register assignment is optimal.
+                                    392 ;	Stack space usage: 1 bytes.
+      00E841                        393 _TIM4_SelectOnePulseMode:
+      00E841 88               [ 1]  394 	push	a
+                                    395 ; genReceive
+      00E842 6B 01            [ 1]  396 	ld	(0x01, sp), a
+                                    397 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 374: TIM4->CR1 |= TIM4_CR1_OPM ;
+                                    398 ; genPointerGet
+      00E844 C6 52 E0         [ 1]  399 	ld	a, 0x52e0
+                                    400 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 372: if (TIM4_OPMode == TIM4_OPMode_Single)
+                                    401 ; genIfx
+      00E847 0D 01            [ 1]  402 	tnz	(0x01, sp)
+                                    403 ; peephole j5 changed absolute to relative unconditional jump.
+      00E849 27 07            [ 1]  404 	jreq	00102$
+                                    405 ; peephole j10 removed jra by using inverse jump logic
+                                    406 ; peephole j30 removed unused label 00113$.
+                                    407 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 374: TIM4->CR1 |= TIM4_CR1_OPM ;
+                                    408 ; genOr
+      00E84B AA 08            [ 1]  409 	or	a, #0x08
+                                    410 ; genPointerSet
+      00E84D C7 52 E0         [ 1]  411 	ld	0x52e0, a
+                                    412 ; genGoto
+      00E850 20 05            [ 2]  413 	jra	00104$
+                                    414 ; peephole j5 changed absolute to relative unconditional jump.
+                                    415 ; genLabel
+      00E852                        416 00102$:
+                                    417 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 378: TIM4->CR1 &= (uint8_t)(~TIM4_CR1_OPM) ;
+                                    418 ; genAnd
+      00E852 A4 F7            [ 1]  419 	and	a, #0xf7
+                                    420 ; genPointerSet
+      00E854 C7 52 E0         [ 1]  421 	ld	0x52e0, a
+                                    422 ; genLabel
+      00E857                        423 00104$:
+                                    424 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 380: }
+                                    425 ; genEndFunction
+      00E857 84               [ 1]  426 	pop	a
+      00E858 81               [ 4]  427 	ret
+                                    428 ;	Total TIM4_SelectOnePulseMode function size at codegen: 2 bytes.
+                                    429 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 388: void TIM4_Cmd(FunctionalState NewState)
+                                    430 ; genLabel
+                                    431 ;	-----------------------------------------
+                                    432 ;	 function TIM4_Cmd
+                                    433 ;	-----------------------------------------
+                                    434 ;	Register assignment is optimal.
+                                    435 ;	Stack space usage: 1 bytes.
+      00E859                        436 _TIM4_Cmd:
+      00E859 88               [ 1]  437 	push	a
+                                    438 ; genReceive
+      00E85A 6B 01            [ 1]  439 	ld	(0x01, sp), a
+                                    440 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 396: TIM4->CR1 |= TIM4_CR1_CEN ;
+                                    441 ; genPointerGet
+      00E85C C6 52 E0         [ 1]  442 	ld	a, 0x52e0
+                                    443 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 394: if (NewState != DISABLE)
+                                    444 ; genIfx
+      00E85F 0D 01            [ 1]  445 	tnz	(0x01, sp)
+                                    446 ; peephole j5 changed absolute to relative unconditional jump.
+      00E861 27 07            [ 1]  447 	jreq	00102$
+                                    448 ; peephole j10 removed jra by using inverse jump logic
+                                    449 ; peephole j30 removed unused label 00113$.
+                                    450 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 396: TIM4->CR1 |= TIM4_CR1_CEN ;
+                                    451 ; genOr
+      00E863 AA 01            [ 1]  452 	or	a, #0x01
+                                    453 ; genPointerSet
+      00E865 C7 52 E0         [ 1]  454 	ld	0x52e0, a
+                                    455 ; genGoto
+      00E868 20 05            [ 2]  456 	jra	00104$
+                                    457 ; peephole j5 changed absolute to relative unconditional jump.
+                                    458 ; genLabel
+      00E86A                        459 00102$:
+                                    460 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 400: TIM4->CR1 &= (uint8_t)(~TIM4_CR1_CEN) ;
+                                    461 ; genAnd
+      00E86A A4 FE            [ 1]  462 	and	a, #0xfe
+                                    463 ; genPointerSet
+      00E86C C7 52 E0         [ 1]  464 	ld	0x52e0, a
+                                    465 ; genLabel
+      00E86F                        466 00104$:
+                                    467 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 402: }
+                                    468 ; genEndFunction
+      00E86F 84               [ 1]  469 	pop	a
+      00E870 81               [ 4]  470 	ret
+                                    471 ;	Total TIM4_Cmd function size at codegen: 2 bytes.
+                                    472 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 430: void TIM4_ITConfig(TIM4_IT_TypeDef TIM4_IT, FunctionalState NewState)
+                                    473 ; genLabel
+                                    474 ;	-----------------------------------------
+                                    475 ;	 function TIM4_ITConfig
+                                    476 ;	-----------------------------------------
+                                    477 ;	Register assignment is optimal.
+                                    478 ;	Stack space usage: 1 bytes.
+      00E871                        479 _TIM4_ITConfig:
+      00E871 88               [ 1]  480 	push	a
+                                    481 ; genReceive
+                                    482 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 439: TIM4->IER |= (uint8_t)TIM4_IT;
+                                    483 ; genPointerGet
+      00E872 AE 52 E4         [ 2]  484 	ldw	x, #0x52e4
+      00E875 88               [ 1]  485 	push	a
+      00E876 F6               [ 1]  486 	ld	a, (x)
+      00E877 6B 02            [ 1]  487 	ld	(0x02, sp), a
+      00E879 84               [ 1]  488 	pop	a
+                                    489 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 436: if (NewState != DISABLE)
+                                    490 ; genIfx
+      00E87A 0D 04            [ 1]  491 	tnz	(0x04, sp)
+                                    492 ; peephole j5 changed absolute to relative unconditional jump.
+      00E87C 27 07            [ 1]  493 	jreq	00102$
+                                    494 ; peephole j10 removed jra by using inverse jump logic
+                                    495 ; peephole j30 removed unused label 00113$.
+                                    496 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 439: TIM4->IER |= (uint8_t)TIM4_IT;
+                                    497 ; genOr
+      00E87E 1A 01            [ 1]  498 	or	a, (0x01, sp)
+                                    499 ; genPointerSet
+      00E880 C7 52 E4         [ 1]  500 	ld	0x52e4, a
+                                    501 ; genGoto
+      00E883 20 06            [ 2]  502 	jra	00104$
+                                    503 ; peephole j5 changed absolute to relative unconditional jump.
+                                    504 ; genLabel
+      00E885                        505 00102$:
+                                    506 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 444: TIM4->IER &= (uint8_t)(~(uint8_t)TIM4_IT);
+                                    507 ; genCpl
+      00E885 43               [ 1]  508 	cpl	a
+                                    509 ; genAnd
+      00E886 14 01            [ 1]  510 	and	a, (0x01, sp)
+                                    511 ; genPointerSet
+      00E888 C7 52 E4         [ 1]  512 	ld	0x52e4, a
+                                    513 ; genLabel
+      00E88B                        514 00104$:
+                                    515 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 446: }
+                                    516 ; genEndFunction
+      00E88B 84               [ 1]  517 	pop	a
+      00E88C 85               [ 2]  518 	popw	x
+      00E88D 84               [ 1]  519 	pop	a
+      00E88E FC               [ 2]  520 	jp	(x)
+                                    521 ;	Total TIM4_ITConfig function size at codegen: 4 bytes.
+                                    522 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 456: void TIM4_GenerateEvent(TIM4_EventSource_TypeDef TIM4_EventSource)
+                                    523 ; genLabel
+                                    524 ;	-----------------------------------------
+                                    525 ;	 function TIM4_GenerateEvent
+                                    526 ;	-----------------------------------------
+                                    527 ;	Register assignment is optimal.
+                                    528 ;	Stack space usage: 1 bytes.
+      00E88F                        529 _TIM4_GenerateEvent:
+      00E88F 88               [ 1]  530 	push	a
+                                    531 ; genReceive
+      00E890 6B 01            [ 1]  532 	ld	(0x01, sp), a
+                                    533 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 462: TIM4->EGR |= (uint8_t)TIM4_EventSource;
+                                    534 ; genPointerGet
+      00E892 C6 52 E6         [ 1]  535 	ld	a, 0x52e6
+                                    536 ; genOr
+      00E895 1A 01            [ 1]  537 	or	a, (0x01, sp)
+                                    538 ; genPointerSet
+      00E897 C7 52 E6         [ 1]  539 	ld	0x52e6, a
+                                    540 ; genLabel
+                                    541 ; peephole j30 removed unused label 00101$.
+                                    542 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 463: }
+                                    543 ; genEndFunction
+      00E89A 84               [ 1]  544 	pop	a
+      00E89B 81               [ 4]  545 	ret
+                                    546 ;	Total TIM4_GenerateEvent function size at codegen: 2 bytes.
+                                    547 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 474: FlagStatus TIM4_GetFlagStatus(TIM4_FLAG_TypeDef TIM4_FLAG)
+                                    548 ; genLabel
+                                    549 ;	-----------------------------------------
+                                    550 ;	 function TIM4_GetFlagStatus
+                                    551 ;	-----------------------------------------
+                                    552 ;	Register assignment is optimal.
+                                    553 ;	Stack space usage: 1 bytes.
+      00E89C                        554 _TIM4_GetFlagStatus:
+      00E89C 88               [ 1]  555 	push	a
+                                    556 ; genReceive
+      00E89D 6B 01            [ 1]  557 	ld	(0x01, sp), a
+                                    558 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 481: if ((TIM4->SR1 & (uint8_t)TIM4_FLAG)  != 0)
+                                    559 ; genPointerGet
+      00E89F C6 52 E5         [ 1]  560 	ld	a, 0x52e5
+                                    561 ; genAnd
+                                    562 ; genIfx
+      00E8A2 14 01            [ 1]  563 	and	a, (0x01, sp)
+                                    564 ; peephole 23 removed redundant tnz.
+                                    565 ; peephole j5 changed absolute to relative unconditional jump.
+      00E8A4 27 03            [ 1]  566 	jreq	00102$
+                                    567 ; peephole j10 removed jra by using inverse jump logic
+                                    568 ; peephole j30 removed unused label 00113$.
+                                    569 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 483: bitstatus = SET;
+                                    570 ; genAssign
+      00E8A6 A6 01            [ 1]  571 	ld	a, #0x01
+                                    572 ; genGoto
+                                    573 ; peephole j5 changed absolute to relative unconditional jump.
+                                    574 ; genLabel
+                                    575 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 487: bitstatus = RESET;
+                                    576 ; genAssign
+                                    577 ; genLabel
+      00E8A8 21                     578 	.byte 0x21
+                                    579 ; peephole jrf1 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      00E8A9                        580 00102$:
+      00E8A9 4F               [ 1]  581 	clr	a
+      00E8AA                        582 00103$:
+                                    583 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 489: return ((FlagStatus)bitstatus);
+                                    584 ; genReturn
+                                    585 ; genLabel
+                                    586 ; peephole j30 removed unused label 00104$.
+                                    587 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 490: }
+                                    588 ; genEndFunction
+      00E8AA 5B 01            [ 2]  589 	addw	sp, #1
+      00E8AC 81               [ 4]  590 	ret
+                                    591 ;	Total TIM4_GetFlagStatus function size at codegen: 3 bytes.
+                                    592 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 500: void TIM4_ClearFlag(TIM4_FLAG_TypeDef TIM4_FLAG)
+                                    593 ; genLabel
+                                    594 ;	-----------------------------------------
+                                    595 ;	 function TIM4_ClearFlag
+                                    596 ;	-----------------------------------------
+                                    597 ;	Register assignment is optimal.
+                                    598 ;	Stack space usage: 0 bytes.
+      00E8AD                        599 _TIM4_ClearFlag:
+                                    600 ; genReceive
+                                    601 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 505: TIM4->SR1 = (uint8_t)(~((uint8_t)TIM4_FLAG));
+                                    602 ; genCpl
+      00E8AD 43               [ 1]  603 	cpl	a
+                                    604 ; genPointerSet
+      00E8AE C7 52 E5         [ 1]  605 	ld	0x52e5, a
+                                    606 ; genLabel
+                                    607 ; peephole j30 removed unused label 00101$.
+                                    608 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 506: }
+                                    609 ; genEndFunction
+      00E8B1 81               [ 4]  610 	ret
+                                    611 ;	Total TIM4_ClearFlag function size at codegen: 1 bytes.
+                                    612 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 518: ITStatus TIM4_GetITStatus(TIM4_IT_TypeDef TIM4_IT)
+                                    613 ; genLabel
+                                    614 ;	-----------------------------------------
+                                    615 ;	 function TIM4_GetITStatus
+                                    616 ;	-----------------------------------------
+                                    617 ;	Register assignment is optimal.
+                                    618 ;	Stack space usage: 2 bytes.
+      00E8B2                        619 _TIM4_GetITStatus:
+      00E8B2 89               [ 2]  620 	pushw	x
+                                    621 ; genReceive
+      00E8B3 6B 02            [ 1]  622 	ld	(0x02, sp), a
+                                    623 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 527: itStatus = (uint8_t)(TIM4->SR1 & (uint8_t)TIM4_IT);
+                                    624 ; genPointerGet
+      00E8B5 C6 52 E5         [ 1]  625 	ld	a, 0x52e5
+                                    626 ; genAnd
+      00E8B8 14 02            [ 1]  627 	and	a, (0x02, sp)
+      00E8BA 6B 01            [ 1]  628 	ld	(0x01, sp), a
+                                    629 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 529: itEnable = (uint8_t)(TIM4->IER & (uint8_t)TIM4_IT);
+                                    630 ; genPointerGet
+      00E8BC C6 52 E4         [ 1]  631 	ld	a, 0x52e4
+                                    632 ; genAnd
+      00E8BF 14 02            [ 1]  633 	and	a, (0x02, sp)
+                                    634 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 531: if ((itStatus != (uint8_t)RESET ) && (itEnable != (uint8_t)RESET ))
+                                    635 ; genIfx
+      00E8C1 0D 01            [ 1]  636 	tnz	(0x01, sp)
+                                    637 ; peephole j5 changed absolute to relative unconditional jump.
+      00E8C3 27 06            [ 1]  638 	jreq	00102$
+                                    639 ; peephole j10 removed jra by using inverse jump logic
+                                    640 ; peephole j30 removed unused label 00121$.
+                                    641 ; genIfx
+      00E8C5 4D               [ 1]  642 	tnz	a
+                                    643 ; peephole j5 changed absolute to relative unconditional jump.
+      00E8C6 27 03            [ 1]  644 	jreq	00102$
+                                    645 ; peephole j10 removed jra by using inverse jump logic
+                                    646 ; peephole j30 removed unused label 00122$.
+                                    647 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 533: bitstatus = (ITStatus)SET;
+                                    648 ; genAssign
+      00E8C8 A6 01            [ 1]  649 	ld	a, #0x01
+                                    650 ; genGoto
+                                    651 ; peephole j5 changed absolute to relative unconditional jump.
+                                    652 ; genLabel
+                                    653 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 537: bitstatus = (ITStatus)RESET;
+                                    654 ; genAssign
+                                    655 ; genLabel
+      00E8CA 21                     656 	.byte 0x21
+                                    657 ; peephole jrf1 used jump-on-false opcode to shorten jump over 1-byte instruction.
+      00E8CB                        658 00102$:
+      00E8CB 4F               [ 1]  659 	clr	a
+      00E8CC                        660 00103$:
+                                    661 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 539: return ((ITStatus)bitstatus);
+                                    662 ; genReturn
+                                    663 ; genLabel
+                                    664 ; peephole j30 removed unused label 00105$.
+                                    665 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 540: }
+                                    666 ; genEndFunction
+      00E8CC 85               [ 2]  667 	popw	x
+      00E8CD 81               [ 4]  668 	ret
+                                    669 ;	Total TIM4_GetITStatus function size at codegen: 2 bytes.
+                                    670 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 550: void TIM4_ClearITPendingBit(TIM4_IT_TypeDef TIM4_IT)
+                                    671 ; genLabel
+                                    672 ;	-----------------------------------------
+                                    673 ;	 function TIM4_ClearITPendingBit
+                                    674 ;	-----------------------------------------
+                                    675 ;	Register assignment is optimal.
+                                    676 ;	Stack space usage: 0 bytes.
+      00E8CE                        677 _TIM4_ClearITPendingBit:
+                                    678 ; genReceive
+                                    679 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 556: TIM4->SR1 = (uint8_t)(~(uint8_t)TIM4_IT);
+                                    680 ; genCpl
+      00E8CE 43               [ 1]  681 	cpl	a
+                                    682 ; genPointerSet
+      00E8CF C7 52 E5         [ 1]  683 	ld	0x52e5, a
+                                    684 ; genLabel
+                                    685 ; peephole j30 removed unused label 00101$.
+                                    686 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 557: }
+                                    687 ; genEndFunction
+      00E8D2 81               [ 4]  688 	ret
+                                    689 ;	Total TIM4_ClearITPendingBit function size at codegen: 1 bytes.
+                                    690 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 568: void TIM4_DMACmd( TIM4_DMASource_TypeDef TIM4_DMASource, FunctionalState NewState)
+                                    691 ; genLabel
+                                    692 ;	-----------------------------------------
+                                    693 ;	 function TIM4_DMACmd
+                                    694 ;	-----------------------------------------
+                                    695 ;	Register assignment might be sub-optimal.
+                                    696 ;	Stack space usage: 1 bytes.
+      00E8D3                        697 _TIM4_DMACmd:
+      00E8D3 88               [ 1]  698 	push	a
+                                    699 ; genReceive
+      00E8D4 97               [ 1]  700 	ld	xl, a
+                                    701 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 577: TIM4->DER |= (uint8_t)TIM4_DMASource;
+                                    702 ; genPointerGet
+      00E8D5 C6 52 E3         [ 1]  703 	ld	a, 0x52e3
+      00E8D8 6B 01            [ 1]  704 	ld	(0x01, sp), a
+                                    705 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 574: if (NewState != DISABLE)
+                                    706 ; genIfx
+      00E8DA 0D 04            [ 1]  707 	tnz	(0x04, sp)
+                                    708 ; peephole j5 changed absolute to relative unconditional jump.
+      00E8DC 27 08            [ 1]  709 	jreq	00102$
+                                    710 ; peephole j10 removed jra by using inverse jump logic
+                                    711 ; peephole j30 removed unused label 00113$.
+                                    712 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 577: TIM4->DER |= (uint8_t)TIM4_DMASource;
+                                    713 ; genCast
+                                    714 ; genAssign
+      00E8DE 9F               [ 1]  715 	ld	a, xl
+                                    716 ; genOr
+      00E8DF 1A 01            [ 1]  717 	or	a, (0x01, sp)
+                                    718 ; genPointerSet
+      00E8E1 C7 52 E3         [ 1]  719 	ld	0x52e3, a
+                                    720 ; genGoto
+      00E8E4 20 07            [ 2]  721 	jra	00104$
+                                    722 ; peephole j5 changed absolute to relative unconditional jump.
+                                    723 ; genLabel
+      00E8E6                        724 00102$:
+                                    725 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 582: TIM4->DER &= (uint8_t)~TIM4_DMASource;
+                                    726 ; genCast
+                                    727 ; genAssign
+      00E8E6 9F               [ 1]  728 	ld	a, xl
+                                    729 ; genCpl
+      00E8E7 43               [ 1]  730 	cpl	a
+                                    731 ; genCast
+                                    732 ; genAssign
+                                    733 ; genAnd
+      00E8E8 14 01            [ 1]  734 	and	a, (0x01, sp)
+                                    735 ; genPointerSet
+      00E8EA C7 52 E3         [ 1]  736 	ld	0x52e3, a
+                                    737 ; genLabel
+      00E8ED                        738 00104$:
+                                    739 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 584: }
+                                    740 ; genEndFunction
+      00E8ED 84               [ 1]  741 	pop	a
+      00E8EE 85               [ 2]  742 	popw	x
+      00E8EF 84               [ 1]  743 	pop	a
+      00E8F0 FC               [ 2]  744 	jp	(x)
+                                    745 ;	Total TIM4_DMACmd function size at codegen: 4 bytes.
+                                    746 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 607: void TIM4_InternalClockConfig(void)
+                                    747 ; genLabel
+                                    748 ;	-----------------------------------------
+                                    749 ;	 function TIM4_InternalClockConfig
+                                    750 ;	-----------------------------------------
+                                    751 ;	Register assignment is optimal.
+                                    752 ;	Stack space usage: 0 bytes.
+      00E8F1                        753 _TIM4_InternalClockConfig:
+                                    754 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 610: TIM4->SMCR &=  (uint8_t)(~TIM4_SMCR_SMS);
+                                    755 ; genPointerGet
+      00E8F1 C6 52 E2         [ 1]  756 	ld	a, 0x52e2
+                                    757 ; genAnd
+      00E8F4 A4 F8            [ 1]  758 	and	a, #0xf8
+                                    759 ; genPointerSet
+      00E8F6 C7 52 E2         [ 1]  760 	ld	0x52e2, a
+                                    761 ; genLabel
+                                    762 ; peephole j30 removed unused label 00101$.
+                                    763 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 611: }
+                                    764 ; genEndFunction
+      00E8F9 81               [ 4]  765 	ret
+                                    766 ;	Total TIM4_InternalClockConfig function size at codegen: 1 bytes.
+                                    767 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 651: void TIM4_SelectInputTrigger(TIM4_TRGSelection_TypeDef TIM4_InputTriggerSource)
+                                    768 ; genLabel
+                                    769 ;	-----------------------------------------
+                                    770 ;	 function TIM4_SelectInputTrigger
+                                    771 ;	-----------------------------------------
+                                    772 ;	Register assignment is optimal.
+                                    773 ;	Stack space usage: 1 bytes.
+      00E8FA                        774 _TIM4_SelectInputTrigger:
+      00E8FA 88               [ 1]  775 	push	a
+                                    776 ; genReceive
+      00E8FB 6B 01            [ 1]  777 	ld	(0x01, sp), a
+                                    778 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 658: tmpsmcr = TIM4->SMCR;
+                                    779 ; genPointerGet
+      00E8FD C6 52 E2         [ 1]  780 	ld	a, 0x52e2
+                                    781 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 661: tmpsmcr &= (uint8_t)(~TIM4_SMCR_TS);
+                                    782 ; genAnd
+      00E900 A4 8F            [ 1]  783 	and	a, #0x8f
+                                    784 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 662: tmpsmcr |= (uint8_t)TIM4_InputTriggerSource;
+                                    785 ; genOr
+      00E902 1A 01            [ 1]  786 	or	a, (0x01, sp)
+                                    787 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 664: TIM4->SMCR = (uint8_t)tmpsmcr;
+                                    788 ; genPointerSet
+      00E904 C7 52 E2         [ 1]  789 	ld	0x52e2, a
+                                    790 ; genLabel
+                                    791 ; peephole j30 removed unused label 00101$.
+                                    792 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 665: }
+                                    793 ; genEndFunction
+      00E907 84               [ 1]  794 	pop	a
+      00E908 81               [ 4]  795 	ret
+                                    796 ;	Total TIM4_SelectInputTrigger function size at codegen: 2 bytes.
+                                    797 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 676: void TIM4_SelectOutputTrigger(TIM4_TRGOSource_TypeDef TIM4_TRGOSource)
+                                    798 ; genLabel
+                                    799 ;	-----------------------------------------
+                                    800 ;	 function TIM4_SelectOutputTrigger
+                                    801 ;	-----------------------------------------
+                                    802 ;	Register assignment is optimal.
+                                    803 ;	Stack space usage: 1 bytes.
+      00E909                        804 _TIM4_SelectOutputTrigger:
+      00E909 88               [ 1]  805 	push	a
+                                    806 ; genReceive
+      00E90A 6B 01            [ 1]  807 	ld	(0x01, sp), a
+                                    808 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 683: tmpcr2 = TIM4->CR2;
+                                    809 ; genPointerGet
+      00E90C C6 52 E1         [ 1]  810 	ld	a, 0x52e1
+                                    811 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 686: tmpcr2 &= (uint8_t)(~TIM4_CR2_MMS);
+                                    812 ; genAnd
+      00E90F A4 8F            [ 1]  813 	and	a, #0x8f
+                                    814 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 689: tmpcr2 |=  (uint8_t)TIM4_TRGOSource;
+                                    815 ; genOr
+      00E911 1A 01            [ 1]  816 	or	a, (0x01, sp)
+                                    817 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 691: TIM4->CR2 = tmpcr2;
+                                    818 ; genPointerSet
+      00E913 C7 52 E1         [ 1]  819 	ld	0x52e1, a
+                                    820 ; genLabel
+                                    821 ; peephole j30 removed unused label 00101$.
+                                    822 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 692: }
+                                    823 ; genEndFunction
+      00E916 84               [ 1]  824 	pop	a
+      00E917 81               [ 4]  825 	ret
+                                    826 ;	Total TIM4_SelectOutputTrigger function size at codegen: 2 bytes.
+                                    827 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 706: void TIM4_SelectSlaveMode(TIM4_SlaveMode_TypeDef TIM4_SlaveMode)
+                                    828 ; genLabel
+                                    829 ;	-----------------------------------------
+                                    830 ;	 function TIM4_SelectSlaveMode
+                                    831 ;	-----------------------------------------
+                                    832 ;	Register assignment is optimal.
+                                    833 ;	Stack space usage: 1 bytes.
+      00E918                        834 _TIM4_SelectSlaveMode:
+      00E918 88               [ 1]  835 	push	a
+                                    836 ; genReceive
+      00E919 6B 01            [ 1]  837 	ld	(0x01, sp), a
+                                    838 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 713: tmpsmcr = TIM4->SMCR;
+                                    839 ; genPointerGet
+      00E91B C6 52 E2         [ 1]  840 	ld	a, 0x52e2
+                                    841 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 716: tmpsmcr &= (uint8_t)(~TIM4_SMCR_SMS);
+                                    842 ; genAnd
+      00E91E A4 F8            [ 1]  843 	and	a, #0xf8
+                                    844 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 719: tmpsmcr |= (uint8_t)TIM4_SlaveMode;
+                                    845 ; genOr
+      00E920 1A 01            [ 1]  846 	or	a, (0x01, sp)
+                                    847 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 721: TIM4->SMCR = tmpsmcr;
+                                    848 ; genPointerSet
+      00E922 C7 52 E2         [ 1]  849 	ld	0x52e2, a
+                                    850 ; genLabel
+                                    851 ; peephole j30 removed unused label 00101$.
+                                    852 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 722: }
+                                    853 ; genEndFunction
+      00E925 84               [ 1]  854 	pop	a
+      00E926 81               [ 4]  855 	ret
+                                    856 ;	Total TIM4_SelectSlaveMode function size at codegen: 2 bytes.
+                                    857 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 730: void TIM4_SelectMasterSlaveMode(FunctionalState NewState)
+                                    858 ; genLabel
+                                    859 ;	-----------------------------------------
+                                    860 ;	 function TIM4_SelectMasterSlaveMode
+                                    861 ;	-----------------------------------------
+                                    862 ;	Register assignment is optimal.
+                                    863 ;	Stack space usage: 1 bytes.
+      00E927                        864 _TIM4_SelectMasterSlaveMode:
+      00E927 88               [ 1]  865 	push	a
+                                    866 ; genReceive
+      00E928 6B 01            [ 1]  867 	ld	(0x01, sp), a
+                                    868 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 738: TIM4->SMCR |= TIM4_SMCR_MSM;
+                                    869 ; genPointerGet
+      00E92A C6 52 E2         [ 1]  870 	ld	a, 0x52e2
+                                    871 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 736: if (NewState != DISABLE)
+                                    872 ; genIfx
+      00E92D 0D 01            [ 1]  873 	tnz	(0x01, sp)
+                                    874 ; peephole j5 changed absolute to relative unconditional jump.
+      00E92F 27 07            [ 1]  875 	jreq	00102$
+                                    876 ; peephole j10 removed jra by using inverse jump logic
+                                    877 ; peephole j30 removed unused label 00113$.
+                                    878 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 738: TIM4->SMCR |= TIM4_SMCR_MSM;
+                                    879 ; genOr
+      00E931 AA 80            [ 1]  880 	or	a, #0x80
+                                    881 ; genPointerSet
+      00E933 C7 52 E2         [ 1]  882 	ld	0x52e2, a
+                                    883 ; genGoto
+      00E936 20 05            [ 2]  884 	jra	00104$
+                                    885 ; peephole j5 changed absolute to relative unconditional jump.
+                                    886 ; genLabel
+      00E938                        887 00102$:
+                                    888 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 742: TIM4->SMCR &= (uint8_t)(~TIM4_SMCR_MSM);
+                                    889 ; genAnd
+      00E938 A4 7F            [ 1]  890 	and	a, #0x7f
+                                    891 ; genPointerSet
+      00E93A C7 52 E2         [ 1]  892 	ld	0x52e2, a
+                                    893 ; genLabel
+      00E93D                        894 00104$:
+                                    895 ;	STM8L15x_StdPeriph_Driver/src/stm8l15x_tim4.c: 744: }
+                                    896 ; genEndFunction
+      00E93D 84               [ 1]  897 	pop	a
+      00E93E 81               [ 4]  898 	ret
+                                    899 ;	Total TIM4_SelectMasterSlaveMode function size at codegen: 2 bytes.
+                                    900 	.area CODE
+                                    901 	.area CONST
+                                    902 	.area INITIALIZER
+                                    903 	.area CABS (ABS)

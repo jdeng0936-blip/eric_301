@@ -1,0 +1,26 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.=  002710 L   |     .__.ABS.=  000000 G   |     .__.CPU.=  000000 L
+    .__.H$L.=  000001 L   |     _ADC1_CO   ****** GX  |     _DMA1_CH   ****** GX
+    _DMA1_CH   ****** GX  |     _EXTI0_I   ****** GX  |     _EXTI1_I   ****** GX
+    _EXTI2_I   ****** GX  |     _EXTI3_I   ****** GX  |     _EXTI4_I   ****** GX
+    _EXTI5_I   ****** GX  |     _EXTI6_I   ****** GX  |     _EXTI7_I   ****** GX
+    _EXTIB_G   ****** GX  |     _EXTID_H   ****** GX  |     _EXTIE_F   ****** GX
+    _FLASH_I   ****** GX  |     _I2C1_SP   ****** GX  |     _LCD_AES   ****** GX
+    _NonHand   ****** GX  |     _RTC_CSS   ****** GX  |     _SPI1_IR   ****** GX
+    _SWITCH_   ****** GX  |     _TIM1_CC   ****** GX  |     _TIM1_UP   ****** GX
+    _TIM2_CC   ****** GX  |     _TIM2_UP   ****** GX  |     _TIM3_CC   ****** GX
+    _TIM3_UP   ****** GX  |     _TIM4_UP   ****** GX  |     _TRAP_IR   ****** GX
+    _USART1_   ****** GX  |     _USART1_   ****** GX  |     s_GSINIT   ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE      size      0   flags    0
+   1 HOME       size     80   flags    0
+

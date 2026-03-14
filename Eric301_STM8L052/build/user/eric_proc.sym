@@ -1,0 +1,124 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 1
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  9 _A_Fxn                                                         000378 GR
+  1 _A_Fxn_psta_10000_740                                          00031F R
+  9 _B_Fxn                                                         00048C GR
+  1 _B_Fxn_pstb_10000_747                                          000323 R
+  9 _CRC_GetModbus16                                               000254 GR
+  9 _C_Fxn                                                         0005A0 GR
+  1 _C_Fxn_pstc_10000_754                                          000327 R
+  9 _Chk_State                                                     000B66 GR
+  1 _Chk_State_last_10000_810                                      00032F R
+    _Delay                                                         ****** GX
+    _GPIO_Init                                                     ****** GX
+    _GPIO_ReadInputDataBit                                         ****** GX
+  9 _Get_Record                                                    0007E2 GR
+    _I2C_ReadByte                                                  ****** GX
+    _I2C_WriteByte                                                 ****** GX
+  9 _InitMsg                                                       0002AC GR
+    _Load_Data                                                     ****** GX
+    _Load_Stat                                                     ****** GX
+  1 _MsgSystem                                                     000001 GR
+  9 _Pkt_485ackquery                                               0006FB GR
+  9 _Record_GetLRecd                                               000224 GR
+  9 _Record_GetRecd                                                000220 GR
+  9 _Record_GetStat                                                000212 GR
+  9 _Record_LoadHistory                                            00024E GR
+  9 _Record_SaveNew                                                00022E GR
+  9 _Rev16                                                         0006B6 GR
+  9 _RevMsg                                                        000338 GR
+  9 _Rs485_GetCfg                                                  00087A GR
+  9 _Rs485_Proc                                                    000931 GR
+  1 _Rs485_Proc_stateU_10000_793                                   00032D R
+  1 _Rs485_Proc_temp1_10000_793                                    00032B R
+  1 _Rs485_Proc_temp2_10000_793                                    00032C R
+  1 _Rs485_Proc_timeout_10000_793                                  00032E R
+    _Save_Data                                                     ****** GX
+    _Save_Stat                                                     ****** GX
+  9 _SendMsg                                                       0002E2 GR
+  9 _Storage_ClearHistory                                          000BF6 GR
+  9 _Storage_FactoryReset                                          000C18 GR
+  9 _Storage_Init                                                  000C95 GR
+  9 _Storage_SaveAllStats                                          000228 GR
+  9 _Storage_SaveSettings                                          000B9E GR
+  9 _System_GetMode                                                000202 GR
+  9 _System_InitMode                                               000206 GR
+    _USART_DeInit                                                  ****** GX
+    _Uart1_Init                                                    ****** GX
+    _Uart1_Send                                                    ****** GX
+    _Verfin                                                        ****** GX
+    _WWDG_SWReset                                                  ****** GX
+    ___memcpy                                                      ****** GX
+    __divulong                                                     ****** GX
+    __modsint                                                      ****** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 2
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    __modulong                                                     ****** GX
+    __mulint                                                       ****** GX
+    __mullong                                                      ****** GX
+  8 __xinit__r485id                                                000075 R
+  8 __xinit__r485rlt                                               000076 R
+  8 __xinit__selfid                                                000071 R
+  8 __xinit__strokeA                                               000000 R
+  8 __xinit__strokeB                                               00000D R
+  8 __xinit__strokeC                                               00001A R
+  8 __xinit__stt                                                   00002B R
+  8 __xinit__sysmode                                               000084 R
+  8 __xinit__ticks                                                 000027 R
+    _adjustdt                                                      ****** GX
+  1 _c_ackcfg                                                      00018F GR
+  1 _c_ackquery                                                    00019F GR
+  9 _crc_verify                                                    0006C3 GR
+    _data_index                                                    ****** GX
+    _delay_halt                                                    ****** GX
+  9 _itoa_pad                                                      000000 R
+    _language                                                      ****** GX
+  1 _lrecd                                                         00012D GR
+  1 _m_cfg                                                         000137 GR
+  1 _m_query                                                       000197 GR
+    _memset                                                        ****** GX
+  9 _mini_sprintf                                                  0000DE GR
+  1 _pkt1                                                          00029F GR
+  2 _r485id                                                        000075 GR
+  2 _r485rlt                                                       000076 GR
+  1 _recd                                                          000123 GR
+  1 _rsUbuf                                                        00021F GR
+    _rtc_set_datetime                                              ****** GX
+  2 _selfid                                                        000071 GR
+  1 _single_trg                                                    000000 GR
+  2 _strokeA                                                       000000 GR
+  2 _strokeB                                                       00000D GR
+  2 _strokeC                                                       00001A GR
+  2 _stt                                                           00002B R
+  2 _sysmode                                                       000084 R
+  2 _ticks                                                         000027 GR
+    _u1buf                                                         ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8)  Page 3
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size    330   flags    0
+   2 INITIALIZED                                size     85   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size     44   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      0   flags    0
+   8 INITIALIZER                                size     85   flags    0
+   9 CODE                                       size    DD0   flags    0
+   A CABS                                       size      0   flags    8
+
